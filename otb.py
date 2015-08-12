@@ -1,5 +1,5 @@
 """
-Scrit to install and configre OpenTourBuilder
+Script to install and configre OpenTourBuilder
 """
 from sys import version_info
 import platform
@@ -37,13 +37,11 @@ def check_python_version():
     """
     python_version = float('%s.%s' % (version_info[0], version_info[1]))
     if python_version < 2.7 or python_version >= 3:
-        puts(red("Python 2.7 is required. Please check \
-                with your system administrator."))
+        puts(red("Python 2.7 is required. Please check with your system administrator."))
         exit()
 
     else:
         puts(green("Good, Python version is 2.7."))
-        return True
 
 def check_packages(current_platform):
     """
@@ -155,6 +153,9 @@ def check_mysql_connection(user, password, host, database, port):
             return False
     except MySQLdb.Error:
         puts(red("ERROR IN CONNECTION"))
+        puts(red("Install cannot continue without valid databae connection."))
+        puts(red("Please verify your databae credentials and try again."))
+        exit()
     return False
 
 def clone():
@@ -162,13 +163,13 @@ def clone():
     Clone the server from Git Hub.
     """
     puts(green("Downloading OpenTourBuilder-Server from Git Hub."))
-    subprocess.call(['git', 'clone', REPO], stderr=subprocess.PIPE)
+    subprocess.call(['git', 'clone', REPO, '-b', 'feature/api'], stderr=subprocess.PIPE)
 
-def activate_venv():
+def activate_venv(cmd):
     """
     Activate the virtualenv
     """
-    local('source %svenv/bin/activate' % OTB_DIR)
+    local('source %svenv/bin/activate; %s' % (OTB_DIR, cmd))
 
 def setup_virtual_env():
     """
@@ -179,8 +180,7 @@ def setup_virtual_env():
 
 def all_deps():
     '''Locally install all dependencies.'''
-    activate_venv()
-    local('pip install -r %srequirements.txt' % (OTB_DIR))
+    activate_venv('pip install -r %srequirements.txt' % (OTB_DIR))
 
 
 def create_local_settings(user, password, host, database, port):
@@ -202,10 +202,9 @@ def setup_application():
     """
     Run the magage commads to get the application running
     """
-    activate_venv()
-    local('python %smanage.py collect_static --noinput' % OTB_DIR)
-    local('python %smanage.py syncdb' % OTB_DIR)
-    local('python %smanage.py migrate' % OTB_DIR)
+    activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
+    activate_venv('python %smanage.py syncdb' % OTB_DIR)
+    #activate_venv('python %smanage.py migrate' % OTB_DIR)
 
 @task
 def install():
@@ -232,3 +231,5 @@ def install():
 
     check_mysql_connection(db_user, db_password, db_host, db_database, db_port)
     create_local_settings(db_user, db_password, db_host, db_database, db_port)
+
+    setup_application()
