@@ -1,7 +1,7 @@
 """
 Script to install and configre OpenTourBuilder
 """
-from sys import version_info
+from sys import version_info, stdout
 import platform
 import subprocess
 import getpass
@@ -46,24 +46,8 @@ def check_python_version():
 def check_packages(current_platform):
     """
     We need to see if the system has:
-        * build-essential
-            * dpkg -s build-essential | grep Status
-        * mysql-client
-            * dpkg -s mysql-client | grep Status
-        * python-dev
-            * dpkg -s python-dev | grep Status
-        * libmysqlclient-dev
-            * dpkg -s libmysqlclient-dev | grep Status
-        * libjpeg
-            * dpkg -s libjpeg8-dev | grep Status
-        * zlib
-            * dpkg -s zlib1g-dev | grep Status
-        * pip
-            * pip -V
-        * virtualevn
-            * virtualenv --version
-        * git
-            * dpkg -s git | grep Status
+        build-essential, mysql-client, python-dev, libmysqlclient-dev, \
+        libjpeg, zlib, pip, virtualevn and git
     """
     # We're going to handle pip a little differently as it is likely
     # pip was not installed via the system's package manager.
@@ -163,7 +147,7 @@ def clone():
     Clone the server from Git Hub.
     """
     puts(green("Downloading OpenTourBuilder-Server from Git Hub."))
-    subprocess.call(['git', 'clone', REPO, '-b', 'feature/api'], stderr=subprocess.PIPE)
+    local('git clone %s -b feature/api' % REPO)
 
 def activate_venv(cmd):
     """
