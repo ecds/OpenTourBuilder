@@ -6,6 +6,9 @@ import platform
 import subprocess
 import getpass
 import os
+import time
+from __future__ import with_statement
+
 
 from fabric.api import task, puts, local
 from fabric.colors import green, red
@@ -14,21 +17,58 @@ from fabric.operations import prompt
 # from fabric.contrib import files
 # from fabric.contrib.console import confirm
 
-try:
-    import MySQLdb
-except ImportError:
-    puts(red("Python module mysql-python is not installed.\nPlease ask you system's administrator to install it."))
-    exit()
-
 # Git Hub repo for the server
+UBUNTU_PACKAGES = ['build-essential','python-dev','python-setuptools','libjpeg8-dev','zlib1g-dev','mysql-server','python-mysqld','libmysqlclient-dev']
+REDHAT_PACKAGES = ['python-devel','python-setuptools','libjpeg','libzip-devel','mysql-server']
+
 REPO = 'https://github.com/emory-libraries-ecds/OpenTourBuilder-Server.git'
 
 OTB_DIR = os.getcwd() + '/OpenTourBuilder-Server/'
+
+# how long does the process run
+class ProcessRunning:
+
+    def process_start(process):
+        for i in range(1000):
+            time.sleep(1)
+            sys.stdout.write(process + "\r has been running for %d seconds" % i)
+            sys.stdout.flush()
+
+    def process_stop(process):
+        p = process + " is done!"
+        return p
+
+
+
+# auto install a package if a user wants to do so
+def install_package(package, platform):
+    install = prompt("Do you want to install " + package + "? (yes/no)")
+    if install[0].lower() == "y" and platform == "ubuntu":
+        ProcessRunning.process_start(package)
+        local('sudo apt-get install ' + package)
+        ProcessRunning.process_stop(package)
+    
+    elif install[0].lower() == "y" and (platform == "centos" or platform == "redhat"):
+        ProcessRunning.process_start(package)
+        local('sudo yum install ' + package)
+        ProcessRunning.process_stop(package)
+
+    elif install[0].lower() == "n" and platform == "ubuntu"::
+        puts(red('Please, manually install these package before running this script again: sudo apt-get install -y ' + package))
+        exit()
+    elif install[0].lower() == "n" and (platform == "centos" or platform == "redhat"):
+        puts(red('Please, manually install this package before running this script again: sudo yum install ' + package))
+        exit()
+    else:
+        puts(red('Please, manually install required package before running this script again' + package)
+        exit()
+
 
 def check_platform():
     """
     Check to see what platfom we are running
     """
+    puts(green("Checking your platform..."))
     return platform.dist()[0]
 
 def check_python_version():
@@ -43,6 +83,9 @@ def check_python_version():
     else:
         puts(green("Good, Python version is 2.7."))
 
+
+
+
 def check_packages(current_platform):
     """
     We need to see if the system has:
@@ -54,68 +97,54 @@ def check_packages(current_platform):
     pip = subprocess.check_output(["pip", "-V"])
 
     if current_platform.lower() == 'ubuntu':
+        for i, val in enumerate(UBUNTU_PACKAGES):
+            
+            ProcessRunning.process_start(val)
+            try:
+                subprocess.check_output(
+                    ["dpkg", "-s", val], stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError:
+                install_package(val,current_platform)
+            ProcessRunning.process_stop(val)
 
-        try:
-            subprocess.check_output(
-                ["dpkg", "-s", "build-essential"], stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannot verify build-essential is installed.'))
-
-        try:
-            subprocess.check_output(
-                ["dpkg", "-s", "python-dev"], stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannont verify python-dev is installed.'))
-
-        try:
-            subprocess.check_output(
-                ["dpkg", "-s", "libjpeg8-dev"], stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannont verify libjpeg8-dev is installed.'))
-
-        try:
-            subprocess.check_output(
-                ["dpkg", "-s", "zlib1g-dev"], stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannont verify zlib-dev is installed.'))
-
-        # See above note about why the pip check is different
-        if 'not installed' in pip:
-            puts(red("Cannont verify python-pip is installed."))
 
     elif current_platform.lower() == 'redhat' \
         or current_platform.lower() == 'centos':
 
-        try:
-            subprocess.check_output(
-                "rpm -qa | grep python-devel", shell=True, stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannont verify python-devel is installed.'))
+        for i, val in enumerate(REDHAT_PACKAGES):
 
-        try:
-            subprocess.check_output(
-                "rpm -qa | grep libjpeg", shell=True, stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannont verify libjpeg-devel is installed.'))
-
-        try:
-            subprocess.check_output(
-                "rpm -qa | grep libzip-devel", shell=True, stderr=subprocess.PIPE)
-        except subprocess.CalledProcessError:
-            puts(red('Cannont verify libzip-devel is installed.'))
-
-        # See above note about why the pip check is different
-        if 'not installed' in pip:
-            puts(red("Cannont verify python-pip is installed."))
+            ProcessRunning.process_start(val)
+            try:
+                subprocess.check_output(
+                    "rpm -qa | grep " + val, shell=True, stderr=subprocess.PIPE)
+            except subprocess.CalledProcessError:
+                install_package(val,current_platform)
+            ProcessRunning.process_stop(val)
 
     else:
         puts(red("Cannot determine that the server's operating \
             system is supported"))
 
-def check_mysql_connection(user, password, host, database, port):
+    # See above note about why the pip check is different and if it is not different then install virtualenv
+    if 'not installed' in pip:
+        install_package('python-pip',current_platform)
+        local("sudo pip install virtualenv")
+    else:
+        local("sudo pip install virtualenv")
+
+def check_mysql_connection(user, password, host, database, port, current_platform):
     """
     Check that the MySQL connection works.
     """
+    package = "mysql-python"
+
+    ProcessRunning.process_start(package)
+    try:
+        import MySQLdb
+    
+    except ImportError:
+        
+        install_package(package,current_platform)
 
     try:
         # If the port is the default we're going to leave it out of the config
@@ -137,16 +166,17 @@ def check_mysql_connection(user, password, host, database, port):
             return False
     except MySQLdb.Error:
         puts(red("ERROR IN CONNECTION"))
-        puts(red("Install cannot continue without valid databae connection."))
-        puts(red("Please verify your databae credentials and try again."))
+        puts(red("Install cannot continue without valid database connection."))
+        puts(red("Please verify your database credentials and try again."))
         exit()
+    ProcessRunning.process_stop(package)
     return False
 
 def clone():
     """
     Clone the server from Git Hub.
     """
-    puts(green("Downloading OpenTourBuilder-Server from Git Hub."))
+    puts(green("Downloading OpenTourBuilder-Server from GitHub."))
     local('git clone %s -b feature/api' % REPO)
 
 def activate_venv(cmd):
@@ -159,19 +189,22 @@ def setup_virtual_env():
     """
     Create the virtualenv.
     """
+    puts(green("Setting up Virtual Environment"))
     local('cd %s; virtualenv venv --no-site-packages' % OTB_DIR)
 
 
 def all_deps():
     '''Locally install all dependencies.'''
+    puts(green("Installing all dependencies"))
     activate_venv('pip install -r %srequirements.txt' % (OTB_DIR))
 
 
 def create_local_settings(user, password, host, database, port):
     """
-    Take the user supplied databae info and create the
+    Take the user supplied database info and create the
     local settings.
     """
+    puts(green("Creating local settings..."))
     local_settings = open('%stours/settings/local.py' % OTB_DIR, 'w+')
 
     for line in open('local.py.dist', 'r'):
@@ -186,6 +219,7 @@ def setup_application():
     """
     Run the magage commads to get the application running
     """
+    puts(green("Running the magage commads to get the application setup"))
     activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
     activate_venv('python %smanage.py syncdb' % OTB_DIR)
     #activate_venv('python %smanage.py migrate' % OTB_DIR)
@@ -213,7 +247,13 @@ def install():
     db_database = prompt("Enter the name of your database. ")
     db_port = prompt("Enter the port for the database. ", default="3306")
 
-    check_mysql_connection(db_user, db_password, db_host, db_database, db_port)
+    check_mysql_connection(db_user, db_password, db_host, db_database, db_port, current_platform)
     create_local_settings(db_user, db_password, db_host, db_database, db_port)
 
     setup_application()
+
+@task
+def check_for_dependencies():
+    current_platform = check_platform()
+    check_python_version()
+    check_packages(current_platform)
