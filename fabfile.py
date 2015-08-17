@@ -222,7 +222,7 @@ def setup_application():
     puts(green("Running the magage commads to get the application setup"))
     activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
     activate_venv('python %smanage.py syncdb' % OTB_DIR)
-    #activate_venv('python %smanage.py migrate' % OTB_DIR)
+    activate_venv('python %smanage.py loaddata' % OTB_DIR)
 
 @task
 def install():
