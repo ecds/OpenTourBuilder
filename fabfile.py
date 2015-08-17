@@ -14,11 +14,10 @@ from fabric.api import task, puts, local
 from fabric.colors import green, red
 from fabric.operations import prompt
 # from fabric.context_managers import cd, hide, settings
-# from fabric.contrib import files
-# from fabric.contrib.console import confirm
+
 
 # Git Hub repo for the server
-UBUNTU_PACKAGES = ['build-essential','python-dev','python-setuptools','libjpeg8-dev','zlib1g-dev','mysql-server','python-mysqld','libmysqlclient-dev']
+UBUNTU_PACKAGES = ['build-essential','python-dev','python-setuptools','libjpeg8-dev','zlib1g-dev','mysql-server','libmysqlclient-dev']
 REDHAT_PACKAGES = ['python-devel','python-setuptools','libjpeg','libzip-devel','mysql-server']
 
 REPO = 'https://github.com/emory-libraries-ecds/OpenTourBuilder-Server.git'
@@ -143,8 +142,7 @@ def check_mysql_connection(user, password, host, database, port, current_platfor
         import MySQLdb
     
     except ImportError:
-        
-        install_package(package,current_platform)
+        local("sudo pip install MySQL-python")
 
     try:
         # If the port is the default we're going to leave it out of the config
