@@ -1,7 +1,7 @@
 # OpenTourBuilder Installer
 This is a [Python Fabric](http://www.fabfile.org/) script that aims to automate much of the system configuration needed to install and deploy the OpenTourBuilder stack.
 
-Currently, the only server platforms supported by this script are Ubuntu, Red Hat and CentOS. The installer alos provides a sample Apache configuration file. Support for other web servers is currently beyond the scope of this installer.
+Currently, the only server platforms supported by this script are Ubuntu, Red Hat and CentOS. The installer also provides a sample Apache configuration file. Support for other web servers is currently beyond the scope of this installer.
 > We highly recommend you use Ubuntu. Current versions of Red Hat and CentOS ship with older versions of Python and will require you to install an alternative version of Python. OpenTourBuilder requires Python 2.7. You cannot replace the system's Python or you will break <code>yum</code>. There are many ways to [install](https://github.com/yyuu/pyenv) and [run](http://developerblog.redhat.com/2013/02/14/setting-up-django-and-python-2-7-on-red-hat-enterprise-6-the-easy-way/) [alternative](https://github.com/h2oai/h2o-2/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only) versions of Python.
 
 OpenTourBuilder has two parts. The [OpenTourBuilder Server](https://github.com/emory-libraries-ecds/OpenTourBuilder-Server) developed in [Python Django](https://www.djangoproject.com/) and the [OpenTourBuilder Client](https://github.com/emory-libraries-ecds/OpenTourBuilder-Client) developed in [Ember JS](http://emberjs.com/). 
