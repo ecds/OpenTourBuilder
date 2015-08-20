@@ -1,26 +1,26 @@
 # OpenTourBuilder Installer
 This is a [Python Fabric](http://www.fabfile.org/) script that aims to automate much of the system configuration needed to install and deploy the OpenTourBuilder stack.
 
-Curently, the only server platforms supported by this script are Ubuntu and Red Hat (and CentOS).
-> We highly recomend you use Ubuntu. Current Versions of Red Hat and CentOS ship with older versions of Python and will require you to install and alternative version of Python. OpenTourBuilder requires Python 2.7. You cannot replace the system's Python or you will break yum. There are many ways to [install](https://github.com/yyuu/pyenv) and [run](http://developerblog.redhat.com/2013/02/14/setting-up-django-and-python-2-7-on-red-hat-enterprise-6-the-easy-way/) [alternative](https://github.com/h2oai/h2o-2/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only) versions of Python.
+Currently, the only server platforms supported by this script are Ubuntu, Red Hat and CentOS. The installer alos provides a sample Apache configuration file. Support for other web servers is currently beyond the scope of this installer.
+> We highly recommend you use Ubuntu. Current versions of Red Hat and CentOS ship with older versions of Python and will require you to install an alternative version of Python. OpenTourBuilder requires Python 2.7. You cannot replace the system's Python or you will break <code>yum</code>. There are many ways to [install](https://github.com/yyuu/pyenv) and [run](http://developerblog.redhat.com/2013/02/14/setting-up-django-and-python-2-7-on-red-hat-enterprise-6-the-easy-way/) [alternative](https://github.com/h2oai/h2o-2/wiki/Installing-python-2.7-on-centos-6.3.-Follow-this-sequence-exactly-for-centos-machine-only) versions of Python.
 
 OpenTourBuilder has two parts. The [OpenTourBuilder Server](https://github.com/emory-libraries-ecds/OpenTourBuilder-Server) developed in [Python Django](https://www.djangoproject.com/) and the [OpenTourBuilder Client](https://github.com/emory-libraries-ecds/OpenTourBuilder-Client) developed in [Ember JS](http://emberjs.com/). 
 
-## What You Need to do Before Starting the Install
+## What you need to do before starting the install
 
 You will need:
 
 * A server running Ubuntu, Red Hat or CentOS (see note above)
 
 * Access and credentials to a MySQL database
-	* User
+	* Username
 	* Password
 	* Name of database
 	* Hostname
 	* Port
 * Python Fabric installed
 <code>pip install fabric</code>
-* The fully qulaified domain name of your site eg. myawesometour.com
+* The fully qualified domain name of your site, e.g. myawesometour.com
 * Git installed
 	* Ubuntu
 	<code>sudo apt-get install git</code>
@@ -34,7 +34,7 @@ Navigate to the directory where you want to install OpenTourBuilder and download
 
 
 ## Check your system for dependencies
-Check whether you have all dependencies installed or not. If the dependencies are not installed it should pormpt you to install them automatically. **YOU HAVE TO HAVE SUDO ACCESS TO THE SERVER**.
+Check whether you have all dependencies installed. If the dependencies are not installed it should prompt you to install them automatically. **YOU MUST HAVE SUDO ACCESS TO THE SERVER**.
 
 <code>fab check_for_dependencies</code>
 
