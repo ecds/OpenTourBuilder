@@ -16,7 +16,7 @@ You will need:
 	* Username
 	* Password
 	* Name of database
-	* Hostname
+	* Hostname (defaults to localhost)
 	* Port
 * Python Fabric installed
 <code>pip install fabric</code>
@@ -51,7 +51,7 @@ While the installer is running you will be promted for the following information
 * Fully qualified domain name
 
 ## After the installer runs
-After the installer sucessfully runs, you will find a sample [Apache](http://httpd.apache.org/) config file. The sample config assumes you have *mod_wsgi* installed and enabled.
+After the installer sucessfully runs, you will find a sample [Apache](http://httpd.apache.org/) config file; *OpenTourBuilder-Server/apache/otb.conf*. The sample config assumes you have *mod_wsgi* installed and enabled.
 
 Providing configs to deploy OpenTourBuilder using other web servers is beyond the current scope of the installer.
 
