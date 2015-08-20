@@ -39,36 +39,22 @@ REPO = 'https://github.com/emory-libraries-ecds/OpenTourBuilder-Server.git'
 OTB_DIR = os.getcwd() + '/OpenTourBuilder-Server/'
 CLIENT_DIR = os.getcwd() + '/OpentTourBuilder-Client/'
 
-# how long does the process run
-class ProcessRunning:
-
-    def process_start(process):
-        for i in range(1000):
-            time.sleep(1)
-            sys.stdout.write(process + "\r has been running for %d seconds" % i)
-            sys.stdout.flush()
-
-    def process_stop(process):
-        p = process + " is done!"
-        return p
-
-
 
 # auto install a package if a user wants to do so
 def install_package(package, platform):
     install = prompt("Do you want to install " + package + "? (yes/no)")
     if install[0].lower() == "y" and platform == "ubuntu":
-        ProcessRunning.process_start(package)
+        puts(green('Trying to install ' + package))
         local('sudo apt-get install ' + package)
-        ProcessRunning.process_stop(package)
+        puts(green('Done installing ' + package))
     
     elif install[0].lower() == "y" and (platform == "centos" or platform == "redhat"):
-        ProcessRunning.process_start(package)
+        puts(green('Trying to install ' + package))
         local('sudo yum install ' + package)
-        ProcessRunning.process_stop(package)
+        puts(green('Done installing ' + package))
 
     elif install[0].lower() == "n" and platform == "ubuntu":
-        puts(red('Please, manually install these package before running this script again: sudo apt-get install -y ' + package))
+        puts(red('Please, manually install these package before running this script again: sudo apt-get install ' + package))
         exit()
     elif install[0].lower() == "n" and (platform == "centos" or platform == "redhat"):
         puts(red('Please, manually install this package before running this script again: sudo yum install ' + package))
@@ -108,32 +94,34 @@ def check_packages(current_platform):
     """
     # We're going to handle pip a little differently as it is likely
     # pip was not installed via the system's package manager.
+    puts(green('Checking if all necessary packages are installed...'))
     pip = subprocess.check_output(["pip", "-V"])
-
+    length = len(UBUNTU_PACKAGES)
+    length2 = len(REDHAT_PACKAGES)
     if current_platform.lower() == 'ubuntu':
         for i, val in enumerate(UBUNTU_PACKAGES):
-            
-            ProcessRunning.process_start(val)
+            sys.stdout.write("\r Currently checking" + val + ". Progress: %d/%d packages" %(i,length))
+            sys.stdout.flush()
             try:
                 subprocess.check_output(
                     ["dpkg", "-s", val], stderr=subprocess.PIPE)
             except subprocess.CalledProcessError:
                 install_package(val, current_platform)
-            ProcessRunning.process_stop(val)
+            
 
 
     elif current_platform.lower() == 'redhat' \
         or current_platform.lower() == 'centos':
 
         for i, val in enumerate(REDHAT_PACKAGES):
-
-            ProcessRunning.process_start(val)
+            sys.stdout.write("\r Currently checking" + val + ". Progress: %d/%d packages" %(i,length2))
+            sys.stdout.flush()
             try:
                 subprocess.check_output(
                     "rpm -qa | grep " + val, shell=True, stderr=subprocess.PIPE)
             except subprocess.CalledProcessError:
                 install_package(val, current_platform)
-            ProcessRunning.process_stop(val)
+            
 
     else:
         puts(red("Cannot determine that the server's operating \
@@ -152,7 +140,7 @@ def check_mysql_connection(user, password, host, database, port):
     """
     package = "mysql-python"
 
-    ProcessRunning.process_start(package)
+    puts(green("Checking MySQL connection and packages"))
     try:
         import MySQLdb
 
@@ -182,7 +170,7 @@ def check_mysql_connection(user, password, host, database, port):
         puts(red("Install cannot continue without valid database connection."))
         puts(red("Please verify your database credentials and try again."))
         exit()
-    ProcessRunning.process_stop(package)
+    puts(green("You are connected to MySQL Server"))
     return False
 
 def clone():
