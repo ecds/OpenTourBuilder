@@ -34,7 +34,7 @@ Navigate to the directory where you want to install OpenTourBuilder and download
 
 
 ## Check your system for dependencies
-Check whether you have all dependencies installed. If the dependencies are not installed it should prompt you to install them automatically. **YOU MUST HAVE SUDO ACCESS TO THE SERVER**.
+Run the following command to check whether you have all dependencies installed. If the dependencies are not installed, you will be prompted to install them automatically. **YOU MUST HAVE SUDO ACCESS TO THE SERVER**.
 
 <code>fab check_for_dependencies</code>
 
@@ -48,6 +48,7 @@ While the installer is running you will be promted for the following information
 * Database password
 * Name of database
 * Port for database server (defaults to 3306)
+* Fully qualified domain name
 
 ## After the installer runs
 After the installer sucessfully runs, you will find a sample [Apache](http://httpd.apache.org/) config file. The sample config assumes you have *mod_wsgi* installed and enabled.
