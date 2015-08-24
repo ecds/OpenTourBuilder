@@ -7,51 +7,63 @@ import platform
 import subprocess
 import getpass
 import os
-import time
 from random import choice
 from string import lowercase
+from shutil import rmtree
 
 
 from fabric.api import task, puts, local
-from fabric.colors import green, red
+from fabric.colors import green, red, cyan
 from fabric.operations import prompt
-# from fabric.context_managers import cd, hide, settings
+from fabric.context_managers import prefix, lcd
 
 # List of system packages
 UBUNTU_PACKAGES = [
     'build-essential',
-    'python-dev',
-    'python-setuptools',
     'libjpeg8-dev',
     'zlib1g-dev',
-    'libmysqlclient-dev'
+    'libmysqlclient-dev',
+    'mysql-client',
+    'git'
 ]
 REDHAT_PACKAGES = [
-    'python-devel',
-    'python-setuptools',
-    'libjpeg',
-    'libzip-devel'
+    'gcc',
+    'libjpeg-devel',
+    'libzip',
+    'mysql',
+    'mysql-devel',
+    'git'
 ]
 
 # Git Hub repo for the server
 REPO = 'https://github.com/emory-libraries-ecds/OpenTourBuilder-Server.git'
 
-OTB_DIR = os.getcwd() + '/OpenTourBuilder-Server/'
-CLIENT_DIR = os.getcwd() + '/OpentTourBuilder-Client/'
+PARENT_DIR = os.sep.join(os.getcwd().split(os.sep)[:-1])
+OTB_DIR = '%s/OpenTourBuilder-Server/' % PARENT_DIR
+CLIENT_DIR = '%s/OpentTourBuilder-Client/' % PARENT_DIR
+
+def activate_venv(cmd):
+    """
+    Activate the virtualenv
+    """
+    with prefix('source %svenv/bin/activate' % OTB_DIR):
+        local(cmd, shell='/bin/bash')
 
 
 # auto install a package if a user wants to do so
 def install_package(package, platform):
-    install = prompt("Do you want to install " + package + "? (yes/no)")
+
+    install = prompt("\n\nDo you want to install " + package + "? (yes/no)")
+
     if install[0].lower() == "y" and platform == "ubuntu":
-        puts(green('Trying to install ' + package))
-        local('sudo apt-get install ' + package)
-        puts(green('Done installing ' + package))
+        puts(green('\nTrying to install ' + package))
+        local('sudo apt-get install -y ' + package)
+        puts(green('\nDone installing ' + package))
     
     elif install[0].lower() == "y" and (platform == "centos" or platform == "redhat"):
-        puts(green('Trying to install ' + package))
-        local('sudo yum install ' + package)
-        puts(green('Done installing ' + package))
+        puts(green('\nTrying to install ' + package))
+        local('sudo yum install -y ' + package)
+        puts(green('\nDone installing ' + package))
 
     elif install[0].lower() == "n" and platform == "ubuntu":
         puts(red('Please, manually install these package before running this script again: sudo apt-get install ' + package))
@@ -69,7 +81,7 @@ def check_platform():
     Check to see what platfom we are running
     """
     puts(green("Checking your platform..."))
-    return platform.dist()[0]
+    return platform.dist()[0].lower()
 
 def check_python_version():
     """
@@ -100,8 +112,8 @@ def check_packages(current_platform):
     length2 = len(REDHAT_PACKAGES)
     if current_platform.lower() == 'ubuntu':
         for i, val in enumerate(UBUNTU_PACKAGES):
-            sys.stdout.write("\r Currently checking" + val + ". Progress: %d/%d packages" %(i,length))
-            sys.stdout.flush()
+            stdout.write("\r Currently checking" + val + ". Progress: %d/%d packages" %(i,length))
+            stdout.flush()
             try:
                 subprocess.check_output(
                     ["dpkg", "-s", val], stderr=subprocess.PIPE)
@@ -114,8 +126,8 @@ def check_packages(current_platform):
         or current_platform.lower() == 'centos':
 
         for i, val in enumerate(REDHAT_PACKAGES):
-            sys.stdout.write("\r Currently checking" + val + ". Progress: %d/%d packages" %(i,length2))
-            sys.stdout.flush()
+            stdout.write("\r Currently checking" + val + ". Progress: %d/%d packages" %(i,length2))
+            stdout.flush()
             try:
                 subprocess.check_output(
                     "rpm -qa | grep " + val, shell=True, stderr=subprocess.PIPE)
@@ -138,34 +150,23 @@ def check_mysql_connection(user, password, host, database, port):
     """
     Check that the MySQL connection works.
     """
-    package = "mysql-python"
+    # MySQLdb is installed from the pip file so we don't want to
+    # import it until now.
+    import MySQLdb
 
     puts(green("Checking MySQL connection and packages"))
-    try:
-        import MySQLdb
-
-    except ImportError:
-        local("sudo pip install MySQL-python")
 
     try:
-        # If the port is the default we're going to leave it out of the config
-        # as most databases don't 
-        if port != '3306':
-            dbase = MySQLdb.connect(
-                host=host, port=port, user=user, passwd=password, db=database)
-        else:
-            dbase = MySQLdb.connect(
-                host=host, user=user, passwd=password, db=database)
+        dbase = MySQLdb.connect(
+            host=host, port=int(port), user=user, passwd=password, db=database)
+
         cursor = dbase.cursor()
         cursor.execute("SELECT VERSION()")
         results = cursor.fetchone()
         # Check if anything at all is returned
         if results:
             puts(green("MySQL connection successful."))
-            return True
-        else:
-            return False
-    except MySQLdb.Error:
+    except:
         puts(red("ERROR IN CONNECTION"))
         puts(red("Install cannot continue without valid database connection."))
         puts(red("Please verify your database credentials and try again."))
@@ -177,14 +178,13 @@ def clone():
     """
     Clone the server from Git Hub.
     """
-    puts(green("Downloading OpenTourBuilder-Server from GitHub."))
-    local('git clone %s -b feature/api' % REPO)
+    if os.path.exists(OTB_DIR):
+        rmtree(OTB_DIR)
 
-def activate_venv(cmd):
-    """
-    Activate the virtualenv
-    """
-    local('source %svenv/bin/activate; %s' % (OTB_DIR, cmd))
+    puts(green("Downloading OpenTourBuilder-Server from GitHub."))
+
+    with lcd('../'):
+        local('git clone %s -b develop' % REPO, shell='/bin/bash')
 
 def setup_virtual_env():
     """
@@ -221,9 +221,11 @@ def setup_application():
     Run the magage commads to get the application running
     """
     puts(green("Running the magage commads to get the application setup"))
-    activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
     activate_venv('python %smanage.py syncdb' % OTB_DIR)
-    activate_venv('python %smanage.py loaddata' % OTB_DIR)
+    activate_venv('python %smanage.py loaddata tours' % OTB_DIR)
+    if not os.path.exists('%stours/sitemedia' % OTB_DIR):
+        os.makedirs('%stours/sitemedia' % OTB_DIR)
+    activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
 
 def apache_config(domain):
     """
@@ -242,9 +244,9 @@ def apache_config(domain):
     proc = ''.join(choice(lowercase) for i in range(4))
 
     puts(green("Creating sample Apache config..."))
-    config_file = open('%stours/apache/otb.conf' % OTB_DIR, 'w+')
+    config_file = open('%sapache/otb.conf' % OTB_DIR, 'w+')
 
-    for line in open('%sapache/local.py.dist', 'r'):
+    for line in open('%sapache/otb.conf.dist' % OTB_DIR, 'r'):
         line = line.replace('$path', OTB_DIR)
         line = line.replace('$domain', domain)
         line = line.replace('$proc', proc)
@@ -266,7 +268,7 @@ def install():
     setup_virtual_env()
     all_deps()
 
-    puts(green('\n\n\nOK, looking good. Now let\'s configure our settings.'))
+    puts(green('\nOK, looking good. Now let\'s configure our settings.'))
 
     db_host = prompt("Enter the address of your database server. ", default="localhost")
     db_user = prompt("Enter your database user name. ")
@@ -274,7 +276,7 @@ def install():
     db_database = prompt("Enter the name of your database. ")
     db_port = prompt("Enter the port for the database. ", default="3306")
 
-    check_mysql_connection(db_user, db_password, db_host, db_database, db_port, current_platform)
+    check_mysql_connection(db_user, db_password, db_host, db_database, db_port)
     create_local_settings(db_user, db_password, db_host, db_database, db_port)
 
     setup_application()
@@ -288,3 +290,6 @@ def check_for_dependencies():
     current_platform = check_platform()
     check_python_version()
     check_packages(current_platform)
+
+    puts(green("\nOK you're all set. now run the following:"))
+    puts(cyan("fab install"))
