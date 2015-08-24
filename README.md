@@ -20,7 +20,7 @@ You will need:
 	* Port
 
 ### Install a few things
-Thes packages may have already been installed but let's just make sure by running to following comands.
+Thes packages may have already been installed but let's just make sure by running the following comands.
 #### Ubuntu
 <code>sudo apt-get install -y python-setuptools python-dev git libmysqlclient-dev mysql-client</code>
 
