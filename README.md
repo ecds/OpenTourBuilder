@@ -29,7 +29,7 @@ Thes packages may have already been installed but let's just make sure by runnin
 <code>sudo pip install fabric MySQL-python</code>
 
 #### Red Hat/CentOS
-<code>sudo yum install -y python-setuptools python-devel git</code>
+<code>sudo yum install -y python-setuptools python-devel git mysql mysql-devel</code>
 
 <code>sudo easy_install pip</code>
 
