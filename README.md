@@ -84,6 +84,34 @@ If you list the contents on the directory (by running <code>ls</code>) you will 
 * OpenTourBuilder-Server
 * OpenTourBuilder-Client
 
-You will find a sample [Apache](http://httpd.apache.org/) config file; *OpenTourBuilder-Server/apache/otb.conf*. The sample config assumes you have *mod_wsgi* installed and enabled.
+### Permissions
 
-Providing configs to deploy OpenTourBuilder using other web servers is beyond the current scope of the installer.
+### Apache
+You will find a sample [Apache](http://httpd.apache.org/) config file; *OpenTourBuilder-Server/apache/otb.conf*. The sample config assumes you have *mod_wsgi* and *mod_rewrite* installed and enabled.
+
+If this is your plan you will need to run the following commands.
+
+#### Ubuntu
+<code>sudo apt-get install -y apache2 libapache2-mod-wsgi</code>
+
+<code>sudo a2enmod rewrite</code>
+
+<code>cd /etc/apache2/sites-enabled</code>
+
+<code>sudo ln -s /<path-for-OpenTourBuilder>/OpenTourBuilder-Server/apache/otb.conf otb.conf</code>
+
+<code>sudo service apache2 restart</code>
+
+#### Red Hat/CentOS
+<code>sudo yum install httpd mod-wsgi</code>
+
+<code>sudo a2enmod rewrite</code>
+
+<code>cd /etc/httpd/sites-enabled</code>
+
+<code>sudo ln -s /<path-for-OpenTourBuilder>/OpenTourBuilder-Server/apache/otb.conf otb.conf</code>
+
+<code>sudo service httpd restart</code>
+
+### Other Web Servers
+Providing configs to deploy OpenTourBuilder using other web servers is beyond the current scope of the installer. Any modern web server should be able to run a Django web application and serve a static site built by EmberJS.

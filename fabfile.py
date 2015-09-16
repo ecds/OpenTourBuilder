@@ -223,7 +223,7 @@ def setup_application(domain):
     """
     puts(green("Running the magage commads to get the application setup"))
     activate_venv('python %smanage.py syncdb' % OTB_DIR)
-    activate_venv('python %smanage.py loaddata tours' % OTB_DIR)
+    activate_venv('python %smanage.py loaddata initial_data' % OTB_DIR)
     if not os.path.exists('%stours/sitemedia' % OTB_DIR):
         os.makedirs('%stours/sitemedia' % OTB_DIR)
     activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
