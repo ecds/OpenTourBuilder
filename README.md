@@ -98,7 +98,7 @@ If this is your plan you will need to run the following commands.
 
 <code>cd /etc/apache2/sites-enabled</code>
 
-<code>sudo ln -s /<path-for-OpenTourBuilder>/OpenTourBuilder-Server/apache/otb.conf otb.conf</code>
+<code>sudo ln -s /\<path-for-OpenTourBuilde\r>/OpenTourBuilder-Server/apache/otb.conf otb.conf</code>
 
 <code>sudo service apache2 restart</code>
 
@@ -109,9 +109,12 @@ If this is your plan you will need to run the following commands.
 
 <code>cd /etc/httpd/sites-enabled</code>
 
-<code>sudo ln -s /<path-for-OpenTourBuilder>/OpenTourBuilder-Server/apache/otb.conf otb.conf</code>
+<code>sudo ln -s /\<path-for-OpenTourBuilder\>/OpenTourBuilder-Server/apache/otb.conf otb.conf</code>
 
 <code>sudo service httpd restart</code>
 
 ### Other Web Servers
 Providing configs to deploy OpenTourBuilder using other web servers is beyond the current scope of the installer. Any modern web server should be able to run a Django web application and serve a static site built by EmberJS.
+
+## Having Trouble?
+Please feel free to open an issue here or contact <libsysdev-l@listserv.cc.emory.edu>.
