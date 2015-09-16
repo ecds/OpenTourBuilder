@@ -282,8 +282,33 @@ def setup_client(domain, title):
     new_index = open(index_file, 'w+')
     for line in open(tmp_index_file, 'r'):
         line = line.replace('$tour-title', title)
+        line = line.replace('%24api-host', 'http://api.%s' % domain)
         new_index.write(line)
     os.remove(tmp_index_file)
+
+def chown():
+    """
+    chown the directories to the apache user, if Apache is installed and running.
+    """
+    user = subprocess.check_output(
+        "ps -ef | egrep '(httpd|apache)' | grep -v `whoami` | grep -v root | head -n1 | awk '{print $1}'", shell=True, stderr=subprocess.PIPE
+    )
+
+    def warn():
+        puts(red('WARNING: The system user for Apache could not be determined.'))
+        puts(red('If you are not using Apache, you can ignore this.'))
+        puts(red('If you are using Apache, you will need to determine the user and fix the permissions on %s and %s' % (CLIENT_DIR, OTB_DIR)))
+
+    # If Apache isn't installed or running,
+    try:
+        if user[0].isalpha():
+            user = user.rstrip()
+            local('sudo chown -R %s:%s %s' % (user, user, CLIENT_DIR))
+            local('sudo chown -R %s:%s %s' % (user, user, OTB_DIR))
+        else:
+            warn()
+    except IndexError:
+        warn()
 
 @task
 def install():
@@ -320,9 +345,7 @@ def install():
 
     setup_client(domain, title)
 
-@task
-def client():
-    setup_client('myawesometour.com', 'My Awesome Tour')
+    chown()
 
 @task
 def check_for_dependencies():
