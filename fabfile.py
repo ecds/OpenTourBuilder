@@ -9,8 +9,9 @@ import getpass
 import os
 from random import choice
 from string import lowercase
-from shutil import rmtree
-
+from shutil import rmtree, move
+import urllib
+import tarfile
 
 from fabric.api import task, puts, local
 from fabric.colors import green, red, cyan
@@ -40,7 +41,7 @@ REPO = 'https://github.com/emory-libraries-ecds/OpenTourBuilder-Server.git'
 
 PARENT_DIR = os.sep.join(os.getcwd().split(os.sep)[:-1])
 OTB_DIR = '%s/OpenTourBuilder-Server/' % PARENT_DIR
-CLIENT_DIR = '%s/OpentTourBuilder-Client/' % PARENT_DIR
+CLIENT_DIR = '%s/OpenTourBuilder-Client/' % PARENT_DIR
 
 def activate_venv(cmd):
     """
@@ -59,7 +60,7 @@ def install_package(package, platform):
         puts(green('\nTrying to install ' + package))
         local('sudo apt-get install -y ' + package)
         puts(green('\nDone installing ' + package))
-    
+
     elif install[0].lower() == "y" and (platform == "centos" or platform == "redhat"):
         puts(green('\nTrying to install ' + package))
         local('sudo yum install -y ' + package)
@@ -119,7 +120,7 @@ def check_packages(current_platform):
                     ["dpkg", "-s", val], stderr=subprocess.PIPE)
             except subprocess.CalledProcessError:
                 install_package(val, current_platform)
-            
+
 
 
     elif current_platform.lower() == 'redhat' \
@@ -133,7 +134,7 @@ def check_packages(current_platform):
                     "rpm -qa | grep " + val, shell=True, stderr=subprocess.PIPE)
             except subprocess.CalledProcessError:
                 install_package(val, current_platform)
-            
+
 
     else:
         puts(red("Cannot determine that the server's operating \
@@ -253,6 +254,37 @@ def apache_config(domain):
         line = line.replace('$client-path', CLIENT_DIR)
         config_file.write(line)
 
+def setup_client(domain, title):
+    """
+    Download tar ball from github, upack it and set it up.
+    """
+    if os.path.exists(CLIENT_DIR):
+        rmtree(CLIENT_DIR)
+    os.makedirs(CLIENT_DIR)
+    urllib.urlretrieve("https://github.com/emory-libraries-ecds/OpenTourBuilder-Client/releases/download/1.0.0/OpenTourBuilder-Client.tar.gz", "%sOpenTourBuilder-Client.tar.gz" % CLIENT_DIR)
+
+    tar = tarfile.open('%sOpenTourBuilder-Client.tar.gz' % CLIENT_DIR)
+    tar.extractall(CLIENT_DIR)
+    tar.close()
+
+    js_file = '%sassets/open-tour-builder-ember.js' % CLIENT_DIR
+    tmp_js_file = 'tmp.js'
+    move(js_file, tmp_js_file)
+    new_js = open(js_file, 'w+')
+    for line in open(tmp_js_file, 'r'):
+        line = line.replace('$api-host', 'api.%s' % domain)
+        new_js.write(line)
+    os.remove(tmp_js_file)
+
+    index_file = '%sindex.html' % CLIENT_DIR
+    tmp_index_file = 'tmp.html'
+    move(index_file, tmp_index_file)
+    new_index = open(index_file, 'w+')
+    for line in open(tmp_index_file, 'r'):
+        line = line.replace('$tour-title', title)
+        new_index.write(line)
+    os.remove(tmp_index_file)
+
 @task
 def install():
     """
@@ -282,8 +314,15 @@ def install():
     setup_application()
 
     domain = prompt("Enter the domain for your site. [example: myawesometour.com] ")
+    title = prompt("Enter the tilte of you tour. [example: My Awesome Tour] ")
 
     apache_config(domain)
+
+    setup_client(domain, title)
+
+@task
+def client():
+    setup_client('myawesometour.com', 'My Awesome Tour')
 
 @task
 def check_for_dependencies():
