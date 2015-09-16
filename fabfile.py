@@ -185,7 +185,7 @@ def clone():
     puts(green("Downloading OpenTourBuilder-Server from GitHub."))
 
     with lcd('../'):
-        local('git clone %s -b develop' % REPO, shell='/bin/bash')
+        local('git clone %s' % REPO, shell='/bin/bash')
 
 def setup_virtual_env():
     """
