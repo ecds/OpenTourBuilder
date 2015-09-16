@@ -217,7 +217,7 @@ def create_local_settings(user, password, host, database, port):
         line = line.replace('$db_port', port)
         local_settings.write(line)
 
-def setup_application():
+def setup_application(domain):
     """
     Run the magage commads to get the application running
     """
@@ -227,6 +227,7 @@ def setup_application():
     if not os.path.exists('%stours/sitemedia' % OTB_DIR):
         os.makedirs('%stours/sitemedia' % OTB_DIR)
     activate_venv('python %smanage.py collectstatic --noinput' % OTB_DIR)
+    activate_venv('python %smanage.py setSite %s' % (OTB_DIR, domain))
 
 def apache_config(domain):
     """
@@ -336,10 +337,10 @@ def install():
     check_mysql_connection(db_user, db_password, db_host, db_database, db_port)
     create_local_settings(db_user, db_password, db_host, db_database, db_port)
 
-    setup_application()
-
     domain = prompt("Enter the domain for your site. [example: myawesometour.com] ")
     title = prompt("Enter the tilte of you tour. [example: My Awesome Tour] ")
+
+    setup_application(domain)
 
     apache_config(domain)
 
