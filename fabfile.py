@@ -262,7 +262,7 @@ def setup_client(domain, title):
     if os.path.exists(CLIENT_DIR):
         rmtree(CLIENT_DIR)
     os.makedirs(CLIENT_DIR)
-    urllib.urlretrieve("https://github.com/emory-libraries-ecds/OpenTourBuilder-Client/releases/download/1.0.0/OpenTourBuilder-Client.tar.gz", "%sOpenTourBuilder-Client.tar.gz" % CLIENT_DIR)
+    urllib.urlretrieve("https://github.com/emory-libraries-ecds/OpenTourBuilder-Client/releases/download/1.0.1/OpenTourBuilder-Client.tar.gz", "%sOpenTourBuilder-Client.tar.gz" % CLIENT_DIR)
 
     tar = tarfile.open('%sOpenTourBuilder-Client.tar.gz' % CLIENT_DIR)
     tar.extractall(CLIENT_DIR)
