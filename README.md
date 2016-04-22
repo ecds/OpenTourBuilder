@@ -23,7 +23,7 @@ You will need:
 * Subdomain for the backend API. This *must* be *api.<mydomain>*, eg. *api.myawesometour.com*
 
 ### Install a few things
-Thes packages may have already been installed but let's just make sure by running the following comands.
+These packages may have already been installed but let's just make sure by running the following comands.
 #### Ubuntu
 <code>sudo apt-get update</code>
 
