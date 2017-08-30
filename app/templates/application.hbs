@@ -1,5 +1,6 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
 {{outlet}}
+<ul>
+{{#each model as |tour|}}
+<li>{{tour.title}}</li>
+{{/each}}
+</ul>
