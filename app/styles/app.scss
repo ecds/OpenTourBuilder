@@ -1,0 +1,39 @@
+@import 'variables';
+@import 'mixins';
+@import 'typography';
+@import 'animate.scss';
+@import 'maps';
+@import 'tour-top-nav-bar';
+@import 'themes';
+@import 'tour-list-mobile';
+
+body,
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+article {
+  padding: 0 2em;
+}
+
+.otb-container {
+  height: calc(100vh - 8em);
+  overflow: hidden;
+
+  .responsive-embed {
+    margin-top: 0;
+  }
+
+  .description {
+    @include scrollable-container;
+
+    .expand-collapse {
+      @include scrollable-top;
+    }
+
+    article {
+      @include scrollable-content;
+    }
+  }
+}

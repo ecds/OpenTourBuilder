@@ -5,4 +5,7 @@ export default function destroyApp(application) {
     if (window.server) {
         window.server.shutdown();
     }
+    if (window.server) {
+        window.server.shutdown();
+    }
 }

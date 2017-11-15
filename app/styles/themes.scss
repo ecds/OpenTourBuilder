@@ -1,0 +1,20 @@
+.tour-top-nav-bar-wrapper {
+  background-color: #333;
+}
+
+.pure-menu-heading {
+  color: #FFF;
+}
+
+[data-theme='default'] {
+  $primary-dark: #1B76CE;
+  $header-text: #FFFFFF;
+
+  .tour-top-nav-bar-wrapper {
+    background-color: $primary-dark;
+  }
+
+  .pure-menu-heading {
+    color: $header-text;
+  }
+}

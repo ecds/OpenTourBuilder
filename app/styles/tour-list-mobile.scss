@@ -1,0 +1,324 @@
+.media-mobile {
+  div:first-of-type {
+    // position: fixed;
+  }
+}
+
+.tour-container {
+  margin: 0;
+  // min-height: 100vh;
+  opacity: 0;
+  overflow: hidden;
+  position: relative;
+  transform-origin: top;
+  width: 100vw;
+
+  &.show {
+    opacity: 1;
+  }
+
+  &.enter {
+    @include bounceInUp(
+      $fill: both
+    );
+  }
+
+  &.open {
+    height: calc(100vh);
+  }
+}
+
+.header {
+  background-position: center;
+  background-position-x: center;
+  background-position-y: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  display: flex;
+  height: 34vh;
+  position: relative;
+  transform: translate(0, 0);
+  width: 100vw;
+  will-change: transform, height;
+
+  .title {
+    align-self: flex-end;
+    background: $title-gradient;
+    color: $white;
+    font-size: 3em;
+    text-transform: capitalize;
+    width: 100vw;
+
+    h2 {
+      margin: 0;
+      overflow: hidden;
+      padding-left: .25em;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+      will-change: font-size;
+    }
+  }
+}
+
+.body {
+  background: $white;
+  max-height: 0;
+  min-height: 0;
+  overflow: hidden;
+  will-change: overflow, max-height;
+}
+
+.footer {
+  background: $black;
+  color: $white;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  justify-content: center;
+  overflow: hidden;
+  position: absolute;
+  text-align: center;
+  text-transform: uppercase;
+  top: 100vh;
+  width: 100vw;
+  z-index: 10;
+}
+
+.open {
+  .header {
+    animation: shrink-head $duration forwards;
+
+    .title {
+      animation: darken-title $duration forwards;
+    }
+  }
+
+  .body {
+    animation: grow-body $duration forwards;
+  }
+
+  .footer {
+    animation: show-footer $duration forwards;
+  }
+
+  .description {
+    height: calc(34vh - 4em);
+  }
+}
+
+.out-up {
+
+  .header {
+    animation: header-out $duration forwards;
+  }
+}
+
+.out-down {
+  animation: out-down $duration forwards;
+}
+
+.return {
+  .header {
+    animation: return-head $duration forwards;
+    transform-origin: top;
+
+    .title {
+      animation: return-title $duration forwards;
+    }
+  }
+
+  .body {
+    animation: return-body $duration forwards;
+  }
+
+  .footer {
+    animation: return-footer $duration forwards;
+  }
+}
+
+.return-down {
+  .header {
+    animation: return-down $duration forwards;
+    transform-origin: top;
+  }
+}
+
+.return-up {
+  .header {
+    animation: return-up $duration forwards;
+  }
+}
+
+@keyframes shrink-head {
+  0% {
+    height: 34vh;
+  }
+
+  100% {
+    height: 4em;
+  }
+}
+
+@keyframes darken-title {
+  0% {
+    background: $title-gradient;
+  }
+
+  100% {
+    background: $faded-black;
+  }
+}
+
+@keyframes return-head {
+  0% {
+    height: 4em;
+  }
+
+  100% {
+    height: 34vh;
+  }
+}
+
+@keyframes return-title {
+  0% {
+    background: $faded-black;
+  }
+
+  100% {
+    background: $title-gradient;
+  }
+}
+
+@keyframes grow-body {
+  0% {
+    max-height: 0;
+  }
+
+  100% {
+    max-height: calc(100vh - 4em);
+    overflow: auto;
+  }
+}
+
+@keyframes return-body {
+  0% {
+    max-height: calc(100vh - 2em);
+    overflow: auto;
+  }
+
+  100% {
+    max-height: 0;
+    overflow: hidden;
+  }
+}
+
+@keyframes show-footer {
+  60% {
+    height: 0;
+    top: 100vh;
+  }
+
+  100% {
+    height: 4em;
+    top: calc(100vh - 4em);
+  }
+}
+
+@keyframes return-footer {
+  0% {
+    height: 4em;
+  }
+
+  40% {
+    height: 0;
+  }
+}
+
+@keyframes out-down {
+  0% {
+    height: 34vh;
+    transform: scaleY(1) translate3d(0, 0, 0);
+    transform-origin: top;
+  }
+
+  80% {
+    transform: translate3d(0, 100vh, 0);
+  }
+
+  100% {
+    height: 0;
+    // min-height: 0;
+    transform: scaleY(0);
+
+  }
+}
+
+@keyframes return-up {
+  0% {
+    height: 0;
+    transform: translate(0, 100vh);
+    transform-origin: bottom;
+  }
+
+  99% {
+    transform: scaleY(1), translate(0, 0);
+  }
+
+  100% {
+    height: 34vh;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes header-out {
+  0% {
+    height: 34vh;
+  }
+
+  100% {
+    height: 0;
+  }
+}
+
+@keyframes return-down {
+  0% {
+    height: 0;
+    opacity: 1;
+    transform: scaleY(0) translate(0, -100vh);
+  }
+
+  90% {
+    transform: scaleY(1);
+  }
+
+  100% {
+    height: 34vh;
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes header-return {
+  0% {
+    height: 0;
+  }
+
+  50% {
+    height: 25vh;
+  }
+
+  100% {
+    height: 34vh;
+  }
+}
+
+@keyframes body-return {
+  0% {
+    max-height: calc(100vh - 2em);
+  }
+
+  100% {
+    max-height: 0;
+  }
+}

@@ -1,0 +1,24 @@
+// https://benfrain.com/independent-scrolling-panels-body-scroll-using-just-css/
+@mixin scrollable-container {
+  backface-visibility: hidden;
+  display: flex;
+  max-height: 100vh;
+  opacity: 1;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  will-change: overflow;
+}
+
+@mixin scrollable-top {
+  display: flex;
+  height: auto;
+  position: relative;
+}
+
+@mixin scrollable-content {
+  height: auto;
+  overflow: auto;
+  // overflow-scrolling: touch;
+  overflow-style: none;
+}

@@ -18,7 +18,8 @@ yarn-error.log
 testem.log
 .gitkeep
 .DS_Store
-.wathmanconfig
+.watchmanconfig
+.vscode
 
 # ember-try
 .node_modules.ember-try/
@@ -34,3 +35,13 @@ ember-cordova/cordova/plugins/*
 !ember-cordova/cordova/plugins/.gitkeep
 ember-cordova/cordova/www/*
 !ember-cordova/cordova/www/.gitkeep
+corber/tmp-livereload
+corber/cordova/node_modules
+corber/cordova/package.json
+corber/cordova/package-lock.json
+corber/cordova/platforms/*
+!corber/cordova/platforms/.gitkeep
+corber/cordova/plugins/*
+!corber/cordova/plugins/.gitkeep
+corber/cordova/www/*
+!corber/cordova/www/.gitkeep

@@ -9,10 +9,10 @@ export default Service.extend({
         this._super(...arguments);
         this.setProperties({
             domain: get(this, 'fastboot.isFastBoot')
-                    ? computed(() => get(this, 'fastboot.request.host').split('.').shift())
-                    : ENV.sub
-                        ? computed(() => ENV.sub)
-                        : computed(() => location.hostname.split('.').shift())
+                ? computed('domain', () => get(this, 'fastboot.request.host').split('.').shift())
+                : ENV.sub
+                    ? computed('domain', () => ENV.sub)
+                    : computed('domain', () => location.hostname.split('.').shift())
         });
     }
 });

@@ -1,9 +1,3 @@
-import Ember from 'ember';
+import Route from '@ember/routing/route';
 
-const { Route } = Ember;
-
-export default Route.extend({
-    model() {
-        return this.store.findAll('tour');
-    }
-});
+export default Route.extend({});

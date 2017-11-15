@@ -7,8 +7,8 @@ module.exports = {
     sourceType: 'module'
   },
   extends: [
-      'airbnb-base',
-      'plugin:ember-suave/recommended'
+    'eslint:recommended',
+    'plugin:ember-best-practices/recommended'
   ],
   env: {
     'browser': true
@@ -28,10 +28,5 @@ module.exports = {
       'no-restricted-syntax': [0, 'ForInStatmens'],
       'import/no-extraneous-dependencies': 0,
       /*eslint new-cap: ["error", { "newIsCap": false }]*/
-
-      // ember-suave
-      'ember-suave/no-const-outside-module-scope': ['off'],
-      'ember-suave/require-access-in-comments': ['off'],
-
   }
 };

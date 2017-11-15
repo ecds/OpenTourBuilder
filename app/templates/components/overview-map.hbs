@@ -1,0 +1,12 @@
+
+{{#g-map markersFitMode='live' as |context|}}
+{{#unless media.isDesktop}}
+    {{#each stops as |stop|}}
+        {{g-map-marker context lat=stop.lat lng=stop.lng}}
+    {{/each}}
+{{else}}
+  {{!-- {{g-map-marker context lat=37.7933 lng=-122.4167}}
+  {{g-map-marker context lat=37.7833 lng=-122.4267}}
+  {{g-map-marker context lat=37.7733 lng=-122.4067}} --}}
+{{/unless}}
+{{/g-map}}

@@ -18,8 +18,13 @@ module.exports = (environment) => {
             }
         },
 
+        googleFonts: [
+            'Open+Sans:300,400,700',
+            'Source+Sans+Pro:300'
+        ],
+
         fastboot: {
-            hostWhitelist: [/^.*lvh.me:4200+$/]
+            hostWhitelist: [/^.*lvh.me:4200+$/, /^.*tours.org:4200+$/]
         },
 
         APP: {
@@ -35,6 +40,13 @@ module.exports = (environment) => {
         ENV.APP.LOG_TRANSITIONS = true;
         // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
         // ENV.APP.LOG_VIEW_LOOKUPS = true;
+        ENV['ember-cli-mirage'] = {
+            enabled: false
+        };
+        ENV['g-map'] = {
+            key: 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8',
+            protocol: 'https'
+        };
     }
 
     if (environment === 'mobile') {
@@ -42,10 +54,15 @@ module.exports = (environment) => {
         ENV.rootURL = '';
         ENV.sub = 'jay';
         ENV.APP.API_HOST = 'otb.org:3000';
-
+        ENV['g-map'] = {
+            key: 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8',
+            protocol: 'https'
+        };
     }
 
     if (environment === 'test') {
+        ENV['ember-cli-mirage'] = { enabled: true }
+        ENV.APP.API_HOST = 'otb.org:3000';
         // Testem prefers this...
         ENV.locationType = 'none';
 
@@ -57,8 +74,19 @@ module.exports = (environment) => {
     }
 
     if (environment === 'production') {
+        ENV.APP.API_HOST = 'otb.org:3000';
 
+        //
     }
+
+    ENV.contentSecurityPolicy = {
+        'default-src': "'none'",
+        'script-src': "'self' 'unsafe-eval' *.googleapis.com maps.gstatic.com",
+        'font-src': "'self' fonts.gstatic.com",
+        'connect-src': "'self' maps.gstatic.com",
+        'img-src': "'self' *.googleapis.com maps.gstatic.com csi.gstatic.com",
+        'style-src': "'self' 'unsafe-inline' fonts.googleapis.com maps.gstatic.com"
+    };
 
     return ENV;
 };

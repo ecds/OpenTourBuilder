@@ -1,9 +1,19 @@
-import { Factory, faker } from 'ember-cli-mirage';
+import { Factory, faker, trait } from 'ember-cli-mirage';
 
 export default Factory.extend({
-    title(i) {
-        return `Tour ${i + 1}`;
+    title() {
+        return faker.address.city()
     },
-    description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    is_geo: faker.random.boolean
+    description() {
+        return  faker.lorem.paragraphs()
+    },
+    is_geo() {
+        return faker.random.boolean
+    },
+
+    withStops: trait({
+        afterCreate(tour, server) {
+            server.createList('tour_stop', 10, { tour });
+        }
+    })
 });

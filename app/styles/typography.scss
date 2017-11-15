@@ -1,0 +1,22 @@
+html {
+  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+}
+
+body {
+  font-family: 'Open Sans';
+  margin: 0;
+}
+
+h1,
+h2 {
+  font-family: 'PT Sans';
+  font-weight: 300;
+}
+
+h1 {
+  font-size: 1.75em;
+}
+
+h2 {
+  font-size: 1.1em;
+}
