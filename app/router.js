@@ -1,20 +1,30 @@
-import Ember from 'ember';
+import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
 
-const Router = Ember.Router.extend({
-    location: config.locationType,
-    rootURL: config.rootURL
+const Router = EmberRouter.extend({
+  location: config.locationType,
+  rootURL: config.rootURL
 });
 
 Router.map(function() {
-    this.route('tours');
-    this.route('tour', {
-        path: '/tour/:tour_id'
+  this.route('tours');
+  this.route('tour', {
+    path: '/tour/:tour_id'
+  }, function() {
+    this.route('overview', {
+      path: '/'
     }, function() {
-        this.route('stop', {
-            path: '/stop/:stop_id'
-        });
+      this.route('stops');
+      this.route('map');
     });
+
+    this.route('stop', {
+      path: 'stop/:stop_id'
+    }, function() {
+      this.route('map');
+    });
+  });
+  this.route('upload');
 });
 
 export default Router;

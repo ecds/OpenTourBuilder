@@ -1,0 +1,19 @@
+<table class='uk-table uk-table-divider otb-stop-list'>
+    <tbody>
+    {{#each model.sortedTourStops as |tstop|}}
+    {{!-- {{#link-to 'tour.stop' stop}} --}}
+    <tr class='{{if tstop.stop.show 'uk-animation-slide-right'}}' onclick={{action (route-action 'goToStop' tstop)}}>
+        <td>
+            Auto
+        </td>
+        <td>
+            {{tstop.stop.title}}
+        </td>
+        <td>
+            <i class='fa fa-chevron-right' aria-hidden='true'></i>
+        </td>
+    </tr>
+    {{!-- {{/link-to}} --}}
+    {{/each}}
+    </tbody>
+</table>

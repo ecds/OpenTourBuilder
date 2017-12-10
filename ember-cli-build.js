@@ -11,8 +11,12 @@ module.exports = function(defaults) {
 
         sassOptions: {
             includePaths: [
-                'bower_components/animatewithsass'
+                // 'bower_components/animatewithsass'
             ]
+        },
+
+        'ember-composable-helpers': {
+            only: ['toggle']
         }
     });
 

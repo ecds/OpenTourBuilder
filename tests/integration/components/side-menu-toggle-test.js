@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('tour-list-mobile', 'Integration | Component | tour list mobile', {
+moduleForComponent('side-menu-toggle', 'Integration | Component | side menu toggle', {
   integration: true
 });
 
@@ -9,15 +9,15 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{tour-list-mobile}}`);
+  this.render(hbs`{{side-menu-toggle}}`);
 
   assert.equal(this.$().text().trim(), '');
 
   // Template block usage:
   this.render(hbs`
-    {{#tour-list-mobile}}
+    {{#side-menu-toggle}}
       template block text
-    {{/tour-list-mobile}}
+    {{/side-menu-toggle}}
   `);
 
   assert.equal(this.$().text().trim(), 'template block text');

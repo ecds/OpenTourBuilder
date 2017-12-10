@@ -1,10 +1,11 @@
-import Ember from 'ember';
-
-const { Component, get } = Ember;
+import { inject as service } from '@ember/service';
+import Component from '@ember/component';
+import { get } from '@ember/object';
 
 export default Component.extend({
-    tagName: '',
-    markers() {
-        return get(this, 'stops')
-    }
+  windoc: service(),
+  tagName: '',
+  markers() {
+    return get(this, 'stops')
+  }
 });

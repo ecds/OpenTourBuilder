@@ -1,39 +1,142 @@
 @import 'variables';
 @import 'mixins';
-@import 'typography';
-@import 'animate.scss';
+// @import 'typography';
 @import 'maps';
-@import 'tour-top-nav-bar';
+// @import 'tour-top-nav-bar';
 @import 'themes';
-@import 'tour-list-mobile';
 
-body,
-html {
-  height: 100%;
-  overflow: hidden;
+.uk-gird-margin {
+  margin-top: 0;
 }
 
-article {
-  padding: 0 2em;
+.otb-top-navbar-container,
+.otb-bottom-navbar-container {
+  position: fixed;
+  width: 100vw;
+  z-index: 2;
+
+  a,
+  a:active,
+  a:hover {
+    color: $white;
+    height: $mobile-bottom-nav-height;
+    text-decoration: none;
+  }
+}
+
+.otb-bottom-navbar-container {
+  height: $mobile-bottom-nav-height;
+}
+
+.otb-top-navbar-container {
+  // background-position: center;
+  // background-position-x: center;
+  // background-position-y: center;
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  height: $mobile-top-nav-height;
+  top: 0;
+
+  .otb-navbar {
+    @include theme('background', 'primary-dark');
+    height: $mobile-top-nav-height;
+    // background: $title-gradient;
+
+    // a {
+    //   font-size: 1.25rem;
+    // }
+  }
+}
+
+.otb-bottom-navbar-container {
+  @include theme('background', 'primary');
+  bottom: 0;
+  width: 100vw;
+
+  .uk-grid {
+    height: $mobile-bottom-nav-height;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      font-size: initial;
+      justify-content: center;
+      text-transform: uppercase;
+
+      &.active {
+        @include theme('background', 'accent');
+      }
+    }
+  }
+}
+
+.uk-article {
+  & * {
+    &:nth-child(2) {
+      display: inline;
+    }
+  }
 }
 
 .otb-container {
-  height: calc(100vh - 8em);
-  overflow: hidden;
+  @include parallax;
+  height: calc(100vh - #{$mobile-bottom-nav-height});
+}
 
-  .responsive-embed {
-    margin-top: 0;
+.otb-media {
+  // @include parallax-layer;
+  @include parallax-layer-base;
+  // margin-top: 80px;
+  max-height: 50vh;
+  width: 100vw;
+  z-index: -1;
+}
+
+.otb-content {
+  @include parallax-layer-back;
+  background: $white;
+  margin-top: $mobile-bottom-nav-height;
+}
+
+.otb-stop-list {
+  margin-top: $mobile-bottom-nav-height;
+
+  tr {
+    transform: translateX(200%);
   }
+}
 
-  .description {
-    @include scrollable-container;
+.otb-stop-title-bar {
+  @include theme('background', 'primary');
+  height: $mobile-top-title-bar;
+  margin-top: $mobile-top-nav-height;
 
-    .expand-collapse {
-      @include scrollable-top;
-    }
-
-    article {
-      @include scrollable-content;
+  .uk-navbar-nav {
+    li {
+      a {
+        height: $mobile-top-title-bar;
+        font-size: 1.5em;
+      }
     }
   }
 }
+
+.otb-stop-container {
+  margin-top: calc((1em + #{$mobile-top-nav-height}) + #{$mobile-top-title-bar});
+}
+
+.liquid-container {
+  transform: none;
+}
+
+.liquid-animating {
+  &.liquid-container {
+    transform: translateY(0);
+  }
+}
+
+.liquid-child {
+  height: 100vh;
+}
+
+@import 'ember-uikit';

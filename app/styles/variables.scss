@@ -5,6 +5,12 @@ $white: #fff;
 $black: #000;
 
 $transparent: rgba(00, 00, 00, 0);
-$translucent: rgba(00, 00, 00, .4);
-$faded-black: rgba(00, 00, 00, .7);
-$title-gradient: linear-gradient(to bottom, $transparent, $translucent, $faded-black);
+$darken: rgba(00, 00, 00, .4);
+$darker: rgba(00, 00, 00, .6);
+$translucent: rgba(00, 00, 00, .7);
+$faded-black: rgba(00, 00, 00, 1);
+$title-gradient: linear-gradient(to bottom, $transparent, $darken, $translucent, $faded-black);
+
+$mobile-top-nav-height: 40px;
+$mobile-top-title-bar: 60px;
+$mobile-bottom-nav-height: 60px;

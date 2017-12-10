@@ -1,22 +1,45 @@
-<div data-theme={{if model.theme model.theme.title 'default'}}>
-{{#unless media.isDesktop}}
-<div class="tour-top-nav-bar-wrapper pure-g">
-          <div class="pure-u-2-24">
-            <i class="fa fa-bars" aria-hidden="true" class="pure-menu-heading"></i>
-         </div>
-         <div class='pure-u-22-24'>
-                  {{#link-to 'tour' model class="pure-menu-heading"}}{{model.title}}{{/link-to}}
-         </div>
-          <div class="pure-u-1">
-              {{!-- <div class="pure-menu pure-menu-horizontal custom-can-transform"> --}}
-                  <ul class="pure-menu-list">
-                      <li class="pure-menu-item"><a href="#" class="pure-menu-link">Home</a></li>
-                      <li class="pure-menu-item"><a href="#" class="pure-menu-link">About</a></li>
-                      <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
-                  </ul>
-              {{!-- </div> --}}
-          </div>
-      </div>
-      {{/unless}}
-{{outlet}}
+<div class='uk-navbar-transparent uk-navbar-container otb-top-navbar-container' style='{{model.safeBackgroundImage}}'>
+    <nav class='uk-navbar otb-navbar' data-theme='{{theme.name}}'>
+        <div class="uk-navbar-left">
+            <ul class="uk-navbar-nav">
+                <li class="uk-offcanvas-content">
+                    <a uk-toggle="target: #offcanvas-overlay">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                    </a>
+                    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+                    {{!-- <div id="offcanvas-overlay" uk-offcanvas="overlay: true" onclick={{ action (route-action 'closeOffCanvas')}}> --}}
+                        <div class="uk-offcanvas-bar">
+                            <button class="uk-offcanvas-close" type="button" uk-close></button>
+                            <div class="uk-width-1-2@s uk-width-2-5@m">
+                                <ul class='uk-nav uk-nav-default'>
+                                    <li>{{#link-to 'index' class='uk-offcanvas-close'}}All Tours{{/link-to}}</li>
+                                    <li><a href="#">About</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class='uk-logo'>{{model.title}}</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
 </div>
+
+{{liquid-outlet}}
+
+{{!-- <div class='otb-bottom-navbar-container' data-theme='{{theme.name}}'>
+    <div class='uk-grid-collapse uk-child-width-1-3 uk-text-center' uk-grid>
+        {{#otb-link-to 'tour.index' model class='' data-theme=theme.name}}
+            <div><i class='fa fa-info-circle' aria-hidden='true'></i><br />info</div>
+        {{/otb-link-to}}
+        {{#otb-link-to 'tour.map' model class=''}}
+            <div><i class='fa fa-map' aria-hidden='true'></i><br />map</div>
+        {{/otb-link-to}}
+        {{#otb-link-to 'tour.stops'}}
+            <div><i class='fa fa-list' aria-hidden='true'></i><br />stops</div>
+        {{/otb-link-to}}
+    </div>
+</div> --}}
+

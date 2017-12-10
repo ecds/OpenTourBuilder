@@ -17,6 +17,20 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <splash height="960" id="640-960" src="res/screen/ios/640-960.png" width="640" />
+        <splash height="640" id="960-640" src="res/screen/ios/960-640.png" width="960" />
+        <splash height="1136" id="640-1136" src="res/screen/ios/640-1136.png" width="640" />
+        <splash height="640" id="1136-640" src="res/screen/ios/1136-640.png" width="1136" />
+        <splash height="1334" id="750-1334" src="res/screen/ios/750-1334.png" width="750" />
+        <splash height="750" id="1334-750" src="res/screen/ios/1334-750.png" width="1334" />
+        <splash height="2208" id="1242-2208" src="res/screen/ios/1242-2208.png" width="1242" />
+        <splash height="1242" id="2208-1242" src="res/screen/ios/2208-1242.png" width="2208" />
+        <splash height="1024" id="768-1024" src="res/screen/ios/768-1024.png" width="768" />
+        <splash height="768" id="1024-768" src="res/screen/ios/1024-768.png" width="1024" />
+        <splash height="2048" id="1536-2048" src="res/screen/ios/1536-2048.png" width="1536" />
+        <splash height="1536" id="2048-1536" src="res/screen/ios/2048-1536.png" width="2048" />
+        <splash height="2732" id="2048-2732" src="res/screen/ios/2048-2732.png" width="2048" />
+        <splash height="2048" id="2732-2048" src="res/screen/ios/2732-2048.png" width="2732" />
     </platform>
     <allow-navigation href="https://*youtube.com/*" />
     <allow-navigation href="https://fonts.googleapis.com/*" />

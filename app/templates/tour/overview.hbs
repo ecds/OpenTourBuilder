@@ -1,0 +1,14 @@
+{{liquid-outlet}}
+<div class='otb-bottom-navbar-container' data-theme='{{theme.name}}'>
+    <div class='uk-grid-collapse uk-child-width-1-3 uk-text-center' uk-grid>
+        {{#otb-link-to 'tour.overview.index' model class='' data-theme=theme.name}}
+            <div><i class='fa fa-info-circle' aria-hidden='true'></i><br />info</div>
+        {{/otb-link-to}}
+        {{#otb-link-to 'tour.overview.map' model class=''}}
+            <div><i class='fa fa-map' aria-hidden='true'></i><br />map</div>
+        {{/otb-link-to}}
+        {{#otb-link-to 'tour.overview.stops'}}
+            <div><i class='fa fa-list' aria-hidden='true'></i><br />stops</div>
+        {{/otb-link-to}}
+    </div>
+</div>

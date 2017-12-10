@@ -1,5 +1,10 @@
-.g-map-canvas {
-  height: 20vh;
-  width: 100%;
-}
+.media-mobile {
+  .g-map {
+    margin-top: $mobile-top-nav-height;
+  }
 
+  .g-map-canvas {
+    height: calc((100vh - #{$mobile-bottom-nav-height}) - #{$mobile-top-nav-height});
+    width: 100vw;
+  }
+}

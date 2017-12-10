@@ -14,10 +14,9 @@ module.exports = {
     'browser': true
   },
   rules: {
-      'indent': [2, 4],
+      'indent': [2, 2],
       'comma-dangle': ['error', 'never'],
       'quotes': [2, 'single', 'avoid-escape'],
-      'indent': [2, 4],
       'no-use-before-define': [2, 'nofunc'],
       'prefer-rest-params': 0,
       'import/no-unresolved': 0,
