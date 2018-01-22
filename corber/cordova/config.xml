@@ -31,6 +31,31 @@
         <splash height="1536" id="2048-1536" src="res/screen/ios/2048-1536.png" width="2048" />
         <splash height="2732" id="2048-2732" src="res/screen/ios/2048-2732.png" width="2048" />
         <splash height="2048" id="2732-2048" src="res/screen/ios/2732-2048.png" width="2732" />
+        <icon height="40" id="icon-40" src="res/icon/ios/icon-40.png" width="40" />
+        <icon height="57" id="icon" src="res/icon/ios/icon.png" width="57" />
+        <icon height="80" id="icon-40@2x" src="res/icon/ios/icon-40@2x.png" width="80" />
+        <icon height="120" id="icon-40@3x" src="res/icon/ios/icon-40@3x.png" width="120" />
+        <icon height="60" id="icon-60" src="res/icon/ios/icon-60.png" width="60" />
+        <icon height="120" id="icon-60@2x" src="res/icon/ios/icon-60@2x.png" width="120" />
+        <icon height="180" id="icon-60@3x" src="res/icon/ios/icon-60@3x.png" width="180" />
+        <icon height="114" id="icon@2x" src="res/icon/ios/icon@2x.png" width="114" />
+        <icon height="29" id="icon-small" src="res/icon/ios/icon-small.png" width="29" />
+        <icon height="58" id="icon-small@2x" src="res/icon/ios/icon-small@2x.png" width="58" />
+        <icon height="87" id="icon-small@3x" src="res/icon/ios/icon-small@3x.png" width="87" />
+        <icon height="152" id="icon-76@2x" src="res/icon/ios/icon-76@2x.png" width="152" />
+        <icon height="76" id="icon-76" src="res/icon/ios/icon-76.png" width="76" />
+        <icon height="72" id="icon-72" src="res/icon/ios/icon-72.png" width="72" />
+        <icon height="144" id="icon-72@2x" src="res/icon/ios/icon-72@2x.png" width="144" />
+        <icon height="50" id="icon-50" src="res/icon/ios/icon-50.png" width="50" />
+        <icon height="100" id="icon-50@2x" src="res/icon/ios/icon-50@2x.png" width="100" />
+        <icon height="167" id="icon-83.5@2x" src="res/icon/ios/icon-83.5@2x.png" width="167" />
+        <icon height="120" id="icon-120" src="res/icon/ios/icon-120.png" width="120" />
+        <icon height="240" id="icon-120@2x" src="res/icon/ios/icon-120@2x.png" width="240" />
+        <icon height="152" id="icon-152" src="res/icon/ios/icon-152.png" width="152" />
+        <icon height="304" id="icon-152@2x" src="res/icon/ios/icon-152@2x.png" width="304" />
+        <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+            <string>need location access to find things nearby</string>
+        </edit-config>
     </platform>
     <allow-navigation href="https://*youtube.com/*" />
     <allow-navigation href="https://fonts.googleapis.com/*" />

@@ -1,9 +1,12 @@
 
-{{#g-map markersFitMode='live' as |context|}}
-{{#unless media.isDesktop}}
-    {{#each stops as |stop|}}
-        {{g-map-marker context lat=stop.lat lng=stop.lng}}
-    {{/each}}
-{{else}}
-{{/unless}}
+{{#g-map as |feature|}}
+  {{#each stops as |stop|}}
+  {{#feature.marker lat=stop.lat lng=stop.lng label=stop.id animation='DROP' as |marker|}}
+    {{#marker.infowindow}}
+      <h2>{{stop.title}}</h2>
+      <p>{{stop.metadescription}}</p>
+      {{#link-to 'tour.stop' stop.id}}Go to stop <i class='fa fa-chevron-right' aria-hidden='true'></i>{{/link-to}}
+    {{/marker.infowindow}}
+  {{/feature.marker}}
+  {{/each}}
 {{/g-map}}

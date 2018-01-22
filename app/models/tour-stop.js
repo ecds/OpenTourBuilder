@@ -4,6 +4,10 @@ const { Model, attr, belongsTo } = DS;
 
 export default Model.extend({
   tour: belongsTo('tour'),
-  stop: belongsTo('stop'),
-  position: attr('number')
+  stop: belongsTo('stop', {
+    async: false
+  }),
+  position: attr('number'),
+  next: attr(),
+  previous: attr()
 });

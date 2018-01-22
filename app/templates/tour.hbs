@@ -1,45 +1,24 @@
-<div class='uk-navbar-transparent uk-navbar-container otb-top-navbar-container' style='{{model.safeBackgroundImage}}'>
-    <nav class='uk-navbar otb-navbar' data-theme='{{theme.name}}'>
-        <div class="uk-navbar-left">
-            <ul class="uk-navbar-nav">
-                <li class="uk-offcanvas-content">
-                    <a uk-toggle="target: #offcanvas-overlay">
-                        <i class="fa fa-bars" aria-hidden="true"></i>
-                    </a>
-                    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
-                    {{!-- <div id="offcanvas-overlay" uk-offcanvas="overlay: true" onclick={{ action (route-action 'closeOffCanvas')}}> --}}
-                        <div class="uk-offcanvas-bar">
-                            <button class="uk-offcanvas-close" type="button" uk-close></button>
-                            <div class="uk-width-1-2@s uk-width-2-5@m">
-                                <ul class='uk-nav uk-nav-default'>
-                                    <li>{{#link-to 'index' class='uk-offcanvas-close'}}All Tours{{/link-to}}</li>
-                                    <li><a href="#">About</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <a class='uk-logo'>{{model.title}}</a>
-                </li>
-            </ul>
+<nav class='uk-panel otb-top-navbar-container' data-theme='{{theme.name}}'>
+    <a uk-toggle="target: #offcanvas-overlay" class='uk-logo'>
+        <i class="fa fa-bars" aria-hidden="true"></i>
+    </a>
+
+    {{#link-to 'tour' model class='uk-logo'}}{{model.title}}{{/link-to}}
+</nav>
+
+{{liquid-outlet class='stop-view'}}
+
+{{!-- Offcanvas menu --}}
+<div class="uk-offcanvas-content">
+    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
+        <div class="uk-offcanvas-bar">
+            <button class="uk-offcanvas-close" type="button" uk-close></button>
+            <nav class="uk-width-1-2@s uk-width-2-5@m">
+                <ul class='uk-nav uk-nav-default'>
+                    <li>{{#link-to 'index' class='uk-offcanvas-close otb-menu-link'}}All Tours{{/link-to}}</li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
         </div>
-    </nav>
-</div>
-
-{{liquid-outlet}}
-
-{{!-- <div class='otb-bottom-navbar-container' data-theme='{{theme.name}}'>
-    <div class='uk-grid-collapse uk-child-width-1-3 uk-text-center' uk-grid>
-        {{#otb-link-to 'tour.index' model class='' data-theme=theme.name}}
-            <div><i class='fa fa-info-circle' aria-hidden='true'></i><br />info</div>
-        {{/otb-link-to}}
-        {{#otb-link-to 'tour.map' model class=''}}
-            <div><i class='fa fa-map' aria-hidden='true'></i><br />map</div>
-        {{/otb-link-to}}
-        {{#otb-link-to 'tour.stops'}}
-            <div><i class='fa fa-list' aria-hidden='true'></i><br />stops</div>
-        {{/otb-link-to}}
     </div>
-</div> --}}
-
+</div>

@@ -1,3 +1,11 @@
-{{#each model as |tour|}}
-    {{#link-to 'tour.overview' tour}}{{tour.title}}{{/link-to}}
+{{#each sortedTours as |tour|}}
+    {{#link-to 'tour.overview' tour}}
+        <div class='otb-tour-list {{if tour.show "uk-animation-slide-bottom"}}'>
+            <div class='otb-tour-cover {{if (eq sortedTours.length 2) "otb-two-tours" "otb-many-tours"}}' style={{tour.safeBackgroundImage}} />
+            <div class='otb-tour-meta uk-container'>
+                <h4>{{tour.title}}</h4>
+                {{tour.stops.length}} Stops
+            </div>
+        </div>
+    {{/link-to}}
 {{/each}}

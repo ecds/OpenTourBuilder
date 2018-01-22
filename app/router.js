@@ -7,7 +7,6 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('tours');
   this.route('tour', {
     path: '/tour/:tour_id'
   }, function() {

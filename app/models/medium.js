@@ -5,5 +5,6 @@ const { Model, attr } = DS;
 export default Model.extend({
   title: attr('string'),
   caption: attr('string'),
-  original_image: attr('file')
+  original_image: attr('file'),
+  stop: attr()
 });

@@ -4,8 +4,9 @@ const { Model, attr } = DS;
 
 export default Model.extend({
   title: attr('string'),
-  lat: attr(),
-  lng: attr(),
+  slug: attr('string'),
+  lat: attr('number'),
+  lng: attr('number'),
   description: attr('string'),
   sanitized_description: attr('string'),
   metadescription: attr('string'),

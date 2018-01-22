@@ -1,9 +1,16 @@
 @import 'variables';
 @import 'mixins';
 // @import 'typography';
-@import 'maps';
 // @import 'tour-top-nav-bar';
 @import 'themes';
+@import 'maps';
+@import 'ember-uikit';
+@import "ember-power-select";
+
+html,
+body {
+  font-size: 16px;
+}
 
 .uk-gird-margin {
   margin-top: 0;
@@ -11,6 +18,7 @@
 
 .otb-top-navbar-container,
 .otb-bottom-navbar-container {
+  // pointer-events: all;
   position: fixed;
   width: 100vw;
   z-index: 2;
@@ -22,6 +30,16 @@
     height: $mobile-bottom-nav-height;
     text-decoration: none;
   }
+
+  li {
+    a,
+    a:active,
+    a:hover {
+      color: $white;
+      height: $mobile-bottom-nav-height;
+      text-decoration: none;
+    }
+  }
 }
 
 .otb-bottom-navbar-container {
@@ -29,23 +47,11 @@
 }
 
 .otb-top-navbar-container {
-  // background-position: center;
-  // background-position-x: center;
-  // background-position-y: center;
-  // background-repeat: no-repeat;
-  // background-size: cover;
+  @include theme('background', 'primary');
   height: $mobile-top-nav-height;
+  padding-left: .5em;
+  padding-top: .5em;
   top: 0;
-
-  .otb-navbar {
-    @include theme('background', 'primary-dark');
-    height: $mobile-top-nav-height;
-    // background: $title-gradient;
-
-    // a {
-    //   font-size: 1.25rem;
-    // }
-  }
 }
 
 .otb-bottom-navbar-container {
@@ -66,13 +72,17 @@
       &.active {
         @include theme('background', 'accent');
       }
+
+      &.loading {
+        @include inactive;
+      }
     }
   }
 }
 
 .uk-article {
   & * {
-    &:nth-child(2) {
+    &:nth-child(3) {
       display: inline;
     }
   }
@@ -83,50 +93,200 @@
   height: calc(100vh - #{$mobile-bottom-nav-height});
 }
 
+.otb-stop-container {
+  margin-top: $mobile-top-nav-height;
+  // // pointer-events: all;
+}
+
 .otb-media {
   // @include parallax-layer;
   @include parallax-layer-base;
-  // margin-top: 80px;
+  margin-top: -12px;
   max-height: 50vh;
   width: 100vw;
   z-index: -1;
 }
 
-.otb-content {
-  @include parallax-layer-back;
+.otb-tour-intro-content,
+.otb-stop-content {
   background: $white;
+  // margin-top: $mobile-bottom-nav-height;
+  margin-top: 1em;
+}
+
+.otb-stop-content {
+  padding-bottom: calc(2 * #{$mobile-bottom-nav-height});
+}
+
+.otb-tour-intro-content {
+  @include parallax-layer-back;
   margin-top: $mobile-bottom-nav-height;
+}
+
+.otb-tour-list {
+  // height: 34vh;
+  margin-top: 100vh;
+  width: 100vw;
+
+  &.uk-animation-slide-bottom {
+    margin-top: unset;
+  }
+
+  .otb-tour-cover {
+    background-position: center;
+    background-position-x: center;
+    background-position-y: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &.otb-one-tour {
+      height: 100vh;
+    }
+
+    &.otb-two-tours {
+      height: 44vh;
+    }
+
+    &.otb-many-tours {
+      height: 24vh;
+    }
+
+  }
+
+  .otb-cover-meta {
+    height: 5vh;
+  }
 }
 
 .otb-stop-list {
   margin-top: $mobile-bottom-nav-height;
+  // pointer-events: all;
 
   tr {
     transform: translateX(200%);
   }
 }
 
-.otb-stop-title-bar {
-  @include theme('background', 'primary');
-  height: $mobile-top-title-bar;
-  margin-top: $mobile-top-nav-height;
+.otb-location-service-alert {
+  margin: 0 auto;
+}
 
-  .uk-navbar-nav {
-    li {
-      a {
-        height: $mobile-top-title-bar;
-        font-size: 1.5em;
-      }
-    }
+// .otb-stop-title-bar {
+//   @include theme('background', 'primary');
+//   height: $mobile-top-title-bar;
+//   margin-top: $mobile-top-nav-height;
+
+//   .uk-navbar-nav {
+//     li {
+//       a, {
+//         height: $mobile-top-title-bar;
+//       }
+//     }
+//   }
+// }
+
+.uk-slideshow-items {
+  max-height: 34vh;
+}
+
+.uk-modal {
+  height: 100vh;
+}
+
+.otb-menu-link {
+  position: unset;
+}
+
+.stop-view {
+  position: fixed;
+  top: 0;
+}
+
+.material-icons {
+  font-size: 1.1em;
+}
+
+.otb-map-control {
+  top: 10px !important;
+
+  button,
+  & + button {
+    opacity: .7;
+  }
+
+  .uk-dropdown {
+    font-size: 1.75em;
+    margin-top: 0;
+    min-width: auto;
+    padding: 1em;
   }
 }
 
-.otb-stop-container {
-  margin-top: calc((1em + #{$mobile-top-nav-height}) + #{$mobile-top-title-bar});
+.otb-mode-contorl {
+  margin-right: 5px;
 }
 
+.otb-directions-control {
+  margin-left: 5px;
+}
+
+// .otb-stop-directions-container {
+//   background: $white;
+//   bottom: 60px;
+//   height: 65vh;
+//   position: fixed;
+//   // width: 100vw;
+//   // transition: height 300ms;
+//   // will-change: height;
+//   // z-index: 22;
+
+//   // &.show {
+//   //   height: 65vh;
+//   // }
+// }
+
+ul {
+  &.otb-tabs {
+    margin-top: 0;
+    width: 100vw;
+  }
+}
+.uk-active,
+.adp-wanrbox { // This is for directions from Google Maps.
+  * {
+    @include theme('background', 'accent');
+  }
+}
+
+.otb-directions-fab {
+  bottom: $mobile-bottom-nav-height;
+  left: 1em;
+  width: $mobile-bottom-nav-height;
+
+  button {
+    @include theme('background', 'primary');
+    border-radius: 50%;
+    height: $mobile-bottom-nav-height;
+    padding: 1em;
+  }
+
+  i {
+    color: $white;
+    font-size: 2em;
+  }
+}
+
+// .liquid-stop-directions {
+//   .liquid-child {
+//     background: $white;
+//     transform: none !important;
+//   }
+// }
+
 .liquid-container {
+  // pointer-events: none;
   transform: none;
+  width: 100vw;
 }
 
 .liquid-animating {
@@ -137,6 +297,9 @@
 
 .liquid-child {
   height: 100vh;
+
+  * {
+    pointer-events: auto;
+  }
 }
 
-@import 'ember-uikit';

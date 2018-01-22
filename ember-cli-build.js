@@ -4,23 +4,23 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
-    let app = new EmberApp(defaults, {
-        'ember-cli-babel': {
-            includePolyfill: true
-        },
+  let app = new EmberApp(defaults, {
+    'ember-cli-babel': {
+      includePolyfill: true
+    },
 
-        sassOptions: {
-            includePaths: [
-                // 'bower_components/animatewithsass'
-            ]
-        },
+    sassOptions: {
+      includePaths: [
+        // 'bower_components/animatewithsass'
+      ]
+    },
 
-        'ember-composable-helpers': {
-            only: ['toggle']
-        }
-    });
+    'ember-composable-helpers': {
+      only: ['toggle']
+    }
+  });
 
-    // app.import('');
+  // app.import('');
 
-    return app.toTree();
+  return app.toTree();
 };

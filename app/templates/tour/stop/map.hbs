@@ -1,1 +1,95 @@
-{{outlet}}
+<div class='stop-title uk-text-center uk-text-middle' data-theme='{{theme.name}}'><h2>{{model.stop.title}}</h2></div>
+<div class='otb-container otb-stop-map-container {{if showDirections 'show-directions'}}'>
+  {{#if (xor locationService.Allowed gMap.clientPositionError)}}
+
+  {{!-- ALLOWS LOCATION --}}
+
+    {{#if gMap.clientLat}}
+      {{#g-map as |feature|}}
+        {{feature.directions
+          travelMode=model.tour.mode.title
+          origin=(
+            hash
+              lat=gMap.clientLat
+              lng=gMap.clientLng
+          )
+          destination=(
+            hash
+              lat=model.stop.lat
+              lng=model.stop.lng
+          )}}
+          <div class='uk-grid'>
+            {{select-travel-mode tour=model.tour modes=modes map=this}}
+            |
+            {{directions-button map=this}}
+          </div>
+      {{/g-map}}
+      {{else}}
+      <div class='uk-flex uk-flex-center uk-flex-middle uk-text-center' style='height: 50%'>
+        <div class='uk-card uk-card-hover uk-card-body'>
+          <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+          <br />
+          <h3>Locating...</h3>
+        </div>
+      </div>
+    {{/if}}
+
+  {{!-- HAS NOT ACCEPTED OR DECLINED SHARING LOCATION --}}
+
+  {{else}}
+    {{#g-map class=(unless locationService.Acknowledged 'with-alert') options=(hash zoom=16) as |feature|}}
+      {{#feature.marker feature lat=model.stop.lat lng=model.stop.lng as |marker|}}
+        {{#marker.infowindow}}
+          <h3>{{model.stop.title}}</h3>
+          <article>{{model.stop.metadescription}}</article>
+          {{#link-to 'tour.stop' model}}Go to Stop{{/link-to}}
+        {{/marker.infowindow}}
+      {{/feature.marker}}
+    {{/g-map}}
+  {{/if}}
+
+  {{!-- DECLINED SHARING LOCATION --}}
+
+  {{#unless locationService.Acknowledged}}
+  <div class='uk-alert otb-location-service-alert' uk-alert>
+      <p>Use location services to get directions?</p>
+      <div class='uk-flex uk-flex-center'>
+        <button class='uk-button uk-button-default uk-button-small' {{action (route-action 'declineLocation')}}>No</button>
+        <button class='uk-button uk-button-primary uk-button-small' {{action (route-action 'getLocation')}}>Yes</button>
+      </div>
+  </div>
+
+  {{/unless}}
+
+  {{!-- DIRECTIONS PANEL --}}
+  {{#if (or model.stop.direction_notes gMap.clientLat)}}
+    <div class='otb-directions-panel uk-panel-scrollable'>
+      <div class='uk-position-top-center' {{action (toggle "showDirections" this)}}>
+        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+      </div>
+
+      <hr />
+    {{#if (and model.stop.direction_notes gMap.clientLat)}}
+      <ul class="uk-subnav uk-subnav-pill uk-flex-center otb-tabs" uk-switcher="animation: uk-animation-fade">
+        <li><a href="#"><i class="fa fa-sticky-note" aria-hidden="true"></i> Directions</a></li>
+        <li><a href="#"><i class='material-icons' aria-hidden='true' >directions</i> Turn by Turn</a></li>
+      </ul>
+    {{/if}}
+
+      <ul class="uk-switcher uk-margin">
+        {{#if model.stop.direction_notes}}
+          <li class='{{if (not gMap.clientLat) 'uk-active'}}'>
+            <article class='uk-article'>
+              {{model.stop.direction_notes}}
+            </article>
+          </li>
+        {{/if}}
+        {{#if gMap.clientLat}}
+          <li class='{{if (not model.stop.direction_notes) 'uk-active'}}'>
+            <div id='directions-panel'></div>
+          </li>
+        {{/if}}
+      </ul>
+    </div>
+  {{/if}}
+</div>

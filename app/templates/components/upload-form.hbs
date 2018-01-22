@@ -1,0 +1,11 @@
+{{#power-select
+  selected=destination
+  options=model
+  onchange=(action 'setStop')
+  as |stop|
+}}
+  {{stop.title}}
+{{/power-select}}
+<input type='file' id='file-field'/> <a {{action 'uploadImage'}}>upload</a>
+
+{{drop-zone url=endpoint addedfile=(action 'uploadImage') complete=(action 'uploadSuccess') addRemoveLinks=true removedfile=(action 'deleteImage')}}

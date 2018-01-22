@@ -2,23 +2,23 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('overview-map', 'Integration | Component | overview map', {
-    integration: true
+  integration: true
 });
 
 test('it renders', function(assert) {
-    // Set any properties with this.set('myProperty', 'value');
-    // Handle any actions with this.on('myAction', function(val) { ... });
+  // Set any properties with this.set('myProperty', 'value');
+  // Handle any actions with this.on('myAction', function(val) { ... });
 
-    this.render(hbs`{{overview-map}}`);
+  this.render(hbs`{{overview-map}}`);
 
-    assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), '');
 
-    // Template block usage:
-    this.render(hbs`
+  // Template block usage:
+  this.render(hbs`
     {{#overview-map}}
       template block text
     {{/overview-map}}
   `);
 
-    assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'template block text');
 });

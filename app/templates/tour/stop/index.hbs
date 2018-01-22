@@ -1,6 +1,46 @@
-<div class='otb-container otb-stop-container uk-container'>
+<div class='otb-container otb-stop-container'>
+  <div class="uk-position-relative uk-visible-toggle uk-light" uk-slideshow="animation: push">
+
+            <ul class="uk-slideshow-items">
+                {{!-- <li>
+                  {{responsive-embed embedCode='https://www.youtube.com/watch?v=TpazxwU-LzM'}}
+                </li> --}}
+                <li uk-toggle="target: #modal-example">
+                    <img src="http://www.iwfatlanta.com/Resources/MediaContent/Atlanta%20Homepage.jpg" alt="" uk-cover>
+                </li>
+                <li>
+                    <img src="http://doubletree3.hilton.com/resources/media/dt/ATLSSDT/en_US/img/shared/full_page_image_gallery/main/DT_fountain_3_677x380_FitToBoxSmallDimension_Center.jpg" alt="" uk-cover>
+                </li>
+                <li>
+                    <img src="https://www.alston.com/-/media/images/offices/atlanta/officephoto/atlantaalstonbird.jpg" alt="" uk-cover>
+                </li>
+                <li>
+                    <img src="https://atlanta.regency.hyatt.com/content/dam/PropertyWebsites/regency/atlra/Media/All/Hyatt-Regency-Atlanta-P218-Polaris-Lightning-1280x427.jpg" alt="" uk-cover>
+                </li>
+            </ul>
+
+            <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+            <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+
+        </div>
+        <div class='uk-container otb-stop-content'>
 <article class='uk-article'>
+  <h1 class="uk-article-title">{{model.stop.title}}</h1>
   {{read-it content=model.stop.sanitized_description}}
   {{{model.stop.description}}}
 </article>
+</div>
+</div>
+
+<div id="modal-example" uk-modal uk-cover>
+    <div class="uk-modal-dialog uk-modal-body">
+        <h2 class="uk-modal-title">Headline</h2>
+        <p>
+                    <img src="http://www.iwfatlanta.com/Resources/MediaContent/Atlanta%20Homepage.jpg">
+          </p>
+        <p class="uk-text-right">
+            <button class="uk-button uk-button-default uk-modal-close" type="button">Cancel</button>
+            <button class="uk-button uk-button-primary" type="button">Save</button>
+        </p>
+    </div>
 </div>

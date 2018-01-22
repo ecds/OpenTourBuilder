@@ -1,10 +1,71 @@
-.media-mobile {
-  .g-map {
-    margin-top: $mobile-top-nav-height;
+// .media-mobile {
+  // .liquid-stop-directions {
+  //   .g-map {
+  //     margin-top: calc((#{$mobile-top-nav-height} + #{$mobile-bottom-nav-height} + 4rem));
+  //   }
+
+  //   .g-map-canvas {
+  //     height: calc(((100vh - #{$mobile-bottom-nav-height}) - (#{$mobile-top-nav-height} + #{$mobile-bottom-nav-height})));
+  //     width: 100vw;
+  //   }
+  // }
+
+  // .otb-container {
+  //   .g-map {
+  //     margin-top: $mobile-top-nav-height;
+  //   }
+  //   .g-map-canvas {
+  //     height: calc(100vh - (#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}));
+  //   }
+  // }
+// }
+
+.map-map {
+  height: calc(100vh - (#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}));
+  margin-top: $mobile-top-nav-height;
+  width: 100%;
+}
+
+// .liquid-stop-directions {
+.stop-title {
+  @include theme('background', 'primary-dark');
+  height: 3em;
+  margin-top: $mobile-top-nav-height;
+
+  h2 {
+    color: $white;
+  }
+}
+
+.otb-stop-map-container {
+  .map-map {
+    height: calc(100vh - ((#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}) + 3em));
+    margin-top: 0;
+
+    &.with-alert {
+      height: calc(100vh - ((#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}) + 10rem));
+    }
   }
 
-  .g-map-canvas {
-    height: calc((100vh - #{$mobile-bottom-nav-height}) - #{$mobile-top-nav-height});
-    width: 100vw;
+  .otb-directions-panel {
+    background: $white;
+    bottom: calc(#{$mobile-bottom-nav-height} + 3em);
+    height: 0;
+    position: absolute;
+    transition: height 300ms, visibility 400ms;
+    visibility: hidden;
+    width: 100%;
+    will-change: height;
+  }
+
+  &.show-directions {
+    .otb-directions-panel {
+      height: calc(100vh - ((#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}) + 10rem));
+      visibility: visible;
+    }
+  }
+
+  .adp {
+    font-size: .75em;
   }
 }
