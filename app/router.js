@@ -1,5 +1,6 @@
 import EmberRouter from '@ember/routing/router';
 import config from './config/environment';
+import adminRouter from 'ember-admin/router';
 
 const Router = EmberRouter.extend({
   location: config.locationType,
@@ -24,6 +25,7 @@ Router.map(function() {
     });
   });
   this.route('upload');
+  adminRouter(this);
 });
 
 export default Router;
