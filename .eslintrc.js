@@ -32,4 +32,26 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     /*eslint new-cap: ["error", { "newIsCap": false }]*/
   }
+  },
+  overrides: [
+    // node files
+    {
+      files: [
+        '.template-lintrc.js',
+        'ember-cli-build.js',
+        'testem.js',
+        'blueprints/*/index.js',
+        'config/**/*.js',
+        'lib/*/index.js'
+      ],
+      parserOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2015
+      },
+      env: {
+        browser: false,
+        node: true
+      }
+    }
+  ]
 };
