@@ -1,0 +1,17 @@
+{{#otb-crud/form-section label=(concat modelTitle ' Title') as |inputId|}}
+{{input class='uk-input' id=inputId value=model.title}}
+{{/otb-crud/form-section}}
+
+{{#if (eq modelTitle 'Tour')}}
+{{#otb-crud/form-section label='Publish' as |inputId|}}
+{{input type="checkbox" id=inputId name=model.published checked=model.published}}
+{{/otb-crud/form-section}}
+{{/if}}
+
+{{#otb-crud/form-section label=(concat modelTitle ' Description') as |inputId|}}
+{{pell-editor id=inputId value=model.description onChange=(action (mut model.description))}}
+{{/otb-crud/form-section}}
+
+{{#otb-crud/form-section label=(concat modelTitle ' Meta Description') as |inputId|}}
+{{textarea id=inputId rows=6 class='uk-textarea' value=model.meta_description}}
+{{/otb-crud/form-section}}

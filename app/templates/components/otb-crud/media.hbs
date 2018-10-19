@@ -1,0 +1,130 @@
+<h3 class='uk-heading'>Manage Media</h3>
+{{#otb-crud/form-section label='Add Video' icon='video' as |inputId|}}
+  <form {{action 'addVideo' on='submit'}}>
+    {{input id=inputId class='uk-input uk-margin-bottom' placeholder='Add video code...' value=videoCode input=(action 'getVideo' videoCode)}}
+    {{#if (and (xor videoProviders.videoPreview videoProviders.videoPreview.error) (gt videoProviders.videoPreview.videoId.length 0) )}}
+      <div class='uk-width-1-2 uk-align-center'>
+        <section class='uk-section uk-text-center embed-container'>
+        {{#if (eq videoProviders.videoPreview.provider 'youtube')}}
+          <iframe src='https://www.youtube.com/embed/{{videoProviders.videoPreview.videoId}}' frameborder='0' allowfullscreen uk-responsive uk-video autoplay=false></iframe>
+        {{else if (eq videoProviders.videoPreview.provider 'vimeo')}}
+          <iframe src='https://player.vimeo.com/video/{{videoProviders.videoPreview.videoId}}' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+        {{/if}}
+        </section>
+      </div>
+      {{#uk-button color='primary' on-click=(action 'addVideo')}}{{fa-icon 'video'}} Add Video{{/uk-button}}
+    {{else}}
+      {{videoProviders.videoPreview.error}}
+    {{/if}}
+  </form>
+
+  {{#file-dropzone class='js-upload uk-placeholder uk-text-center uk-inline' name='photos' as |dropzone queue|}}
+    <h4>Upload Images</h4>
+    {{#if dropzone.supported}}
+        Drag and drop images onto this area to upload them or
+      {{/if}}
+      <br />
+      {{#file-upload name=(concat _modelName '-' model.id)
+        accept='image/*'
+        multiple=true
+        onfileadd=(perform uploadMedium)}}
+        <a id={{concat 'upload-' _modelName '-' model.id}} tabindex=0>Upload an Image</a>
+      {{/file-upload}}
+      {{#uk-sortable
+        on-added=(action 'addExisting' model)
+        on-stop=reorder
+        group='media'
+        tagName='ul' class='uk-grid uk-grid-small uk-child-width-1-1@s uk-child-width-1-3@m uk-text-center'}}
+      {{#each model.sortedMedia as |modelMedium|}}
+        <li class='uk-tile uk-margin uk-padding-remove uk-inline-clip uk-transition-toggle' tabindex='0' data-id={{modelMedium.id}} data-model={{modelMedium.constructor.modelName}}>
+          {{uk-img medium=medium class='uk-transition-toggle'  alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.mobile)}}
+  <div class='uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default'>
+{{#uk-modal modalName=(concat 'edit-' model.slug modelMedium.id) on-show=(toggle 'loadEmbed' this) as |modal|}}
+              {{#modal.open class='otb-media-button' tagName='div'}}
+                {{fa-icon 'pencil-alt'}} Edit
+              {{/modal.open}}
+              {{#modal.dialog}}
+                {{#modal.body}}
+                  {{#if modelMedium.medium.video}}
+                    {{otb-embed medium=modelMedium}}
+
+                  {{else}}
+                    <section class='uk-section uk-text-center'>
+                      {{uk-img dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.tablet) alt=(concat 'Picture of ' modelMedium.medium.title '. ' modelMedium.medium.caption)}}
+                    </section>
+                  {{/if}}
+
+                  {{#otb-crud/form-section label='Medium Title' as |inputId|}}
+                    {{input class='uk-input' id=inputId placeholder='Medium title...' value=modelMedium.medium.title}}
+                  {{/otb-crud/form-section}}
+
+                  {{#otb-crud/form-section label='Caption' as |inputId|}}
+                    {{textarea class='uk-input' id=inputId value=modelMedium.medium.caption}}
+                  {{/otb-crud/form-section}}
+                {{/modal.body}}
+
+                {{#modal.footer class='uk-text-right'}}
+                  {{#uk-button class='uk-modal-close'}}Cancel{{/uk-button}}
+                  {{#uk-button class='uk-modal-close' on-click=(action 'saveModel' modelMedium.medium) color='primary'}}Save{{/uk-button}}
+                {{/modal.footer}}
+
+              {{/modal.dialog}}
+              {{#modal.media class='otb-stop-media-modal'}}
+                  {{#if (and modelMedium.medium.video loadEmbed)}}
+                    {{{medium.medium.embed}}}
+                  {{else}}
+                      {{uk-img medium=medium target=(concat '#intro-media-modal-' modelMedium.medium.id) alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.tablet)}}
+                      <p>{{modelMedium.medium.caption}}</p>
+                  {{/if}}
+              {{/modal.media}}
+            {{/uk-modal}}
+
+            {{#uk-modal modalName=(concat 'delete-' model.slug modelMedium.id) as |modal|}}
+              {{#modal.open class='otb-crud-media-buttons'}}
+                {{fa-icon 'trash-alt'}} Delete
+              {{/modal.open}}
+              {{#modal.dialog}}
+
+                {{#modal.header}}
+                  {{#modal.title}}
+                    Delete {{modelMedium.medium.title}}?
+                  {{/modal.title}}
+                {{/modal.header}}
+
+                {{#modal.body}}
+                  <section class='uk-section uk-text-center'>
+                    {{#if (and modelMedium.medium.video loadEmbed)}}
+                    {{{medium.medium.embed}}}
+                  {{else}}
+                      {{uk-img medium=medium target=(concat '#intro-media-modal-' modelMedium.medium.id) alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.tablet)}}
+                    {{/if}}
+                  </section>
+                {{/modal.body}}
+
+                {{#modal.footer class='uk-text-right'}}
+                  {{#uk-button class='uk-modal-close'}}Cancel{{/uk-button}}
+                  {{#uk-button class='uk-modal-close' on-click=(perform removeMedia modelMedium) color='primary'}}delete{{/uk-button}}
+                {{/modal.footer}}
+
+              {{/modal.dialog}}
+            {{/uk-modal}}
+              </div>
+
+
+        </li>
+      {{/each}}
+    {{/uk-sortable}}
+
+    {{#if dropzone.active}}
+      {{#if dropzone.valid}}
+        <div class='uk-overlay-primary uk-position-cover'></div>
+        <div class='uk-overlay uk-position-center uk-dark'>
+          <p class='uk-text-large uk-text-bold' style='color: #fff;'>Drop to upload</p>
+        </div>
+      {{else}}
+        Invalid
+      {{/if}}
+    {{/if}}
+
+  {{/file-dropzone}}
+{{/otb-crud/form-section}}

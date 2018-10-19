@@ -1,27 +1,23 @@
 {{#liquid-bind model use='stop' as |currentModel|}}
     {{liquid-outlet class='stop-content'}}
-    <div class='otb-bottom-navbar-container' data-theme='{{theme.name}}'>
-        <div class='uk-grid-collapse uk-child-width-1-5 uk-text-center' uk-grid>
-            {{#otb-link-to 'tour.stop.index' model.previous.id class='' data-theme=theme.name}}
-                <div><i class='fa fa-chevron-left' aria-hidden='true'></i><br />Prev</div>
-            {{/otb-link-to}}{{#otb-link-to 'tour.stop.index' model class='' data-theme=theme.name}}
-                <div><i class='fa fa-info-circle' aria-hidden='true'></i><br />info</div>
-            {{/otb-link-to}}
-            {{#otb-link-to 'tour.stop.map' model class=''}}
-                <div><i class='fa fa-map' aria-hidden='true'></i><br />map</div>
-            {{/otb-link-to}}
-            <a href='#'>
-                <div id='more'><i class='fa fa-ellipsis-v' aria-hidden='true'></i><br />more</div>
-                <div uk-dropdown="pos: top-right">
-            <ul class="uk-nav uk-dropdown-nav">
-                <li class="uk-nav-header"><i class="fa fa-share-alt" aria-hidden="true"></i> Share</li>
-                <li class="uk-nav-header"><i class="fa fa-comments-o" aria-hidden="true"></i> Comment</li>
-            </ul>
-        </div>
-            </a>
-            {{#otb-link-to 'tour.stop' model.next.id class='' data-theme=theme.name}}
-                <div><i class='fa fa-chevron-right' aria-hidden='true'></i><br />next</div>
-            {{/otb-link-to}}
-        </div>
-    </div>
 {{/liquid-bind}}
+
+<div class='otb-bottom-navbar-container' data-theme='{{theme.name}}'>
+    <div class='uk-grid-collapse uk-child-width-1-4 uk-text-center' uk-grid>
+        {{#otb-link-to 'tour.stop.index' model.previous.id class='' data-theme=theme.name}}
+            <div>{{fa-icon 'chevron-left' aria-hidden='true'}}<br />Prev</div>
+        {{/otb-link-to}}
+
+        {{#otb-link-to 'tour.stop.index' model class='' data-theme=theme.name}}
+            <div>{{fa-icon 'info-circle' aria-hidden='true'}}<br />info</div>
+        {{/otb-link-to}}
+
+        {{#otb-link-to 'tour.stop.map' model class='' data-theme=theme.name}}
+            <div>{{fa-icon 'map' aria-hidden='true'}}<br />{{t 'map'}}</div>
+        {{/otb-link-to}}
+
+        {{#otb-link-to 'tour.stop' model.next.id class='' data-theme=theme.name}}
+            <div>{{fa-icon 'chevron-right' aria-hidden='true'}}<br />next</div>
+        {{/otb-link-to}}
+    </div>
+</div>

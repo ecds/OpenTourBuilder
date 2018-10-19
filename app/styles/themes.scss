@@ -10,7 +10,7 @@ $themes: (
     dark: (
       primary-dark: #000,
       primary: #212121,
-      secondary: #eee,
+      secondary: #949494,
       accent: #fe5455
     ),
     second: (
@@ -66,6 +66,7 @@ $global-primary-background: #212121;
   @each $base, $attributes in $themes {
     @each $section, $values in $attributes {
       $name: '#{$base}-#{$section}';
+
       &[data-theme='#{$name}'] {
         #{$css-attribute}: #{$before} map-get($values, $theme-value) #{$after};
       }

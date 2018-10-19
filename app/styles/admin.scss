@@ -1,0 +1,51 @@
+.offcanvas-crud {
+  background: white;
+  color: black;
+  width: 66vw;
+
+  label,
+  input {
+    border-color: #e5e5e5 !important;
+    color: black !important;
+  }
+}
+
+.media-grid {
+  &:first-child {
+    margin-top: 20px;
+  }
+}
+
+.pell-content {
+  background: $white;
+}
+
+.uk-container {
+  .uk-form-stacked {
+    height: 50vh;
+  }
+}
+
+a.uk-accordion-title::after {
+  background-image: url(/assets/icons/bars.svg) !important;
+}
+
+#newStopForm a.uk-accordion-title::after {
+  background-image: none !important;
+}
+
+.otb-handle {
+  a {
+    cursor: move;
+
+    span {
+      cursor: pointer;
+    }
+  }
+}
+
+.uk-accordion-content {
+  a {
+    cursor: pointer;
+  }
+}

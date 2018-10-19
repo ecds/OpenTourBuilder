@@ -5,7 +5,12 @@ import { ChildMixin } from 'ember-composability-tools';
 
 export default Component.extend(ChildMixin, {
   tagName: 'button',
-  classNames: ['uk-button', 'uk-button-primary', 'otb-map-control', 'otb-directions-control'],
+  classNames: [
+    'uk-button',
+    'uk-button-primary',
+    'otb-map-control',
+    'otb-directions-control'
+  ],
 
   didInsertParent() {
     this._super(...arguments);
@@ -18,5 +23,4 @@ export default Component.extend(ChildMixin, {
   click() {
     this.map.toggleProperty('showDirections');
   }
-
 });

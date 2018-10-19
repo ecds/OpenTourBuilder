@@ -1,0 +1,34 @@
+<h2 class='uk-heading-bullet'>Tour Sites</h2>
+{{#uk-button on-click='newTourSet'}}New{{/uk-button}}
+  {{#if model.tours}}
+  {{#each model.tours as |tour|}}
+    {{tour.title}}
+  {{/each}}
+  {{/if}}
+  {{#if model.tourSets}}
+<table class="uk-table uk-table-divider">
+  <thead>
+    <tr>
+      <th class="uk-table-expand">Site Name</th>
+      <th class="uk-width-small">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each model.tourSets as |tour-set|}}
+    <tr>
+      <td class='uk-table-link'>
+        {{#link-to 'admin.tours.index' tour-set.subdir}}
+        {{tour-set.name}}
+        {{/link-to}}
+      </td>
+
+      <td class='uk-table-link'>
+        {{#link-to 'admin.tours.index' tour-set.subdir}}
+        Delete
+        {{/link-to}}
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{/if}}

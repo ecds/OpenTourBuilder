@@ -1,15 +1,18 @@
 @import 'variables';
 @import 'mixins';
-// @import 'typography';
-// @import 'tour-top-nav-bar';
 @import 'themes';
 @import 'maps';
 @import 'ember-uikit';
-@import "ember-power-select";
+@import 'ember-power-select';
+@import 'desktop';
+@import 'admin';
+@import 'login-form';
 
 html,
 body {
   font-size: 16px;
+  // height: 100vh;
+  // overflow-y: scroll;
 }
 
 .uk-gird-margin {
@@ -19,7 +22,7 @@ body {
 .otb-top-navbar-container,
 .otb-bottom-navbar-container {
   // pointer-events: all;
-  position: fixed;
+  position: absolute;
   width: 100vw;
   z-index: 2;
 
@@ -32,6 +35,7 @@ body {
   }
 
   li {
+
     a,
     a:active,
     a:hover {
@@ -40,10 +44,6 @@ body {
       text-decoration: none;
     }
   }
-}
-
-.otb-bottom-navbar-container {
-  height: $mobile-bottom-nav-height;
 }
 
 .otb-top-navbar-container {
@@ -56,7 +56,8 @@ body {
 
 .otb-bottom-navbar-container {
   @include theme('background', 'primary');
-  bottom: 0;
+  bottom: $mobile-bottom-nav-height;
+  // height: $mobile-bottom-nav-height;
   width: 100vw;
 
   .uk-grid {
@@ -94,7 +95,7 @@ body {
 }
 
 .otb-stop-container {
-  margin-top: $mobile-top-nav-height;
+  margin-top: calc(#{$mobile-top-nav-height} + 1em);
   // // pointer-events: all;
 }
 
@@ -114,13 +115,11 @@ body {
   margin-top: 1em;
 }
 
-.otb-stop-content {
-  padding-bottom: calc(2 * #{$mobile-bottom-nav-height});
-}
-
+.otb-stop-content,
 .otb-tour-intro-content {
   @include parallax-layer-back;
   margin-top: $mobile-bottom-nav-height;
+  padding-bottom: calc(2 * #{$mobile-bottom-nav-height});
 }
 
 .otb-tour-list {
@@ -160,7 +159,6 @@ body {
 
 .otb-stop-list {
   margin-top: $mobile-bottom-nav-height;
-  // pointer-events: all;
 
   tr {
     transform: translateX(200%);
@@ -171,26 +169,21 @@ body {
   margin: 0 auto;
 }
 
-// .otb-stop-title-bar {
-//   @include theme('background', 'primary');
-//   height: $mobile-top-title-bar;
-//   margin-top: $mobile-top-nav-height;
-
-//   .uk-navbar-nav {
-//     li {
-//       a, {
-//         height: $mobile-top-title-bar;
-//       }
-//     }
-//   }
-// }
-
-.uk-slideshow-items {
+.uk-slideshow {
+  @include theme('background', 'secondary');
   max-height: 34vh;
-}
 
-.uk-modal {
-  height: 100vh;
+  li {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    img {
+      flex-shrink: 0;
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
 }
 
 .otb-menu-link {
@@ -210,12 +203,12 @@ body {
   top: 10px !important;
 
   button,
-  & + button {
+  &+button {
     opacity: .7;
   }
 
   .uk-dropdown {
-    font-size: 1.75em;
+    font-size: 1.25em;
     margin-top: 0;
     min-width: auto;
     padding: 1em;
@@ -230,61 +223,23 @@ body {
   margin-left: 5px;
 }
 
-// .otb-stop-directions-container {
-//   background: $white;
-//   bottom: 60px;
-//   height: 65vh;
-//   position: fixed;
-//   // width: 100vw;
-//   // transition: height 300ms;
-//   // will-change: height;
-//   // z-index: 22;
-
-//   // &.show {
-//   //   height: 65vh;
-//   // }
-// }
-
 ul {
   &.otb-tabs {
     margin-top: 0;
     width: 100vw;
   }
 }
+
 .uk-active,
-.adp-wanrbox { // This is for directions from Google Maps.
+.adp-wanrbox {
+
+  // This is for directions from Google Maps.
   * {
     @include theme('background', 'accent');
   }
 }
 
-.otb-directions-fab {
-  bottom: $mobile-bottom-nav-height;
-  left: 1em;
-  width: $mobile-bottom-nav-height;
-
-  button {
-    @include theme('background', 'primary');
-    border-radius: 50%;
-    height: $mobile-bottom-nav-height;
-    padding: 1em;
-  }
-
-  i {
-    color: $white;
-    font-size: 2em;
-  }
-}
-
-// .liquid-stop-directions {
-//   .liquid-child {
-//     background: $white;
-//     transform: none !important;
-//   }
-// }
-
 .liquid-container {
-  // pointer-events: none;
   transform: none;
   width: 100vw;
 }
@@ -303,3 +258,92 @@ ul {
   }
 }
 
+.otb-playbutton-overlay {
+  color: $white;
+  font-size: 9em;
+  opacity: .8;
+  pointer-events: none;
+
+  // i {
+  //   pointer-events: none;
+  // }
+}
+
+.uk-slider-items {
+  .otb-playbutton-overlay {
+    i {
+      font-size: 3em;
+    }
+  }
+}
+
+.otb-crud {
+  label {
+    font-size: 1.25rem;
+  }
+}
+
+.otb-crud-footer {
+  background: #f8f8f8;
+  border: 0 solid #e5e5e5;
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+  width: 100%;
+}
+
+.otb-collapse {
+  border: 0;
+}
+
+// for mobile
+.media-mobile {
+  h1 {
+    font-size: 1.625rem !important;
+  }
+
+  .otb-container {
+    td {
+      cursor: pointer;
+    }
+  }
+}
+
+.embed-container {
+  height: 0;
+  max-width: 100%;
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+
+  iframe,
+  object,
+  embed {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+.otb-crud-media-buttons {
+  color: #212121;
+}
+
+.js-upload {
+  width: 95%;
+}
+
+// UIKit Overrides
+.uk-button {
+  &:focus {
+    outline: 2px solid Highlight;
+  }
+}
+
+.otb-media-button {
+  border: 0;
+}

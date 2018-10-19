@@ -9,6 +9,12 @@ module.exports = function(defaults) {
       includePolyfill: true
     },
 
+    // customEvents: {
+    //   // add support for the paste event
+    //   paste: 'stop',
+    //   scroll: 'scroll'
+    // },
+
     sassOptions: {
       includePaths: [
         // 'bower_components/animatewithsass'
@@ -16,11 +22,15 @@ module.exports = function(defaults) {
     },
 
     'ember-composable-helpers': {
-      only: ['toggle']
+      only: ['toggle', 'next']
+    },
+
+    emberCliDropzonejs: {
+      includeDropzoneCss: false
     }
   });
 
-  // app.import('');
+  app.import('node_modules/scrollama/build/scrollama.min.js');
 
   return app.toTree();
 };

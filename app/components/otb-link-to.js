@@ -6,5 +6,9 @@ export default LinkComponent.extend({
   dataTheme: 'default',
   didInsertElement() {
     set(this, 'dataTheme', get(this, 'theme.name'));
+  },
+
+  deviceorientation(event) {
+    console.log(event);
   }
 });

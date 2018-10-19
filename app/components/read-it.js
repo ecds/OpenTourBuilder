@@ -28,6 +28,10 @@ export default Component.extend({
     }
   },
 
+  click() {
+    this.send('sayIt');
+  },
+
   willDestroy() {
     const reader = get(this, 'reader');
     if (get(reader, 'synth') !== null) {
@@ -37,7 +41,8 @@ export default Component.extend({
   },
 
   actions: {
-    sayIt(content) {
+    sayIt() {
+      const content = get(this, 'content');
       let reader = get(this, 'reader');
       set(reader, 'voice', window.speechSynthesis.getVoices()[32]);
       if (!reader.synth.speaking) {

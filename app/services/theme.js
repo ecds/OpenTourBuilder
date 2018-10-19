@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import { computed, observer } from '@ember/object';
+import { computed /* observer */ } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 export default Service.extend({
@@ -14,9 +14,9 @@ export default Service.extend({
   }),
 
   // update things that may be using data-theme
-  themeChanged: observer('base', 'theme', function() {
-    this.notifyPropertyChange('name');
-  }),
+  // themeChanged: observer('base', 'theme', function() {
+  //   this.notifyPropertyChange('name');
+  // }),
 
   // set the base theme for the application
   setBase: function(base) {

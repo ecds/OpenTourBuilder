@@ -1,3 +1,7 @@
 {{#if supported}}
-    <i class="fa {{if speaking 'fa-pause' 'fa-headphones'}}" aria-hidden="true" onclick={{action 'sayIt' content}}></i>
+    {{#if speaking}}
+        {{fa-icon 'pause'}}
+    {{else}}
+        {{fa-icon 'headphones'}}
+    {{/if}}
 {{/if}}

@@ -1,5 +1,25 @@
+{{#if (media 'isDesktop')}}
+    <div uk-grid class='uk-grid-match uk-grid-small'>
+        {{#each sortedTours as |tour|}}
+            <div class='uk-width-expand'>
+                <div class="uk-cover-container uk-transition-toggle" uk-height-viewport>
+        {{#link-to 'tour' tour}}
+                    <img src='{{baseUrl}}{{tour.splash.original_image.url}}' alt={{concat 'Cover image for the ' tour.title ' tour. The image is titled ' tour.splash.title ' and captioned: ' tour.splash.caption}} class='otb-cover-image uk-transition-scale-up uk-transition-opaque'>
+                    <div class="uk-overlay-primary uk-position-cover">
+                <div class="uk-position-center">
+                    <h1 class='uk-heading-primary uk-text-center'>{{tour.title}}</h1>
+                    <p class='uk-text-meta uk-text-center'>{{tour.stops.length}} Stops</p>
+                     {{#uk-button color='secondary' class='uk-align-center uk-width-1-2'}}start tour{{/uk-button}}
+                </div>
+            </div>
+            {{/link-to}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+{{else}}
 {{#each sortedTours as |tour|}}
-    {{#link-to 'tour.overview' tour}}
+    {{#link-to 'tour' tour}}
         <div class='otb-tour-list {{if tour.show "uk-animation-slide-bottom"}}'>
             <div class='otb-tour-cover {{if (eq sortedTours.length 2) "otb-two-tours" "otb-many-tours"}}' style={{tour.safeBackgroundImage}} />
             <div class='otb-tour-meta uk-container'>
@@ -9,3 +29,4 @@
         </div>
     {{/link-to}}
 {{/each}}
+{{/if}}

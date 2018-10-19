@@ -5,37 +5,42 @@ import { sort } from '@ember/object/computed';
 
 export default Route.extend({
   model() {
-    return  this.store.findAll('tour');
+    return this.store.findAll('tour');
   },
 
-  afterModel(model) {
-    if (model.content.length === 1) {
-      this.transitionTo('tour.overview', model.content[0].id)
-    }
-  },
+  // afterModel() {
+  //   this.transitionTo('tour.overview', 'testboa', 1);
+  // },
 
   setupController(controller, model) {
     this._super(controller, model);
     this.controllerFor('index').set('toursSorting', ['position']);
     if (get(this.controller, 'sortedTours') === undefined) {
-      this.controllerFor('index').set('sortedTours', sort('model', 'toursSorting'));
+      this.controllerFor('index').set(
+        'sortedTours',
+        sort('model', 'toursSorting')
+      );
     }
   },
 
   actions: {
     didTransition() {
       let sortedTours = get(this.controller, 'sortedTours');
-      sortedTours.forEach( (tour, index) => {
+      sortedTours.forEach((tour, index) => {
         tour.setProperties({
           show: false
         });
-        run.later(this, () => {
-          if (!tour.isDestroyed) {
-            tour.setProperties({
-              show: true
-            });
-          }
-        }, 300 * index);
+        run.later(
+          this,
+          () => {
+            if (!tour.isDestroyed) {
+              tour.setProperties({
+                show: true
+              });
+            }
+          },
+          300 * index
+        );
       });
     }
   }

@@ -1,24 +1,63 @@
-<nav class='uk-panel otb-top-navbar-container' data-theme='{{theme.name}}'>
-    <a uk-toggle="target: #offcanvas-overlay" class='uk-logo'>
-        <i class="fa fa-bars" aria-hidden="true"></i>
-    </a>
+{{#if (media 'isDesktop')}}
+    <nav class='uk-navbar uk-light uk-background-secondary uk-margin' uk-navbar>
+        <div class='uk-navbar-left'>
+            {{#link-to 'index'}}
+            <img src='/assets/images/otblogo.png' alt='Branding logo' /> Open Tour Builder
+            {{/link-to}}
+        </div>
+        <div class='uk-navbar-center'>
+        <h1 class='uk-navbar-item uk-logo uk-margin-remove uk-padding-remove otb-desktop-tour-title'>
+            {{model.title}} {{fa-icon 'caret-down'}}
+        </h1>
+        <div class="uk-navbar-dropdown" uk-dropdown mode='click' offset=0 animation='uk-animation-slide-top' boundary='.uk-navbar' boundary-align=true align='center' style='width: 100vw;'>
+            <div uk-grid class='desktop-dropdown-nav uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-1@s uk-dropdown-grid'>
+                {{#each model.sortedTourStops as |tourStop|}}
+                    <div onClick={{action 'setActiveStop' model.tour_stops tourStop true}}>
+                        <a href='#'>
+                        <img src='{{tourStop.stop.mobileThumbUrl}}' />
+                        <br />
+                        <span class='uk-text-large'>{{tourStop.position}}: {{tourStop.stop.title}}</span>
+                        </a>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+        </div>
+    </nav>
+    <div class='map-container uk-grid-collapse' uk-grid>
+    {{desktop-tour-list class='uk-width-1-2' tourStops=model.sortedTourStops setActiveStop=(action 'setActiveStop')}}
+    {{#g-map zoom='auto' class='uk-width-1-2' options=(hash disableDefaultUI=true) setActiveStop=(action 'setActiveStop') as |feature|}}
+        {{#each model.sortedTourStops as |tourStop|}}
+          {{feature.marker lat=tourStop.stop.lat lng=tourStop.stop.lng onClick=(action 'setActiveStop' model.tour_stops tourStop true) icon=(if tourStop.active tourStop.activeIcon tourStop.icon) label=(if tourStop.active tourStop.activeLabel tourStop.label)}}
+        {{/each}}
+    {{/g-map}}
+    </div>
 
-    {{#link-to 'tour' model class='uk-logo'}}{{model.title}}{{/link-to}}
-</nav>
+{{else}}
+    <nav class='uk-panel otb-top-navbar-container' data-theme='{{theme.name}}'>
+        <a uk-toggle='target: #offcanvas-overlay' class='uk-logo'>
+            {{fa-icon 'bars' aria-hidden='true'}}
+        </a>
 
-{{liquid-outlet class='stop-view'}}
+        {{#link-to 'tour' model class='uk-logo'}}{{model.title}}{{/link-to}}
+    </nav>
+
+    {{liquid-outlet class='stop-view'}}
 
 {{!-- Offcanvas menu --}}
-<div class="uk-offcanvas-content">
-    <div id="offcanvas-overlay" uk-offcanvas="overlay: true">
-        <div class="uk-offcanvas-bar">
-            <button class="uk-offcanvas-close" type="button" uk-close></button>
-            <nav class="uk-width-1-2@s uk-width-2-5@m">
-                <ul class='uk-nav uk-nav-default'>
-                    <li>{{#link-to 'index' class='uk-offcanvas-close otb-menu-link'}}All Tours{{/link-to}}</li>
-                    <li><a href="#">About</a></li>
-                </ul>
-            </nav>
+    <div class='uk-offcanvas-content'>
+        <div id='offcanvas-overlay' uk-offcanvas='overlay: true'>
+            <div class='uk-offcanvas-bar'>
+                <button class='uk-offcanvas-close' type='button' uk-close></button>
+                <nav class='uk-width-1-2@s uk-width-2-5@m'>
+                    <ul class='uk-nav uk-nav-default'>
+                        <li>{{#link-to 'index' class='uk-offcanvas-close otb-menu-link'}}All Tours{{/link-to}}</li>
+                        <li><a href='#'>About</a></li>
+                        <li class='uk-nav-divider'></li>
+                        <li>{{login-button}}</li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
+{{/if}}

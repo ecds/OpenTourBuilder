@@ -1,1 +1,11 @@
-{{overview-map stops=model.stops}}
+{{#g-map zoom='auto' as |feature|}}
+  {{#each model.stops as |stop|}}
+  {{#feature.marker lat=stop.lat lng=stop.lng label=stop.id animation='DROP' as |marker|}}
+    {{#marker.infowindow}}
+      <h2>{{stop.title}}</h2>
+      <p>{{stop.metadescription}}</p>
+      {{#link-to 'tour.stop' stop.id}}Go to stop {{fa-icon 'chevron-right' aria-hidden='true'}}{{/link-to}}
+    {{/marker.infowindow}}
+  {{/feature.marker}}
+  {{/each}}
+{{/g-map}}

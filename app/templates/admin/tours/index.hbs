@@ -1,0 +1,44 @@
+<div uk-grid class='uk-child-width-auto'>
+  <div>
+  {{#link-to 'admin.tours.new'}}
+  {{#uk-button color='primary' size='large'}}New Tour{{/uk-button}}
+  {{/link-to}}
+  </div>
+  <div>
+    {{#uk-button color='primary' size='large'}}Tour Set Users{{/uk-button}}
+  </div>
+</div>
+
+{{#uk-table-striped}}
+  <thead>
+        <tr>
+            <th>Tour</th>
+            <th class='uk-table-shrink'>Published</th>
+            <th class='uk-table-shrink'>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+      {{#each model as |tour|}}
+
+        <tr>
+            <td>
+              {{#link-to 'admin.tours.edit' tour}}
+                {{tour.title}}
+              {{/link-to}}
+            </td>
+            <td>
+              {{#uk-button color='link' on-click=(action 'togglePublish' tour) class='uk-align-center'}}
+                {{fa-icon (if tour.published 'check' 'times') aria-hidden='true'}}
+                <span class='sr-only'>{{if tour.published 'Click to publish' 'Click to un-publish'}}</span>
+              {{/uk-button}}
+            </td>
+            <td>
+              {{#uk-button color='link' on-click=(action 'deleteTour' tour) class='uk-align-center'}}
+                {{fa-icon 'trash-alt' aria-hidden='true'}}
+                <span class='sr-only'>Delete {{tour.title}}</span>
+              {{/uk-button}}
+            </td>
+        </tr>
+        {{/each}}
+    </tbody>
+  {{/uk-table-striped}}

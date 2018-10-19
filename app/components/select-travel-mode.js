@@ -16,13 +16,16 @@ export default Component.extend(ChildMixin, {
     {
       mode: 'DRIVING',
       icon: 'car'
-    }, {
+    },
+    {
       mode: 'BICYCLING',
       icon: 'bicycle'
-    }, {
+    },
+    {
       mode: 'TRANSIT',
       icon: 'bus'
-    }, {
+    },
+    {
       mode: 'WALKING',
       icon: 'question'
     }

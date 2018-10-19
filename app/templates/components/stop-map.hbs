@@ -1,0 +1,58 @@
+  {{!-- HAS NOT ACCEPTED OR DECLINED SHARING LOCATION --}}
+  {{#if (eq allowsLocation undefined)}}
+    <div class='uk-alert otb-location-service-alert' uk-alert>
+      <p>Use location services to get directions?</p>
+      <div class='uk-flex uk-flex-center'>
+        <button class='uk-button uk-button-default uk-button-small' {{action 'declineLocation'}}>No</button>
+        <button class='uk-button uk-button-primary uk-button-small' {{action 'getLocation'}}>Yes</button>
+      </div>
+    </div>
+
+  {{else if allowsLocation}}
+  {{!-- ALLOWS LOCATION --}}
+    {{#if geoLocation.clientLat}}
+      {{#g-map options=(
+          hash
+          disableDefaultUI=true
+        ) as |feature|}}
+      {{feature.directions
+        travelMode=model.tour.mode.title
+        origin_lat = geoLocation.clientLat
+        origin_lng = geoLocation.clientLng
+        destination_lat = model.stop.lat
+        destination_lng = model.stop.lng
+        waypoint_lat = model.stop.parking_lat
+        waypoint_lng = model.stop.parking_lng
+      }}
+      {{!-- {{#if (and model.stop.lat model.stop.lng)}} --}}
+          {{#feature.marker
+            icon=(parking-icon)
+            lat=model.lat
+            lng=model.lng as |marker|}}
+        {{/feature.marker}}
+        {{!-- {{/if}} --}}
+      <div class='uk-grid'>
+        {{select-travel-mode tour=model.tour modes=modes map=this}}
+        |
+        {{directions-button map=this}}
+      </div>
+    {{/g-map}}
+  {{else}}
+    Locating
+  {{/if}}
+
+{{else}}
+
+  {{!-- DECLINED SHARING LOCATION --}}
+
+  {{#g-map class=(if (eq allowsLocation undefined) 'with-alert') zoom=16 as |feature|}}
+    {{#feature.marker feature position=(hash lat=model.stop.lat lng=model.stop.lng) as |marker|}}
+      {{#marker.infowindow}}
+        <h3>{{model.stop.title}}</h3>
+        <article>{{model.stop.address}}</article>
+        {{#link-to 'tour.stop' model}}Go to Stop{{/link-to}}
+      {{/marker.infowindow}}
+    {{/feature.marker}}
+  {{/g-map}}
+
+{{/if}}

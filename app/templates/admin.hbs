@@ -1,0 +1,23 @@
+<div uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky; bottom: #transparent-sticky-navbar">
+    <nav class="uk-navbar-container" uk-navbar style="position: relative; z-index: 980;">
+        <div class="uk-navbar-left">
+
+            <ul class="uk-navbar-nav">
+                <li>{{#link-to 'admin.index'}}Sites{{/link-to}}</li>
+                {{!-- {{#if }} --}}
+                <li>{{#link-to 'admin.tours' tenant.tenant}}Tours{{/link-to}}</li>
+            </ul>
+        </div>
+        <div class="uk-navbar-right">
+          <ul class="uk-navbar-nav">
+            {{login-button}}
+        </ul>
+        </div>
+    </nav>
+</div>
+
+<div class='uk-container uk-margin-top'>
+  {{!-- <div class='uk-grid' uk-grid> --}}
+    {{outlet}}
+  {{!-- </div> --}}
+</div>

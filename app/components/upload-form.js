@@ -9,7 +9,7 @@ export default Component.extend({
   tenant: service(),
 
   endpoint: computed('', function() {
-    return  `https://${this.get('tenant.domain')}.${ENV.APP.API_HOST}/media`
+    return `https://${this.get('tenant.domain')}.${ENV.APP.API_HOST}/media`;
   }),
 
   actions: {
@@ -17,29 +17,40 @@ export default Component.extend({
       this.set('stop', stop);
     },
 
-    // uploadImage(file) {
-    //   let photo = get(this, 'store').createRecord('medium', {
-    //     title: file.name,
-    //     original_image: file,
-    //     stop: this.get('stop')
-    //   });
-    //   photo.save().then(() => {
-    //     file.id = photo.id;
-    //   });
-    // },
+    uploadImage() {
+      // let photo = get(this, 'store').createRecord('medium', {
+      //   title: file.name,
+      //   original_image: file
+      // });
+      // photo.save().then(() => {
+      //   file.id = photo.id;
+      // });
+    },
 
     uploadSuccess(file) {
-      const response = JSON.parse(file.xhr.response);
-      const store = get(this, 'store');
-      store.findRecord('medium', response.data.id);
+      let response = JSON.parse(file.xhr.response);
+      let store = get(this, 'store');
+      store
+        .peekRecord('medium', response.data.id, {
+          backgroundReload: false
+        })
+        .then(media => {
+          media.setProperties({
+            title: file.name,
+            original_image: file
+          });
+          media.save();
+        });
     },
 
     deleteImage(file) {
       const response = JSON.parse(file.xhr.response);
       const store = get(this, 'store');
-      store.findRecord('medium', response.data.id, { backgroundReload: false }).then(function(image) {
-        image.destroyRecord();
-      });
+      store
+        .findRecord('medium', response.data.id, { backgroundReload: false })
+        .then(function(image) {
+          image.destroyRecord();
+        });
     }
   }
 });

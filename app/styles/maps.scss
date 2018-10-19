@@ -1,25 +1,3 @@
-// .media-mobile {
-  // .liquid-stop-directions {
-  //   .g-map {
-  //     margin-top: calc((#{$mobile-top-nav-height} + #{$mobile-bottom-nav-height} + 4rem));
-  //   }
-
-  //   .g-map-canvas {
-  //     height: calc(((100vh - #{$mobile-bottom-nav-height}) - (#{$mobile-top-nav-height} + #{$mobile-bottom-nav-height})));
-  //     width: 100vw;
-  //   }
-  // }
-
-  // .otb-container {
-  //   .g-map {
-  //     margin-top: $mobile-top-nav-height;
-  //   }
-  //   .g-map-canvas {
-  //     height: calc(100vh - (#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}));
-  //   }
-  // }
-// }
-
 .map-map {
   height: calc(100vh - (#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}));
   margin-top: $mobile-top-nav-height;
@@ -47,19 +25,19 @@
     }
   }
 
-  .otb-directions-panel {
+  .otb-stop-directions-container {
     background: $white;
     bottom: calc(#{$mobile-bottom-nav-height} + 3em);
     height: 0;
     position: absolute;
     transition: height 300ms, visibility 400ms;
     visibility: hidden;
-    width: 100%;
+    // width: 100%;
     will-change: height;
   }
 
   &.show-directions {
-    .otb-directions-panel {
+    .otb-stop-directions-container {
       height: calc(100vh - ((#{$mobile-bottom-nav-height} + #{$mobile-top-nav-height}) + 10rem));
       visibility: visible;
     }
@@ -67,5 +45,12 @@
 
   .adp {
     font-size: .75em;
+  }
+}
+
+.otb-crud,
+.uk-modal-body {
+  .map-map {
+    height: auto;
   }
 }

@@ -1,12 +1,18 @@
 /* eslint-env node */
 
-module.exports = (environment) => {
+module.exports = environment => {
   const ENV = {
     modulePrefix: 'open-tour-builder',
     environment,
     rootURL: '/',
     locationType: 'auto',
-    'ember-cli-mirage': { enabled: false },
+    'ember-cli-mirage': {
+      enabled: false
+    },
+    torii: {
+      providers: {}
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -18,13 +24,15 @@ module.exports = (environment) => {
       }
     },
 
-    googleFonts: [
-      'Open+Sans:300,400,700',
-      'Source+Sans+Pro:300'
-    ],
+    googleFonts: ['Open+Sans:300,400,700', 'Source+Sans+Pro:300'],
 
     fastboot: {
-      hostWhitelist: [/^.*lvh.me:4200+$/, /^.*tours.org:4200+$/, /^.*otb.org:3000+$/, '*'],
+      hostWhitelist: [
+        /^.*lvh.me:4200+$/,
+        /^.*tours.org:4200+$/,
+        /^.*otb.org:3000+$/,
+        '*'
+      ],
       disabled: true
     },
 
@@ -34,8 +42,12 @@ module.exports = (environment) => {
     }
   };
 
+  ENV.i18n = {
+    defaultLocale: 'en'
+  };
+
   if (environment === 'development') {
-    ENV.APP.API_HOST = 'otb.org:3000';
+    ENV.APP.API_HOST = 'https://otb.org:3000';
     ENV.fastboot.hostWhitelist.push('https://jay.otb.org:3000');
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
@@ -47,8 +59,16 @@ module.exports = (environment) => {
     };
     ENV['g-map'] = {
       key: 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8',
-      libraries: ['places']
+      libraries: ['places'],
+      language: 'en'
     };
+
+    ENV.torii.providers['google-oauth2'] = {
+      apiKey: '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
+      redirectUri: 'https://lvh.me:4200/torii/redirect.html'
+    };
+    // ENV.torii.providers['google-oauth2-bearer-v2'] = {
+    // };
   }
 
   if (environment === 'mobile') {
@@ -63,7 +83,9 @@ module.exports = (environment) => {
   }
 
   if (environment === 'test') {
-    ENV['ember-cli-mirage'] = { enabled: true }
+    ENV['ember-cli-mirage'] = {
+      enabled: true
+    };
     ENV.APP.API_HOST = 'otb.org:3000';
     // Testem prefers this...
     ENV.locationType = 'none';
@@ -75,10 +97,23 @@ module.exports = (environment) => {
     ENV.APP.rootElement = '#ember-testing';
   }
 
-  if (environment === 'production') {
-    ENV.APP.API_HOST = 'otb.org:3000';
+  if (environment === 'staging') {
+    ENV.APP.API_HOST = 'https://otb-api.ecdsdev.org';
 
-    //
+    ENV['g-map'] = {
+      key: 'AIzaSyC0l_y6pP0DK4oig0ile1XLbRx9HUQeryE',
+      protocol: 'https'
+    };
+
+    ENV.torii.providers['facebook-oauth2'] = {
+      apiKey: '383939088765607',
+      redirectUri: 'https://obt.ecdsdev.org/torii/redirect.html'
+    };
+
+    ENV.torii.providers['google-oauth2'] = {
+      apiKey: '171053764894-edtmjrjbnh8jukcbsgdue4sovqpe1l5f.apps.googleusercontent.com',
+      redirectUri: 'https://otb.ecdsdev.org/torii/redirect.html'
+    };
   }
 
   ENV.contentSecurityPolicy = {

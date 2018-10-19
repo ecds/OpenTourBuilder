@@ -1,17 +1,19 @@
 import Route from '@ember/routing/route';
 import { inject as service } from '@ember/service';
-// import { get } from '@ember/object';
+import { get } from '@ember/object';
+import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-export default Route.extend({
-  // theme: service(),
-  splashSreenService: service('ember-cordova/splash'),
+export default Route.extend(ApplicationRouteMixin, {
+  currentUser: service(),
+  tenant: service(),
 
-  // setupController(controller, model) {
-  //     this._super(controller, model);
-  //     this.controllerFor('application').set('theme', this.get('theme'));
-  // },
+  beforeModel() {
+    return this.get('currentUser').load();
+  },
 
-  afterModel() {
-    // get(this, 'splashScreenService').hide();
+  actions: {
+    didTransition() {
+      get(this, 'tenant').setTenant();
+    }
   }
 });

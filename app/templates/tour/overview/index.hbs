@@ -1,9 +1,36 @@
-<div class='otb-container'>
-    <div class='otb-media'>
-        {{responsive-embed embedCode='https://www.youtube.com/watch?v=TpazxwU-LzM'}}
-    </div>
+<div class='otb-container otb-stop-container'>
+    <div class='uk-position-relative uk-visible-toggle uk-light' uk-slideshow='animation: push'>
+
+                <ul class='uk-slideshow-items' data-theme='{{theme.name}}'>
+            {{#each model.sortedMedia as |media|}}
+            <li>
+                {{#uk-modal modalName=(concat 'media-modal-' media.id) as |modal|}}
+                    <img src='{{media.medium.baseUrl}}{{media.medium.tablet}}' alt='' uk-toggle target={{concat '#media-modal-' media.id}}>
+                    {{#if media.medium.video}}
+                    <div class='uk-position-center uk-panel otb-playbutton-overlay'>
+                        {{fa-icon 'play-circle' aria-hidden='true'}}
+                    </div>
+                    {{/if}}
+                {{#modal.media class='otb-stop-media-modal'}}
+                    {{#if media.medium.video}}
+                        {{{media.medium.embed}}}
+                    {{else}}
+                        <img src='{{media.medium.baseUrl}}{{media.medium.tablet}}' alt='' />
+                    {{/if}}
+                {{/modal.media}}
+                {{/uk-modal}}
+            </li>
+            {{else}}
+            <li>loading...</li>
+            {{/each}}
+        </ul>
+
+        <a class='uk-position-center-left uk-position-small uk-hidden-hover' href='#' uk-slidenav-previous uk-slideshow-item='previous'></a>
+        <a class='uk-position-center-right uk-position-small uk-hidden-hover' href='#' uk-slidenav-next uk-slideshow-item='next'></a>
+        </div>
     <div class='uk-container otb-tour-intro-content'>
         <article class='uk-article'>
+            <h1 class='uk-article-title'>{{model.title}}</h1>
             {{read-it content=model.sanitized_description}}
             {{{model.safeDescription}}}
         </article>
