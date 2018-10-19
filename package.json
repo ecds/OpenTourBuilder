@@ -17,7 +17,6 @@
   "dependencies": {
     "cordova": "^7.1.0",
     "ember": "^1.0.3",
-    "ember-cli": "3.0.0",
     "ember-cli-htmlbars": "^2.0.3",
     "ember-console": "^0.0.7",
     "ember-data": "^3.0.0",
@@ -35,6 +34,7 @@
     "ecds-ember-responsive-embed": "git://github.com/ecds/ecds-ember-responsive-embed.git#develop",
     "ember-ajax": "^3.0.0",
     "ember-auto-import": "^1.0.1",
+    "ember-cli": "3.0.0",
     "ember-cli-app-version": "^3.0.0",
     "ember-cli-babel": "^6.3.0",
     "ember-cli-chai": "^0.4.0",
@@ -49,6 +49,7 @@
     "ember-cli-sass": "^7.1.7",
     "ember-cli-shims": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
+    "ember-cli-update": "^0.27.1",
     "ember-composability-tools": "^0.0.9",
     "ember-composable-helpers": "^2.0.3",
     "ember-concurrency": "^0.8.14",
