@@ -30,8 +30,8 @@ module.exports = {
     'camelcase': 0,
     'no-restricted-syntax': [0, 'ForInStatmens'],
     'import/no-extraneous-dependencies': 0,
+    'no-console': 1
     /*eslint new-cap: ["error", { "newIsCap": false }]*/
-  }
   },
   overrides: [
     // node files

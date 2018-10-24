@@ -15,8 +15,7 @@ export default Model.extend({
   video: attr('string'),
   position: attr('number'),
   theme_title: attr('string'),
-  modes: hasMany('tour-modes'),
-  media: hasMany('medium', { inverse: 'tours', async: false }),
+  // modes: hasMany('tour-modes'),
   splash: attr(),
   mode: belongsTo('mode', {
     async: true
@@ -25,20 +24,16 @@ export default Model.extend({
     async: true
   }),
   published: attr('boolean'),
-  tour_stops: hasMany('tour_stop', {
+  tour_stops: hasMany('tour-stop', {
     async: true
   }),
-  tour_media: hasMany('tour_medium'),
-  stops: hasMany('stop', {
-    async: true
-  }),
-  flat_pages: hasMany('flat_page', {
+  tour_media: hasMany('tour-medium'),
+  media: hasMany('medium'),
+  stops: hasMany('stop'),
+  flat_pages: hasMany('flat-page', {
     async: true
   }),
   users: hasMany('user'),
-  // safeBackgroundImage: computed('splash_imange', function safeBackgroundPhoto() {
-  //   return new htmlSafe(`background-image: url("${get(this, 'splash_image')}");`);
-  // }).property('splash_image'),
   safeDescription: computed('description', function safeDescription() {
     return new htmlSafe(get(this, 'description'));
   }).property('description'),

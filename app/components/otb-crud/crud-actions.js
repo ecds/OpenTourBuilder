@@ -23,28 +23,6 @@ export default Component.extend({
         });
       };
       /* eslint-enable */
-    },
-
-    reordered(event) {
-      let index = 1;
-      for (let item of event.target.children) {
-        set(this, 'modelToReorder', item.attributes['data-model'].value);
-        let storeItem = get(this, 'store').peekRecord(
-          get(this, 'modelToReorder'),
-          item.attributes['data-id'].value
-        );
-        storeItem.setProperties({
-          position: index
-        });
-        index++;
-      }
-
-      get(this, 'store')
-        .peekAll(get(this, 'modelToReorder'))
-        .save()
-        .then(() => {
-          UIkit.notification({ message: 'New order saved.', pos: 'top-right' });
-        });
     }
   }
 });

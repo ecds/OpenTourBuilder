@@ -16,7 +16,6 @@
     "test": "ember test"
   },
   "dependencies": {
-    "cordova": "^7.1.0",
     "ember": "^1.0.3",
     "ember-cli-htmlbars": "^3.0.0",
     "ember-console": "^0.0.7",
@@ -33,7 +32,6 @@
     "@fortawesome/free-brands-svg-icons": "^5.1.1",
     "@fortawesome/free-solid-svg-icons": "^5.1.1",
     "broccoli-asset-rev": "^2.7.0",
-    "corber": "1.1.7",
     "ecds-ember-responsive-embed": "git://github.com/ecds/ecds-ember-responsive-embed.git#develop",
     "ember-ajax": "^3.1.0",
     "ember-auto-import": "^1.0.1",
@@ -57,7 +55,6 @@
     "ember-composable-helpers": "^2.0.3",
     "ember-concurrency": "^0.8.14",
     "ember-cookies": "^0.1.2",
-    "ember-cordova": "^1.0.6",
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.2.4",
     "ember-g-map": "jayvarner/ember-g-map.git#develop",

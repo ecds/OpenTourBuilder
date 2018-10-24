@@ -1,12 +1,45 @@
-<h2 class='uk-heading-bullet'>Tour Sites</h2>
-{{#uk-button on-click='newTourSet'}}New{{/uk-button}}
+<h2 class='uk-heading-bullet'>Tours</h2>
+{{#otb-crud/new-button click=(perform newRecord 'tour')}}New Tour{{/otb-crud/new-button}}
   {{#if model.tours}}
+{{#uk-table-striped}}
+  <thead>
+    <tr>
+      <th class="uk-table-expand">Site Name</th>
+      <th>Stops</th>
+      <th class="uk-table-shrink">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
   {{#each model.tours as |tour|}}
-    {{tour.title}}
-  {{/each}}
+    {{#if tour.title}}
+    <tr>
+      <td>
+        {{#link-to 'admin.tours.edit' 'public' tour}}
+        {{tour.title}}
+        {{/link-to}}
+      </td>
+
+      <td>
+        {{tour.stops.length}}
+      </td>
+
+      <td>
+        {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour)}}
+        {{fa-icon 'trash'}}
+        {{/uk-button}}
+      </td>
+    </tr>
+    {{/if}}
+    {{/each}}
+  </tbody>
+{{/uk-table-striped}}
   {{/if}}
+
+<h2 class='uk-heading-bullet'>Tour Sites</h2>
+{{#otb-crud/new-button click=(perform newRecord 'tour-set')}}New Site{{/otb-crud/new-button}}
+
   {{#if model.tourSets}}
-<table class="uk-table uk-table-divider">
+{{#uk-table-striped}}
   <thead>
     <tr>
       <th class="uk-table-expand">Site Name</th>
@@ -23,12 +56,12 @@
       </td>
 
       <td class='uk-table-link'>
-        {{#link-to 'admin.tours.index' tour-set.subdir}}
-        Delete
-        {{/link-to}}
+        {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour-set)}}
+        {{fa-icon 'trash'}}
+        {{/uk-button}}
       </td>
     </tr>
     {{/each}}
   </tbody>
-</table>
+{{/uk-table-striped}}
 {{/if}}

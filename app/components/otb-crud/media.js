@@ -9,13 +9,6 @@ import UIkit from 'uikit';
 export default Component.extend({
   fileQueue: service(),
   store: service(),
-  videoProviders: service(),
-  videoPreview: {},
-  //TODO: there should be a better way to get
-  // if this is asking for tour or stop media.
-  _modelName: computed(function() { //eslint-disable-line
-    return get(this, 'model._internalModel.modelName');
-  }),
 
   otherMedia: computed('', function() {
     return get(this, 'store').query('medium', {
@@ -23,38 +16,38 @@ export default Component.extend({
     });
   }),
 
-  uploadMedium: task(function*(file) {
-    let medium = get(this, 'store').createRecord('medium', {
-      [`${get(this, '_modelName')}s`]: A([this.model]),
-      title: get(file, 'name'),
-      original_image: file.blob
-    });
+  // uploadMedium: task(function*(file) {
+  //   let medium = get(this, 'store').createRecord('medium', {
+  //     [`${get(this, '_modelName')}s`]: A([this.model]),
+  //     title: get(file, 'name'),
+  //     original_image: file.blob
+  //   });
 
-    try {
-      yield medium.save();
-      let newRel = get(this, 'store')
-        .queryRecord(`${get(this, '_modelName')}-medium`, {
-          medium_id: medium.id,
-          [`${get(this, '_modelName')}_id`]: get(this, 'model').id
-        })
-        .then(() => {
-          UIkit.notification({
-            messagge: `${medium.title} Added!`,
-            status: 'success'
-          });
-        });
-      yield newRel;
-      yield get(this, 'model').save();
-    } catch (error) {
-      debug(error);
-      UIkit.notification({
-        message: error.message,
-        status: 'danger'
-      });
-    }
-  })
-    .maxConcurrency(3)
-    .enqueue(),
+  //   try {
+  //     yield medium.save();
+  //     let newRel = get(this, 'store')
+  //       .queryRecord(`${get(this, '_modelName')}-medium`, {
+  //         medium_id: medium.id,
+  //         [`${get(this, '_modelName')}_id`]: get(this, 'model').id
+  //       })
+  //       .then(() => {
+  //         UIkit.notification({
+  //           messagge: `${medium.title} Added!`,
+  //           status: 'success'
+  //         });
+  //       });
+  //     yield newRel;
+  //     yield get(this, 'model').save();
+  //   } catch (error) {
+  //     debug(error);
+  //     UIkit.notification({
+  //       message: error.message,
+  //       status: 'danger'
+  //     });
+  //   }
+  // })
+  //   .maxConcurrency(3)
+  //   .enqueue(),
 
   removeMedia: task(function*(item) {
     // let mediumRel = get(this, 'store').peekRecord(
@@ -128,36 +121,6 @@ export default Component.extend({
             status: 'success'
           });
         });
-      });
-    },
-
-    upload(file) {
-      this.sendAction(get(this, 'upload'), file);
-    },
-
-    getVideo(code) {
-      get(this, 'videoProviders').getEmbed(code);
-    },
-
-    addVideo() {
-      let medium = get(this, 'store').createRecord('medium', {
-        video: get(this, 'videoCode'),
-        [`${get(this, '_modelName')}s`]: A([get(this, 'model')])
-      });
-
-      medium.save().then(() => {
-        get(this, 'model')
-          .save()
-          .then(() => {
-            get(this, 'store').queryRecord(
-              `${get(this, '_modelName')}-medium`,
-              {
-                medium_id: medium.id,
-                [`${get(this, '_modelName')}_id`]: get(this, 'model').id
-              }
-            );
-            set(this, 'videoCode', null);
-          });
       });
     },
 

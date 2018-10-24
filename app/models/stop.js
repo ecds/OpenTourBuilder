@@ -30,8 +30,12 @@ export default Model.extend({
   tour_stops: hasMany('tour_stop', {
     async: true
   }),
-  media: hasMany('medium', { inverse: 'stops', async: true }),
-  stop_media: hasMany('stop_medium'),
+  stop_media: hasMany('stop_medium', {
+    async: true
+  }),
+  media: hasMany('medium', {
+    async: true
+  }),
   splash: attr(),
 
   mobileThumbUrl: computed('original_image', function() {

@@ -1,69 +1,55 @@
 {{outlet}}
+<div id="task-running" class='uk-flex-top'>
+  <div class='uk-modal-dialog uk-margin-auto-vertical uk-modal-body'>
+    <p class='uk-text-success uk-text-large'>
+      {{taskMessage}}
+    </p>
+  </div>
+</div>
+
 <div uk-grid>
   <div class='uk-width-1-1'>
-    <div uk-grid>
-      <div class="uk-width-1-5">
-        <ul class="uk-nav uk-nav-default">
-          <li class="uk-active"><a href="#">Active</a></li>
-          <li><a href="#">Item</a></li>
-          <li><a href="#">Item</a></li>
-        </ul>
-      </div>
-      <form class='uk-form-stacked otb-crud uk-width-4-5 uk-padding uk-padding-bottom'
-        {{action 'saveModel' on='submit'}}>
-        {{otb-crud/common-form model=model modelTitle='Tour'}}
+    <form class='uk-form-stacked otb-crud uk-padding uk-padding-bottom' {{action 'doNothing' on='submit'}}>
+    {{otb-crud/common-form model=model modelTitle='Tour'}}
+    {{otb-crud/video model=model save=addVideo}}
+    {{otb-crud/medium-upload uploadTask=uploadFile model=model modelName='tour'}}
+    {{otb-crud/media model=model reorder=reorder save=saveRecord delete=deleteHasMany}}
 
-        <h2 class='uk-heading-bullet'></h2>
-        {{otb-crud/media model=model reorder=(action 'reordered')}}
+    {{#otb-crud/form-section classNames='crud-stop-list' label='Stops'}}
+      <div class='uk-form-controls'>
+      {{#otb-crud/new-button class='uk-margin' click=(perform newStop)}}New Stop{{/otb-crud/new-button}}
 
-        {{#otb-crud/form-section label='Stops'}}
-
-        <div class='uk-form-controls'>
-          {{!-- {{#uk-accordion id='newStopForm' tagName='div' targets='> div > *' on-beforeshow=(action 'newStop') as
-          |accordion|}}
-          <div class='uk-background-default uk-margin-small uk-padding-small' id={{concat stop.stop.slug '-' stop.stop.id}}
-            data-id={{stop.id}} data-model={{stop.constructor.modelName}}>
-            {{#accordion.item tagName='div' calss='uk-button' title='Add Stop' as |item|}}
-
-          </div>
-          {{/uk-accordion}} --}}
-          {{#uk-button on-click=(action 'newStop')}}new stop{{/uk-button}}
-          {{#uk-accordion id='stopList' tagName='div' targets='> div > div > *' as |accordion|}}
-          {{#uk-sortable handle='.uk-accordion-title' on-stop=(action 'reordered')}}
+      {{#uk-accordion id='stopList' tagName='div' targets='> div > div > *' as |accordion|}}
+        {{#uk-sortable handle='.uk-accordion-title' on-added=(action 'stopAdded') on-stop=(perform reorder)}}
           {{#each model.sortedTourStops as |stop index|}}
-          <div class='uk-background-muted uk-margin-small uk-padding-small' id={{concat stop.stop.slug '-' stop.stop.id}}
-            data-id={{stop.id}} data-model='stop'>
-            {{#accordion.item tagName='div' class='otb-handle' title=(concat stop.position ': ' stop.stop.title) as
-            |item|}}
-            {{#item.content}}
-            <div class='uk-card uk-card-default uk-card-body uk-card-small'>
-              {{otb-crud/stop stop=stop.stop save=(perform saveTask stop.stop) cancel=(action 'rollBackStop' stop)
-              reordered=(action 'reordered')}}
+            <div class='uk-background-muted uk-margin-small uk-padding-small' id={{concat stop.stop.slug '-' stop.stop.id}} data-id={{stop.id}} data-model='tour-stop'>
+              {{#accordion.item
+                title=(concat stop.position ': ' stop.stop.title) 
+                tagName='div'
+                class='otb-handle' as |item|}}
+                {{#item.content}}
+                  <div class='uk-card uk-card-default uk-card-body uk-card-small'>
+                    {{otb-crud/common-form model=stop.stop modelTitle='Stop'}}
+                    {{otb-crud/map model=stop.stop}}
+
+                    <h3 class='uk-heading'>Manage Media</h3>
+                    {{otb-crud/video model=stop.stop save=addVideo}}
+                    <h4>Upload Images</h4>
+                    {{otb-crud/medium-upload uploadTask=uploadFile model=stop.stop modelName='stop'}}
+                    {{otb-crud/media model=stop.stop reorder=reorder save=saveRecord delete=deleteHasMany}}
+                    {{#uk-button color='primary' on-click=(perform saveRecord stop.stop)}}save{{/uk-button}}
+                    {{#uk-button on-click=cancel}}Cancel{{/uk-button}}
+                    {{#uk-button color='link' on-click=(perform deleteHasMany (hash containerObj=model relationType='stop' objToRemove=stop.stop))}}Delete from tour{{/uk-button}}
+                  </div>
+                {{/item.content}}
+              {{/accordion.item}}
             </div>
-            {{/item.content}}
-            {{/accordion.item}}
-          </div>
           {{/each}}
-          <div class='uk-background-muted uk-margin-small uk-padding-small' style={{unless newTourStop 'opacity: 0;'}}
-            id='new-stop'>
-            {{#accordion.item tagName='div' class='otb-handle' title=(concat stop.position ': ' stop.stop.title) as
-            |item|}}
-            {{#item.content}}
-            <div class='uk-card uk-card-default uk-card-body uk-card-small'>
-              {{otb-crud/stop stop=newTourStop}}
-            </div>
-            {{/item.content}}
-            {{/accordion.item}}
-          </div>
-          {{/uk-sortable}}
-          {{/uk-accordion}}
-          <div id='end-of-stops' class='uk-margin-large'>-</div>
-        </div>
-        {{/otb-crud/form-section}}
-
-
-      </form>
-    </div>
+        {{/uk-sortable}}
+      {{/uk-accordion}}
+      </div>
+    {{/otb-crud/form-section}}
+    </form>
   </div>
-  {{otb-crud/submit-buttons class='uk-width-1-1' save=(action 'saveModel' model)}}
+  {{otb-crud/submit-buttons class='uk-width-1-1' save=(perform saveRecord model)}}
 </div>

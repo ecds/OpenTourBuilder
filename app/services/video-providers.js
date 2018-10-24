@@ -20,6 +20,10 @@ export default Service.extend({
     // return `${provider(videoId)}?${params}`;
   },
 
+  clear() {
+    this.set('videoPreview', {});
+  },
+
   getThumbnailUrl(url) {
     let videoId = this._getVideoId(url);
     return this._getProvider(url).thumbnailUrl(videoId);

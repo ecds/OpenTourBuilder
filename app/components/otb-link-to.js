@@ -9,6 +9,6 @@ export default LinkComponent.extend({
   },
 
   deviceorientation(event) {
-    console.log(event);
+    console.log('otb-link-to: ', event);
   }
 });
