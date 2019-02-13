@@ -12,8 +12,13 @@ export default Component.extend({
 
     get(this, 'model.tour.slug');
     if (get(this, 'allowsLocation')) {
-      get(this, 'geoLocation').getClientPosition();
+      this.send('getLocation');
     }
+  },
+
+  willDestroy() {
+    console.log('destroy!!!!');
+    this.get('geoLocation').clearLocation();
   },
 
   allowsLocation: computed('', function() {
@@ -24,7 +29,7 @@ export default Component.extend({
       return true;
     } else if (
       get(this, 'cookies').read(`${get(this, 'model.tour.slug')}-Allowed`) ===
-      'pissoff'
+      'nothanks'
     ) {
       return false;
     }
@@ -33,19 +38,19 @@ export default Component.extend({
 
   actions: {
     getLocation() {
-      get(this, 'geoLocation');
+      // get(this, 'geoLocation');
       get(this, 'cookies').write(
         `${get(this, 'model.tour.slug')}-Allowed`,
         'yup'
       );
-      get(this, 'geoLocation').getClientPosition();
+      this.get('geoLocation').getClientPosition();
       set(this, 'allowsLocation', true);
     },
 
     declineLocation() {
       get(this, 'cookies').write(
         `${get(this, 'model.tour.slug')}-Allowed`,
-        'pissoff'
+        'nothanks'
       );
       get(this, 'allowsLocation');
       set(this, 'allowsLocation', false);

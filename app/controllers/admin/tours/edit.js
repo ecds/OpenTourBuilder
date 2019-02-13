@@ -4,16 +4,16 @@ import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import CrudActionsMixin from '../../../mixins/crud-actions';
 import UIkit from 'uikit';
+import ENV from '../../../config/environment';
 
 export default Controller.extend(CrudActionsMixin, {
   store: service(),
-
   tenant: service(),
-
-
   geocoder: service(),
-
   taskMessage: null,
+  env: ENV,
+
+  mapTypes: ['roadmap', 'satellite', 'hybrid', 'terrain'],
 
   screenBlocker: computed('taskMessage', () => {
     return UIkit.modal(document.getElementById('task-running'), {
@@ -22,95 +22,104 @@ export default Controller.extend(CrudActionsMixin, {
     });
   }),
 
-  newStop: task(function*() {
-    this.set('taskMessage', 'Creating new stop...');
-    const modal = this.get('screenBlocker');
-    modal.show();
+  waitForElement: task(function*(element, accordion) {
+    // TODO: Use Ember Concurrency `waitForProperty`
+    let checkExist = yield setInterval(() => {
+      if (document.getElementById(element)) {
+        clearInterval(checkExist);
+        let child = document.getElementById(element);
+        let parent = child.parentNode;
+        accordion.toggle(Array.prototype.indexOf.call(parent.children, child));
+      }
+    }, 300);
+    return checkExist;
+  }),
+
+  showTaskMessage: task(function*(message) {
+    this.set('taskMessage', message);
+    return yield this.get('screenBlocker').show();
+  }),
+
+  clearTaskMessage: task(function*() {
+    this.set('taskMessage', null);
+    return yield this.get('screenBlocker').hide();
+  }),
+
+  newStop: task(function*(tour) {
+    yield this.get('showTaskMessage').perform({
+      message: 'Creating new stop...',
+      type: 'success'
+    });
     const stopListElement = document.getElementById('stopList');
     const accordion = UIkit.accordion(stopListElement);
     // Close any open items in the accordion.
     accordion.toggle(-1);
     try {
+      this.set('taskMessage', {
+        message: 'Adding new stop to tour...',
+        type: 'success'
+      });
       let newStop = yield this.get('createHasMany').perform({
-        newType: 'stop',
-        containerObj: this.model
+        relationType: 'stop',
+        parentObj: tour
       });
-      this.set('taskMessage', 'Adding new stop to tour...');
-      // Add a onetime event listener for when the new stop is opened.
-      // Scroll it to the top and close the modal.
-      UIkit.util.once(stopListElement, 'shown', () => {
-        document
-          .getElementById(`${newStop.slug}-${newStop.id}`)
-          .scrollIntoView();
-        window.scrollBy(0, -100);
-        newStop.setProperties({
-          title: ''
-        });
-        modal.hide();
+      newStop.setProperties({
+        title: ''
       });
-      // Watch for the new stop to be added to the list and open it.
-      let checkExist = yield setInterval(() => {
-        if (document.getElementById(`${newStop.slug}-${newStop.id}`)) {
-          clearInterval(checkExist);
-          let child = document.getElementById(`${newStop.slug}-${newStop.id}`);
-          let parent = child.parentNode;
-          accordion.toggle(
-            Array.prototype.indexOf.call(parent.children, child)
-          );
-        }
-      }, 300);
+      yield this.get('clearTaskMessage').perform();
+      yield this.get('waitForElement').perform(
+        `${newStop.slug}-${newStop.id}`,
+        accordion
+      );
     } catch (error) {
       this.set('taskMessage', `ERROR: ${error.message}`);
     }
     // Destroy the modal but leave the element for next time.
-    modal.$destroy;
+    this.get('screenBlocker').$destroy;
   }),
 
-  reorder: task(function*(event) {
-    // Warn if person tries to leave page before everything has been saved.
-    window.onbeforeunload = () => {
-      return 'Not all updates have finished saving.';
-    };
-    // Wait a bit to make sure the DOM is settled.
-    yield timeout(500);
-    this.set(
-      'taskMessage',
-      `Saving new order 0 of ${event.target.children.length}`
-    );
-    const modal = this.get('screenBlocker');
-    modal.show();
-    let index = 1;
-    let modelToReorder = '';
-    for (let item of event.target.children) {
-      modelToReorder = item.attributes['data-model'].value;
-      let storeItem = this.store.peekRecord(
-        modelToReorder,
-        item.attributes['data-id'].value
-      );
-      storeItem.setProperties({
-        position: index
-      });
-      this.set(
-        'taskMessage',
-        `Saving new order ${index} of ${event.target.children.length}`
-      );
-      index++;
-      yield this.get('saveRecord').perform(storeItem);
+  newPage: task(function*(tour) {
+    yield this.get('showTaskMessage').perform({
+      message: 'Creating new page...',
+      type: 'success'
+    });
+    const pageListElement = document.getElementById('pageList');
+    const accordion = UIkit.accordion(pageListElement);
+    // Close any open items in the accordion.
+    if (accordion.items.length > 1) {
+      accordion.toggle(-1);
     }
-    this.set('taskMessage', 'ALL DONE!');
-    yield timeout(300);
-    modal.hide();
-    modal.$destroy;
-    window.onbeforeunload = null;
+    try {
+      this.set('taskMessage', {
+        message: 'Adding new page to tour...',
+        type: 'success'
+      });
+      let newPage = yield this.get('createHasMany').perform({
+        relationType: 'flat_page',
+        parentObj: tour
+      });
+      newPage.setProperties({
+        title: ''
+      });
+      yield this.get('clearTaskMessage').perform();
+      yield this.get('waitForElement').perform(`page-${newPage.id}`, accordion);
+    } catch (error) {
+      this.set('taskMessage', `ERROR: ${error.message}`);
+    }
+    // Destroy the modal but leave the element for next time.
+    this.get('screenBlocker').$destroy;
   }),
 
   addVideo: task(function*(videoCode, parentObj) {
-    this.set('taskMessage', 'Adding video...');
+    this.set('taskMessage', { message: 'Adding video...', type: 'success' });
     const modal = this.get('screenBlocker');
     modal.show();
+    if (parentObj.hasOwnProperty('content')) {
+      parentObj = parentObj.content;
+    }
     let options = {
-      newType: 'medium',
-      containerObj: parentObj,
+      relationType: 'medium',
+      parentObj: parentObj,
       attrs: {
         video: videoCode
       }
@@ -123,6 +132,11 @@ export default Controller.extend(CrudActionsMixin, {
   actions: {
     doNothing() {
       return true;
+    },
+
+    scrollElementToTop(event) {
+      event.path[2].scrollIntoView();
+      window.scrollBy(0, -100);
     }
   }
 });

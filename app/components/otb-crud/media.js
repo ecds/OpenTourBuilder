@@ -101,17 +101,20 @@ export default Component.extend({
     saveModel(item) {
       let medium = this.get('store').peekRecord('medium', item.get('id'));
       medium.save().then(() => {
-        UIkit.notification({
-          message: 'Media Saved!',
-          status: 'success'
-        }, error => {
-        UIkit.notification({
-          message: `ERROR: ${error.message}`,
-          status: 'danger'
-        })
+        UIkit.notification(
+          {
+            message: 'Media Saved!',
+            status: 'success'
+          },
+          error => {
+            UIkit.notification({
+              message: `ERROR: ${error.message}`,
+              status: 'danger'
+            });
+          }
+        );
       });
-    })
-  },
+    },
 
     deleteModel(item, model) {
       item.destroyRecord().then(() => {

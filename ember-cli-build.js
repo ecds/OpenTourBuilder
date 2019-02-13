@@ -9,20 +9,12 @@ module.exports = function(defaults) {
       includePolyfill: true
     },
 
-    // customEvents: {
-    //   // add support for the paste event
-    //   paste: 'stop',
-    //   scroll: 'scroll'
-    // },
-
     sassOptions: {
-      includePaths: [
-        // 'bower_components/animatewithsass'
-      ]
+      includePaths: []
     },
 
     'ember-composable-helpers': {
-      only: ['toggle', 'next']
+      only: ['toggle', 'next', 'pipe']
     },
 
     emberCliDropzonejs: {
@@ -31,6 +23,7 @@ module.exports = function(defaults) {
   });
 
   app.import('node_modules/scrollama/build/scrollama.min.js');
+  app.import('node_modules/jodit/build/jodit.min.js');
 
   return app.toTree();
 };

@@ -17,7 +17,9 @@ export default Model.extend({
   parking_lat: attr('number'),
   parking_lng: attr('number'),
   address: attr('string'),
-  description: attr('string'),
+  description: attr('string', {
+    defaultValue: ''
+  }),
   sanitized_description: attr('string'),
   sanitized_direction_notes: attr('string'),
   metadescription: attr('string'),

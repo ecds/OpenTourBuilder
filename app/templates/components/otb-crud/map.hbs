@@ -31,7 +31,7 @@
         {{input type='number' class='uk-input' step='0.0001000000000' id=inputId value=model.parking_lat}}
       {{/otb-crud/form-section}}
 
-      {{#otb-crud/form-section label='Longititude' as |inputId|}}
+      {{#otb-crud/form-section label='Longitude' as |inputId|}}
         {{input type='number' class='uk-input' step='0.0001000000000' id=inputId value=model.parking_lng}}
       {{/otb-crud/form-section}}
     </div>
@@ -39,7 +39,7 @@
 
   <div class='uk-width-2-3@m uk-width-1-1@s'>
   {{#if (and model.lat model.lng)}}
-    {{#g-map options=(hash zoom=18) lat=model.lat lng=model.lng as |feature|}}
+    {{#g-map options=(hash zoom=18 mapTypeId=model.map_type) lat=model.lat lng=model.lng as |feature|}}
         {{#feature.marker
             draggable=true onDrag=(action 'reLocate')
             lat=model.lat

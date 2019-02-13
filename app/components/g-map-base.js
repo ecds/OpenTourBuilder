@@ -15,7 +15,7 @@ export default Component.extend(ChildMixin, {
   feature: null,
 
   createFeature() {
-    assert('GMapBase\'s `createFeature` should be overriden.');
+    assert("GMapBase's `createFeature` should be overriden.");
   },
   /*
    * Method called by parent when the layer needs to setup

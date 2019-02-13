@@ -12,9 +12,9 @@ export default Component.extend({
     if (mode === 'BICYCLING') {
       set(this, 'icon', 'bicycle');
     } else if (mode === 'DRIVING') {
-      set(this, 'icon', 'car')
+      set(this, 'icon', 'car');
     } else if (mode === 'TRANSIT') {
-      set(this, 'icon', 'bus')
+      set(this, 'icon', 'bus');
     }
   }
 });

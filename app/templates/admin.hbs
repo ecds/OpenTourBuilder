@@ -3,9 +3,10 @@
         <div class="uk-navbar-left">
 
             <ul class="uk-navbar-nav">
-                <li>{{#link-to 'admin.index'}}Sites{{/link-to}}</li>
-                {{!-- {{#if }} --}}
-                <li>{{#link-to 'admin.tours' tenant.tenant}}Tours{{/link-to}}</li>
+                <li>{{#link-to 'admin'}}Home{{/link-to}}</li>
+                {{#if currentUser.user.super}}
+                <li>{{#link-to 'admin.users'}}Users{{/link-to}}</li>
+                {{/if}}
             </ul>
         </div>
         <div class="uk-navbar-right">
@@ -21,3 +22,4 @@
     {{outlet}}
   {{!-- </div> --}}
 </div>
+{{!-- <section style='position: fixed; bottom: 0; height: 2em; width: 100vw;' class='uk-align-right'>CURRENT TENANT: {{tenant.tenant}}</section> --}}

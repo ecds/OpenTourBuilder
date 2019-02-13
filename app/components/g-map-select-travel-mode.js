@@ -9,12 +9,7 @@ export default Component.extend({
   layout,
   fastboot: service(),
   isFastBoot: reads('fastboot.isFastBoot'),
-  defaultModes: A([
-    'DRIVING',
-    'BICYCLING',
-    'TRANSIT',
-    'WALKING'
-  ]),
+  defaultModes: A(['DRIVING', 'BICYCLING', 'TRANSIT', 'WALKING']),
 
   change(event) {
     set(this, 'travelMode', event.target.value);

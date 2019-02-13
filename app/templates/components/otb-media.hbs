@@ -2,8 +2,7 @@
     <ul class='uk-slideshow-items intro-slideshow {{concat 'gallery-' stop.slug}}' id=''>
         {{#each stop.sortedMedia as |medium|}}
         <li class='uk-width-1-1'>
-            {{#uk-modal modalName=(concat 'intro-media-modal-' medium.medium.id) on-show=(toggle 'loadEmbed'
-            medium.medium) on-hide=(toggle 'loadEmbed' medium.medium) as |modal|}}
+            {{#uk-modal modalName=(concat 'intro-media-modal-' medium.medium.id) on-show=(toggle 'loadEmbed' medium.medium) on-hide=(toggle 'loadEmbed' medium.medium) as |modal|}}
             {{#modal.open class='otb-media-button' tagName='div'}}
             {{uk-img medium=medium target=(concat '.gallery-' stop.slug) alt=(concat 'Image: ' medium.medium.caption)
             dataSrcset=medium.medium.srcset sizes=medium.medium.srcset_sizes}}
@@ -19,7 +18,7 @@
             {{#modal.media class='otb-stop-media-modal'}}
             {{#if medium.medium.video}}
             {{#if medium.medium.loadEmbed}}
-            {{{medium.medium.embed}}}
+            {{{medium.medium.safeEmbed}}}
             {{/if}}
             {{else}}
             {{uk-img medium=medium class='uk-align-center' target=(concat '.gallery-' stop.slug) alt=(concat 'Image:

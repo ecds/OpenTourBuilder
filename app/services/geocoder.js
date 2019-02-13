@@ -4,7 +4,7 @@ import { debug } from '@ember/debug';
 
 export default Service.extend({
   locateAddress(address) {
-    let locator = new google.maps.Geocoder;
+    let locator = new google.maps.Geocoder();
     let location = locator.geocode(
       {
         address: address
@@ -13,7 +13,7 @@ export default Service.extend({
         if (status === 'OK') {
           return result[0].geometry.location;
         } else {
-          debug(status)
+          debug(status);
         }
       }
     );

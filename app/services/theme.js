@@ -1,10 +1,16 @@
 import Service from '@ember/service';
+import { inject as service } from '@ember/service';
 import { computed /* observer */ } from '@ember/object';
 import { isEmpty } from '@ember/utils';
 
 export default Service.extend({
+  store: service(),
   base: 'default',
-  theme: 'first',
+  theme: 'dark',
+
+  init() {
+    this.store.findAll('theme');
+  },
 
   // the property used as a reference for styles
   name: computed('base', function() {
@@ -12,11 +18,6 @@ export default Service.extend({
     const theme = this.get('theme');
     return `${base}-${theme}`;
   }),
-
-  // update things that may be using data-theme
-  // themeChanged: observer('base', 'theme', function() {
-  //   this.notifyPropertyChange('name');
-  // }),
 
   // set the base theme for the application
   setBase: function(base) {

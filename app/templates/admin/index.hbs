@@ -1,67 +1,100 @@
 <h2 class='uk-heading-bullet'>Tours</h2>
-{{#otb-crud/new-button click=(perform newRecord 'tour')}}New Tour{{/otb-crud/new-button}}
-  {{#if model.tours}}
-{{#uk-table-striped}}
-  <thead>
-    <tr>
-      <th class="uk-table-expand">Site Name</th>
-      <th>Stops</th>
-      <th class="uk-table-shrink">Delete</th>
-    </tr>
-  </thead>
-  <tbody>
-  {{#each model.tours as |tour|}}
-    {{#if tour.title}}
-    <tr>
-      <td>
-        {{#link-to 'admin.tours.edit' 'public' tour}}
-        {{tour.title}}
-        {{/link-to}}
-      </td>
-
-      <td>
-        {{tour.stops.length}}
-      </td>
-
-      <td>
-        {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour)}}
-        {{fa-icon 'trash'}}
-        {{/uk-button}}
-      </td>
-    </tr>
-    {{/if}}
-    {{/each}}
-  </tbody>
-{{/uk-table-striped}}
+{{#data-loader queryType='all' modelName='tour' as |tourLoader|}}
+  {{#if toursLoader.fetchingAll}}
+    <p>Loading Tours...</p>
+  {{else if tour.data}}
+    {{#otb-crud/new-button click=(perform newRecord 'tour')}}New Tour{{/otb-crud/new-button}}
+    {{#uk-table-striped}}
+      <thead>
+        <tr>
+          <th class='uk-table-expand'>Site Name</th>
+          <th>Stops</th>
+          <th class='uk-table-shrink'>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tourLoader.data as |tour|}}
+        <tr>
+          <td>
+            {{!-- {{#link-to 'admin.tours.edit' 'public' tour}} --}}
+            {{if tour.title tour.title 'Untitled Tour'}}
+            {{!-- {{/link-to}} --}}
+          </td>
+          <td>
+            {{!-- {{tour.stops.length}} --}}
+          </td>
+          <td>
+            {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour)}}
+            {{fa-icon 'trash'}}
+            {{/uk-button}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    {{/uk-table-striped}}
+  {{else}}
+  <div class='uk-child-width-1-1 uk-text-center' uk-grid>
+    <div>
+      <h1 class='uk-heading-primary'>NO TOURS HAVE BEEN CREATED</h1>
+    </div>
+    <div>
+      {{#otb-crud/new-button click=(perform newRecord 'tour')}}Start Your First Tour{{/otb-crud/new-button}}
+    </div>
+  </div>
   {{/if}}
+{{/data-loader}}
 
-<h2 class='uk-heading-bullet'>Tour Sites</h2>
-{{#otb-crud/new-button click=(perform newRecord 'tour-set')}}New Site{{/otb-crud/new-button}}
+{{#if currentUser.user.super}}
+  <h2 class='uk-heading-bullet'>Tour Sites</h2>
+  {{#uk-modal modalName='newSite' on-show=(action 'newSite') as |modal|}}
+    {{#modal.open class='uk-button uk-button-primary' tagName='div'}}
+      New Site
+    {{/modal.open}}
+    {{#modal.dialog}}
+      {{#modal.body}}
+        {{#otb-crud/form-section label='Site Title' as |inputId|}}
+          {{input autofocus='autofocus' class='uk-input' id=inputId value=newSite.name}}
+        {{/otb-crud/form-section}}
+      {{/modal.body}}
+      {{#modal.footer}}
+        {{#otb-crud/new-button class='uk-modal-close' click=(perform createSite)}}New Site{{/otb-crud/new-button}}
+        {{#uk-button color='link' class='uk-modal-close'}}Cancel{{/uk-button}}
+      {{/modal.footer}}
+    {{/modal.dialog}}
+  {{/uk-modal}}
 
-  {{#if model.tourSets}}
-{{#uk-table-striped}}
+  {{#data-loader queryType='all' modelName='tour-set' as |siteLoader|}}
+  {{#if siteLoader.fetchingAll}}
+  <div>
+  Loading Tour Sites...
+  </div>
+  {{else}}
+  {{#uk-table-striped}}
   <thead>
-    <tr>
-      <th class="uk-table-expand">Site Name</th>
-      <th class="uk-width-small">Delete</th>
-    </tr>
+  <tr>
+  <th class='uk-table-expand'>Site Name</th>
+  <th class='uk-width-small'>Delete</th>
+  </tr>
   </thead>
   <tbody>
-    {{#each model.tourSets as |tour-set|}}
-    <tr>
-      <td class='uk-table-link'>
-        {{#link-to 'admin.tours.index' tour-set.subdir}}
-        {{tour-set.name}}
-        {{/link-to}}
-      </td>
+  {{#each siteLoader.data as |tour-set|}}
+  <tr>
+  <td class='uk-table-link'>
+  {{#link-to 'admin.tours.index' tour-set.subdir}}
+  {{tour-set.name}}
+  {{/link-to}}
+  </td>
 
-      <td class='uk-table-link'>
-        {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour-set)}}
-        {{fa-icon 'trash'}}
-        {{/uk-button}}
-      </td>
-    </tr>
-    {{/each}}
+  <td class='uk-table-link'>
+  {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour-set)}}
+  {{fa-icon 'trash'}}
+  {{/uk-button}}
+  </td>
+  </tr>
+  {{/each}}
   </tbody>
-{{/uk-table-striped}}
+  {{/uk-table-striped}}
+  {{/if}}
+{{/data-loader}}
 {{/if}}
+<div class='uk-section'></div>

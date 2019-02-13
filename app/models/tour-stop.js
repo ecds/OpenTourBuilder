@@ -7,9 +7,11 @@ const { Model, attr, belongsTo } = DS;
 export default Model.extend({
   tour: belongsTo('tour'),
   stop: belongsTo('stop', {
-    async: false
+    async: true
   }),
-  position: attr('number'),
+  position: attr('number', {
+    defaultValue: 1
+  }),
   next: attr(),
   next_slug: attr('string'),
   previous: attr(),

@@ -11,22 +11,6 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
   tenant: service(),
 
   host: function host() {
-    // const currentUrl = window.location.pathname.replace(/\/$/, '').split('/');
-    // const firstSubDir = currentUrl[1];
-    // // alert(currentUrl[2])
-    // if (
-    //   (firstSubDir === 'admin' && currentUrl.length === 2) ||
-    //   firstSubDir === 'tour' ||
-    //   firstSubDir === 'tours' ||
-    //   firstSubDir == 'login' ||
-    //   firstSubDir.length === 0
-    // ) {
-    //   return `${ENV.APP.API_HOST}/public`;
-    // } else if (firstSubDir === 'admin' && currentUrl.length > 2) {
-    //   return `${ENV.APP.API_HOST}/${currentUrl[2]}`;
-    // } else {
-    //   return `${ENV.APP.API_HOST}/${firstSubDir}`;
-    // }
     return `${ENV.APP.API_HOST}/${get(this, 'tenant.tenant')}`;
   }
     .property()

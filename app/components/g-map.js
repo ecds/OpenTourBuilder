@@ -16,6 +16,7 @@ export default GMapBase.extend(ParentMixin, {
   fastboot: service(),
   yagMap: service(),
   isFastBoot: reads('fastboot.isFastBoot'),
+  mapType: 'roadmap',
 
   init() {
     this._super(...arguments);
@@ -27,8 +28,11 @@ export default GMapBase.extend(ParentMixin, {
     }
 
     let options = get(this, 'options') || {};
+    if (!options.mapTypeId) {
+      options.mapTypeId = 'roadmap';
+    }
     if (get(this, 'zoom') !== 'auto') {
-      options.zoom = parseInt(get(this, 'zoom')) || 16
+      options.zoom = parseInt(get(this, 'zoom')) || 16;
     }
 
     if (!options.center) {
@@ -41,7 +45,7 @@ export default GMapBase.extend(ParentMixin, {
         map.setZoom(options.zoom);
       }
     });
-    get(this, 'yagMap').setMap(map);
+    // get(this, 'yagMap').setMap(map);
     return map;
   },
 
@@ -59,6 +63,6 @@ export default GMapBase.extend(ParentMixin, {
   },
 
   willDestroy() {
-    console.log('destroying map')
+    // console.log('destroying map');
   }
 });

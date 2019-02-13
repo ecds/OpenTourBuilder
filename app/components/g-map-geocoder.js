@@ -9,7 +9,7 @@ export default Component.extend({
   location: null,
 
   didInsertElement() {
-    set(this, 'locator', new google.maps.Geocoder)
+    set(this, 'locator', new google.maps.Geocoder());
   },
 
   didUpadteAttrs() {
@@ -26,5 +26,4 @@ export default Component.extend({
       }
     );
   }
-
 });

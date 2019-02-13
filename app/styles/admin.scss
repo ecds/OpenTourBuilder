@@ -53,3 +53,13 @@ a.uk-accordion-title::after {
 .crud-stop-list {
   margin-bottom: 5em !important;
 }
+
+.uk-accordion-title {
+  span {
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

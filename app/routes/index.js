@@ -8,10 +8,6 @@ export default Route.extend({
     return this.store.findAll('tour');
   },
 
-  // afterModel() {
-  //   this.transitionTo('tour.overview', 'testboa', 1);
-  // },
-
   setupController(controller, model) {
     this._super(controller, model);
     this.controllerFor('index').set('toursSorting', ['position']);

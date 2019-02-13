@@ -22,32 +22,45 @@ export default Service.extend({
     // if (get(this))
   },
 
-  clientPosition: computed('clientLat', 'clientLng', 'clientPositionError', function() {
-    if (this.get('isFastBoot')) {
-      return;
+  clientPosition: computed(
+    'clientLat',
+    'clientLng',
+    'clientPositionError',
+    function() {
+      if (this.get('isFastBoot')) {
+        return;
+      }
+      return {
+        lat: get(this, 'clientLat'),
+        lng: get(this, 'clientLng'),
+        error: get(this, 'clientPositionError')
+      };
     }
-    return {
-      lat: get(this, 'clientLat'),
-      lng: get(this, 'clientLng'),
-      error: get(this, 'clientPositionError')
-    };
-  }),
+  ),
 
   getClientPosition() {
     if (this.get('isFastBoot')) {
       return;
     }
-    if (isPresent(navigator.geolocation) && (typeof FastBoot === 'undefined')) {
-      navigator.geolocation.getCurrentPosition((location) => {
-        set(this, 'clientLat', location.coords.latitude);
-        set(this, 'clientLng', location.coords.longitude);
-      }, (error) => {
-        debug(`GMap Location ERROR: ${error.message}`);
-        set(this, 'clientPositionError', error.message);
-      }, { enableHighAccuracy: true, timeout: 50000, maximumAge: 0 });
+    if (isPresent(navigator.geolocation) && typeof FastBoot === 'undefined') {
+      navigator.geolocation.getCurrentPosition(
+        location => {
+          set(this, 'clientLat', location.coords.latitude);
+          set(this, 'clientLng', location.coords.longitude);
+        },
+        error => {
+          debug(`GMap Location ERROR: ${error.message}`);
+          set(this, 'clientPositionError', error.message);
+        },
+        { enableHighAccuracy: true, timeout: 50000, maximumAge: 0 }
+      );
     } else if (isPresent(navigator.geolocation) === false) {
-      debug('GMap Location EROOR: Your browser doesn\'t support geolocation.');
-      set(this, 'clientPositionError', 'GMap Location EROOR: Your browser doesn\'t support geolocation.');
+      debug("GMap Location EROOR: Your browser doesn't support geolocation.");
+      set(
+        this,
+        'clientPositionError',
+        "GMap Location EROOR: Your browser doesn't support geolocation."
+      );
     }
   }
 });

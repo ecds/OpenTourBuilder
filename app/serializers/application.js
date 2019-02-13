@@ -6,11 +6,11 @@ import DS from 'ember-data';
 const { JSONAPISerializer } = DS;
 
 export default JSONAPISerializer.extend({
-  keyForAttribute: function remvoeDashes(attr) {
+  keyForAttribute: function removeDashes(attr) {
     return underscore(attr);
   },
 
-  keyForRelationship: function remvoeDashes(rawKey) {
+  keyForRelationship: function removeDashes(rawKey) {
     return underscore(rawKey);
   }
 });

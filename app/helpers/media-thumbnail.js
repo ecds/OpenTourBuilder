@@ -4,7 +4,10 @@ import { htmlSafe } from '@ember/string';
 
 export function mediaThumbnail([medium, version, width]) {
   let imageElement = `<img width=${width}
-                        data-src='${get(medium, 'baseUrl')}${get(medium, version)}'
+                        data-src='${get(medium, 'baseUrl')}${get(
+  medium,
+  version
+)}'
                         alt='Picture of ${get(medium, 'title')}.
                         ${get(medium, 'caption')}' uk-img/>`;
 

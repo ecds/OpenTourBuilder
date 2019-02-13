@@ -1,5 +1,4 @@
 
-  {{model.title}}
 {{#uk-sortable
   on-added=(action 'addExisting' model)
   on-stop=(perform reorder)
@@ -7,7 +6,11 @@
   tagName='ul' class='uk-grid uk-grid-small uk-child-width-auto uk-text-center'}}
     {{#each model.sortedMedia as |modelMedium|}}
       <li class='uk-tile uk-inline-clip uk-transition-toggle' tabindex='0' data-id={{modelMedium.id}} data-model={{modelMedium.constructor.modelName}}>
-      {{uk-img medium=medium class='uk-transition-toggle'  alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.mobile)}}
+      {{#if modelMedium.medium.mobile}}
+        {{uk-img medium=medium class='uk-transition-toggle'  alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.mobile)}}
+      {{else}}
+        Loading...
+      {{/if}}
       {{!-- Overlay with edit and delete buttons. --}}
       <div class='uk-transition-slide-bottom uk-position-bottom uk-overlay uk-overlay-default'>
         {{!-- Edit button and modal --}}
@@ -38,7 +41,7 @@
           {{/modal.dialog}}
         {{/uk-modal}}
           {{!-- Delete button --}}
-          {{#uk-button on-click=(perform delete (hash containerObj=model objToRemove=modelMedium.medium relationType='media'))}}{{fa-icon 'trash-alt'}} Delete{{/uk-button}}
+          {{#uk-button on-click=(perform delete (hash parentObj=model childObj=modelMedium.medium relationType='media'))}}{{fa-icon 'trash-alt'}} Delete{{/uk-button}}
       </div>
       </li>
     {{/each}}

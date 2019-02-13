@@ -1,6 +1,7 @@
 
 
-  {{#file-dropzone class='js-upload uk-placeholder uk-text-center uk-inline' name=(concat modelName '-' model.id) as |dropzone queue|}}
+ <section class='uk-form-control'>
+ {{#file-dropzone class='js-upload uk-placeholder uk-text-center uk-inline' name=(concat 'upload-' modelName '-' model.id) as |dropzone queue|}}
   {{#if dropzone.active}}
     {{#if dropzone.valid}}
       Drop to upload
@@ -8,18 +9,18 @@
       Invalid
     {{/if}}
   {{else}}
-    <h4>Upload Images</h4>
-    <p>
+    <p class='uk-text-middle'>
       {{#if dropzone.supported}}
         Drag and drop images onto this area to upload them or
       {{/if}}
-      {{#file-upload name=(concat modelName '-' model.id)
-                     for="upload-photo"
+      {{#file-upload name=(concat 'upload-' modelName '-' model.id)
+                     for=(concat 'upload-' modelName '-' model.id)
                      accept="image/*"
                      multiple=true
-                     onfileadd=(action 'upload')}}
+                     onfileadd=(action 'upload' model)}}
         <a id={{concat 'upload-' modelName '-' model.id}} tabindex=0>Upload an Image</a>
       {{/file-upload}}
     </p>
   {{/if}}
 {{/file-dropzone}}
+</section>

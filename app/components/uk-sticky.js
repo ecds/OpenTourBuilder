@@ -26,7 +26,7 @@ export default Component.extend({
   //   return `z-index: ${this.get('foo') + 980};`
   // }),
 
-    /**
+  /**
    * Add listener to update sticky element width on resize event
    * @method initResizeEventListener
    * @private
@@ -113,7 +113,7 @@ export default Component.extend({
     // this.initResizeEventListener();
     schedule('afterRender', () => {
       // get(this, '_ukSticky').update();
-      get(this, '_ukSticky').$emit(event = 'update');
+      get(this, '_ukSticky').$emit((event = 'update'));
     });
   }
 });

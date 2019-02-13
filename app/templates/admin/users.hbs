@@ -1,25 +1,2 @@
 {{outlet}}
-<table class="uk-table uk-table-striped">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Provider</th>
-        </tr>
-    </thead>
-    <tbody>
-      {{#each model as |user|}}
-        <tr>
-            <td>
-              {{#if user.super}}{{fa-icon 'chess-queen'}}{{/if}} {{user.display_name}}
-            </td>
-            <td>
-                {{user.login.identification}}
-            </td>
-            <td>
-                {{user.login.provider}}
-            </td>
-        </tr>
-      {{/each}}
-    </tbody>
-</table>
+

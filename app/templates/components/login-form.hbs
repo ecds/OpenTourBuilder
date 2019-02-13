@@ -1,92 +1,31 @@
 <div class='uk-text-center login-form'>
-      {{#if authenticating}}
-      <span class='authenticating'>{{fa-icon 'circle-notch' spin=true}}</span>
-      {{/if}}
-      {{#if accountCreated}}
-        Your account has been created. Check your email to confirm your account.
-      {{else if session.isAuthenticated}}
-        {{#if currentUser.user.confirmed}}
-        <button {{action 'logOut' }}>{{fa-icon 'sign-out-alt'}} Logout</button>
-        {{/if}}
-      {{else}}
-          {{#if signUp}}
-          <section><h2>SIGN UP</h2></section>
-            <form {{action 'signUpSubmit' on='submit'}} class='uk-form-stacked'>
-
-
-              <div class='uk-margin'>
-                <label class='uk-form-label' for='new-email'>Email</label>
-                <div class='uk-fomr-controls'>
-                  {{input id='new-email' class='uk-input' value=newLogin.identification type='email' pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$" name='identification'}}
-                </div>
-              </div>
-              <div class='uk-margin'>
-                <label class='uk-form-label' for='new-password'>Password</label>
-                <div class='uk-fomr-controls'>
-                  {{input id='new-password' class='uk-input' value=newLogin.password autocomplete='new-password' type=(if showingPassword 'text' 'password')}}
-                </div>
-              </div>
-              <div class='uk-margin'>
-                <label class='uk-form-label' for='confirm-new-password'>Confirm Password</label>
-                <div class='uk-fomr-controls'>
-                  {{input id='confirm-new-password' class='uk-input' autocomplete='new-password' type=(if showingPassword 'text' 'password')}}
-                </div>
-              </div>
-              <button type="submit" class="">Sign Up</button>
-              <button {{action 'cancel'}}type="submit" class="">Cancel</button>
-            </form>
-          {{else}}
-          <section><h2>LOG IN</h2></section>
-
-            {{! Buttons should probably be a block component.}}
-            <div class="uk-child-width-1-3@s uk-grid-small uk-text-center uk-flex-center" uk-grid>
-              <div>
-                  <button class="uk-tile blue" onclick={{action 'authenticateWithFacebook'}}>
-                      {{fa-icon 'facebook-f' prefix='fab'}}
-                  </button>
-              </div>
-
-              <div>
-                  <button class="uk-tile red" onclick={{action 'authenticateWithGoogle'}}>
-                      {{fa-icon 'google' prefix='fab'}}
-                  </button>
-              </div>
-          </div>
-
-            <section class='uk-text-large'>- or -</section>
-            <section>
-            <form {{action 'authenticateWithOAuth2' on='submit'}} class='uk-form-stacked'>
-            <div class='uk-margin'>
-              <label class='uk-form-label uk-text-left' for='current-email'>Email</label>
-              <div class='uk-fomr-controls'>
-                {{input id='current-email' class='uk-input' value=identification autocomplete='username'}}
-              </div>
-            </div>
-            <div class='uk-margin uk-text-left'>
-              <label class='uk-form-label' for='current-password'>Password</label>
-              <div class='uk-fomr-controls'>
-                {{input id='current-password' class='uk-input' value=password autocomplete='current-password' type=(if showingPassword 'text' 'password')}}
-              </div>
-            </div>
-            {{!-- <section onclick={{action (toggle-action 'showingPassword' this)}}>
-              <i class="fa {{if showingPassword 'fa-check-square-o' 'fa-square-o'}}" aria-hidden="true"></i> Show Password
-            </section> --}}
-            {{#uk-button color='primary' size='large'}}Login{{/uk-button}}
-            </form>
-          </section>
-          {{!-- <section>No account? <a onclick={{action 'startSignUp'}}>Sign up now!</a></section> --}}
-          {{/if}}
-          <hr />
-          <section class='fine-print'>
-            Creating an account means you're okay wth Emory Center for Digitial Scholarship's <a href='http://digitalscholarship.emory.edu/about/center/privacy-policy.html' target='_blank'>Terms of Service and Privacy Policy</a>.
-          </section>
-          {{#if errorMessage}}
-          <div class="alert alert-danger">
-          <section>
-          <strong>Login failed:</strong> <code>{{errorMessage}}</code>
-        </section>
-          </div>
-        {{/if}}
-      {{/if}}
-
+  <section><h2>LOG IN</h2></section>
+  {{! Buttons should probably be a block component.}}
+  <div class="uk-child-width-1-3@s uk-grid-small uk-text-center uk-flex-center" uk-grid>
+    <div>
+      <button class="uk-tile blue" onclick={{action 'authenticateWithFacebook'}}>
+        {{fa-icon 'facebook-f' prefix='fab'}}
+      </button>
+    </div>
+    
+    <div>
+      <button class="uk-tile red" onclick={{action 'authenticateWithGoogle'}}>
+        {{fa-icon 'google' prefix='fab'}}
+      </button>
+    </div>
+  </div>
+  
+  <hr />
+  
+  <section class='fine-print'>
+    Creating an account means you're okay wth Emory Center for Digital Scholarship's <a href='http://digitalscholarship.emory.edu/about/center/privacy-policy.html' target='_blank'>Terms of Service and Privacy Policy</a>.
+  </section>
+  
+  {{#if errorMessage}}
+    <div class="alert alert-danger">
+      <section>
+        <strong>Login failed:</strong> <code>{{errorMessage}}</code>
+      </section>
+    </div>
+  {{/if}}
 </div>

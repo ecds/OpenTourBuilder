@@ -23,7 +23,8 @@
     "ember-try": "^1.0.0-beta.1",
     "eslint": "^4.19.1",
     "eslint-plugin-ember-best-practices": "^1.1.1",
-    "global": "^4.3.2"
+    "global": "^4.3.2",
+    "jodit": "^3.2.34"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
@@ -57,11 +58,11 @@
     "ember-cookies": "^0.1.2",
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.2.4",
+    "ember-font-awesome": "^4.0.0-rc.4",
     "ember-g-map": "jayvarner/ember-g-map.git#develop",
     "ember-i18n": "^5.2.1",
     "ember-load-initializers": "^1.1.0",
     "ember-material-design-icons-shim": "^0.1.12",
-    "ember-pell": "^1.2.1",
     "ember-power-select": "^1.10.4",
     "ember-qunit": "^3.4.1",
     "ember-resolver": "^5.0.1",

@@ -18,6 +18,7 @@ const Router = EmberRouter.extend({
       return `/${path}/`;
     }
   })
+  // rootURL: '/'
 });
 
 Router.map(function() {
@@ -49,6 +50,9 @@ Router.map(function() {
           this.route('map');
         }
       );
+      this.route('flat-page', {
+        path: 'page/:page_id'
+      });
     }
   );
   this.route(
@@ -57,25 +61,25 @@ Router.map(function() {
       path: '/admin/'
     },
     function() {
+      this.route('users', function() {
+        this.route('user', {
+          path: '/:user_id'
+        });
+      });
       this.route(
         'tours',
         {
-          path: '*/tours'
+          path: ':*/'
         },
         function() {
-          this.route('new');
+          this.route('index', {
+            path: '/'
+          });
           this.route('edit', {
             path: 'edit/:tour_id'
           });
         }
       );
-      this.route('stops', function() {
-        this.route('new');
-        this.route('edit', {
-          path: 'edit/:stop_id'
-        });
-      });
-      this.route('users');
     }
   );
 

@@ -18,8 +18,6 @@ export default Component.extend({
 
   ukImage: true,
   sizes: '(max-width: 620px) 680px, (max-width: 880px) 880px, 1000px',
-  // width: 768,
-  // height: 300,
   // ukToggle: true,
 
   // This prevents the a click firing after swipes.

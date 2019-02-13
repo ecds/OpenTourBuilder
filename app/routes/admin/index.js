@@ -1,20 +1,34 @@
 import Route from '@ember/routing/route';
-import RSVP from 'rsvp';
+import { task } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 
 export default Route.extend({
   currentUser: service(),
+  tenant: service(),
 
-  model() {
-    if (this.get('currentUser.user.super')) {
-      return RSVP.hash({
-        tours: this.store.findAll('tour'),
-        tourSets: this.store.findAll('tour-set')
-      });
-    } else {
-      return RSVP.hash({
-        tours: this.store.findAll('tour')
-      });
-    }
-  }
+  // beforeModel() {
+  //   // this.get('tenant').setTenant();
+  //   return this.get('currentUser').load();
+  // },
+
+  // model() {
+  //   if (this.get('currentUser.user.super')) {
+  //     return {
+  //       tours: this.get('getTours').perform(),
+  //       tourSets: this.get('getTourSets').perform()
+  //     };
+  //   } else {
+  //     return {
+  //       tours: this.get('getTours').perform()
+  //     };
+  //   }
+  // },
+
+  getTours: task(function*() {
+    return yield this.store.findAll('tour');
+  }),
+
+  getTourSets: task(function*() {
+    return yield this.store.findAll('tour-set');
+  })
 });

@@ -1,21 +1,29 @@
 import OtbCrudRoute from '../../otb-crud';
-import { get } from '@ember/object';
-import { inject as service } from '@ember/service';
+import { task } from 'ember-concurrency';
+// import { inject as service } from '@ember/service';
 
 export default OtbCrudRoute.extend({
-  tenant: service(),
+  // tenant: service(),
 
-  beforeModel(transisition) {
-    if (transisition.intent.hasOwnProperty('contexts')) {
-      get(this, 'tenant').setTenantFromContext(transisition.intent.contexts);
-    } else {
-      get(this, 'tenant').setTenant(transisition.intent.url);
-    }
-  },
+  // beforeModel() {
+  //   this._super(...arguments);
+  //   this.store.unloadAll('tour');
+  // },
 
   model(params) {
-    return this.store.findRecord('tour', params.tour_id);
+    // return this.store.findRecord('tour', params.tour_id);
+    return {
+      modelId: params.tour_id
+    };
   },
+
+  getModel: task(function*(params) {
+    try {
+      return yield this.store.findRecord('tour', params.tour_id);
+    } catch (nah) {
+      return nah;
+    }
+  }),
 
   actions: {
     doNothing() {

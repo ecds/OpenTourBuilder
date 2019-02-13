@@ -37,8 +37,9 @@ export default Component.extend({
     this.element.firstElementChild.addEventListener('scroll', () => {
       get(this, 'tourStops').forEach(tourStop => {
         let stop = get(tourStop, 'stop');
-        // let stopProps = getProperties(tourStop, 'active');
-        let stopEl = document.getElementById(`${get(stop, 'slug')}-${stop.id}`);
+        let stopEl = document.getElementById(
+          `${get(stop, 'slug')}-${stop.get('id')}`
+        );
 
         if (direction === 'down') {
           // The next stop takes up 2/3 of viewport offset by the heights of

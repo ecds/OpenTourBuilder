@@ -17,7 +17,7 @@
 
     {{#switcher.content class='uk-text-left' as |content|}}
       {{#content.item}}
-        notes
+        {{stop.direction_notes}}
       {{/content.item}}
       {{#content.item}}
         <div id='directions-panel' class='uk-width-auto'></div>
@@ -25,6 +25,7 @@
     {{/switcher.content}}
     {{/uk-switcher}}
   {{else}}
+  {{feature.directionsPanel}}
     <div id='directions-panel' class='uk-width-auto'></div>
   {{/if}}
 </div>

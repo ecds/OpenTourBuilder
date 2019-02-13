@@ -30,7 +30,6 @@ export default GMapBase.extend(ParentMixin, ChildMixin, {
 
     // this._addObservers();
     // this._addEventListeners();
-
   },
 
   didcreateFeature() {
@@ -56,7 +55,7 @@ export default GMapBase.extend(ParentMixin, ChildMixin, {
     }
 
     this.didcreateFeature();
-    if(isPresent(this.feature)) {
+    if (isPresent(this.feature)) {
       this.setPosition();
       // this.setZIndex();
       this.setIcon();
@@ -87,14 +86,15 @@ export default GMapBase.extend(ParentMixin, ChildMixin, {
     }
 
     const marker = this.feature;
-    const latLng = get(this, 'position')
+    const latLng = get(this, 'position');
     const lat = parseFloat(get(this, 'lat'));
     const lng = parseFloat(get(this, 'lng'));
 
-    const markerPosition = isPresent(latLng) ? latLng : new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+    const markerPosition = isPresent(latLng)
+      ? latLng
+      : new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
 
-    if (isPresent(marker)
-      && isPresent(markerPosition)) {
+    if (isPresent(marker) && isPresent(markerPosition)) {
       const map = get(this, 'parentComponent.feature');
       marker.setPosition(markerPosition);
       let bounds = get(this, 'parentComponent.bounds');
@@ -144,7 +144,7 @@ export default GMapBase.extend(ParentMixin, ChildMixin, {
   },
 
   setOnDrag() {
-    this.feature.addListener('dragend', (event) => {
+    this.feature.addListener('dragend', event => {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
       if (isPresent(lat) && isPresent(lng) && isPresent(this.feature)) {
@@ -173,7 +173,7 @@ export default GMapBase.extend(ParentMixin, ChildMixin, {
 
   setAnimation() {
     const animation = this.get('animation');
-    if(isPresent(animation)) {
+    if (isPresent(animation)) {
       if (animation.toUpperCase() == 'DROP') {
         this.feature.setAnimation(google.maps.Animation.DROP);
       } else if (animation.toUpperCase() == 'BOUNCE') {
@@ -185,7 +185,7 @@ export default GMapBase.extend(ParentMixin, ChildMixin, {
   },
 
   sendOnClick() {
-    console.log(this.get('onClick'))
+    console.log(this.get('onClick'));
     const onClick = this.get('onClick');
     const mapContext = this.get('mapContext');
     const group = this.get('group');

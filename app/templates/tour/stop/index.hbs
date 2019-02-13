@@ -1,4 +1,5 @@
 {{!-- TODO fix this containers --}}
+{{#if (eq orientation.orientationClass 'portrait')}}
 <div class='otb-container otb-stop-container'>
     {{#if model.stop.media}}
     {{otb-media stop=model.stop}}
@@ -11,3 +12,20 @@
         </article>
     </div>
 </div>
+{{else}}
+<div class='otb-container otb-stop-container uk-child-width-1-2 uk-overflow-hidden' uk-grid>
+    <div>
+      {{#if model.stop.media}}
+        {{otb-media stop=model.stop}}
+      {{/if}}
+    </div>
+    <div class='uk-container uk-overflow-auto'>
+        <article class='uk-article'>
+            <h1 class='uk-article-title'>{{model.stop.title}}</h1>
+            {{read-it content=model.stop.sanitized_description}}
+            {{{model.stop.description}}}
+        </article>
+        <section class='uk-section'></section>
+    </div>
+</div>
+{{/if}}

@@ -1,4 +1,4 @@
-{{#g-map zoom='auto' as |feature|}}
+{{#g-map zoom='auto' options=(hash disableDefaultUI=true mapTypeId=model.map_type) as |feature|}}
   {{#each model.stops as |stop|}}
   {{#feature.marker lat=stop.lat lng=stop.lng label=stop.id animation='DROP' as |marker|}}
     {{#marker.infowindow}}

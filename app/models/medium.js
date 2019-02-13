@@ -2,6 +2,7 @@ import DS from 'ember-data';
 import { hasMany } from 'ember-data/relationships';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
+import { htmlSafe } from '@ember/string';
 import ENV from '../config/environment';
 
 const { Model, attr } = DS;
@@ -27,5 +28,9 @@ export default Model.extend({
 
   baseUrl: computed('original_image', function() {
     return `${ENV.APP.API_HOST}`;
+  }),
+
+  safeEmbed: computed('embed', function() {
+    return htmlSafe(this.embed);
   })
 });

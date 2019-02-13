@@ -1,24 +1,16 @@
-import Service, {
-  inject as service
-} from '@ember/service';
+import Service, { inject as service } from '@ember/service';
+import { isEmpty } from '@ember/utils';
 
 export default Service.extend({
   fastboot: service(),
-  // tenant() {
-  //   return new Promise(this.setTenant(window.location.href.split('/')[3]));
-  // },
-  init() {
-    this._super(...arguments);
-    // this.setProperties({ tenant: 'public' });
-    // this.setTenant(window.location.href.split('/')[3]);
-  },
-
   tenant: 'public',
 
-  setTenant() {
-    const path = window.location.pathname;
+  setTenant(path = window.location.pathname) {
+    if (typeof path !== 'string') {
+      return false;
+    }
     const pathParts = path.replace(/\/$/, '').split('/');
-    const firstSubDir = pathParts[1];
+    const firstSubDir = pathParts.length > 1 ? pathParts[1] : pathParts[0];
     /*
        Like the router, this is complicated and should be given more thought.
        Reasons we want to switch to the public tenant/scheme:
@@ -29,12 +21,14 @@ export default Service.extend({
     if (
       !firstSubDir ||
       parseInt(firstSubDir) ||
-      (firstSubDir === 'admin' && pathParts.length === 2) ||
+      (firstSubDir === 'admin' && pathParts.length <= 2) ||
       // Reverse pathParts without modifying it.
       (firstSubDir === 'admin' && [...pathParts].reverse()[0] === 'users') ||
       firstSubDir === 'tour' ||
       firstSubDir === 'tours' ||
       firstSubDir === 'login' ||
+      firstSubDir === 'index' ||
+      pathParts[2] === 'users' ||
       firstSubDir.length === 0
     ) {
       this.setProperties({
@@ -52,8 +46,22 @@ export default Service.extend({
   },
 
   setTenantFromContext(context) {
-    this.setProperties({
-      tenant: context
-    });
+    if (isEmpty(context)) {
+      this.setTenant();
+    } else if (typeof context === 'string') {
+      this.setProperties({
+        tenant: context
+      });
+    } else if (isNaN(context[0]) && typeof context[0] === 'string') {
+      this.setProperties({
+        tenant: context.firstObject
+      });
+    } else if (context.params[context.targetName].hasOwnProperty('tenant')) {
+      this.setProperties({
+        tenant: context.params[context.targetName].tenant
+      });
+    } else {
+      this.setTenant();
+    }
   }
 });

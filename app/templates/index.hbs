@@ -1,18 +1,26 @@
+<nav class="uk-navbar uk-light uk-background-secondary uk-margin" uk-navbar>
+
+    <div class="uk-navbar-left">
+        {{!-- <ul class="uk-navbar-nav"> --}}
+            <span class="uk-logo"><img src='/assets/images/otblogo.png' alt='Branding logo' /> {{sortedTours.firstObject.tenant_title}}</span>
+            {{!-- <li>{{sortedTours.firstObject.tenant_title}}</li>
+            </ul> --}}
+            </div></nav>
 {{#if (media 'isDesktop')}}
-    <div uk-grid class='uk-grid-match uk-grid-small'>
+    <div class="uk-child-width-1-2@s uk-child-width-1-3@m uk-grid-match uk-grid-small" uk-grid="masonry: true">
         {{#each sortedTours as |tour|}}
-            <div class='uk-width-expand'>
-                <div class="uk-cover-container uk-transition-toggle" uk-height-viewport>
-        {{#link-to 'tour' tour}}
-                    <img src='{{baseUrl}}{{tour.splash.original_image.url}}' alt={{concat 'Cover image for the ' tour.title ' tour. The image is titled ' tour.splash.title ' and captioned: ' tour.splash.caption}} class='otb-cover-image uk-transition-scale-up uk-transition-opaque'>
-                    <div class="uk-overlay-primary uk-position-cover">
-                <div class="uk-position-center">
-                    <h1 class='uk-heading-primary uk-text-center'>{{tour.title}}</h1>
-                    <p class='uk-text-meta uk-text-center'>{{tour.stops.length}} Stops</p>
-                     {{#uk-button color='secondary' class='uk-align-center uk-width-1-2'}}start tour{{/uk-button}}
-                </div>
-            </div>
-            {{/link-to}}
+            <div>
+                <div class="uk-cover-container uk-transition-toggle">
+                    {{#link-to 'tour' tour}}
+                        <img src='{{baseUrl}}{{tour.splash.original_image.url}}' alt={{concat 'Cover image for the ' tour.title ' tour. The image is titled ' tour.splash.title ' and captioned: ' tour.splash.caption}} class='otb-cover-image uk-transition-scale-up uk-transition-opaque'>
+                        <div class="uk-overlay-primary uk-position-cover">
+                            <div class="uk-position-center">
+                                <h1 class='uk-heading-primary uk-text-center'>{{tour.title}}</h1>
+                                <p class='uk-text-meta uk-text-center'>{{tour.stop_count}} Stops</p>
+                                {{#uk-button color='secondary' class='uk-align-center uk-width-1-2'}}start tour{{/uk-button}}
+                            </div>
+                        </div>
+                    {{/link-to}}
                 </div>
             </div>
         {{/each}}
@@ -20,13 +28,23 @@
 {{else}}
 {{#each sortedTours as |tour|}}
     {{#link-to 'tour' tour}}
-        <div class='otb-tour-list {{if tour.show "uk-animation-slide-bottom"}}'>
-            <div class='otb-tour-cover {{if (eq sortedTours.length 2) "otb-two-tours" "otb-many-tours"}}' style={{tour.safeBackgroundImage}} />
-            <div class='otb-tour-meta uk-container'>
+        {{!-- <div class='otb-tour-list uk-container {{if tour.show "uk-animation-slide-bottom"}}'>
+                        <img src='{{baseUrl}}{{tour.splash.original_image.mobile_list_thumb.url}}' alt={{concat 'Cover image for the ' tour.title ' tour. The image is titled ' tour.splash.title ' and captioned: ' tour.splash.caption}} class='otb-cover-image uk-transition-scale-up uk-transition-opaque'> --}}
+            {{!-- <div class='otb-tour-cover {{if (eq sortedTours.length 2) "otb-two-tours" "otb-many-tours"}}' style={{tour.safeBackgroundImage}} /> --}}
+            {{!-- <div class='otb-tour-meta'>
                 <h4>{{tour.title}}</h4>
                 {{tour.stops.length}} Stops
             </div>
-        </div>
+        </div> --}}
+<div class="uk-card uk-card-default uk-card-small {{if tour.show "uk-animation-slide-bottom"}}">
+    <div class="uk-card-media-top">
+        <img src="{{baseUrl}}{{tour.splash.original_image.tablet.url}}" alt="" style='width: 100vw;'>
+    </div>
+    <div class="uk-card-body">
+        <h4 class='uk-card-title'>{{tour.title}}</h4>
+                {{tour.stops.length}} Stops
+    </div>
+</div>
     {{/link-to}}
 {{/each}}
 {{/if}}

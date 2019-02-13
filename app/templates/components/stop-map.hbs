@@ -11,32 +11,30 @@
   {{else if allowsLocation}}
   {{!-- ALLOWS LOCATION --}}
     {{#if geoLocation.clientLat}}
-      {{#g-map options=(
-          hash
-          disableDefaultUI=true
-        ) as |feature|}}
-      {{feature.directions
-        travelMode=model.tour.mode.title
-        origin_lat = geoLocation.clientLat
-        origin_lng = geoLocation.clientLng
-        destination_lat = model.stop.lat
-        destination_lng = model.stop.lng
-        waypoint_lat = model.stop.parking_lat
-        waypoint_lng = model.stop.parking_lng
-      }}
-      {{!-- {{#if (and model.stop.lat model.stop.lng)}} --}}
-          {{#feature.marker
-            icon=(parking-icon)
-            lat=model.lat
-            lng=model.lng as |marker|}}
+      {{#g-map  options=(hash mapTypeId=model.tour.map_type disableDefaultUI=true) as |feature|}}
+        {{feature.directions
+          travelMode=model.tour.mode.title
+          origin_lat = geoLocation.clientPosition.lat
+          origin_lng = geoLocation.clientPosition.lng
+          destination_lat = model.stop.lat
+          destination_lng = model.stop.lng
+          waypoint_lat = model.stop.parking_lat
+          waypoint_lng = model.stop.parking_lng
+        }}
+        {{#feature.marker
+          icon=(parking-icon)
+          lat=model.lat
+          lng=model.lng as |marker|}}
         {{/feature.marker}}
-        {{!-- {{/if}} --}}
       <div class='uk-grid'>
         {{select-travel-mode tour=model.tour modes=modes map=this}}
         |
         {{directions-button map=this}}
       </div>
     {{/g-map}}
+    <div style='position: absolute; z-index: 9999999; bottom: 25vh;'>
+      DEBUG: {{geoLocation.clientPosition.lat}} {{geoLocation.clientPosition.lng}}<br>DISTANCE: {{geoLocation.diff}}
+    </div>
   {{else}}
     Locating
   {{/if}}

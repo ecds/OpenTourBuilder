@@ -2,9 +2,13 @@ import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
 
 export default Controller.extend({
-  tenant: service(),
   orientation: service(),
   session: service(),
+
+  init() {
+    this._super(...arguments);
+    // this.get('tenant').setTenant();
+  },
 
   actions: {
     invalidateSession() {

@@ -38,7 +38,7 @@ export default Component.extend(ChildMixin, {
     }
     this.element.index = 1;
     const map = get(this, 'parentComponent').feature;
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(this.element);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(this.element);
   },
 
   // willDestroyParent() {

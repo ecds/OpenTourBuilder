@@ -8,7 +8,7 @@ export default LinkComponent.extend({
     set(this, 'dataTheme', get(this, 'theme.name'));
   },
 
-  deviceorientation(event) {
-    console.log('otb-link-to: ', event);
+  deviceorientation(/*event*/) {
+    // console.log('otb-link-to: ', event);
   }
 });
