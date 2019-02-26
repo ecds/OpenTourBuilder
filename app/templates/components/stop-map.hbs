@@ -32,9 +32,9 @@
         {{directions-button map=this}}
       </div>
     {{/g-map}}
-    <div style='position: absolute; z-index: 9999999; bottom: 25vh;'>
+    {{!-- <div style='position: absolute; z-index: 9999999; bottom: 25vh;'>
       DEBUG: {{geoLocation.clientPosition.lat}} {{geoLocation.clientPosition.lng}}<br>DISTANCE: {{geoLocation.diff}}
-    </div>
+    </div> --}}
   {{else}}
     Locating
   {{/if}}

@@ -1,8 +1,8 @@
-import OtbCrudRoute from '../../otb-crud';
+import Route from '@ember/routing/route';
 import { task } from 'ember-concurrency';
 // import { inject as service } from '@ember/service';
 
-export default OtbCrudRoute.extend({
+export default Route.extend({
   // tenant: service(),
 
   // beforeModel() {

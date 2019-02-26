@@ -17,7 +17,7 @@ export default Component.extend({
   },
 
   willDestroy() {
-    console.log('destroy!!!!');
+    // console.log('destroy!!!!');
     this.get('geoLocation').clearLocation();
   },
 

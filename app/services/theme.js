@@ -5,6 +5,7 @@ import { isEmpty } from '@ember/utils';
 
 export default Service.extend({
   store: service(),
+  tour: null,
   base: 'default',
   theme: 'dark',
 
@@ -27,5 +28,9 @@ export default Service.extend({
   // set theme to use within base theme
   setTheme: function(theme) {
     this.set('theme', isEmpty(theme) ? 'first' : theme);
+  },
+
+  setTour: function(tour) {
+    this.set('tour', tour);
   }
 });

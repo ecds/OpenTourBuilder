@@ -1,10 +1,10 @@
 {{#g-map zoom='auto' options=(hash disableDefaultUI=true mapTypeId=model.map_type) as |feature|}}
-  {{#each model.stops as |stop|}}
-  {{#feature.marker lat=stop.lat lng=stop.lng label=stop.id animation='DROP' as |marker|}}
+  {{#each model.sortedTourStops as |tourStop|}}
+  {{#feature.marker lat=tourStop.stop.lat lng=tourStop.stop.lng label=tourStop.label animation='DROP' as |marker|}}
     {{#marker.infowindow}}
-      <h2>{{stop.title}}</h2>
-      <p>{{stop.metadescription}}</p>
-      {{#link-to 'tour.stop' stop.id}}Go to stop {{fa-icon 'chevron-right' aria-hidden='true'}}{{/link-to}}
+      <h2>{{tourStop.stop.title}}</h2>
+      <p>{{tourStop.stop.metadescription}}</p>
+      {{#link-to 'tour.stop' tourStop.stop.slug}}Go to stop {{fa-icon 'chevron-right' aria-hidden='true'}}{{/link-to}}
     {{/marker.infowindow}}
   {{/feature.marker}}
   {{/each}}

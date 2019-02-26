@@ -9,7 +9,7 @@
 {{/if}}
 
 {{#otb-crud/form-section label=(concat modelTitle ' Description') as |inputId|}}
-{{ember-jodit value=model.description onChange=(action (mut model.description))}}
+{{ember-jodit value=(if model.description model.description '') onChange=(action (mut model.description))}}
 {{/otb-crud/form-section}}
 
 {{#otb-crud/form-section label=(concat modelTitle ' Meta Description') as |inputId|}}

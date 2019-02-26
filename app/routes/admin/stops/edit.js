@@ -1,6 +1,6 @@
-import OtbCrudRoute from '../../otb-crud';
+import Route from '@ember/routing/route';
 
-export default OtbCrudRoute.extend({
+export default Route.extend({
   model(params) {
     return this.store.findRecord('stop', params.stop_id);
   }

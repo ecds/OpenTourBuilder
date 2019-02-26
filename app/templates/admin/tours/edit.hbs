@@ -4,6 +4,7 @@
   <p>Loading Tour...</p>
 {{else}}
 <div class='uk-child-width-1-1' uk-grid>
+{{#if currentUser.user.current_tenant_admin}}
   <div>
     {{#uk-modal modalName='tour-authors' as |modal|}}
       {{#modal.open class='' tagName='div'}}
@@ -37,6 +38,7 @@
       {{/modal.dialog}}
     {{/uk-modal}}
   </div>
+  {{/if}}
   <div>
     <form class='uk-form-stacked otb-crud uk-padding uk-padding-bottom' {{action 'doNothing' on='submit'}}>
     {{otb-crud/common-form model=tourLoader.data modelTitle='Tour'}}
@@ -117,7 +119,7 @@
                     {{/otb-crud/form-section}}
 
                     {{#otb-crud/form-section label='Page Content' as |inputId|}}
-                    {{ember-jodit value=page.flat_page.content.content onChange=(action (mut page.flat_page.content.content))}}
+                    {{ember-jodit value=(if page.flat_page.content.content page.flat_page.content.content '') onChange=(action (mut page.flat_page.content.content))}}
                     {{/otb-crud/form-section}}
 
                     {{#uk-button color='primary' on-click=(perform saveRecord page.flat_page)}}save{{/uk-button}}

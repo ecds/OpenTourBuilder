@@ -20,7 +20,6 @@ export default Component.extend({
       let readerService = get(this, 'reader');
       readerService.setProperties({
         synth: window.speechSynthesis,
-        voice: window.speechSynthesis.getVoices()[1],
         utterance
       });
 
@@ -44,7 +43,7 @@ export default Component.extend({
     sayIt() {
       const content = get(this, 'content');
       let reader = get(this, 'reader');
-      set(reader, 'voice', window.speechSynthesis.getVoices()[32]);
+      // set(reader, 'voice', window.speechSynthesis.getVoices()[32]);
       if (!reader.synth.speaking) {
         set(this, 'speaking', true);
         reader.cancel();

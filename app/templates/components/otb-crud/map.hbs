@@ -56,4 +56,9 @@
       {{/g-map}}
   {{/if}}
   </div>
+  <div class='uk-width-1-1'>
+    {{#otb-crud/form-section label='Direction Notes' as |inputId|}}
+      {{ember-jodit value=(if model.direction_notes model.direction_notes '') onChange=(action (mut model.direction_notes))}}
+    {{/otb-crud/form-section}}
+  </div>
 </div>

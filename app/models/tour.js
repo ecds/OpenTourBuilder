@@ -34,7 +34,9 @@ export default Model.extend({
     async: true
   }),
   tour_media: hasMany('tour-medium'),
-  media: hasMany('medium'),
+  media: hasMany('medium', {
+    async: true
+  }),
   stops: hasMany('stop', {
     async: true
   }),

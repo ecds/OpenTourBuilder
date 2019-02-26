@@ -9,6 +9,7 @@ export default Route.extend({
 
   actions: {
     goToStop(stop) {
+      console.log(stop);
       this.transitionTo('tour.stop', stop);
     },
 

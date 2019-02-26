@@ -39,18 +39,24 @@ export default Mixin.create({
   }),
 
   deleteHasMany: task(function*(options) {
+    console.log(options);
     let didConfirm = yield this.get('confirmDelete').perform(
       options.childObj.get('title')
     );
+    let parentObj = options.parentObj.hasOwnProperty('isFulfilled')
+      ? options.parentObj.content
+      : options.parentObj;
     let childObj = options.childObj.hasOwnProperty('isFulfilled')
       ? options.childObj.content
       : options.childObj;
     if (didConfirm) {
-      options.parentObj
+      parentObj
         .get(`${pluralize(options.relationType)}`)
         .removeObject(childObj);
       try {
-        yield options.parentObj.save();
+        yield parentObj.save();
+        yield childObj.save();
+        console.log('saved');
       } catch (error) {
         UIkit.notification(`ERROR: ${error}`, { status: 'danger' });
       } finally {

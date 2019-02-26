@@ -1,7 +1,7 @@
 $desktop-nav-height: 80px;
 
 .map-container {
-  @include theme('background', 'primary-dark')
+  @include theme('background', 'primary-dark');
   // left: 33wv;
   bottom: 0;
   height: calc(100% - #{$desktop-nav-height});
@@ -14,6 +14,8 @@ $desktop-nav-height: 80px;
 .media-desktop {
   .uk-navbar {
     margin-bottom: 0;
+    width: 100vw;
+    z-index: 10;
   }
 
   .otb-desktop-tour-title {
@@ -31,8 +33,9 @@ $desktop-nav-height: 80px;
   }
 
   .map-map {
-    height: 100%;
+    height: calc(100% - #{$desktop-nav-height});
     margin-top: 0;
+    right: 0;
     width: 50%;
   }
 
@@ -67,7 +70,7 @@ $desktop-nav-height: 80px;
     border-bottom: solid $faded-black;
     top: 80;
     // transition: background-color 300ms ease-in-out;
-    z-index: 989;
+    z-index: 9;
 
     h3 {
       transition: color 300ms linear;

@@ -5,7 +5,8 @@ module.exports = environment => {
     modulePrefix: 'open-tour-builder',
     environment,
     rootURL: '/',
-    locationType: 'auto',
+    locationType: 'trailing-history',
+    historySupportMiddleware: true,
     'ember-cli-mirage': {
       enabled: false
     },
@@ -49,11 +50,8 @@ module.exports = environment => {
   if (environment === 'development') {
     ENV.APP.API_HOST = 'https://otb.org:3000';
     ENV.fastboot.hostWhitelist.push('https://jay.otb.org:3000');
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
     ENV.APP.LOG_TRANSITIONS = true;
     ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
     ENV['ember-cli-mirage'] = {
       enabled: false
     };
@@ -64,7 +62,8 @@ module.exports = environment => {
     };
 
     ENV.torii.providers['google-oauth2'] = {
-      apiKey: '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
+      apiKey:
+        '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
       redirectUri: 'https://lvh.me:4200/torii/redirect.html'
     };
     // ENV.torii.providers['google-oauth2-bearer-v2'] = {
@@ -111,8 +110,23 @@ module.exports = environment => {
     };
 
     ENV.torii.providers['google-oauth2'] = {
-      apiKey: '171053764894-edtmjrjbnh8jukcbsgdue4sovqpe1l5f.apps.googleusercontent.com',
+      apiKey:
+        '171053764894-edtmjrjbnh8jukcbsgdue4sovqpe1l5f.apps.googleusercontent.com',
       redirectUri: 'https://otb.ecdsdev.org/torii/redirect.html'
+    };
+  }
+
+  if (environment === 'production') {
+    ENV.APP.API_HOST = 'https://api.opentour.emory.edu';
+    ENV['g-map'] = {
+      key: 'AIzaSyC0l_y6pP0DK4oig0ile1XLbRx9HUQeryE',
+      protocol: 'https'
+    };
+
+    ENV.torii.providers['google-oauth2'] = {
+      apiKey:
+        '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
+      redirectUri: 'https://opentour.emory.edu/torii/redirect.html'
     };
   }
 

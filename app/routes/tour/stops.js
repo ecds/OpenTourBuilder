@@ -5,7 +5,7 @@ import { later } from '@ember/runloop';
 export default Route.extend({
   actions: {
     goToStop(stop) {
-      this.transitionTo('tour.stop', stop);
+      this.transitionTo('tour.stop', stop.stop.slug);
     },
 
     didTransition() {
@@ -20,6 +20,10 @@ export default Route.extend({
                 classList: 'enter'
               });
             }
+            stop.stop.setProperties({
+              previous: stop.previous,
+              next: stop.next
+            });
           },
           300 * index
         );

@@ -9,11 +9,13 @@ export default Model.extend({
   stop: belongsTo('stop', {
     async: true
   }),
+  slug: attr('string'),
   position: attr('number', {
     defaultValue: 1
   }),
   next: attr(),
   next_slug: attr('string'),
+  previous_slug: attr('string'),
   previous: attr(),
   active: attr('boolean', {
     defaultValue: false

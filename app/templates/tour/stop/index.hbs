@@ -1,31 +1,37 @@
 {{!-- TODO fix this containers --}}
 {{#if (eq orientation.orientationClass 'portrait')}}
-<div class='otb-container otb-stop-container'>
-    {{#if model.stop.media}}
-    {{otb-media stop=model.stop}}
-    {{/if}}
-    <div class='uk-container otb-stop-content'>
-        <article class='uk-article'>
-            <h1 class='uk-article-title'>{{model.stop.title}}</h1>
-            {{read-it content=model.stop.sanitized_description}}
-            {{{model.stop.description}}}
-        </article>
+    <div class='otb-container otb-stop-container'>
+        <div class='uk-container otb-stop-content'>
+            {{#if model.stop.media}}
+                {{otb-media stop=model.stop}}
+            {{/if}}
+            <article class='uk-article'>
+                <h1 class='uk-article-title'>{{model.stop.title}}</h1>
+                {{read-it content=model.stop.sanitized_description}}
+                {{{model.stop.description}}}
+            </article>
+            <footer class='uk-footer uk-text-center uk-margin'>
+                <img class='uk-margin' src="/assets/images/otblogo.png" alt="Branding logo">
+            </footer>
+        </div>
     </div>
-</div>
-{{else}}
-<div class='otb-container otb-stop-container uk-child-width-1-2 uk-overflow-hidden' uk-grid>
-    <div>
-      {{#if model.stop.media}}
-        {{otb-media stop=model.stop}}
-      {{/if}}
+    {{else}}
+    <div class='otb-container otb-stop-container uk-child-width-1-2 uk-overflow-hidden uk-position-relative' uk-grid>
+        <div>
+            {{#if model.stop.media}}
+                {{otb-media stop=model.stop}}
+            {{/if}}
+        </div>
+        <div class='uk-container uk-overflow-auto' style='height: 85vh;'>
+            <article class='uk-article'>
+                <h1 class='uk-article-title'>{{model.stop.title}}</h1>
+                {{read-it content=model.stop.sanitized_description}}
+                {{{model.stop.description}}}
+            </article>
+            <footer class='uk-footer uk-text-center uk-margin'>
+                <img class='uk-margin' src="/assets/images/otblogo.png" alt="Branding logo">
+            </footer>
+            <div style='height: 80px'></div>
+        </div>
     </div>
-    <div class='uk-container uk-overflow-auto'>
-        <article class='uk-article'>
-            <h1 class='uk-article-title'>{{model.stop.title}}</h1>
-            {{read-it content=model.stop.sanitized_description}}
-            {{{model.stop.description}}}
-        </article>
-        <section class='uk-section'></section>
-    </div>
-</div>
 {{/if}}

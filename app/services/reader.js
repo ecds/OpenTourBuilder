@@ -6,7 +6,6 @@ export default Service.extend({
     this._super(...arguments);
     this.setProperties({
       utterance: null,
-      voice: null,
       synth: null,
       text: null,
       speaking: false
@@ -16,7 +15,7 @@ export default Service.extend({
   read(content) {
     let _utterance = get(this, 'utterance');
     _utterance.text = content;
-    _utterance.voice = get(this, 'voice');
+    _utterance.lang = navigator.language;
     get(this, 'synth').speak(_utterance);
   },
 

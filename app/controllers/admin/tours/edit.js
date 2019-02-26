@@ -1,5 +1,5 @@
 import Controller from '@ember/controller';
-import { task, timeout } from 'ember-concurrency';
+import { task } from 'ember-concurrency';
 import { computed } from '@ember/object';
 import { inject as service } from '@ember/service';
 import CrudActionsMixin from '../../../mixins/crud-actions';
@@ -64,7 +64,7 @@ export default Controller.extend(CrudActionsMixin, {
         parentObj: tour
       });
       newStop.setProperties({
-        title: ''
+        title: new Date().getTime().toString()
       });
       yield this.get('clearTaskMessage').perform();
       yield this.get('waitForElement').perform(

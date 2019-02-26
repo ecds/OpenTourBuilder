@@ -28,7 +28,7 @@ Router.map(function() {
   this.route(
     'tour',
     {
-      path: '/:tour_id'
+      path: '/:tour_slug'
     },
     function() {
       this.route(
@@ -44,7 +44,7 @@ Router.map(function() {
       this.route(
         'stop',
         {
-          path: ':stop_id'
+          path: ':stop_slug'
         },
         function() {
           this.route('map');

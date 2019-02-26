@@ -7,13 +7,13 @@
     </div>
     <hr />
     {{#each tourStops as |tourStop|}}
-    <div class="uk-margin-bottom uk-position-relative {{if tourStop.active 'active-stop'}} tour-stop" id={{concat tourStop.stop.slug '-' tourStop.stop.id}}>
+    <div class="uk-margin-bottom uk-position-relative stop-list-stop {{if tourStop.active 'active-stop'}} tour-stop" id={{concat tourStop.stop.slug '-' tourStop.stop.id}} data={{tourStop}}>
         {{#sticky-element top=80 bottom=0}}
         <h3 class='uk-padding-small uk-margin-remove'>{{tourStop.position}}: {{tourStop.stop.title}}</h3>
         {{/sticky-element}}
-        {{#if tourStop.stop.media}}
+        {{!-- {{#if (and tourStop.stop.media tourStop.active)}} --}}
         {{otb-media stop=tourStop.stop}}
-        {{/if}}
+        {{!-- {{/if}} --}}
         <div class='uk-container'>
             {{{tourStop.stop.description}}}
         </div>

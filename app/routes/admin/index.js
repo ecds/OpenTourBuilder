@@ -25,10 +25,14 @@ export default Route.extend({
   // },
 
   getTours: task(function*() {
+    if (!this.currentUser.user.current_tenant_admin) return;
     return yield this.store.findAll('tour');
   }),
 
   getTourSets: task(function*() {
+    if (!this.currentUser.user.tour_sets) {
+      
+    }
     return yield this.store.findAll('tour-set');
   })
 });

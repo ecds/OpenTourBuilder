@@ -118,7 +118,7 @@ body {
 .otb-stop-content,
 .otb-tour-intro-content {
   @include parallax-layer-back;
-  margin-top: $mobile-bottom-nav-height;
+  // margin-top: $mobile-bottom-nav-height;
   padding-bottom: calc(2 * #{$mobile-bottom-nav-height});
 }
 
@@ -349,5 +349,9 @@ ul {
   border: 0;
 }
 
+.tour-list-single {
+  height: 100vh;
+  width: 100vw;
+}
 
 img[data-src][src*='data:image'] { background: red; }
