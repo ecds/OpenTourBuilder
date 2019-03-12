@@ -1,5 +1,6 @@
 import Controller from '@ember/controller';
 import { task, timeout } from 'ember-concurrency';
+import UIkit from 'uikit';
 
 export default Controller.extend({
   _setActiveStop: task(function*(stops, stop, scrollTo = false) {
@@ -24,6 +25,7 @@ export default Controller.extend({
 
   actions: {
     setActiveStop(stops, stop, scrollTo = false) {
+      UIkit.dropdown(document.getElementById('desktop-dropdown')).hide();
       this.get('_setActiveStop').perform(stops, stop, scrollTo);
     }
   }

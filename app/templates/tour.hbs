@@ -2,14 +2,13 @@
     <nav class='uk-navbar uk-light uk-background-secondary uk-margin uk-position-fixed' uk-navbar>
         <div class='uk-navbar-left'>
             {{#link-to 'index'}}
-            <img src='/assets/images/otblogo.png' alt='Branding logo' /> Open Tour Builder
+            <img src='/assets/images/otblogo.png' alt='Branding logo' />
             {{/link-to}}
-        </div>
-        <div class='uk-navbar-center'>
+
         <h1 class='uk-navbar-item uk-logo uk-margin-remove uk-padding-remove otb-desktop-tour-title'>
             {{model.title}} <span class='uk-margin-small-left'>{{fa-icon 'caret-down'}}</span>
         </h1>
-        <div class="uk-navbar-dropdown" uk-dropdown mode='click' offset=0 animation='uk-animation-slide-top' boundary='.uk-navbar' boundary-align=true align='center' style='width: 100vw;'>
+        <div class="uk-navbar-dropdown" uk-dropdown mode='hover' offset=0 animation='uk-animation-slide-top' boundary='.uk-navbar' boundary-align=true align='center' style='width: 100vw;'>
             <div uk-grid class='desktop-dropdown-nav uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-1@s uk-dropdown-grid'>
                 {{#each model.sortedTourStops as |tourStop|}}
                     <div onClick={{action 'setActiveStop' model.tour_stops tourStop true}}>
@@ -22,6 +21,24 @@
                 {{/each}}
             </div>
         </div>
+        </div>
+        <div class='uk-navbar-right'>
+        <ul class='uk-navbar-nav'>
+            {{#each model.sortedFlatPages as |page|}}
+            <li>
+                <a uk-toggle target={{concat '#flat-page-' page.id}}>
+                    {{page.flat_page.title}}
+                </a>
+                <div  class='' uk-offcanvas flip=true id={{concat 'flat-page-' page.id}}>
+                    <div class='uk-offcanvas-bar'>
+                        <button class='uk-offcanvas-close' type='button' uk-close></button>
+                        <h3>{{page.flat_page.title}}</h3>
+                    {{{page.flat_page.safeContent}}}
+                    </div>
+                </div>
+            </li>
+            {{/each}}
+        </ul>
         </div>
     </nav>
     <div class='map-container uk-grid-collapse' uk-grid>

@@ -18,9 +18,8 @@ export default Service.extend({
   },
 
   windowOrientation() {
-    console.log('resize');
     this.set('windowHeight', window.innerHeight);
-    if (window.outerHeight > window.outerWidth) {
+    if (window.innerHeight > window.innerWidth) {
       this.setProperties({ orientationClass: 'portrait' });
     } else {
       this.setProperties({ orientationClass: 'landscape' });
@@ -29,7 +28,11 @@ export default Service.extend({
 
   setOrientation() {
     this.set('windowHeight', window.innerHeight);
-    if (screen.orientation.angle === -90 || screen.orientation.angle === 90) {
+    if (
+      window.innerHeight < window.innerWidth ||
+      screen.orientation.angle === -90 ||
+      screen.orientation.angle === 90
+    ) {
       this.setProperties({ orientationClass: 'landscape' });
     } else {
       this.setProperties({ orientationClass: 'portrait' });

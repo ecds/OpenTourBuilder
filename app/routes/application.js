@@ -20,6 +20,7 @@ export default Route.extend(ApplicationRouteMixin, {
     },
 
     didTransition() {
+      console.log('did trans application');
       this.get('orientation').set('windowHeight', window.innerHeight);
     }
   },

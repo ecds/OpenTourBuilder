@@ -6,6 +6,7 @@ const { Model, attr, hasMany } = DS;
 
 export default Model.extend({
   title: attr('string'),
+  slug: attr('string'),
   content: attr('string', {
     defaultValue: ''
   }),

@@ -14,6 +14,7 @@ export default Route.extend({
     },
 
     didTransition() {
+      console.log('did trans stops list');
       let stops = get(this.currentModel, 'sortedTourStops');
       stops.forEach((stop, index) => {
         later(

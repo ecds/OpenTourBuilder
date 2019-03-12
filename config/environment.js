@@ -61,10 +61,11 @@ module.exports = environment => {
       language: 'en'
     };
 
-    ENV.torii.providers['google-oauth2'] = {
+    ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey:
-        '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
-      redirectUri: 'https://lvh.me:4200/torii/redirect.html'
+        '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
+      redirectUri: 'https://opentour.emory.edu/torii/redirect.html',
+      scope: 'email'
     };
     // ENV.torii.providers['google-oauth2-bearer-v2'] = {
     // };
@@ -109,7 +110,7 @@ module.exports = environment => {
       redirectUri: 'https://obt.ecdsdev.org/torii/redirect.html'
     };
 
-    ENV.torii.providers['google-oauth2'] = {
+    ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey:
         '171053764894-edtmjrjbnh8jukcbsgdue4sovqpe1l5f.apps.googleusercontent.com',
       redirectUri: 'https://otb.ecdsdev.org/torii/redirect.html'
@@ -123,10 +124,11 @@ module.exports = environment => {
       protocol: 'https'
     };
 
-    ENV.torii.providers['google-oauth2'] = {
+    ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey:
         '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
-      redirectUri: 'https://opentour.emory.edu/torii/redirect.html'
+      redirectUri: 'https://opentour.emory.edu/torii/redirect.html',
+      scope: 'email'
     };
   }
 

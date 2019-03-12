@@ -117,3 +117,12 @@ $desktop-nav-height: 80px;
     }
   }
 }
+
+.uk-offcanvas-bar {
+  background: #222222de;
+  width: 50vw;
+
+  a {
+    text-decoration: underline;
+  }
+}

@@ -27,7 +27,7 @@ export default Torii.extend({
           dataType: 'json',
           data: {
             grant_type: grantType,
-            auth_code: data.authorizationCode
+            auth_code: data.access_token
           }
         })
         .then(response => {
