@@ -13,7 +13,7 @@ export default Component.extend({
     authenticateWithFacebook() {
       this.set('authenticating', true);
       this.get('session.torii')
-        .authenticate('authenticator:torii', 'facebook')
+        .authenticate('authenticator:torii', 'facebook-oauth2')
         .then(
           () => {
             this.set('authenticating', false);
