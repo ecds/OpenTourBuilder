@@ -63,8 +63,8 @@ module.exports = environment => {
 
     ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey:
-        '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
-      redirectUri: 'https://opentour.emory.edu/torii/redirect.html',
+        '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
+      redirectUri: 'https://lvh.me:4200/torii/redirect.html',
       scope: 'email'
     };
     // ENV.torii.providers['google-oauth2-bearer-v2'] = {
@@ -129,6 +129,20 @@ module.exports = environment => {
         '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
       redirectUri: 'https://opentour.emory.edu/torii/redirect.html',
       scope: 'email'
+    };
+
+    ENV.torii.providers['facebook-oauth2'] = {
+      apiKey: '373879153234380',
+      redirectUri: 'https://opentour.emory.edu/torii/redirect.html'
+    };
+  }
+
+  if (environment === 'gsuWalkingTours') {
+    ENV.APP.API_HOST = 'https://otb.org:3000';
+    ENV.APP.TENANT = 'campus-tour';
+    ENV['g-map'] = {
+      key: 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8',
+      protocol: 'https'
     };
   }
 
