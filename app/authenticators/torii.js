@@ -21,6 +21,7 @@ export default Torii.extend({
         grantType = 'google_auth_code';
       } else if (data.provider.includes('facebook')) {
         grantType = 'facebook_auth_code';
+        data.access_token = data.authorizationCode;
       }
       return ajax
         .request(`${ENV.APP.API_HOST}/${this.get('tenant.tenant')}/token`, {
