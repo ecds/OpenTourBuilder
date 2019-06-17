@@ -9,7 +9,6 @@ services:
 before_install:
   - cd api-server
   - cp config/database.yml.travis config/database.yml
-  - psql -c 'create database travis_ci_test' -U postgres
   - cp config/secrets.yml.dist config/secrets.yml
   - gem install bundler:2.0.1
 script:
