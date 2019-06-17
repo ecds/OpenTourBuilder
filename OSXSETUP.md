@@ -32,7 +32,7 @@ cd ~/some/folder
 ```  
 2. Clone the code
 ```bash
-git clone https://github.com/emory-libraries-ecds/OpenTourBuilder
+git clone https://github.com/ecds/OpenTourBuilder-Server
 ```  
 3. Setup virtualenv and install dependancies  
 ```bash  
@@ -95,10 +95,22 @@ python manage.py rumserver 0.0.0.0:8000
 Now you should be able to go to [http://localhost:8000/admin](http://localhost:8000/admin) and log in with the user you created in the previous section.
 
 ## Setup the Front End Client
-Open up a new terminal session and go to the folder where you cloned the server app
+Install Node and Ember
+```bash
+brew install node
+npm install -g ember-cli
+```
+
+Open up a new terminal session and go to the folder where you want to the 
 
 ```bash  
-cd ~/some/folder  
+cd ~/some/folder
+git clone https://github.com/ecds/OpenTourBuilder-Client
+cd OpenTourBuilder-Client
+npm install
+bower install
 ```
 
 
+brew install node
+npm install -g ember-cli
