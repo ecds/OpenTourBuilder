@@ -1,2 +1,10 @@
-*.pyc
-.git
+*.DS_Store
+.coverage
+api-server/config/database.yml
+api-server/log
+api-server/config/secrets.yml
+tmp
+api-server/config/initializers/auth.rb
+api-server/public/uploads/
+.vscode
+
