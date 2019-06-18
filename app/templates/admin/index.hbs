@@ -1,49 +1,3 @@
-<h2 class='uk-heading-bullet'>Tours</h2>
-{{#data-loader queryType='all' modelName='tour' as |tourLoader|}}
-  {{#if toursLoader.fetchingAll}}
-    <p>Loading Tours...</p>
-  {{else if tour.data}}
-    {{#otb-crud/new-button click=(perform newRecord 'tour')}}New Tour{{/otb-crud/new-button}}
-    {{#uk-table-striped}}
-      <thead>
-        <tr>
-          <th class='uk-table-expand'>Site Name</th>
-          <th>Stops</th>
-          <th class='uk-table-shrink'>Delete</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each tourLoader.data as |tour|}}
-        <tr>
-          <td>
-            {{!-- {{#link-to 'admin.tours.edit' 'public' tour}} --}}
-            {{if tour.title tour.title 'Untitled Tour'}}
-            {{!-- {{/link-to}} --}}
-          </td>
-          <td>
-            {{!-- {{tour.stops.length}} --}}
-          </td>
-          <td>
-            {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour)}}
-            {{fa-icon 'trash'}}
-            {{/uk-button}}
-          </td>
-        </tr>
-        {{/each}}
-      </tbody>
-    {{/uk-table-striped}}
-  {{else}}
-  <div class='uk-child-width-1-1 uk-text-center' uk-grid>
-    <div>
-      <h1 class='uk-heading-primary'>NO TOURS HAVE BEEN CREATED</h1>
-    </div>
-    <div>
-      {{#otb-crud/new-button click=(perform newRecord 'tour')}}Start Your First Tour{{/otb-crud/new-button}}
-    </div>
-  </div>
-  {{/if}}
-{{/data-loader}}
-
 {{#if currentUser.user.super}}
   <h2 class='uk-heading-bullet'>Tour Sites</h2>
   {{#uk-modal modalName='newSite' on-show=(action 'newSite') as |modal|}}
@@ -62,8 +16,9 @@
       {{/modal.footer}}
     {{/modal.dialog}}
   {{/uk-modal}}
+{{/if}}
 
-  {{#data-loader queryType='all' modelName='tour-set' as |siteLoader|}}
+  {{#data-loader queryType='all' modelName='tourSet' as |siteLoader|}}
   {{#if siteLoader.fetchingAll}}
   <div>
   Loading Tour Sites...
@@ -77,24 +32,28 @@
   </tr>
   </thead>
   <tbody>
-  {{#each siteLoader.data as |tour-set|}}
+  {{#each siteLoader.data as |tourSet|}}
   <tr>
   <td class='uk-table-link'>
-  {{#link-to 'admin.tours.index' tour-set.subdir}}
-  {{tour-set.name}}
-  {{/link-to}}
+  {{!-- {{#link-to 'admin.tours.index' tourSet.subdir}} --}}
+  <a href={{concat tourSet.subdir "/"}}>
+  {{tourSet.name}}
+  </a>
   </td>
 
   <td class='uk-table-link'>
-  {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tour-set)}}
+  {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tourSet)}}
   {{fa-icon 'trash'}}
   {{/uk-button}}
   </td>
   </tr>
+  {{else}}
+  <div>
+  No sites to manage.
+  </div>
   {{/each}}
   </tbody>
   {{/uk-table-striped}}
   {{/if}}
 {{/data-loader}}
-{{/if}}
 <div class='uk-section'></div>

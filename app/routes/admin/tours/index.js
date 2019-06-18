@@ -1,11 +1,18 @@
 import Route from '@ember/routing/route';
-// import { inject as service } from '@ember/service';
+import { inject as service } from '@ember/service';
 
 export default Route.extend({
-  // tenant: service(),
-  // model() {
-  //   return this.store.findAll('tour');
-  // },
+  tenant: service(),
+  beforeModel() {
+    this.tenant.setTenant();
+  },
+
+
+
+  model(params) {
+    console.log(this.tenant.tenant, params)
+    return this.store.queryRecord('tour-set',  { subdir: this.tenant.tenant });
+  },
   // actions: {
   //   delete(model) {
   //     this.store

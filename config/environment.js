@@ -4,8 +4,8 @@ module.exports = environment => {
   const ENV = {
     modulePrefix: 'open-tour-builder',
     environment,
-    rootURL: '/',
-    locationType: 'trailing-history',
+    rootURL: '/admin',
+    locationType: 'auto',
     historySupportMiddleware: true,
     'ember-cli-mirage': {
       enabled: false
@@ -43,10 +43,6 @@ module.exports = environment => {
     }
   };
 
-  ENV.i18n = {
-    defaultLocale: 'en'
-  };
-
   if (environment === 'development') {
     ENV.APP.API_HOST = 'https://otb.org:3000';
     ENV.fastboot.hostWhitelist.push('https://jay.otb.org:3000');
@@ -61,13 +57,11 @@ module.exports = environment => {
       language: 'en'
     };
 
-    ENV.torii.providers['google-oauth2-bearer-v2'] = {
-      apiKey:
-        '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
-      redirectUri: 'https://lvh.me:4200/torii/redirect.html',
-      scope: 'email'
+    ENV.torii.providers['google-oauth2'] = {
+      apiKey: '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
+      redirectUri: 'https://lvh.me:4200/admin/torii/redirect.html'
     };
-    // ENV.torii.providers['google-oauth2-bearer-v2'] = {
+    // ENV.torii.providers['google-oauth2'] = {
     // };
   }
 
@@ -98,7 +92,7 @@ module.exports = environment => {
   }
 
   if (environment === 'staging') {
-    ENV.APP.API_HOST = 'https://otb-api.ecdsdev.org';
+    ENV.APP.API_HOST = 'https://api.opentour.emory.edu';
 
     ENV['g-map'] = {
       key: 'AIzaSyC0l_y6pP0DK4oig0ile1XLbRx9HUQeryE',
@@ -107,13 +101,14 @@ module.exports = environment => {
 
     ENV.torii.providers['facebook-oauth2'] = {
       apiKey: '383939088765607',
-      redirectUri: 'https://obt.ecdsdev.org/torii/redirect.html'
+      redirectUri: 'https://obt.ecdsdev.org/admin/torii/redirect.html'
     };
 
     ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey:
         '171053764894-edtmjrjbnh8jukcbsgdue4sovqpe1l5f.apps.googleusercontent.com',
-      redirectUri: 'https://otb.ecdsdev.org/torii/redirect.html'
+      redirectUri: 'https://otb.ecdsdev.org/admin/torii/redirect.html',
+      scope: 'email'
     };
   }
 
@@ -124,7 +119,7 @@ module.exports = environment => {
       protocol: 'https'
     };
 
-    ENV.torii.providers['google-oauth2-bearer-v2'] = {
+    ENV.torii.providers['google-oauth2'] = {
       apiKey:
         '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
       redirectUri: 'https://opentour.emory.edu/torii/redirect.html',

@@ -1,11 +1,16 @@
 import Service, { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
+import ENV from '../config/environment';
 
 export default Service.extend({
   fastboot: service(),
   tenant: 'public',
 
   setTenant(path = window.location.pathname) {
+    if (ENV.APP.TENANT) {
+      this.setProperties({ tenant: ENV.APP.TENANT });
+      return true;
+    }
     if (typeof path !== 'string') {
       return false;
     }

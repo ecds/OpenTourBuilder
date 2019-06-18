@@ -2,6 +2,7 @@ import { get, computed } from '@ember/object';
 import { sort } from '@ember/object/computed';
 import { htmlSafe } from '@ember/string';
 import DS from 'ember-data';
+import ENV from '../config/environment';
 
 const { Model, attr, belongsTo, hasMany } = DS;
 
@@ -20,6 +21,7 @@ export default Model.extend({
   theme_title: attr('string'),
   modes: hasMany('mode'),
   splash: attr(),
+  external_url: attr('string'),
   mode: belongsTo('mode', {
     async: true,
     inverse: null
@@ -51,6 +53,14 @@ export default Model.extend({
   safeDescription: computed('description', function safeDescription() {
     return new htmlSafe(get(this, 'description'));
   }).property('description'),
+
+  splashBackground: computed('splash', {
+    get() {
+      return new htmlSafe(
+        `background: url(${ENV.APP.API_HOST}/${this.splash.original_image.desktop.url}); background-size: cover;`
+      );
+    }
+  }),
 
   sortedTourStops: sort('tour_stops', '_positionSort'),
   _positionSort: ['position:asc'],

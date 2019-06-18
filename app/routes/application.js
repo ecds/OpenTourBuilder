@@ -14,13 +14,17 @@ export default Route.extend(ApplicationRouteMixin, {
     return this.get('currentUser').load();
   },
 
+  // afterModel(model) {
+  //   //
+  // },
+
   actions: {
     willTransition(transisition) {
       this.__setTenant(transisition);
     },
 
     didTransition() {
-      console.log('did trans application');
+      // console.log('did trans application');
       this.get('orientation').set('windowHeight', window.innerHeight);
     }
   },

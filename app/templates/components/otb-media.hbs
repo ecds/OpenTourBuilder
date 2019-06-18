@@ -1,48 +1,45 @@
 <div class='uk-position-relative uk-visible-toggle uk-dark'>
-    <ul class='uk-slideshow-items intro-slideshow {{concat 'gallery-' stop.slug}}' id=''>
-        {{#each stop.sortedMedia as |medium|}}
-        <li class='uk-width-1-1'>
-            {{#uk-modal modalName=(concat 'intro-media-modal-' medium.medium.id) on-show=(toggle 'loadEmbed' medium.medium) on-hide=(toggle 'loadEmbed' medium.medium) as |modal|}}
-            {{#modal.open class='otb-media-button' tagName='div'}}
-            {{!-- {{uk-img medium=medium target=(concat '.gallery-' stop.slug) alt=(concat 'Image: ' medium.medium.caption)
-            dataSrcset=medium.medium.srcset sizes=medium.medium.srcset_sizes class='lazyload'}} --}}
-            {{!-- <img src={{concat imageBasePath medium.medium.mobile}} /> --}}
-            <img data-sizes={{medium.medium.srcset_sizes}} data-src={{concat imageBasePath medium.medium.mobile}} data-srcset={{medium.medium.srcset}} class='lazyload'/>
-            {{#if medium.medium.video}}
-            <div class='uk-position-center uk-panel otb-playbutton-overlay'>
-                {{fa-icon 'play-circle'}}
-            </div>
-            {{/if}}
-            {{#if (media 'isDesktop')}}
-            <div>{{medium.medium.title}}</div>
-            {{/if}}
-            {{/modal.open}}
-            {{#modal.media class='otb-stop-media-modal uk-text-center'}}
-            {{#if medium.medium.video}}
-            {{#if medium.medium.loadEmbed}}
-            {{{medium.medium.safeEmbed}}}
-            {{/if}}
-            {{else}}
-            {{!-- {{uk-img medium=medium class='uk-align-center lazylaod' target=(concat '.gallery-' stop.slug) alt=(concat 'Image:
-            ' medium.medium.caption) dataSrc=medium.medium.tablet dataSrcset=medium.medium.srcset
-            sizes=medium.medium.srcset_sizes}} --}}
-            {{!-- <img src={{concat imageBasePath medium.medium.mobile}} /> --}}
-            <img data-sizes={{medium.medium.srcset_sizes}} data-src={{concat imageBasePath medium.medium.mobile}} data-srcset={{medium.medium.srcset}} class='lazyload'/>
+  <ul class='uk-slideshow-items intro-slideshow {{concat 'gallery-' stop.slug}}' id=''>
+    {{#each stop.sortedMedia as |medium|}}
+    <li class='uk-width-1-1'>
+      {{#uk-modal modalName=(concat 'intro-media-modal-' medium.medium.id) on-show=(toggle 'loadEmbed' medium.medium)
+      on-hide=(toggle 'loadEmbed' medium.medium) as |modal|}}
+      {{#modal.open class='otb-media-button' tagName='div'}}
 
-            <p class='uk-align-center uk-text-meta'>{{medium.medium.caption}}</p>
-            {{/if}}
-            {{/modal.media}}
-            {{/uk-modal}}
-        </li>
-        {{/each}}
-    </ul>
-    <a href='#' aria-hidden='true' class='uk-position-center-left uk-slidenav-large' uk-slidenav-previous
-        uk-slideshow-item='previous'></a>
-    <a href='#' aria-hidden='true' class='uk-position-center-right uk-slidenav-large' uk-slidenav-next
-        uk-slideshow-item='next'></a>
-    <ul aria-hidden='true' class='uk-slideshow-nav uk-dotnav uk-flex-center uk-margin'>
-        {{#each media as |medium index|}}
-        <li uk-slideshow-item={{index}}><a href="#" /></li>
-        {{/each}}
-    </ul>
+      <img data-sizes={{medium.medium.srcset_sizes}} data-src={{concat imageBasePath medium.medium.mobile}} data-srcset={{medium.medium.srcset}}
+        class='lazyload' />
+      {{#if medium.medium.video}}
+        <div class='uk-position-center uk-panel otb-playbutton-overlay'>
+            {{fa-icon 'play-circle'}}
+        </div>
+      {{/if}}
+      {{#if (media 'isDesktop')}}
+      <div>{{medium.medium.title}}</div>
+      {{/if}}
+      {{/modal.open}}
+      {{#modal.media class='otb-stop-media-modal uk-text-center'}}
+      {{#if medium.medium.video}}
+        {{#if medium.medium.loadEmbed}}
+            {{{medium.medium.safeEmbed}}}
+        {{/if}}
+      {{else}}
+
+      <img data-sizes={{medium.medium.srcset_sizes}} data-src={{concat imageBasePath medium.medium.mobile}} data-srcset={{medium.medium.srcset}}
+        class='lazyload' />
+
+      <p class='uk-align-center uk-text-meta'>{{medium.medium.caption}}</p>
+      {{/if}}
+      {{/modal.media}}
+      {{/uk-modal}}
+    </li>
+    {{/each}}
+  </ul>
+  <a href='#' aria-hidden='true' class='uk-position-center-left uk-slidenav-large' uk-slidenav-previous
+    uk-slideshow-item='previous'></a>
+  <a href='#' aria-hidden='true' class='uk-position-center-right uk-slidenav-large' uk-slidenav-next uk-slideshow-item='next'></a>
+  <ul aria-hidden='true' class='uk-slideshow-nav uk-dotnav uk-flex-center uk-margin'>
+    {{#each media as |medium index|}}
+    <li uk-slideshow-item={{index}}><a href="#" /></li>
+    {{/each}}
+  </ul>
 </div>

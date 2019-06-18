@@ -25,6 +25,7 @@ export default Mixin.create({
   }),
 
   createHasMany: task(function*(options) {
+    console.log(options)
     let attrs = isEmpty(options.attrs) ? {} : options.attrs;
     let childObj = isEmpty(options.childObj)
       ? this.store.createRecord(options.relationType, attrs)
@@ -150,7 +151,7 @@ export default Mixin.create({
       type: 'success'
     });
     const modal = this.get('screenBlocker');
-    modal.show();
+    if (modal) modal.show();
     obj = obj.hasOwnProperty('isFulfilled') ? obj.content : obj;
     if (!obj.hasOwnProperty('store')) {
       console.error('You must pass a store object to saveRecord.');
@@ -170,8 +171,8 @@ export default Mixin.create({
       });
       yield timeout(5000);
     } finally {
-      modal.hide();
-      modal.$destroy;
+      if (modal) modal.hide();
+      if (modal) modal.$destroy;
     }
     return obj;
   }).drop(),

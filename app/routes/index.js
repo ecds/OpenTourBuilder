@@ -2,10 +2,19 @@ import Route from '@ember/routing/route';
 import { run } from '@ember/runloop';
 import { get } from '@ember/object';
 import { sort } from '@ember/object/computed';
+import ENV from '../config/environment';
 
 export default Route.extend({
   model() {
     return this.store.findAll('tour');
+  },
+
+  redirect(model) {
+    const currentLoc = `${window.location.hostname}:${window.location.port}`;
+    const externalUrl = model.firstObject.external_url;
+    if (externalUrl && ENV.APP.TENANT && currentLoc !== externalUrl) {
+      window.location.replace(`http://${externalUrl}`);
+    }
   },
 
   setupController(controller, model) {
@@ -21,7 +30,7 @@ export default Route.extend({
 
   actions: {
     didTransition() {
-      console.log('did trans');
+      console.log('did trans index');
       let sortedTours = get(this.controller, 'sortedTours');
       sortedTours.forEach((tour, index) => {
         tour.setProperties({

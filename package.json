@@ -23,8 +23,7 @@
     "ember-try": "^1.0.0-beta.1",
     "eslint": "^4.19.1",
     "eslint-plugin-ember-best-practices": "^1.1.1",
-    "global": "^4.3.2",
-    "jodit": "^3.2.34"
+    "global": "^4.3.2"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",
@@ -38,11 +37,15 @@
     "ember-auto-import": "^1.0.1",
     "ember-cli": "~3.5.0",
     "ember-cli-app-version": "^3.2.0",
-    "ember-cli-babel": "^6.16.0",
+    "ember-cli-babel": "^7.3.0",
     "ember-cli-chai": "^0.4.0",
     "ember-cli-dependency-checker": "^3.0.0",
+    "ember-cli-deploy": "^1.0.2",
+    "ember-cli-deploy-build": "^1.1.1",
+    "ember-cli-deploy-display-revisions": "^1.0.1",
+    "ember-cli-deploy-revision-data": "^1.0.0",
+    "ember-cli-deploy-simply-ssh": "^1.0.1",
     "ember-cli-eslint": "^4.2.3",
-    "ember-cli-fastboot": "^1.1.2",
     "ember-cli-form-data": "https://github.com/funtusov/ember-cli-form-data.git#master",
     "ember-cli-google-fonts": "^2.16.2",
     "ember-cli-htmlbars-inline-precompile": "^1.0.3",
@@ -60,8 +63,6 @@
     "ember-export-application-global": "^2.0.0",
     "ember-file-upload": "^2.2.4",
     "ember-font-awesome": "^4.0.0-rc.4",
-    "ember-g-map": "jayvarner/ember-g-map.git#develop",
-    "ember-i18n": "^5.2.1",
     "ember-load-initializers": "^1.1.0",
     "ember-power-select": "^1.10.4",
     "ember-qunit": "^3.4.1",
@@ -88,5 +89,11 @@
   "engines": {
     "node": "6.* || 8.* || >= 10.*"
   },
-  "private": true
+  "private": true,
+  "ember-addon": {
+    "paths": [
+      "lib/ember-jodit",
+      "lib/ember-g-map"
+    ]
+  }
 }

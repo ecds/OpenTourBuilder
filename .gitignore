@@ -20,6 +20,7 @@ testem.log
 .DS_Store
 .watchmanconfig
 .vscode
+.env*
 
 # ember-try
 .node_modules.ember-try/

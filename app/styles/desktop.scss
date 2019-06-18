@@ -110,16 +110,18 @@ $desktop-nav-height: 80px;
   }
 
   .uk-overlay-primary {
+    height: 100vh;
     transition: background;
+    width: 100vw;
 
     &:hover {
-      background: rgba(34, 34, 34, 0.4);
+      background: rgba(34, 34, 34, 0.2);
     }
   }
 }
 
 .uk-offcanvas-bar {
-  background: #222222de;
+  background: rgba(34, 34, 34, 0.8705882352941177);
   width: 50vw;
 
   a {

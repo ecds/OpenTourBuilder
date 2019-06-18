@@ -3,7 +3,7 @@ import { computed } from '@ember/object';
 import config from './config/environment';
 
 const Router = EmberRouter.extend({
-  location: config.locationType,
+  location: 'trailingHistory',
   /** This is a little too complicated, but here we go.
     We set the root url to '/' if:
     1) The path is 'admin'
@@ -12,53 +12,54 @@ const Router = EmberRouter.extend({
   */
   rootURL: computed('', () => {
     let path = window.location.pathname.replace(/\/$/, '').split('/')[1];
+    console.log(path)
     if (path === 'admin' || path === 'login' || !path || parseInt(path)) {
-      return '/';
+      return '/admin/';
     } else if (path) {
-      return `/${path}/`;
+      return `/admin/${path}/`;
     }
   })
   // rootURL: '/'
 });
 
 Router.map(function() {
-  this.route('index', {
-    path: '/'
-  });
-  this.route(
-    'tour',
-    {
-      path: '/:tour_slug'
-    },
-    function() {
-      this.route(
-        'overview',
-        {
-          path: '/'
-        },
-        function() {
-          this.route('stops');
-          this.route('map');
-        }
-      );
-      this.route(
-        'stop',
-        {
-          path: ':stop_slug'
-        },
-        function() {
-          this.route('map');
-        }
-      );
-      this.route('flat-page', {
-        path: 'page/:page_id'
-      });
-    }
-  );
+  // this.route('index', {
+  //   path: '/'
+  // });
+  // this.route(
+  //   'tour',
+  //   {
+  //     path: '/:tour_slug'
+  //   },
+  //   function() {
+  //     this.route(
+  //       'overview',
+  //       {
+  //         path: '/'
+  //       },
+  //       function() {
+  //         this.route('stops');
+  //         this.route('map');
+  //       }
+  //     );
+  //     this.route(
+  //       'stop',
+  //       {
+  //         path: ':stop_slug'
+  //       },
+  //       function() {
+  //         this.route('map');
+  //       }
+  //     );
+  //     this.route('flat-page', {
+  //       path: 'page/:page_id'
+  //     });
+  //   }
+  // );
   this.route(
     'admin',
     {
-      path: '/admin/'
+      path: ''
     },
     function() {
       this.route('users', function() {

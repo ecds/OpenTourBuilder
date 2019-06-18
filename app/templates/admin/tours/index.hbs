@@ -23,9 +23,9 @@
                       id=(concat 'user' user.id)
                       type='checkbox'
                       name='tour_set'
-                      change=(perform toggleHasMany (hash relationType='author' parentObj=tourLoader.data childObj=user))
-                      checked=(includes user.tours model)}}
-                    <label for={{tourSet.subdir}}>{{user.display_name}}</label>
+                      change=(perform toggleHasMany (hash relationType='tenantAdmins' parentObj=this.model childObj=user))
+                      checked=user.currentTenantAdmin}}
+                    <label for={{tourSet.subdir}}>{{if user.display_name user.display_name user.login.identification}}</label>
                   </div>
                 {{/unless}}
               {{/each}}

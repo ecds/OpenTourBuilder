@@ -25,7 +25,6 @@ export default Controller.extend({
 
   actions: {
     setActiveStop(stops, stop, scrollTo = false) {
-      UIkit.dropdown(document.getElementById('desktop-dropdown')).hide();
       this.get('_setActiveStop').perform(stops, stop, scrollTo);
     }
   }

@@ -66,6 +66,16 @@ export default Component.extend({
     }
   },
 
+  parkingIcon() {
+    return {
+      url: '/admin/assets/icons/parking.svg',
+      size: new google.maps.Size(90, 90),
+      scaledSize: new google.maps.Size(40, 40),
+      anchor: new google.maps.Point(15, 15),
+      origin: new google.maps.Point(0, 0)
+    };
+  },
+
   actions: {
     locateAddress() {
       if (get(this, 'model.address')) {
