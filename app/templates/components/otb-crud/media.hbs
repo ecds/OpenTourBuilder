@@ -7,7 +7,8 @@
     {{#each model.sortedMedia as |modelMedium|}}
       <li class='uk-tile uk-inline-clip uk-transition-toggle' tabindex='0' data-id={{modelMedium.id}} data-model={{modelMedium.constructor.modelName}}>
       {{#if modelMedium.medium.mobile}}
-        {{uk-img medium=medium class='uk-transition-toggle'  alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.mobile)}}
+        {{!-- {{uk-img medium=medium class='uk-transition-toggle'  alt=(concat 'Image: ' modelMedium.medium.caption) dataSrc=(concat modelMedium.medium.baseUrl modelMedium.medium.mobile)}} --}}
+        <img src={{concat modelMedium.medium.baseUrl modelMedium.medium.mobile}} alt={{concat 'Image: ' modelMedium.medium.caption}} class='uk-tile uk-inline-clip uk-transition-toggle'>
         {{#if modelMedium.medium.video}}
         <div class='uk-position-center uk-panel otb-playbutton-overlay'>
             {{fa-icon 'play-circle'}}

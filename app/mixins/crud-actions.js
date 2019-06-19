@@ -1,5 +1,5 @@
 import Mixin from '@ember/object/mixin';
-import { task, timeout } from 'ember-concurrency';
+import { task, timeout, waitForProperty } from 'ember-concurrency';
 import { inject as service } from '@ember/service';
 import { isEmpty } from '@ember/utils';
 import { pluralize } from 'ember-inflector';
@@ -34,9 +34,12 @@ export default Mixin.create({
     options.parentObj
       .get(`${pluralize(options.relationType)}`)
       .pushObject(childObj);
-    yield this.get('saveRecord').perform(childObj);
+    let newImage = yield this.get('saveRecord').perform(childObj);
     yield options.parentObj.save();
-    return yield childObj;
+    // yield waitForProperty(newImage, 'mobile', v => v !== null);
+
+    console.log('newly created', newImage)
+    return newImage;
   }),
 
   deleteHasMany: task(function*(options) {
@@ -187,7 +190,7 @@ export default Mixin.create({
     if (parentObj.hasOwnProperty('content')) {
       parentObj = parentObj.content;
     }
-    yield this.get('createHasMany').perform({
+    let newImage = yield this.get('createHasMany').perform({
       relationType: 'medium',
       parentObj: parentObj,
       attrs: {
@@ -195,8 +198,14 @@ export default Mixin.create({
         title: file.name
       }
     });
+    this.set('taskMessage', {
+      message: 'Loading new image...',
+      type: 'success'
+    });
+    let savedImage = yield this.store.findRecord('medium', newImage.id);
+    yield waitForProperty(savedImage, 'mobile', v => v !== null);
+
     modal.hide();
     modal.$destroy;
-    return true;
   })
 });

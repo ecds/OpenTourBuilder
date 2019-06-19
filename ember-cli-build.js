@@ -10,10 +10,6 @@ module.exports = function(defaults) {
       includePolyfill: true
     },
 
-    sassOptions: {
-      includePaths: []
-    },
-
     'ember-composable-helpers': {
       only: ['toggle', 'next', 'pipe']
     },

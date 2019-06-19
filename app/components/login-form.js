@@ -29,7 +29,7 @@ export default Component.extend({
     authenticateWithGoogle() {
       this.set('authenticating', true);
       this.get('session')
-        .authenticate('authenticator:torii', 'google-oauth2')
+        .authenticate('authenticator:torii', 'google-oauth2-bearer-v2')
         .then(
           () => {
             this.set('authenticating', false);

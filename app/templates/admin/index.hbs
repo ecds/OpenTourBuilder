@@ -48,9 +48,13 @@
   </td>
   </tr>
   {{else}}
-  <div>
-  No sites to manage.
-  </div>
+  {{#data-loader queryType='all' modelName='tour' as |tourLoader|}}
+  <ul>
+    {{#each tourLoader as |tour|}}
+    <li>{{tour.title}}</li>
+    {{/each}}
+  </ul>
+  {{/data-loader}}
   {{/each}}
   </tbody>
   {{/uk-table-striped}}

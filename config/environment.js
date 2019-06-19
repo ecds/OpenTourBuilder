@@ -57,12 +57,16 @@ module.exports = environment => {
       language: 'en'
     };
 
-    ENV.torii.providers['google-oauth2'] = {
+    ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey: '391159993660-70se4jcll933rh4f896takormj0rnlbc.apps.googleusercontent.com',
+      redirectUri: 'https://lvh.me:4200/admin/torii/redirect.html',
+      scope: 'email'
+    };
+
+    ENV.torii.providers['facebook-oauth2'] = {
+      apiKey: '383939088765607',
       redirectUri: 'https://lvh.me:4200/admin/torii/redirect.html'
     };
-    // ENV.torii.providers['google-oauth2'] = {
-    // };
   }
 
   if (environment === 'mobile') {

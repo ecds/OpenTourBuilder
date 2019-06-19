@@ -23,7 +23,8 @@
     "ember-try": "^1.0.0-beta.1",
     "eslint": "^4.19.1",
     "eslint-plugin-ember-best-practices": "^1.1.1",
-    "global": "^4.3.2"
+    "global": "^4.3.2",
+    "jodit": "^3.2.45"
   },
   "devDependencies": {
     "@ember/jquery": "^0.5.2",

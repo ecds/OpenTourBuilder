@@ -137,6 +137,8 @@ export default Controller.extend(CrudActionsMixin, {
     scrollElementToTop(event) {
       event.path[2].scrollIntoView();
       window.scrollBy(0, -100);
+      let stop = this.store.peekRecord('tourStop', parseInt(event.path[2].getAttribute('data-id')));
+      stop.setProperties({load: true})
     }
   }
 });
