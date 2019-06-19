@@ -78,7 +78,6 @@
                 tagName='div'
                 class='otb-handle' as |item|}}
                 {{#item.content}}
-                {{#if stop.load}}
                   <div class='uk-card uk-card-default uk-card-body uk-card-small'>
                     {{otb-crud/common-form model=stop.stop modelTitle='Stop'}}
                     {{otb-crud/map model=stop.stop}}
@@ -92,7 +91,6 @@
                     {{#uk-button on-click=cancel}}Cancel{{/uk-button}}
                     {{#uk-button color='link' on-click=(perform deleteHasMany (hash parentObj=tourLoader.data relationType='stop' childObj=stop.stop reorder=true))}}Delete from tour{{/uk-button}}
                   </div>
-                {{/if}}
                 {{/item.content}}
               {{/accordion.item}}
             </div>

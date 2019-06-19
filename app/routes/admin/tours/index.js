@@ -7,20 +7,7 @@ export default Route.extend({
     this.tenant.setTenant();
   },
 
-
-
-  model(params) {
-    console.log(this.tenant.tenant, params)
+  model() {
     return this.store.queryRecord('tour-set',  { subdir: this.tenant.tenant });
-  },
-  // actions: {
-  //   delete(model) {
-  //     this.store
-  //       .findRecord('tour', model.id, { backgroundReload: false })
-  //       .then(tour => {
-  //         tour.destroyRecord();
-  //       });
-  //     // this.store.destroyRecord('tour', model);
-  //   }
-  // }
+  }
 });
