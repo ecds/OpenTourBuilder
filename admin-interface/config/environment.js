@@ -123,16 +123,16 @@ module.exports = environment => {
       protocol: 'https'
     };
 
-    ENV.torii.providers['google-oauth2'] = {
+    ENV.torii.providers['google-oauth2-bearer-v2'] = {
       apiKey:
         '583999668970-8t0a0k6lrop28kdgar02sq41gkhet9fa.apps.googleusercontent.com',
-      redirectUri: 'https://opentour.emory.edu/torii/redirect.html',
+      redirectUri: 'https://opentour.emory.edu/admin/torii/redirect.html',
       scope: 'email'
     };
 
     ENV.torii.providers['facebook-oauth2'] = {
       apiKey: '373879153234380',
-      redirectUri: 'https://opentour.emory.edu/torii/redirect.html'
+      redirectUri: 'https://opentour.emory.edu/admin/torii/redirect.html'
     };
   }
 

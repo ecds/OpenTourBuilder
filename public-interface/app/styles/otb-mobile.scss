@@ -177,6 +177,7 @@ $mobile-bottom-nav-height-landscape: 60px;
   left: 0 !important;
 }
 
+
 .otb-mobile-directions-panel {
   background: white;
   height: 0;
@@ -186,6 +187,11 @@ $mobile-bottom-nav-height-landscape: 60px;
 }
 
 .portrait {
+  .otb-mobile-map-control-tr,
+  .otb-mobile-map-control-tl {
+    top: $mobile-top-nav-height-portrait;
+  }
+
   .otb-mobile-directions-panel {
     bottom: $mobile-bottom-nav-height-portrait;
   }
@@ -198,6 +204,11 @@ $mobile-bottom-nav-height-landscape: 60px;
 }
 
 .landscape {
+  .otb-mobile-map-control-tr,
+  .otb-mobile-map-control-tl {
+    top: $mobile-top-nav-height-landscape;
+  }
+
   .otb-mobile-directions-panel {
     bottom: $mobile-bottom-nav-height-landscape;
   }
