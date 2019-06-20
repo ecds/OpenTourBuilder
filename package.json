@@ -1,7 +1,7 @@
 {
   "name": "open-tour-builder",
-  "version": "0.0.0",
-  "description": "Small description for open-tour-builder goes here",
+  "version": "3.0.0rc",
+  "description": "Admin user interface for OpenTourBuilder",
   "repository": "",
   "license": "MIT",
   "author": "",
