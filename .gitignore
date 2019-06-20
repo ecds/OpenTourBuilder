@@ -8,6 +8,7 @@ api-server/config/initializers/auth.rb
 api-server/public/uploads/
 .vscode
 *.env*
+*server.js
 
 # compiled output
 */dist/

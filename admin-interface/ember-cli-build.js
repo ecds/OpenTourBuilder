@@ -16,6 +16,10 @@ module.exports = function(defaults) {
 
     emberCliDropzonejs: {
       includeDropzoneCss: false
+    },
+
+    'ember-uikit': {
+      useIcons: false
     }
   });
 

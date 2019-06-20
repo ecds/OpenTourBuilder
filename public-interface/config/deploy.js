@@ -22,7 +22,7 @@ module.exports = function(deployTarget) {
         username: process.env.SSH_USER,
         privateKey: process.env.SSH_KEY
       },
-      dir: '/data/fastboot2/dist',
+      dir: '/data/fastboot2',
       keep: 10
     };
   }
