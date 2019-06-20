@@ -1,0 +1,32 @@
+{{! TODO there has to be a more DRY way to do this. }}
+<div class="otb-mobile-tour-container">
+  {{#if this.deviceOrientation.isPortrait}}
+    <article class="uk-article">
+      <OtbMediaGallery @sortedMedia={{this.model.sortedMedia}} />
+      <div class="uk-container uk-position-relative otb-mobile-tour-content">
+        <article class="uk-article">
+          <h1 class="uk-article-title">{{this.model.title}}</h1>
+          <ReadIt @content={{this.model.sanitizedDescription}} />
+          {{this.model.safeDescription}}
+        </article>
+        <footer class="uk-footer uk-text-center uk-margin-xlarge-bottom">
+          <img class="uk-margin" src="/assets/images/otblogo.png" alt="Branding logo">
+        </footer>
+      </div>
+    </article>
+  {{else}}
+    <div class=" otb-mobile-stop-container uk-child-width-1-2 uk-overflow-hidden uk-position-relative" uk-grid>
+      <OtbMediaGallery @sortedMedia={{this.model.sortedMedia}} />
+      <div class="uk-container uk-position-relative otb-mobile-tour-content">
+        <article class="uk-article">
+          <h1 class="uk-article-title">{{this.model.title}}</h1>
+          <ReadIt @content={{this.model.sanitizedDescription}} />
+          {{this.model.safeDescription}}
+        </article>
+        <footer class="uk-footer uk-text-center uk-margin-xlarge-bottom">
+          <img class="uk-margin" src="/assets/images/otblogo.png" alt="Branding logo">
+        </footer>
+      </div>
+    </div>
+  {{/if}}
+</div>

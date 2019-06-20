@@ -1,0 +1,17 @@
+.otb-common-playbutton-overlay {
+  color: white;
+  font-size: 16vh;
+}
+
+.otb-common-loading {
+  background-image: url(/assets/images/otb-bg.png);
+  height: 100vh;
+}
+
+img.ls-is-cached.lazyloaded {
+  max-height: 65vh !important;
+}
+
+#map-container:first-child {
+  height: calc(100vh - 80px);
+}

@@ -1,0 +1,109 @@
+{{#if this.deviceContext.isDesktop}}
+  {{!-- DESKTOP --}}
+  <nav class="uk-navbar uk-light uk-background-secondary uk-margin uk-position-fixed otb-desktop-navbar" uk-navbar>
+    <div class="uk-navbar-left">
+      <LinkTo @route="tours.index">
+        <img src="/assets/images/otblogo.png" alt="Branding logo">
+      </LinkTo>
+
+      <h1 class="uk-navbar-item uk-logo uk-margin-remove uk-padding-remove otb-desktop-tour-title">
+        {{this.model.title}} <span class="uk-margin-small-left"><FaIcon @icon="angle-down" /></span>
+      </h1>
+      <div id="desktop-stop-grid" class="uk-navbar-dropdown otb-desktop-navbar-dropdown" uk-dropdown mode="hover" offset="0"
+        animation="uk-animation-slide-top" boundary=".uk-navbar" boundary-align="true" align="center">
+        <div uk-grid class="uk-child-width-1-6@l uk-child-width-1-4@m uk-child-width-1-1@s uk-dropdown-grid otb-desktop-dropdown-grid">
+          {{#each this.model.sortedStops as |tourStop|}}
+            <div onClick={{perform this.setActiveStop this.model.tourStops tourStop true}}>
+              <a href="#">
+                <img src={{tourStop.stop.splashUrl}} alt="Image preview for stop.">
+                <br>
+                <span class="uk-text-large">{{tourStop.position}}: {{tourStop.stop.title}}</span>
+              </a>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="uk-navbar-right">
+      <ul class="uk-navbar-nav">
+        {{#each this.model.sortedFlatPages as |page|}}
+          <li>
+            <a uk-toggle target={{concat "#flat-page-" page.id}}>
+              {{page.flatPage.title}}
+            </a>
+            <div uk-offcanvas flip="true" id={{concat "flat-page-" page.id}} container=".otb-desktop-main">
+              <div class="uk-offcanvas-bar otb-desktop-offcanvas-bar">
+                <button class="uk-offcanvas-close" type="button" uk-close></button>
+                <h3>{{page.flatPage.title}}</h3>
+                {{page.flatPage.safeContent}}
+              </div>
+            </div>
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </nav>
+  <div class="uk-grid-collapse uk-child-width-1-2 uk-position-absolute otb-desktop-main {{if this.showStopGrid "showing-stop-grid"}}" uk-grid>
+    <TourDesktopList @tourStops={{this.model.sortedStops}} @setActiveStop={{this.setActiveStop}} />
+    <div class="uk-position-fixed otb-desktop-map">
+      <OverviewMap @tour={{this.model}} @setActiveStop={{this.setActiveStop}}></OverviewMap>
+    </div>
+  </div>
+{{else if this.deviceContext.isMobile}}
+  {{!-- MOBILE --}}
+  <nav class="uk-navbar uk-navbar-container otb-mobile-top-navbar" data-theme={{this.theme.name}}>
+    <div class="uk-navbar-left">
+      <ul class="uk-navbar-nav">
+        <li>
+          <a uk-toggle target="#flat-pages" class="uk-navbar-toggle">
+            {{fa-icon "bars" aria-hidden="true"}}
+          </a>
+        </li>
+        <li>
+          <LinkTo @route="tour" @model={{this.model}} class="otb-mobile-tour-title">{{this.model.title}}</LinkTo>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  {{liquid-outlet class="uk-position-fixed"}}
+
+  {{!-- Offcanvas menu --}}
+  <div id="flat-pages" uk-offcanvas overlay="true">
+    <div class="uk-offcanvas-bar">
+      <button class="uk-offcanvas-close" type="button" uk-close></button>
+      <ul class="uk-nav uk-nav-default">
+        <li>
+          <LinkTo @route="index" class="otb-menu-link">All Tours</LinkTo>
+        </li>
+        <li>
+          <LinkTo @route="tour" @model={{this.model}} class="otb-menu-link">Tour Home</LinkTo>
+        </li>
+        {{#each this.model.sortedFlatPages as |page|}}
+          <li>
+            <LinkTo @route="tour.flat-page" @model={{page}} class="otb-menu-link">
+              {{page.flatPage.title}}
+            </LinkTo>
+          </li>
+        {{/each}}
+        <li class="uk-nav-divider"></li>
+        <li class="uk-nav-header">Location Controls</li>
+        <LocationSettings @tour={{this.model}} />
+        <li>
+          About Location Settings
+        </li>
+      </ul>
+    </div>
+  </div>
+{{else}}
+  <TourSplashBackground @tour={{this.model}} @full="true">
+    <section class="uk-inline otb-tour-cell-overlay">
+      <div class="uk-overlay uk-overlay-primary uk-dark uk-text-center uk-padding-remove otb-mobile-full-viewport">
+        <section class="uk-position-center">
+          <h3 class="uk-heading">Loading...</h3>
+          <h1 class="uk-heading">{{this.model.title}}</h1>
+        </section>
+      </div>
+    </section>
+  </TourSplashBackground>
+{{/if}}

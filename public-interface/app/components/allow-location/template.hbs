@@ -1,0 +1,37 @@
+<section {{did-insert this.checkPermissions}}>
+  {{#unless this.locationPermissions.getLocationSet}}
+    <div id="set-loc-perms-modal" class="uk-modal">
+      <section class="uk-modal-dialog">
+        <form>
+          <section class="uk-modal-body">
+
+            <p>
+              To provide directions, this tour needs to use your location.
+            </p>
+            <footer class="uk-modal-footer uk-text-right">
+              <button class="uk-button uk-button-default uk-modal-close uk-button-small" type="button" onclick={{action this.declineLocation}}>Decline</button>
+              <button class="uk-button uk-button-primary uk-modal-close uk-button-small" autofocus onclick={{action this.allowLocation}}>Allow</button>
+            </footer>
+          </section>
+        </form>
+      </section>
+    </div>
+  {{/unless}}
+  {{#unless this.locationPermissions.updateLocationSet}}
+    <div id="set-update-loc-perms-modal" class="uk-modal">
+      <section class="uk-modal-dialog">
+        <form>
+          <section class="uk-modal-body">
+            <p>
+              Do you want your location and directions to update as you travel to the stop?
+            </p>
+            <footer class="uk-modal-footer uk-text-right">
+              <button class="uk-button uk-button-default uk-modal-close" type="button" onclick={{action this.declineUpdateLocation}}>Decline</button>
+              <button class="uk-button uk-button-primary uk-modal-close" autofocus onclick={{action this.allowUpdateLocation}}>Allow</button>
+            </footer>
+          </section>
+        </form>
+      </section>
+    </div>
+  {{/unless}}
+</section>

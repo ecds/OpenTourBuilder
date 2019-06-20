@@ -1,0 +1,28 @@
+{{#if this.locationPermissions.locationAllowed}}
+  <li class="uk-margin-small-bottom" role="button" onclick={{this.locationPermissionsOff}}>
+    <span class="uk-text-middle uk-margin-right">Current Location ON</span> <FaIcon @icon="toggle-on" class="uk-text-middle" />
+  </li>
+{{else}}
+  <li class="uk-margin-small-bottom" role="button" onclick={{this.locationPermissionsOn}}>
+    <span class="uk-text-middle uk-margin-right">Current Location OFF</span> <FaIcon @icon="toggle-off" class="uk-text-middle" />
+  </li>
+{{/if}}
+{{#if this.locationPermissions.updateLocationAllowed}}
+  <li class="uk-margin-small-bottom" role="button" onclick={{this.updateLocationPermissionsOff}}>
+    <span class="uk-text-middle uk-margin-right">Update Location On</span> <FaIcon @icon="toggle-on" class="uk-text-middle" />
+  </li>
+{{else}}
+  <li class="uk-margin-small-bottom" role="button" onclick={{this.updateLocationPermissionsOn}}>
+    <span class="uk-text-middle uk-margin-right">Update Location OFF</span> <FaIcon @icon="toggle-off" class="uk-text-middle" />
+  </li>
+{{/if}}
+{{#if this.location.clientLocation}}
+  <li class="uk-parent">
+    Preferred Travel Mode:
+    <ul class="uk-nav-sub">
+      <li id="mode-control">
+        <ModeControl @tour={{@tour}} />
+      </li>
+    </ul>
+  </li>
+{{/if}}

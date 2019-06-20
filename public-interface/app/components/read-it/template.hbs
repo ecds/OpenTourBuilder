@@ -1,0 +1,13 @@
+<span {{did-insert this.registerUtterance}} {{will-destroy this.destroyUtterance}} class="uk-align-left uk-margin-small-right uk-margin-remove-bottom">
+  {{#if this.supported}}
+    {{#if this.speaking}}
+      <span role="button" onclick={{action this.pause}}>
+        <FaIcon @icon="pause" />
+      </span>
+    {{else}}
+      <span role="button" onclick={{action this.sayIt}}>
+        <FaIcon @icon="headphones" />
+      </span>
+    {{/if}}
+  {{/if}}
+</span>

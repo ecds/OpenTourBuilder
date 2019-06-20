@@ -1,0 +1,27 @@
+{{#unless this.deviceContext.isDesktop}}
+  {{#liquid-bind this.model.tourStop.tourStop use="stop"}}
+    {{liquid-outlet class="stop-content"}}
+  {{/liquid-bind}}
+  
+  <div class="uk-position-fixed otb-mobile-bottom-navbar" data-theme={{this.theme.name}}>
+    <div class="uk-grid-collapse uk-child-width-1-4 uk-text-center" uk-grid>
+      <span role="link" tabindex="0" onclick={{action this.gotToStop this.model.tourStop.previous_slug}} class="uk-padding-small {{unless this.model.tourStop.previous "otb-mobile-inactive"}}">
+        <div><FaIcon @icon="chevron-left" /><br>Prev</div>
+      </span>
+
+      {{!-- <span @route="tour.stop.index" @stopSlug={{this.model.tourStop.slug}} class="uk-padding-small" data-theme={{this.theme.name}}> --}}
+      <span role="link" tabindex="0" onclick={{action this.gotToStop this.model.tourStop.slug}} class="uk-padding-small {{if (eq this.target.currentPath "tour.stop.index")"active" }}" data-theme={{this.theme.name}}>
+        <div><FaIcon @icon="info-circle" /><br>info</div>
+      </span>
+
+      {{!-- <span @route="tour.stop.map" @stopSlug={{this.model.tourStop.slug}} class="uk-padding-small" data-theme={{this.theme.name}}> --}}
+      <span role="link" tabindex="0" onclick={{action this.gotToStopMap this.model.tourStop.slug}} class="uk-padding-small {{if (eq this.target.currentPath "tour.stop.map") "active" }}" data-theme={{this.theme.name}}>
+        <div><FaIcon @icon="map" /><br>map</div>
+      </span>
+
+      <span role="link" tabindex="0" onclick={{action this.gotToStop this.model.tourStop.next_slug}} class="uk-padding-small {{unless this.model.tourStop.next "otb-mobile-inactive"}}">
+        <div><FaIcon @icon="chevron-right" /><br>next</div>
+      </span>
+    </div>
+  </div>
+{{/unless}}

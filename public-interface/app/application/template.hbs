@@ -1,0 +1,9 @@
+<HeadLayout />
+
+{{#if (eq this.deviceContext.deviceContextClass "mobile")}}
+  <style type="text/css">.liquid-child { height: {{concat this.deviceOrientation.windowHeight "px;"}} }</style>
+{{/if}}
+
+<div class="{{this.deviceOrientation.orientationClass}} {{this.deviceContext.deviceContextClass}}">
+  {{outlet}}
+</div>

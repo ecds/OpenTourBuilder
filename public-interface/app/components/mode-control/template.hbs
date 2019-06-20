@@ -1,0 +1,14 @@
+<button type="button" class="uk-button otb-mobile-map-control"  {{did-insert this.setMode}}>
+  <FaIcon @icon={{this.tourModeFromCookie.icon}} /> {{this.tourModeFromCookie.title}}
+</button>
+<div uk-dropdown class="uk-nav uk-dropdown-nav" id="mode-options" mode="click">
+  <ul class="uk-list">
+    {{#each @tour.modes as |mode|}}
+      {{#if (not-eq mode.title this.tourModeFromCookie.title)}}
+        <li role="button" onclick={{action this.setMode mode}}>
+          <FaIcon @icon={{mode.icon}} /> {{mode.title}}
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>

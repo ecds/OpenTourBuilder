@@ -1,0 +1,16 @@
+<section id="otb-desktop-stop-list" class="uk-overflow-auto uk-padding otb-desktop-stop" {{did-insert this.registerScrollListener}} {{will-destroy this.destroyScrollListener}}>
+  <article  id={{@tourStops.firstObject.tour.slug}}>
+    <OtbMediaGallery @sortedMedia={{@tourStops.firstObject.tour.sortedMedia}} />
+    {{@tourStops.firstObject.tour.safeDescription}}
+  </article>
+  <hr>
+  {{#each @tourStops as |tourStop|}}
+    <article class="uk-margin-bottom uk-position-relative otb-desktop-stop" id={{concat tourStop.stop.slug "-" tourStop.stop.id}} data={{tourStop}}>
+      <StickyElement @top="80" @bottom="0">
+        <h3>{{tourStop.position}}: {{tourStop.stop.title}}</h3>
+      </StickyElement>
+      <OtbMediaGallery @sortedMedia={{tourStop.stop.sortedMedia}} />
+      {{tourStop.stop.safeDescription}}
+    </article>
+  {{/each}}
+</section>

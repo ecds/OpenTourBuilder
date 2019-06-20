@@ -1,0 +1,223 @@
+$mobile-top-nav-height-portrait: 80px;
+$mobile-top-nav-height-landscape: 60px;
+$mobile-bottom-nav-height-portrait: 80px;
+$mobile-bottom-nav-height-landscape: 60px;
+
+.portrait {
+  .mobile {
+    #map-container:first-child {
+      height: calc(100vh - #{$mobile-top-nav-height-portrait});
+      margin-top: #{$mobile-top-nav-height-portrait};
+      width: 100vw;
+    }
+  }
+}
+
+.landscape {
+  .mobile {
+    #map-container:first-child {
+      height: calc(100vh - #{$mobile-top-nav-height-landscape});
+      margin-top: #{$mobile-top-nav-height-landscape};
+      width: 100vw;
+    }
+  }
+}
+
+.mobile {
+  #map-container:first-child {
+    width: 100vw;
+  }
+
+  iframe {
+    height: 33vmax;
+    width: 33vmax;
+  }
+}
+
+.otb-mobile-tour-list-splash {
+  width: 100vw;
+}
+
+.otb-mobile-top-navbar,
+.otb-mobile-bottom-navbar {
+  @include theme('background', 'primary');
+
+  a,
+  span {
+    color: white;
+  }
+
+  span {
+    &.otb-mobile-inactive {
+      color: unset;
+    }
+  }
+}
+
+.portrait {
+  .otb-mobile-top-navbar,
+  .otb-mobile-bottom-navbar {
+    li {
+      a {
+        min-height: $mobile-top-nav-height-portrait;
+      }
+    }
+  }
+}
+
+.landscape {
+  .liquid-container {
+    width: 100vw;
+  }
+
+  .otb-mobile-top-navbar,
+  .otb-mobile-bottom-navbar {
+    li {
+      a {
+        min-height: $mobile-top-nav-height-landscape;
+      }
+    }
+  }
+
+  .otb-mobile-stop-list {
+    img {
+      max-height: 20vh;
+    }
+  }
+}
+
+.otb-mobile-tour-title {
+  font-size: 1.25rem;
+}
+
+.otb-mobile-top-navbar {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 2;
+}
+
+.portrait {
+  .otb-mobile-top-navbar {
+    min-height: $mobile-top-nav-height-portrait;
+  }
+}
+
+.landscape {
+  .otb-mobile-top-navbar {
+    min-height: $mobile-top-nav-height-landscape;
+  }
+}
+
+.otb-mobile-bottom-navbar {
+  bottom: 0;
+  text-transform: uppercase;
+  width: 100vw;
+  z-index: 2;
+
+  .uk-padding-small {
+    padding: 10px;
+  }
+
+  a,
+  span {
+    &.active {
+      @include theme('background', 'accent');
+    }
+  }
+}
+
+.otb-mobile-full-viewport {
+  height: 100vh;
+  width: 100vw;
+}
+
+.otb-mobile-splash-image {
+  width: 100vw;
+}
+
+.otb-mobile-tour-container {
+  height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: 1px;
+}
+
+.portrait {
+  .otb-mobile-tour-container > .uk-article,
+  .otb-mobile-map,
+  .otb-mobile-stop-list {
+    height: calc(100vh - (#{$mobile-bottom-nav-height-portrait} + #{$mobile-bottom-nav-height-portrait}));
+    margin-bottom: $mobile-bottom-nav-height-portrait;
+    margin-top: $mobile-top-nav-height-portrait;
+  }
+}
+
+.landscape {
+  .otb-mobile-tour-container > .uk-article,
+  .otb-mobile-map,
+  .otb-mobile-stop-list {
+    height: calc(100vh - (#{$mobile-bottom-nav-height-landscape} + #{$mobile-bottom-nav-height-landscape}));
+    margin-bottom: $mobile-bottom-nav-height-landscape;
+    margin-top: $mobile-top-nav-height-landscape;
+  }
+}
+
+.otb-mobile-map-control {
+  background-color: rgba(34, 34, 34, 0.58);
+  color: #ffffff;
+}
+
+#map-mode-control,
+#directions-toggle {
+  z-index: -1;
+}
+
+.otb-mobile-map-control-tl {
+  left: 0 !important;
+}
+
+.otb-mobile-directions-panel {
+  background: white;
+  height: 0;
+  position: absolute;
+  transition: height 500ms;
+  width: 100vw;
+}
+
+.portrait {
+  .otb-mobile-directions-panel {
+    bottom: $mobile-bottom-nav-height-portrait;
+  }
+
+  .otb-mobile-directions-panel {
+    &.otb-mobile-directions-panel-show {
+      height: calc(100vh - (#{$mobile-top-nav-height-portrait} + #{$mobile-top-nav-height-portrait} + 5rem));
+    }
+  }
+}
+
+.landscape {
+  .otb-mobile-directions-panel {
+    bottom: $mobile-bottom-nav-height-landscape;
+  }
+  
+  .otb-mobile-stop-container {
+    margin-top: $mobile-bottom-nav-height-landscape
+  }
+
+  .otb-mobile-directions-panel {
+    &.otb-mobile-directions-panel-show {
+      height: calc(100vh - (#{$mobile-top-nav-height-portrait} + #{$mobile-top-nav-height-portrait} + 5rem));
+    }
+  }
+}
+
+.fa-toggle-on,
+.fa-toggle-off {
+  font-size: 1.5rem;
+}
+
+.fa-toggle-on {
+  color: lightgreen;
+}

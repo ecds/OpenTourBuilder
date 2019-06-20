@@ -1,0 +1,38 @@
+{{!-- TODO fix this containers --}}
+{{#unless this.deviceContext.isDesktop}}
+  <div class="otb-mobile-tour-container">
+    {{#if this.deviceOrientation.isPortrait}}
+      <article class="uk-article">
+        {{#if this.model.tourStop.stop.media}}
+          <OtbMediaGallery @sortedMedia={{this.model.tourStop.stop.sortedMedia}} />
+        {{/if}}
+        <section class="uk-container uk-position-relative otb-mobile-tour-content">
+          <h1 class="uk-article-title">{{this.model.tourStop.stop.title}}</h1>
+          <ReadIt @content={{this.model.tourStop.stop.sanitized_description}} />
+          {{this.model.tourStop.stop.safeDescription}}
+        </section>
+        <footer class="uk-footer uk-text-center uk-margin-xlarge-bottom">
+          <img class="uk-margin" src="/assets/images/otblogo.png" alt="Branding logo">
+        </footer>
+      </article>
+    {{else}}
+      <div class="otb-mobile-stop-container uk-child-width-1-2 uk-position-relative" uk-grid>
+        <div>
+          {{#if this.model.tourStop.stop.media}}
+            <OtbMediaGallery @sortedMedia={{this.model.tourStop.stop.sortedMedia}} />
+          {{/if}}
+        </div>
+        <div class="uk-container uk-position-relative otb-mobile-tour-content">
+          <article class="uk-article">
+            <h1 class="uk-article-title">{{this.model.tourStop.stop.title}}</h1>
+            <ReadIt @content={{this.model.tourStop.stop.sanitized_description}} />
+            {{this.model.tourStop.stop.safeDescription}}
+          </article>
+          <footer class="uk-footer uk-text-center uk-margin-xlarge-bottom">
+            <img src="/assets/images/otblogo.png" alt="Branding logo">
+          </footer>
+        </div>
+      </div>
+    {{/if}}
+  </div>
+{{/unless}}

@@ -1,0 +1,52 @@
+{{#unless this.deviceContext.isDesktop}}
+  <div class="otb-mobile-tour-container">
+    {{!--
+      Flow:
+        show stop on map
+        explain why asking for permission
+        ask
+        if allow directions -> show directions || show 
+        else -> show stop on map with address
+    --}}
+    <MobileStopMap @stop={{this.model.tourStop.stop}} @tour={{this.model.tour}}/>
+    <AllowLocation />
+    {{#if (and this.location.updateLocation.isRunning (not this.location.clientLocation))}}
+      <div class="uk-overlay uk-overlay-default uk-position-center">
+        <p>locating....</p>
+      </div>
+    {{else if (and this.location.clientLocation (eq this.location.errorMessage null))}}
+      <MobileStopRoute @stop={{this.model.tourStop.stop}} @tour={{this.model.tour}}/>
+    {{/if}}
+    <div id="map-mode-control" class="otb-mobile-map-control-tl uk-padding-small">
+      <ModeControl @tour={{this.model.tour}} @parentId="map-mode-control" />
+    </div>
+    <ToggleDirections @show={{this.showDirections}}>
+      <button type="button" class="uk-button otb-mobile-map-control" onclick={{toggle "showDirections" this}}>
+        <FaIcon @icon={{"directions"}} /> Directions
+      </button>
+    </ToggleDirections>
+    <div class="otb-mobile-directions-panel uk-panel-scrollable uk-padding-remove {{if this.showDirections "otb-mobile-directions-panel-show"}}">
+      <div class="uk-text-center" role="button" onclick={{toggle "showDirections" this}}>
+        <FaIcon @icon="angle-down" />
+      </div>
+      {{!-- <h1>{{this.model.tourStop.stop.lat}} : {{this.model.tourStop.stop.lng}}</h1> --}}
+      {{#if this.model.tourStop.stop.sanitized_direction_notes}}
+        <ul uk-tab>
+          <li class="uk-active"><a href="#">Notes</a></li>
+          <li><a href="#">Turn By Turn</a></li>
+        </ul>
+        <ul class="uk-switcher uk-margin uk-container">
+          <li>
+            <div class="uk-container">
+              {{this.model.tourStop.stop.sanitized_direction_notes}}
+            </div>
+          </li>
+          <li><div id="directions-panel"></div></li>
+        </ul>
+      {{else}}
+        <div id="directions-panel" class="uk-container"></div>
+      {{/if}}
+    </div>
+  </div>
+
+{{/unless}}

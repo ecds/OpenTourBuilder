@@ -1,0 +1,5 @@
+{{! template-lint-disable no-inline-styles }}
+<section class="uk-background-cover {{unless @full "otb-tour-cell" "otb-mobile-full-viewport"}} otb-desktop-tour-cell-random-{{this.random}}" style={{html-safe (concat "background-image: url(" this.backgroundImage ");")}}>
+  {{yield}}
+</section>
+{{! template-lint-enable no-inline-styles }}

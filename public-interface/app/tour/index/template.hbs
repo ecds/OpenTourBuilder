@@ -1,0 +1,20 @@
+{{outlet}}
+<div class="uk-position-fixed otb-mobile-bottom-navbar" data-theme={{this.theme.name}}>
+  <div class="uk-grid-collapse uk-child-width-1-3 uk-text-center" uk-grid>
+    <LinkTo @route="tour.overview.index" class="uk-padding-small" data-theme={{this.theme.name}}>
+      <div>
+        <FaIcon @icon="info-circle" /><br>info
+      </div>
+    </LinkTo>
+    <LinkTo @route="tour.overview.map" class="uk-padding-small" data-theme={{this.theme.name}}>
+      <div>
+        <FaIcon @icon="map" /><br>map
+      </div>
+    </LinkTo>
+    <LinkTo @route="tour.overview.stops" class="uk-padding-small" data-theme={{this.theme.name}}>
+      <div>
+        <FaIcon @icon="list" /><br>stops
+      </div>
+    </LinkTo>
+  </div>
+</div>

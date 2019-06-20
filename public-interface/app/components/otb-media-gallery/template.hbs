@@ -1,0 +1,59 @@
+<section id={{concat "otb-gallery-" @sortedMedia.firstObject.stop.slug @sortedMedia.firstObject.stop.id}} class="uk-position-relative uk-visible-toggle otb-common-gallery" tabindex="-1" uk-slideshow animation="push">
+  <ul class="uk-slideshow-items">
+    {{#each @sortedMedia as |sortedMedium|}}
+      <li uk-toggle target={{concat "#modal-" sortedMedium.position sortedMedium.medium.id}}  role="button" onclick={{action this.showEmbed sortedMedium.medium}}>
+        <img
+          data-sizes={{sortedMedium.medium.srcset_sizes}}
+          data-src={{concat this.imageBasePath sortedMedium.medium.mobile}}
+          data-srcset={{sortedMedium.medium.srcset}}
+          class="lazyload"
+          alt={{sortedMedium.medium.caption}}
+          uk-cover
+
+        >
+        {{#if sortedMedium.medium.video}}
+          <div class="uk-position-center uk-panel otb-common-playbutton-overlay">
+            <FaIcon @icon={{"play-circle"}} />
+          </div>
+        {{/if}}
+      </li>
+    {{/each}}
+  </ul>
+
+  <a class="uk-position-center-left uk-position-small uk-light" href="#" uk-slidenav-previous uk-slideshow-item="previous"></a>
+  <a class="uk-position-center-right uk-position-small uk-light" href="#" uk-slidenav-next uk-slideshow-item="next"></a>
+  <ul class="uk-slideshow-nav uk-dotnav uk-flex-center uk-margin"></ul>
+
+</section>
+
+{{#each @sortedMedia as |sortedMedium|}}
+  <div id={{concat "modal-" sortedMedium.position sortedMedium.medium.id}} class="uk-flex-top {{this.deviceContext.deviceContextClass}}" uk-modal>
+    <section class="uk-modal-dialog uk-width-auto uk-margin-auto-vertical">
+      <button class="uk-modal-close-outside" type="button" uk-close></button>
+      {{#if sortedMedium.medium.loadEmbed}}
+        {{sortedMedium.medium.safeEmbed}}
+      {{else}}
+        <div class="uk-card uk-card-default">
+          <figure class="uk-card-media-top uk-text-center uk-margin-top">
+            <img
+              data-sizes={{sortedMedium.medium.srcset_sizes}}
+              data-src={{concat this.imageBasePath (if this.deviceContext.isDesktop sortedMedium.medium.desktop sortedMedium.medium.tablet)}}
+              data-srcset={{sortedMedium.medium.srcset}}
+              class="lazyload"
+              alt={{sortedMedium.medium.caption}}
+            >
+          </figure>
+          <figcaption class="uk-card-body">
+            <h3 class="uk-card-title">{{sortedMedium.medium.title}}</h3>
+            <p>{{sortedMedium.medium.caption}}</p>
+            {{#if this.deviceContext.isDesktop}}
+              <p>
+                <a href={{concat this.imageBasePath sortedMedium.medium.originalImage.url}} target="_blank" rel="noopener">See larger version</a>
+              </p>
+            {{/if}}
+          </figcaption>
+        </div>
+      {{/if}}
+    </section>
+  </div>
+{{/each}}

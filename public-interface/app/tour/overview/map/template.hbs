@@ -1,0 +1,28 @@
+{{!-- <GMap @lat="0" @lng="0"
+  zoom="12"
+  @mapTypeId={{if this.model.mapType this.model.mapType "roadmap"}}
+  @disableDefaultUI="true"
+  @classNames="otb-mobile-map"
+  @onLoad={{action this.fitBounds}}
+  as |g|>
+
+  {{#each this.model.sortedStops as |tourStop|}}
+    <g.marker
+      @lat={{tourStop.stop.lat}}
+      @lng={{tourStop.stop.lng}}
+      @icon={{tourStop.icon}}
+      @label={{tourStop.label}}
+      @onClick={{action this.showInfo tourStop}}
+      as |m|>
+
+      <m.infoWindow @isOpen={{eq this.stopShowing tourStop}}>
+        <h4>{{tourStop.stop.title}}</h4>
+        <p>{{tourStop.stop.metadescription}}</p>
+        <LinkTo @route="tour.stop" @model={{tourStop.stop.slug}}>Go to stop <FaIcon @icon="chevron-right" /><</LinkTo>
+      </m.infoWindow>
+    </g.marker>
+  {{/each}}
+</GMap> --}}
+<div class="otb-mobile-tour-container">
+  <OverviewMap @tour={{this.model}} />
+</div>

@@ -1,0 +1,18 @@
+<GMap @lat="0" @lng="0"
+  zoom="12"
+  @mapTypeId={{if @tour.mapType @tour.mapType "roadmap"}}
+  @disableDefaultUI="true"
+  @classNames="otb-desktop-map"
+  @onLoad={{action this.fitBounds}}
+  as |g|>
+
+  {{#each @tour.sortedStops as |tourStop|}}
+    <g.marker
+      @lat={{tourStop.stop.lat}}
+      @lng={{tourStop.stop.lng}}
+      @onClick={{perform @setActiveStop @tour.sortedStops tourStop true}}
+      @icon={{if tourStop.active tourStop.activeIcon tourStop.icon}}
+      @label={{tourStop.label}}
+    />
+  {{/each}}
+</GMap>

@@ -1,0 +1,23 @@
+<div class="otb-mobile-tour-container">
+  <article class="otb-mobile-stop-list uk-margin-xlarge-bottom">
+    <table class="uk-table uk-table-divider otb-stop-list uk-margin-xlarge-bottom">
+      <tbody>
+        {{#each this.model.sortedStops as |tourStop|}}
+          {{! template-lint-disable no-duplicate-attributes }}
+          <tr class={{if tourStop.stop.show "uk-animation-slide-right" "uk-invisible"}} role="link" tabindex="0" onclick={{action this.goToStop tourStop.stop.slug}} role="link" tabindex="0">
+            <td>
+              <img src={{tourStop.stop.splashUrl}} alt="Image for {{tourStop.stop.title}}: {{tourStop.stop.splash.caption}}">
+            </td>
+            <td class="uk-text-large">
+              {{tourStop.stop.title}}
+            </td>
+            <td>
+              {{fa-icon "chevron-right"}}
+            </td>
+          </tr>
+          {{! template-lint-enable no-duplicate-attributes }}
+        {{/each}}
+      </tbody>
+    </table>
+  </article>
+</div>
