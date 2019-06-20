@@ -2,7 +2,7 @@
   {{!-- DESKTOP --}}
   <nav class="uk-navbar uk-light uk-background-secondary uk-margin uk-position-fixed otb-desktop-navbar" uk-navbar>
     <div class="uk-navbar-left">
-      <LinkTo @route="tour">
+      <LinkTo @route="tours">
         <img src="/assets/images/otblogo.png" alt="Branding logo">
       </LinkTo>
 
@@ -74,7 +74,7 @@
       <button class="uk-offcanvas-close" type="button" uk-close></button>
       <ul class="uk-nav uk-nav-default">
         <li>
-          <LinkTo @route="index" class="otb-menu-link">All Tours</LinkTo>
+          <LinkTo @route="tours" class="otb-menu-link">All Tours</LinkTo>
         </li>
         <li>
           <LinkTo @route="tour" @model={{this.model}} class="otb-menu-link">Tour Home</LinkTo>
@@ -89,9 +89,10 @@
         <li class="uk-nav-divider"></li>
         <li class="uk-nav-header">Location Controls</li>
         <LocationSettings @tour={{this.model}} />
-        <li>
+        {{!-- <li>
+          TODO: Write something about location settings.
           About Location Settings
-        </li>
+        </li> --}}
       </ul>
     </div>
   </div>

@@ -35,7 +35,7 @@ module.exports = function(environment) {
         name: 'GoogleAnalytics',
         environments: ['production'],
         config: {
-          id: 'UA-141690409-1'
+          id: 'UA-51682905-15'
         }
       }
     ],
@@ -116,7 +116,8 @@ module.exports = function(environment) {
   if (environment === 'production') {
     ENV.APP.API_HOST = 'https://api.opentour.emory.edu'
     ENV.fastboot.hostWhitelist.push('https://opentour.emory.edu')
-    ENV.APP.HOST = 'https://otb.ecdsdev.org'
+    ENV.fastboot.hostWhitelist.push('http://opentour.emory.edu')
+    ENV.APP.HOST = 'https://opentour.emory.edu'
     ENV.APP.GA_ID = 'UA-141690409-1'
     ENV.GOOGLE_MAPS_API_KEY = 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8'
     ENV.GOOGLE_MAPS_VERSION = 3.37
