@@ -1,0 +1,17 @@
+{{#unless isFastboot}}
+<select>
+  {{#if modes}}
+    {{#each modes as |mode|}}
+      <option value={{mode}} selected>{{mode}}</option>
+    {{/each}}
+  {{else}}
+    {{#each defaultModes as |mode|}}
+      {{#if (is-equal mode travelMode 'selected')}}
+        <option value={{mode}} selected>{{mode}}</option>
+      {{else}}
+        <option value={{mode}}>{{mode}}</option>
+      {{/if}}
+    {{/each}}
+  {{/if}}
+</select>
+{{/unless}}

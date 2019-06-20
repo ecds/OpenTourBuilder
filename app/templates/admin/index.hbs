@@ -1,0 +1,63 @@
+{{#if currentUser.user.super}}
+  <h2 class='uk-heading-bullet'>Tour Sites</h2>
+  {{#uk-modal modalName='newSite' on-show=(action 'newSite') as |modal|}}
+    {{#modal.open class='uk-button uk-button-primary' tagName='div'}}
+      New Site
+    {{/modal.open}}
+    {{#modal.dialog}}
+      {{#modal.body}}
+        {{#otb-crud/form-section label='Site Title' as |inputId|}}
+          {{input autofocus='autofocus' class='uk-input' id=inputId value=newSite.name}}
+        {{/otb-crud/form-section}}
+      {{/modal.body}}
+      {{#modal.footer}}
+        {{#otb-crud/new-button class='uk-modal-close' click=(perform createSite)}}New Site{{/otb-crud/new-button}}
+        {{#uk-button color='link' class='uk-modal-close'}}Cancel{{/uk-button}}
+      {{/modal.footer}}
+    {{/modal.dialog}}
+  {{/uk-modal}}
+{{/if}}
+
+  {{#data-loader queryType='all' modelName='tourSet' as |siteLoader|}}
+  {{#if siteLoader.fetchingAll}}
+  <div>
+  Loading Tour Sites...
+  </div>
+  {{else}}
+  {{#uk-table-striped}}
+  <thead>
+  <tr>
+  <th class='uk-table-expand'>Site Name</th>
+  <th class='uk-width-small'>Delete</th>
+  </tr>
+  </thead>
+  <tbody>
+  {{#each siteLoader.data as |tourSet|}}
+  <tr>
+  <td class='uk-table-link'>
+  {{!-- {{#link-to 'admin.tours.index' tourSet.subdir}} --}}
+  <a href={{concat tourSet.subdir "/"}}>
+  {{tourSet.name}}
+  </a>
+  </td>
+
+  <td class='uk-table-link'>
+  {{#uk-button color='link' class='uk-align-center' on-click=(perform deleteRecord tourSet)}}
+  {{fa-icon 'trash'}}
+  {{/uk-button}}
+  </td>
+  </tr>
+  {{else}}
+  {{#data-loader queryType='all' modelName='tour' as |tourLoader|}}
+  <ul>
+    {{#each tourLoader as |tour|}}
+    <li>{{tour.title}}</li>
+    {{/each}}
+  </ul>
+  {{/data-loader}}
+  {{/each}}
+  </tbody>
+  {{/uk-table-striped}}
+  {{/if}}
+{{/data-loader}}
+<div class='uk-section'></div>

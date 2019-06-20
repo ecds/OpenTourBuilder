@@ -1,0 +1,32 @@
+{{outlet}}
+<table class="uk-table uk-table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Sets</th>
+            <th>Provider</th>
+        </tr>
+    </thead>
+    <tbody>
+      {{#each model as |user|}}
+        <tr>
+            <td>
+              {{#if user.super}}{{fa-icon 'chess-queen'}}{{/if}} {{user.display_name}}
+            </td>
+            <td>
+                {{#link-to 'admin.users.user' user}}
+                    {{user.login.identification}}
+                {{/link-to}}
+            </td>
+            <td>
+              {{user.tour_sets.length}}
+            </td>
+            <td>
+                {{user.login.provider}}
+            </td>
+        </tr>
+      {{/each}}
+    </tbody>
+</table>
+<div class='uk-section'></div>

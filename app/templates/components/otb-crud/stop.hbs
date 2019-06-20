@@ -1,0 +1,9 @@
+
+{{otb-crud/common-form model=stop modelTitle='Stop'}}
+{{otb-crud/map model=stop}}
+{{#if stop.id}}
+  {{otb-crud/media model=stop reorder=reordered}}
+{{else}}
+  <p>You must save the stop before adding media.</p>
+{{/if}}
+{{#uk-button color='primary' on-click=save}}save{{/uk-button}} {{#uk-button on-click=cancel}}Cancel{{/uk-button}}
