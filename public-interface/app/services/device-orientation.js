@@ -39,7 +39,6 @@ export default class DeviceOrientationService extends Service {
     } else {
       this.setProperties({ orientationClass: 'landscape' });
     }
-    console.log('HEIGHT!!!!', window.innerHeight);
   }
 
   setOrientation() {

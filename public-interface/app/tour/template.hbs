@@ -2,7 +2,7 @@
   {{!-- DESKTOP --}}
   <nav class="uk-navbar uk-light uk-background-secondary uk-margin uk-position-fixed otb-desktop-navbar" uk-navbar>
     <div class="uk-navbar-left">
-      <LinkTo @route="tours.index">
+      <LinkTo @route="tour">
         <img src="/assets/images/otblogo.png" alt="Branding logo">
       </LinkTo>
 
@@ -53,14 +53,14 @@
   {{!-- MOBILE --}}
   <nav class="uk-navbar uk-navbar-container otb-mobile-top-navbar" data-theme={{this.theme.name}}>
     <div class="uk-navbar-left">
-      <ul class="uk-navbar-nav">
+    <ul class="uk-navbar-nav">
         <li>
           <a uk-toggle target="#flat-pages" class="uk-navbar-toggle">
             {{fa-icon "bars" aria-hidden="true"}}
           </a>
         </li>
         <li>
-          <LinkTo @route="tour" @model={{this.model}} class="otb-mobile-tour-title">{{this.model.title}}</LinkTo>
+          <LinkTo @route="tour" @model={{this.model}} class="uk-logo">{{this.model.title}}</LinkTo>
         </li>
       </ul>
     </div>

@@ -118,6 +118,8 @@ module.exports = function(environment) {
     ENV.fastboot.hostWhitelist.push('https://opentour.emory.edu')
     ENV.APP.HOST = 'https://otb.ecdsdev.org'
     ENV.APP.GA_ID = 'UA-141690409-1'
+    ENV.GOOGLE_MAPS_API_KEY = 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8'
+    ENV.GOOGLE_MAPS_VERSION = 3.37
   }
 
   return ENV;

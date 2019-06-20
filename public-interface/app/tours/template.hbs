@@ -9,13 +9,13 @@
 {{#if this.deviceContext.isDesktop}}
   {{#if (eq this.this.sortedTours.length 1)}}
     <div class="uk-child-width-1-1 uk-light uk-grid-collapse" uk-grid>
-      {{#each this.sortedTours as |tour|}}
+        {{#each this.sortedTours as |tour|}}
         {{#link-to "tour" tour.tenant tour.slug}}
           <TourSplashBackground @tour={{tour}} @full="true">
             <TourCell @tour={{tour}}></TourCell>
           </TourSplashBackground>
         {{/link-to}}
-      {{/each}}
+        {{/each}}
     </div>
   {{else if (lt this.sortedTours.length 4)}}
     <div class="{{concat "uk-child-width-1-" this.sortedTours.length}} uk-grid-collapse uk-text-center otb-desktop-full-height" uk-grid>

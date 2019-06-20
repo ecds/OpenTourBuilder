@@ -7,26 +7,27 @@ tmp
 api-server/config/initializers/auth.rb
 api-server/public/uploads/
 .vscode
+*.env*
 
 # compiled output
-public-interface/dist/
-public-interface/tmp/
+*/dist/
+*/tmp/
 
 # dependencies
-public-interface/bower_components/
-public-interface/node_modules/
+*/bower_components/
+*/node_modules/
 
 # misc
-public-interface/.sass-cache
-public-interface/connect.lock
-public-interface/coverage/
-public-interface/libpeerconnection.log
-public-interface/npm-debug.log*
-public-interface/testem.log
-public-interface/yarn-error.log
+*/.sass-cache
+*/connect.lock
+*/coverage/
+*/libpeerconnection.log
+*/npm-debug.log*
+*/testem.log
+*/yarn-error.log
 
 # ember-try
-public-interface/.node_modules.ember-try/
-public-interface/bower.json.ember-try
-public-interface/package.json.ember-try
+*/.node_modules.ember-try/
+*/bower.json.ember-try
+*/package.json.ember-try
 
