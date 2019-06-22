@@ -1,12 +1,24 @@
 import Component from '@glimmer/component';
 import { inject as service } from '@ember/service';
 import { action } from '@ember/object';
+import { htmlSafe } from '@ember/template';
 import MapUtil from '../../utils/google-maps';
 
 export default class OverviewMapComponent extends Component {
   @service deviceContext;
   
   mapUtil = MapUtil.create();
+
+  infoWindow(tourStop) {
+    const tour = tourStop.tour.getProperties(['tenant', 'slug']);
+    const stop = tourStop.stop.getProperties(['slug', 'title']);
+    return htmlSafe(`
+      <header class='uk-text-large'>${stop.title}</header>
+      <a href='/${tour.tenant}/${tour.slug}/${stop.slug}'>
+        Go to stop.
+      </a>
+    `).toString();
+  }
 
   @action
   createMap() {
@@ -43,7 +55,6 @@ export default class OverviewMapComponent extends Component {
       );
     });
 
-    
     this.args.tour.sortedStops.forEach(tourStop => {
       this.mapUtil.setLabel(tourStop.marker, `${tourStop.position}`);
       if (this.deviceContext.isDesktop) {
@@ -51,7 +62,7 @@ export default class OverviewMapComponent extends Component {
           this.args.setActiveStop.perform(this.args.tour.tourStops, tourStop, true); 
         })
       } else if (this.deviceContext.isMobile) {
-        this.mapUtil.addInfoWindow('hello', tourStop.marker, map);
+        this.mapUtil.addInfoWindow(this.infoWindow(tourStop), tourStop.marker, map);
       }
     });
   }

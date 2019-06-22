@@ -50,6 +50,7 @@ export default class ReaderService extends Service {
   }
 
   setDirections(directions) {
+    console.log(directions);
     this.directionsDisplay.setDirections(directions);
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setPanel(document.getElementById('directions-panel'));

@@ -27,7 +27,7 @@ module.exports = function(environment) {
     },
 
     fastboot: {
-      hostWhitelist: ['otb.ecdsdev.org']
+      hostWhitelist: ['opentour.emory.edu']
     },
 
     metricsAdapters: [
@@ -85,12 +85,6 @@ module.exports = function(environment) {
 
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    // ENV.APP.API_HOST = 'https://otb.org:3000';
     ENV.APP.API_HOST = 'https://api.opentour.emory.edu'
     ENV.fastboot.hostWhitelist.push('lvh.me:4200');
     ENV['ember-google-maps'].key = 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8'

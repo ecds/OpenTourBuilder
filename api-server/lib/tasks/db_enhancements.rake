@@ -1,7 +1,7 @@
 # lib/tasks/db_enhancements.rake
 
 ####### Important information ####################
-# This file is used to setup a shared extensions #
+# This file is used to setup shared extensions   #
 # within a dedicated schema. This gives us the   #
 # advantage of only needing to enable extensions #
 # in one place.                                  #
@@ -12,7 +12,7 @@
 
 namespace :db do
   desc 'Also create shared_extensions Schema'
-  task :extensions => :environment  do
+  task extensions: :environment  do
     # Create Schema
     ActiveRecord::Base.connection.execute 'CREATE SCHEMA IF NOT EXISTS shared_extensions;'
     # Enable pgcrypto
@@ -24,10 +24,10 @@ namespace :db do
   end
 end
 
-Rake::Task["db:create"].enhance do
-  Rake::Task["db:extensions"].invoke
+Rake::Task['db:create'].enhance do
+  Rake::Task['db:extensions'].invoke
 end
 
-Rake::Task["db:test:purge"].enhance do
-  Rake::Task["db:extensions"].invoke
+Rake::Task['db:test:purge'].enhance do
+  Rake::Task['db:extensions'].invoke
 end

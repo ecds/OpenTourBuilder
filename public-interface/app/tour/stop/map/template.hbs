@@ -1,4 +1,4 @@
-{{#unless this.deviceContext.isDesktop}}
+{{#if this.deviceContext.isMobile}}
   <div class="otb-mobile-tour-container">
     {{!--
       Flow:
@@ -25,28 +25,29 @@
         <FaIcon @icon={{"directions"}} /> Directions
       </button>
     </ToggleDirections>
-    <div class="otb-mobile-directions-panel uk-panel-scrollable uk-padding-remove {{if this.showDirections "otb-mobile-directions-panel-show"}}">
+    <div class="otb-mobile-directions-panel uk-panel-scrollable {{if this.showDirections "otb-mobile-directions-panel-show"}}">
       <div class="uk-text-center" role="button" onclick={{toggle "showDirections" this}}>
         <FaIcon @icon="angle-down" />
       </div>
       {{!-- <h1>{{this.model.tourStop.stop.lat}} : {{this.model.tourStop.stop.lng}}</h1> --}}
-      {{#if this.model.tourStop.stop.sanitized_direction_notes}}
+      {{#if (or this.model.tourStop.stop.sanitized_direction_notes this.model.tourStop.stop.direction_intro)}}
         <ul uk-tab>
           <li class="uk-active"><a href="#">Notes</a></li>
           <li><a href="#">Turn By Turn</a></li>
         </ul>
-        <ul class="uk-switcher uk-margin uk-container">
+        <ul class="uk-switcher uk-container">
           <li>
-            <div class="uk-container">
+            <div class="otb-mobile-directions-display-panel">
+              {{this.model.tourStop.stop.direction_intro}}
               {{this.model.tourStop.stop.sanitized_direction_notes}}
             </div>
           </li>
-          <li><div id="directions-panel"></div></li>
+          <li><div id="directions-panel" class="otb-mobile-directions-display-panel"></div></li>
         </ul>
       {{else}}
-        <div id="directions-panel" class="uk-container"></div>
+        <div id="directions-panel" class="otb-mobile-directions-display-panel"></div>
       {{/if}}
     </div>
   </div>
 
-{{/unless}}
+{{/if}}

@@ -189,11 +189,11 @@ $mobile-bottom-nav-height-landscape: 60px;
 .portrait {
   .otb-mobile-map-control-tr,
   .otb-mobile-map-control-tl {
-    top: $mobile-top-nav-height-portrait;
+    top: $mobile-top-nav-height-portrait !important;
   }
 
   .otb-mobile-directions-panel {
-    bottom: $mobile-bottom-nav-height-portrait;
+    bottom: $mobile-bottom-nav-height-portrait !important;
   }
 
   .otb-mobile-directions-panel {
@@ -221,9 +221,13 @@ $mobile-bottom-nav-height-landscape: 60px;
     &.otb-mobile-directions-panel-show {
       height: calc(100vh - (#{$mobile-top-nav-height-portrait} + #{$mobile-top-nav-height-portrait} + 5rem));
     }
+
   }
 }
 
+.otb-mobile-directions-display-panel {
+  width: 95vw;
+}
 .fa-toggle-on,
 .fa-toggle-off {
   font-size: 1.5rem;

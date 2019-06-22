@@ -19,14 +19,14 @@ export default EmberObject.extend({
   },
 
   createMap(params) {
-    let { element = document.getElementById('map-container'), center = {lat: 0, lng:0}, zoom = 17, type = 'roadmap'} = params;
+    let { element = document.getElementById('map-container'), center = {lat: 0, lng:0}, zoom = 17, mapTypeId = 'roadmap'} = params;
     let map = new google.maps.Map(
       element,
       {
         zoom,
         center: center,
         disableDefaultUI: true,
-        mapTypeId: type
+        mapTypeId
       }
     );
     

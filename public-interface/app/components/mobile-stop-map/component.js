@@ -27,7 +27,10 @@ export default class MobileStopMapComponent extends Component {
     const stopMarker = this.mapUtil.addMarker(map, center);
     this.maps.features.push(stopMarker);
 
-    this.mapUtil.addInfoWindow('hello', stopMarker, map);
+    if (this.args.stop.get('address')) {
+      this.mapUtil.addInfoWindow(this.args.stop.get('address'), stopMarker, map);
+    }
+
 
     const parkingCords = this.args.stop.getProperties(['parking_lat', 'parking_lng']);
     if (parkingCords.parking_lat && parkingCords.parking_lng) {
