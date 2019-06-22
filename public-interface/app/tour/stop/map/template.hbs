@@ -30,7 +30,7 @@
         <FaIcon @icon="angle-down" />
       </div>
       {{!-- <h1>{{this.model.tourStop.stop.lat}} : {{this.model.tourStop.stop.lng}}</h1> --}}
-      {{#if (or this.model.tourStop.stop.sanitized_direction_notes this.model.tourStop.stop.direction_intro)}}
+      {{#if (or this.model.tourStop.stop.sanitized_direction_notes this.model.tourStop.stop.directionIntro)}}
         <ul uk-tab>
           <li class="uk-active"><a href="#">Notes</a></li>
           <li><a href="#">Turn By Turn</a></li>
@@ -38,7 +38,7 @@
         <ul class="uk-switcher uk-container">
           <li>
             <div class="otb-mobile-directions-display-panel">
-              {{this.model.tourStop.stop.direction_intro}}
+              {{this.model.tourStop.stop.directionIntro}}
               {{this.model.tourStop.stop.sanitized_direction_notes}}
             </div>
           </li>

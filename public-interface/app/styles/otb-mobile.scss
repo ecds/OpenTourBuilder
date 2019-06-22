@@ -206,11 +206,11 @@ $mobile-bottom-nav-height-landscape: 60px;
 .landscape {
   .otb-mobile-map-control-tr,
   .otb-mobile-map-control-tl {
-    top: $mobile-top-nav-height-landscape;
+    top: $mobile-top-nav-height-landscape !important;
   }
 
   .otb-mobile-directions-panel {
-    bottom: $mobile-bottom-nav-height-landscape;
+    bottom: $mobile-bottom-nav-height-landscape !important;
   }
   
   .otb-mobile-stop-container {

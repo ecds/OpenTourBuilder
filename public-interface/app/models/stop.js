@@ -19,7 +19,7 @@ export default class StopModel extends Model {
   @attr('string') article_link;
   @attr('string') video_embed;
   @attr('string') video_poster;
-  @attr('string') direction_intro;
+  @attr('string') directionIntro;
   @attr('string') direction_notes;
   @hasMany('tour_stop', { async: true }) tourStops;
   @hasMany('stop_medium', { async: true }) stopMedia;
