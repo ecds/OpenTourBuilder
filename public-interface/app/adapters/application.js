@@ -18,6 +18,7 @@ export default JSONAPIAdapter.extend(DataAdapterMixin, {
   
   authorize(xhr) {
     let cookieService = this.get('cookies');
+    if (cookieService.exists('ember_simple_auth-session') == false) return;
     let cookies = cookieService.read();
     let access_token = JSON.parse(cookies['ember_simple_auth-session']).authenticated.access_token;
     xhr.setRequestHeader('Authorization', `Bearer ${access_token}`);

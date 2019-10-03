@@ -32,4 +32,26 @@ RSpec.describe 'V3::Stops API' do
       end
     end
   end
+
+  describe 'DELETE /tour-stops' do
+    before { User.last.tour_sets << TourSet.find_by(subdir: Apartment::Tenant.current) }
+    before { @stop = Stop.last }
+    before { @stop_count = Stop.count }
+    before { delete "/#{Apartment::Tenant.current}/tour-stops/#{TourStop.find_by(stop: @stop).id}", headers: { Authorization: "Bearer #{User.last.login.oauth2_token}" } }
+    
+    context 'when a tour-stop is deleted and the stop no longers belogs to a tour, the stop is deleted' do
+      it 'deletes the associated stop' do
+        expect(Stop.count).to eq @stop_count - 1
+      end
+    end
+    
+    before { Tour.all.each { |t| t.stops << Stop.first } }
+    before { delete "/#{Apartment::Tenant.current}/tour-stops/#{TourStop.find_by(stop: Stop.first).id}", headers: { Authorization: "Bearer #{User.last.login.oauth2_token}" } }
+
+    context 'when a tour-stop is deleted, the stop is not deleted if it belongs to other tours.' do
+      it 'deletes tour-stop but not the stop' do
+        expect(Stop.first.title).to eq(Stop.first.title)
+      end
+    end
+  end
 end

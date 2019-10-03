@@ -11,7 +11,8 @@ class V3::TourStopsController < V3Controller
       TourStop.where(tour: Tour.find(params[:tour_id])).where(stop: Stop.find(params[:stop_id])).first || {}
     elsif params[:tour] && params[:slug]
       stop = StopSlug.find_by(slug: params[:slug])
-      TourStop.where(tour: Tour.find(params[:tour])).where(stop: stop.stop).first
+      # TourStop.where(tour: Tour.find(params[:tour])).where(stop: stop.stop).first
+      TourStop.find_by(tour: Tour.find(params[:tour]), stop: stop.stop)
     else
       TourStop.all
     end

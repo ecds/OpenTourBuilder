@@ -56,6 +56,40 @@ RSpec.describe 'V3::Stops API' do
     end
   end
 
+  describe 'GET /:tenant/stops?slug=:stop_slug' do
+    let!(:stop) { Stop.second }
+    let!(:tour) { stop.tours.first }
+    let!(:original_slug) { stop.slug }
+    let!(:new_title) { "#{Faker::Movies::HitchhikersGuideToTheGalaxy.starship}" }
+
+    context 'get stop after title change' do
+
+      before {
+        stop.title = new_title
+        stop.save
+      }
+      before { get "/#{Apartment::Tenant.current}/tour-stops?slug=#{new_title.parameterize}&tour=#{tour.id}" }
+
+      it 'gets same stop with new slug' do
+        p "original slug: #{original_slug}"
+        p "new slug: #{new_title.parameterize}"
+        expect(response).to have_http_status(200)
+        expect(attributes['slug']).to eq(new_title.parameterize)
+        expect(json['id']).to eq(stop.id.to_s)
+      end
+    end
+
+    context 'get stop by old slug' do
+      before { get "/#{Apartment::Tenant.current}/tour-stops?slug=#{original_slug}&tour=#{tour.id}" }
+
+      it 'returns the stop by the original slug' do
+        expect(response).to have_http_status(200)
+        expect(attributes['slug']).to eq(new_title.parameterize)
+        expect(json['id']).to eq(stop.id.to_s)
+      end
+    end
+  end
+
   # Test suite for POST /stops
   describe 'POST /stops' do
     let(:valid_attributes) do

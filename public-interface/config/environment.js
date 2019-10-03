@@ -86,8 +86,9 @@ module.exports = function(environment) {
 
   if (environment === 'development') {
     ENV.APP.API_HOST = 'https://api.opentour.emory.edu'
+    // ENV.APP.API_HOST = 'https://otb.org:3000'
     ENV.fastboot.hostWhitelist.push('lvh.me:4200');
-    ENV['ember-google-maps'].key = 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8'
+    ENV.GOOGLE_MAPS_API_KEY = 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8'
   }
 
   if (environment === 'test') {
@@ -114,6 +115,12 @@ module.exports = function(environment) {
     ENV.APP.GA_ID = 'UA-51682905-15'
     ENV.GOOGLE_MAPS_API_KEY = 'AIzaSyD-G_lDtvChv-P3nchtQYHoCLfFzn9ylr8'
     ENV.GOOGLE_MAPS_VERSION = 3.37
+  }
+
+  if (environment == 'ahc') {
+    ENV.APP.API_HOST = 'https://otb.org:3000'
+    ENV.fastboot.hostWhitelist.push('localhost:4200')
+    ENV.APP.TENANT = 'campus-tour';
   }
 
   return ENV;

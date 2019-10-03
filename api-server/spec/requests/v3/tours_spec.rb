@@ -76,6 +76,37 @@ RSpec.describe 'V3::Tours', type: :request do
     end
   end
 
+  describe 'GET /:tenant/:tour_slug' do
+    let!(:tour) { Tour.last }
+    let!(:original_slug) { Tour.last.slug }
+    let!(:new_title) { Faker::TvShows::RickAndMorty.character }
+
+    context 'get tour after title change' do
+
+      before {
+        tour.title = new_title
+        tour.save
+      }
+      before { get "/#{Apartment::Tenant.current}/tours?slug=#{new_title.parameterize}" }
+
+      it 'gets same tour with new slug' do
+        expect(response).to have_http_status(200)
+        expect(attributes['slug']).to eq(new_title.parameterize)
+        expect(json['id']).to eq(tour.id.to_s)
+      end
+    end
+
+    context 'get tour by old slug' do
+      before { get "/#{Apartment::Tenant.current}/tours?slug=#{original_slug}" }
+
+      it 'returns the tour by the original slug' do
+        expect(response).to have_http_status(200)
+        expect(attributes['slug']).to eq(new_title.parameterize)
+        expect(json['id']).to eq(tour.id.to_s)
+      end
+    end
+  end
+
   # Test suite for POST /atlanta/tours
   describe 'POST /atlanta/tours' do
     # valid payload

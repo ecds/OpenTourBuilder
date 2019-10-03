@@ -6,6 +6,23 @@ import ENV from '../config/environment';
 export default class ApplicationRoute extends Route {
   @service metrics;
   @service fastboot;
+  @service tenant;
+  
+  /**
+   * Redirect for sites that are hosted on an external address
+   *
+   * @param {*} model
+   * @memberof IndexRoute
+   */
+  beforeModel() {
+    // // if (this.fastboot.isFastBoot) return;
+    // const currentLoc = `${window.location.hostname}:${window.location.port}`;
+    // const externalUrl = model.firstObject.external_url;
+    if (ENV.APP.TENANT) {
+      // window.location.replace(`http://${externalUrl}`);
+      this.transitionTo('tours')
+    }
+  }
 
   @action
   didTransition() {

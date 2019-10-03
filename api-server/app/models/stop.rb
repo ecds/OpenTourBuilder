@@ -12,6 +12,7 @@ class Stop < ApplicationRecord
   has_many :stop_slugs, dependent: :delete_all
 
   validates :title, presence: true
+  validates :title, uniqueness: true
 
   after_initialize :default_values
   after_save :ensure_slug

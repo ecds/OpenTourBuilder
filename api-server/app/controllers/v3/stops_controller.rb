@@ -65,7 +65,8 @@ class V3::StopsController < V3Controller
             params, only: [
                   :title, :description, :lat, :lng,
                   :parking_lat, :parking_lng, :media,
-                  :address, :tours, :direction_notes
+                  :address, :tours, :direction_notes,
+                  :metadescription
               ]
           )
     end

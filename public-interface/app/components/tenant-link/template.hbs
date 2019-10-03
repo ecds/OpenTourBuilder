@@ -1,0 +1,9 @@
+{{#if this.env.APP.TENANT}}
+  <LinkTo @route={{@route}} @model={{@segment}}>
+    {{yield}}
+  </LinkTo>
+{{else}}
+  <LinkTo @route={{@route}} @models={{array @tenant @segment}}>
+    {{yield}}
+  </LinkTo>
+{{/if}}

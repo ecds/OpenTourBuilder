@@ -8,6 +8,7 @@ class TourStop < ApplicationRecord
   validates :position, presence: true
 
   before_validation :_set_position
+  before_destroy :_delete_orphan
 
   def slug
     stop.slug
@@ -37,5 +38,11 @@ class TourStop < ApplicationRecord
 
     def _set_position
       self.position = self.position || self.tour.stops.length + 1
+    end
+
+    def _delete_orphan
+      if self.stop.tours.length == 1
+        self.stop.destroy
+      end
     end
 end
