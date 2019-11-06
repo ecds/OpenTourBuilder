@@ -97,6 +97,10 @@ RSpec.describe 'V3::Tours', type: :request do
     end
 
     context 'get tour by old slug' do
+      before {
+        tour.title = new_title
+        tour.save
+      }
       before { get "/#{Apartment::Tenant.current}/tours?slug=#{original_slug}" }
 
       it 'returns the tour by the original slug' do

@@ -46,7 +46,9 @@ class Medium < ApplicationRecord
   end
 
   def published
-    tours.published.present? || stops { |s| s.tours.published }.present?
+    # This works and is shorter, but I think the longer way is more readable/clear.
+    # tours.published.present? || stops { |s| s.tours.published }.present?
+    tours.collect(&:published).include?(true) || stops.map {|s| s.tours.collect(&:published)}.flatten.include?(true)
   end
 
   def srcset

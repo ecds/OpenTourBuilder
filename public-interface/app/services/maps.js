@@ -7,6 +7,7 @@ import MapUtil from '../utils/google-maps';
 
 export default class ReaderService extends Service {
   @service location;
+  @service locationPermissions;
 
   mapUtil = MapUtil.create();
 
@@ -20,6 +21,7 @@ export default class ReaderService extends Service {
   controlElements = [];
   travelMode = 'WALKING';
   controls = [];
+  errorMessage = null;
 
   @computed('destination', 'waypoints', 'origin', 'travelMode')
   get route() {
@@ -37,11 +39,37 @@ export default class ReaderService extends Service {
 
   calcRoute() {
     this.directionsService.route(this.route, (response, status) => {
-      if (status == 'OK') {
-      this.showControls();
-        return this.setDirections(response);
+      let errorMesg = null;
+
+      switch(status) {
+        case 'OK':
+          this.showControls();
+          return this.setDirections(response);
+        case 'NOT_FOUND':
+          errorMesg = 'The location was not found.';
+          break;
+        case 'ZERO_RESULTS':
+        case 'MAX_ROUTE_LENGTH_EXCEEDED':
+          errorMesg = `No ${this.travelMode} route could be found to the stop. Try a different mode.`;
+          break;
+        case 'MAX_WAYPOINTS_EXCEEDED':
+          errorMesg = 'Too many stops between here and your destination.';
+          break;
+        case 'INVALID_REQUEST':
+          errorMesg = 'Something is wrong with the location of this stop.';
+          break;
+        case 'OVER_QUERY_LIMIT':
+          errorMesg = 'This is a popular tour and we have reached the limit allowed by Google. Please try again later.';
+          break;
+        case 'REQUEST_DENIED':
+          errorMesg = 'This tour does not have permission to access the Google directions service. Someone needs to check the API key.';
+          break;
+        case 'UNKNOWN_ERROR':
+        default:
+          errorMesg = 'Getting directions failed and we did not get a reason. Please try again.';
       }
-      this.location.set('errorMessage', response.status);
+      errorMesg = `There was an error that was not your fault. ${errorMesg}`;
+      this.set('errorMessage', errorMesg);
       this.removeRoute();
       this.setDirections(response);
       return false;
@@ -50,7 +78,6 @@ export default class ReaderService extends Service {
   }
 
   setDirections(directions) {
-    console.log(directions);
     this.directionsDisplay.setDirections(directions);
     this.directionsDisplay.setMap(this.map);
     this.directionsDisplay.setPanel(document.getElementById('directions-panel'));
@@ -74,6 +101,7 @@ export default class ReaderService extends Service {
   }
 
   showControls() {
+  if (!this.locationPermissions.locationAllowed) return;
     this.controlElements.forEach(control => {
       control.style.zIndex = 1;
     });

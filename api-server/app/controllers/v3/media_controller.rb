@@ -21,7 +21,7 @@ module V3
     
     # GET /media/1
     def show
-      if @medium.published
+      if @medium.published || current_user.id.present?
         render json: @medium
       else
         head 401

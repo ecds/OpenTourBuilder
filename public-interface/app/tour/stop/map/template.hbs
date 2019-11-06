@@ -17,9 +17,11 @@
     {{else if (and this.location.clientLocation (eq this.location.errorMessage null))}}
       <MobileStopRoute @stop={{this.model.tourStop.stop}} @tour={{this.model.tour}}/>
     {{/if}}
-    <div id="map-mode-control" class="otb-mobile-map-control-tl uk-padding-small">
-      <ModeControl @tour={{this.model.tour}} @parentId="map-mode-control" />
-    </div>
+    {{#if this.locationPermissions.locationAllowed}}
+      <div id="map-mode-control" class="otb-mobile-map-control-tl uk-padding-small">
+        <ModeControl @tour={{this.model.tour}} @parentId="map-mode-control" />
+      </div>
+    {{/if}}
     <ToggleDirections @show={{this.showDirections}}>
       <button type="button" class="uk-button otb-mobile-map-control" onclick={{toggle "showDirections" this}}>
         <FaIcon @icon={{"directions"}} /> Directions
@@ -29,24 +31,37 @@
       <div class="uk-text-center" role="button" onclick={{toggle "showDirections" this}}>
         <FaIcon @icon="angle-down" />
       </div>
-      {{!-- <h1>{{this.model.tourStop.stop.lat}} : {{this.model.tourStop.stop.lng}}</h1> --}}
-      {{#if (or this.model.tourStop.stop.sanitized_direction_notes this.model.tourStop.stop.directionIntro)}}
-        <ul uk-tab>
+      <ul uk-tab>
+        {{#if (or this.model.tourStop.stop.sanitized_direction_notes this.model.tourStop.stop.directionIntro)}}
           <li class="uk-active"><a href="#">Notes</a></li>
-          <li><a href="#">Turn By Turn</a></li>
-        </ul>
-        <ul class="uk-switcher uk-container">
+        {{/if}}
+        <li><a href="#">Turn By Turn</a></li>
+      </ul>
+      <ul class="uk-switcher uk-container">
+        {{#if (or this.model.tourStop.stop.sanitized_direction_notes this.model.tourStop.stop.directionIntro)}}
           <li>
             <div class="otb-mobile-directions-display-panel">
               {{this.model.tourStop.stop.directionIntro}}
               {{this.model.tourStop.stop.sanitized_direction_notes}}
             </div>
           </li>
-          <li><div id="directions-panel" class="otb-mobile-directions-display-panel"></div></li>
-        </ul>
-      {{else}}
-        <div id="directions-panel" class="otb-mobile-directions-display-panel"></div>
-      {{/if}}
+        {{/if}}
+        <li>
+          {{#if this.locationPermissions.locationAllowed}}
+            <div id="directions-panel" class="otb-mobile-directions-display-panel"></div>
+            {{#if this.maps.errorMessage}}
+              <section>{{this.maps.errorMessage}}</section>
+            {{else if this.location.errorMessage}}
+              <section>Unable to get your location. Please try again. Sorry :(</section>
+            {{/if}}
+          {{else}}
+            <div class="otb-directions-display-panel">
+              Turn by turn directions are only available if you allow access to your location.
+              <LocationSettings @tour={{this.model.tour}} />
+            </div>
+          {{/if}}
+        </li>
+      </ul>
     </div>
   </div>
 

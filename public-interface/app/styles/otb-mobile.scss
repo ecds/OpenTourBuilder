@@ -243,3 +243,11 @@ $mobile-bottom-nav-height-landscape: 60px;
   margin-bottom: 80px;
   overflow: auto;
 }
+
+.otb-mobile-hamburger {
+  padding-top: 1.5rem;
+  
+  a {
+    display: inline !important;
+  }
+}

@@ -54,7 +54,7 @@
   <nav class="uk-navbar uk-navbar-container otb-mobile-top-navbar" data-theme={{this.theme.name}}>
     <div class="uk-navbar-left">
       <ul class="uk-navbar-nav">
-        <li>
+        <li class="otb-mobile-hamburger">
           <a uk-toggle target="#flat-pages" class="uk-navbar-toggle">
             {{fa-icon "bars" aria-hidden="true"}}
           </a>
@@ -74,7 +74,8 @@
       <button class="uk-offcanvas-close" type="button" uk-close></button>
       <ul class="uk-nav uk-nav-default">
         <li>
-          <LinkTo @route="tours" class="otb-menu-link">All Tours</LinkTo>
+          {{!-- <LinkTo @route="tours" class="otb-menu-link">All Tours</LinkTo> --}}
+          <a href={{concat "/" this.model.tenant}} class="otb-menu-link">All Tours</a>
         </li>
         <li>
           <LinkTo @route="tour" @model={{this.model}} class="otb-menu-link">Tour Home</LinkTo>

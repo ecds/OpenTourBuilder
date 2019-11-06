@@ -13,7 +13,9 @@ export default class ToggleDirectionsComponent extends Component {
     if (this.maps.controls.length == 0) {
       let element = document.getElementById('directions-toggle');
       this.mapUtil.addControl(this.maps.map, 'directions-toggle', 'TOP_RIGHT');
-      this.maps.controlElements.push(element);
+      element.style.zIndex = 1;
+      // this.maps.controlElements.push(element);
+      // this.maps.set('directionsControl', element);
     }
   }
 }

@@ -5,14 +5,14 @@ class Stop < ApplicationRecord
   include HtmlSaintizer
 
   has_many :tour_stops, dependent: :destroy
-  has_many :tours, through: :tour_stops
+  has_many :tours, -> { distinct }, through: :tour_stops
   has_many :stop_media
   has_many :media, through: :stop_media
   belongs_to :medium, optional: true
   has_many :stop_slugs, dependent: :delete_all
 
   validates :title, presence: true
-  validates :title, uniqueness: true
+  # validates :title, uniqueness: true
 
   after_initialize :default_values
   after_save :ensure_slug
@@ -22,6 +22,7 @@ class Stop < ApplicationRecord
   scope :not_in_tour, lambda { |tour_id| includes(:tour_stops).where.not(tour_stops: { tour_id: tour_id }) }
   scope :no_tours, lambda { includes(:tour_stops).where(tour_stops: { tour_id: nil }) }
   scope :published, lambda { includes(:tours).where(tours: { published: true }) }
+  scope :by_slug_and_tour, lambda { |slug, tour_id| joins(:stop_slugs).joins(:tours).where('stop_slugs.slug = ?', slug).where('tour_stops.tour_id = ?', tour_id) }
 
   def sanitized_description
     HtmlSaintizer.accessable(description)

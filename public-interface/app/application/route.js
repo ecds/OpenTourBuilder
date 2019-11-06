@@ -19,7 +19,6 @@ export default class ApplicationRoute extends Route {
     // const currentLoc = `${window.location.hostname}:${window.location.port}`;
     // const externalUrl = model.firstObject.external_url;
     if (ENV.APP.TENANT) {
-      // window.location.replace(`http://${externalUrl}`);
       this.transitionTo('tours')
     }
   }

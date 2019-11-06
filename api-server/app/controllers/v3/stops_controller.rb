@@ -12,7 +12,8 @@ class V3::StopsController < V3Controller
     @stops = if params[:tour_id]
       Stop.not_in_tour(params[:tour_id]).or(Stop.no_tours)
     elsif params[:slug]
-      stop = StopSlug.find_by(slug: params[:slug]).stop
+      # stop = StopSlug.find_by(slug: params[:slug]).stop
+      stop = Stop.by_slug_and_tour(params[:slug], params[:tour_id])
     else
       Stop.all
     end

@@ -19,6 +19,7 @@ export default class ModeControlComponent extends Component {
       if (this.args.parentId == 'map-mode-control') {
         this.mapUtil.addControl(this.maps.map, 'map-mode-control', 'TOP_LEFT');
         this.maps.controlElements.push(document.getElementById('map-mode-control'));
+        this.maps.set('modeControl', document.getElementById('map-mode-control'));
       }
     } else {
       this.maps.set('travelMode', mode.get('title'));

@@ -4,7 +4,7 @@
 class Tour < ApplicationRecord
   include HtmlSaintizer
   has_many :tour_stops, autosave: true, dependent: :destroy
-  has_many :stops, through: :tour_stops
+  has_many :stops, -> { distinct }, through: :tour_stops
   has_many :tour_modes
   has_many :modes, through: :tour_modes
   belongs_to :mode, default: -> { Mode.last }
@@ -26,6 +26,7 @@ class Tour < ApplicationRecord
   before_validation -> { self.theme ||= Theme.first }
   before_validation -> { self.title ||= 'untitled' }
   after_save :ensure_slug
+  after_create :add_modes
 
   scope :published, -> { where(published: true) }
 
@@ -88,5 +89,11 @@ class Tour < ApplicationRecord
 
     def ensure_slug
       Slug.find_or_create_by(slug: self.slug, tour: self)
+    end
+
+    def add_modes
+      Mode.all.each do |m|
+        self.modes << m
+      end
     end
 end
