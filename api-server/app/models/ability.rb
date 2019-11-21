@@ -27,6 +27,9 @@ class Ability
     can [:read], User
     return unless user.current_tenant_admin?
     can [:manage], Tour
+    can [:manage], TourSetAdmin
+    can [:read, :edit, :update], TourSet
+    can [:read, :edit, :update], User
     # can :manage, Stop
     # can :manage, TourStop
     # can :manage, TourMedium

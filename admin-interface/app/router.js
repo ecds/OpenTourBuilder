@@ -12,7 +12,6 @@ const Router = EmberRouter.extend({
   */
   rootURL: computed('', () => {
     let path = window.location.pathname.replace(/\/$/, '').split('/')[1];
-    console.log(path)
     if (path === 'admin' || path === 'login' || !path || parseInt(path)) {
       return '/admin/';
     } else if (path) {

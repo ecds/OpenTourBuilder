@@ -8,6 +8,6 @@ export default Route.extend({
   },
 
   model() {
-    return this.store.queryRecord('tour-set',  { subdir: this.tenant.tenant });
+    return this.store.queryRecord('tour-set', { subdir: this.tenant.tenant });
   }
 });

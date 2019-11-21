@@ -15,7 +15,6 @@ export default Torii.extend({
     const ajax = this.get('ajax');
 
     return this._super(...arguments).then(data => {
-      console.log(data);
       let grantType = 'password';
       if (data.provider.includes('google')) {
         grantType = 'google_auth_code';

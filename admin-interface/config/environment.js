@@ -14,6 +14,11 @@ module.exports = environment => {
       providers: {}
     },
 
+    'ember-simple-auth': {
+      routeAfterAuthentication: 'admin.index',
+      routeIfAlreadyAuthenticated: 'admin.index'
+    },
+
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

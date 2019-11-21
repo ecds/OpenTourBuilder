@@ -30,7 +30,6 @@ export default Route.extend({
 
   actions: {
     didTransition() {
-      console.log('did trans index');
       let sortedTours = get(this.controller, 'sortedTours');
       sortedTours.forEach((tour, index) => {
         tour.setProperties({

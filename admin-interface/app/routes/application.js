@@ -14,10 +14,6 @@ export default Route.extend(ApplicationRouteMixin, {
     return this.get('currentUser').load();
   },
 
-  // afterModel(model) {
-  //   //
-  // },
-
   actions: {
     willTransition(transisition) {
       this.__setTenant(transisition);

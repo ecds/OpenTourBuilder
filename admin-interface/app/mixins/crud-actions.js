@@ -38,12 +38,10 @@ export default Mixin.create({
     yield options.parentObj.save();
     // yield waitForProperty(newImage, 'mobile', v => v !== null);
 
-    console.log('newly created', newImage)
     return newImage;
   }),
 
   deleteHasMany: task(function*(options) {
-    console.log(options);
     let didConfirm = yield this.get('confirmDelete').perform(
       options.childObj.get('title')
     );
@@ -60,7 +58,6 @@ export default Mixin.create({
       try {
         yield parentObj.save();
         yield childObj.save();
-        console.log('saved');
       } catch (error) {
         UIkit.notification(`ERROR: ${error}`, { status: 'danger' });
       } finally {

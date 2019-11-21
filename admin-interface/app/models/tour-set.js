@@ -5,5 +5,5 @@ export default Model.extend({
   name: attr('string'),
   tours: hasMany('tour'),
   subdir: attr('string'),
-  tenantAdmins: hasMany('user') 
+  admins: hasMany('user')
 });
