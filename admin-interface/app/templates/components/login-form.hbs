@@ -1,0 +1,31 @@
+<div class='uk-text-center login-form'>
+  <section><h2>LOG IN</h2></section>
+  {{! Buttons should probably be a block component.}}
+  <div class="uk-child-width-1-3@s uk-grid-small uk-text-center uk-flex-center" uk-grid>
+    <div>
+      <button class="uk-tile blue" onclick={{action 'authenticateWithFacebook'}}>
+        {{fa-icon 'facebook-f' prefix='fab'}}
+      </button>
+    </div>
+    
+    <div>
+      <button class="uk-tile red" onclick={{action 'authenticateWithGoogle'}}>
+        {{fa-icon 'google' prefix='fab'}}
+      </button>
+    </div>
+  </div>
+  
+  <hr />
+  
+  <section class='fine-print'>
+    Creating an account means you're okay wth Emory Center for Digital Scholarship's <a href='http://digitalscholarship.emory.edu/about/center/privacy-policy.html' target='_blank'>Terms of Service and Privacy Policy</a>.
+  </section>
+  
+  {{#if errorMessage}}
+    <div class="alert alert-danger">
+      <section>
+        <strong>Login failed:</strong> <code>{{errorMessage}}</code>
+      </section>
+    </div>
+  {{/if}}
+</div>

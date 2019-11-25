@@ -1,0 +1,43 @@
+// $total-items: 3;
+
+// ul {
+//     width: 300px;
+//     position: absolute;
+//     // left: 50%;
+//     margin-top: 25px;
+//     // margin-left: -150px;
+//   }
+
+//   li {
+//     position: relative;
+//     display: block;
+//     border: 1px solid hotpink;
+//     margin-bottom: 5px;
+//     // padding: 10px;
+//     text-align: center;
+//     text-transform: uppercase;
+//     animation: fadeIn 0.5s linear;
+//     animation-fill-mode: both;
+//   }
+
+//   // Set delay per List Item
+//   @for $i from 1 through $total-items {
+//     li:nth-child(#{$i}) {
+//       animation-delay: .25s * $i;
+//     }
+//   }
+
+//   // Keyframe animation
+//   @keyframes fadeIn {
+//     0% {
+//       opacity: 0;
+//       top: 100px;
+//     }
+//     75% {
+//       opacity: 0.5;
+//       top: 0px;
+//     }
+//     100% {
+//       opacity: 1;
+//     }
+//   }

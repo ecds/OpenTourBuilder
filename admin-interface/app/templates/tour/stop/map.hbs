@@ -1,0 +1,8 @@
+<div class='stop-title uk-text-center uk-text-middle' data-theme='{{theme.name}}'>
+  <h2>{{model.stop.title}}</h2>
+</div>
+
+<div class='otb-container otb-stop-map-container {{if showDirections 'show-directions'}}'>
+  {{stop-map model=model showDirections=showDirections modes=modes}}
+  {{stop-directions stop=model.stop showDirections=showDirections}}
+</div>

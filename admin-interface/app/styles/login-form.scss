@@ -1,0 +1,20 @@
+.login-form {
+  .uk-form-stacked {
+    height: auto;
+  }
+}
+
+.blue,
+.red {
+  color: $white;
+  font-size: 5rem;
+  width: 75%;
+}
+
+.blue {
+  background-color: #2d4486;
+}
+
+.red {
+  background-color: #e32926;
+}

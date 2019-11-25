@@ -1,0 +1,83 @@
+<div uk-grid class="uk-child-width-auto">
+  <div>
+    {{#uk-button color="primary" size="large" on-click=(perform createTour)}}
+      New Tour
+    {{/uk-button}}
+  </div>
+  <div>
+    {{#uk-modal modalName="tour-authors" as |modal|}}
+      {{#modal.open class="" tagName="div"}}
+        Manage Site Admins
+      {{/modal.open}}
+      {{#modal.dialog}}
+        {{#modal.body}}
+          {{#data-loader queryType="search" modelName="user" as |userLoader|}}
+            {{#if (lte userLoader.data.length 1)}}
+              <p>Loading Users...</p>
+            {{else}}
+              <h3 class="uk-heading">Manage Site Admins</h3>
+              <div class="uk-margin uk-grid-small uk-child-width-1-1 uk-grid">
+                {{#each userLoader.data as |user|}}
+                  {{#unless user.super}}
+                    <div>
+                      {{input
+                        id=(concat "user" user.id)
+                        type="checkbox"
+                        name="tour_set"
+                        change=(perform toggleHasMany (hash relationType="admins" parentObj=this.model childObj=user))
+                        checked=user.currentTenantAdmin
+                      }}
+                      <label for={{tourSet.subdir}}>{{if user.display_name user.display_name user.login.identification}}</label>
+                    </div>
+                  {{/unless}}
+                {{/each}}
+              </div>
+            {{/if}}
+          {{/data-loader}}
+        {{/modal.body}}
+      {{/modal.dialog}}
+    {{/uk-modal}}
+  </div>
+</div>
+
+{{#data-loader queryType="all" modelName="tour" as |toursLoader|}}
+  {{#if toursLoader.fetchingAll}}
+    <p>Loading Tours...</p>
+  {{else}}
+    {{#uk-table-striped}}
+      <thead>
+        <tr>
+          <th>Tour</th>
+          <th class="uk-table-shrink">Published</th>
+          <th class="uk-table-shrink">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        {{#each toursLoader.data as |tour|}}
+
+          <tr>
+            <td>
+              {{!-- {{#link-to "admin.tours.edit" tour}} --}}
+              <a href={{concat "edit/" tour.id}}>{{tour.title}}</a>
+              {{!-- {{/link-to}} --}}
+            </td>
+            <td>
+              {{#uk-button color="link" on-click=(action "togglePublish" tour) class="uk-align-center"}}
+                {{fa-icon (if tour.published "check" "times") aria-hidden="true"}}
+                <span class="sr-only">{{if tour.published "Click to publish" "Click to un-publish"}}</span>
+              {{/uk-button}}
+            </td>
+            <td>
+              {{#uk-button color="link" on-click=(action "deleteTour" tour) class="uk-align-center"}}
+                {{fa-icon "trash" aria-hidden="true"}}
+                <span class="sr-only">Delete {{tour.title}}</span>
+              {{/uk-button}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    {{/uk-table-striped}}
+  {{/if}}
+{{/data-loader}}
+<div class="uk-section"></div>

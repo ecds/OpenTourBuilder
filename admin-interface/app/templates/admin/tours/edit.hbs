@@ -1,0 +1,181 @@
+{{outlet}}
+{{#data-loader queryType='fetchRecord' modelName='tour' param=model.modelId as |tourLoader|}}
+{{#if tourLoader.fetchingRecord}}
+  <p>Loading Tour...</p>
+{{else}}
+<div class='uk-child-width-1-1' uk-grid>
+{{#if currentUser.user.current_tenant_admin}}
+  <div>
+    {{#uk-modal modalName='tour-authors' as |modal|}}
+      {{#modal.open class='' tagName='div'}}
+        Manage Tour Authors
+      {{/modal.open}}
+      {{#modal.dialog}}
+        {{#modal.body}}
+          {{#data-loader queryType='all' modelName='user' as |userLoader|}}
+            {{#if (lte userLoader.data.length 1)}}
+              <p>Loading Users...</p>
+            {{else}}
+            <h3 class='uk-heading'>Manage Tour Authors</h3>
+              <div class='uk-margin uk-grid-small uk-child-width-1-1 uk-grid'>
+              {{#each userLoader.data as |user|}}
+                {{#unless user.super}}
+                  <div>
+                    {{input
+                      id=(concat 'user' user.id)
+                      type='checkbox'
+                      name='tour_set'
+                      change=(perform toggleHasMany (hash relationType='author' parentObj=tourLoader.data childObj=user))
+                      checked=(includes user.tours model)}}
+                    <label for={{tourSet.subdir}}>{{user.display_name}}</label>
+                  </div>
+                {{/unless}}
+              {{/each}}
+              </div>
+            {{/if}}
+          {{/data-loader}}
+        {{/modal.body}}
+      {{/modal.dialog}}
+    {{/uk-modal}}
+  </div>
+  {{/if}}
+  <div>
+    <form class='uk-form-stacked otb-crud uk-padding uk-padding-bottom' {{action 'doNothing' on='submit'}}>
+    {{otb-crud/common-form model=tourLoader.data modelTitle='Tour'}}
+
+    {{#otb-crud/form-section label="Travel Modes"}}
+      {{#data-loader queryType='all' modelName='mode' as |modeLoader|}}
+      <div class="uk-width-medium" uk-grid>
+        <div class="uk-width-1-2">
+          Mode
+        </div>
+        <div class="uk-width-1-4">
+          Enable
+        </div>
+        <div class="uk-width-1-4">
+          Default
+        </div>
+        {{#each modeLoader.data as |mode|}}
+        <div class="uk-width-1-2">
+          {{titleize mode.title}}
+        </div>
+        <div class="uk-width-1-4">
+          {{input type="checkbox" checked=(contains mode tourLoader.data.modes) change=(perform toggleHasMany (hash parentObj=tourLoader.data relationType='mode' childObj=mode))}}
+        </div>
+        <div class="uk-width-1-4">
+          <input type="radio" name="default" value=mode checked={{eq tourLoader.data.mode.id mode.id}} onchange={{perform setDefaultMode tourLoader.data mode}}>
+        </div>
+        {{/each}}
+      </div>
+      {{/data-loader}}
+    {{/otb-crud/form-section}}
+
+    {{#otb-crud/form-section label='Map Type'}}
+      <div class='uk-form-controls uk-child-width-1-2' uk-grid>
+        <div>
+        {{#power-select
+          options=mapTypes
+          searchEnabled=false
+          selected=tourLoader.data.map_type
+          onchange=(action (mut tourLoader.data.map_type))
+          as |type|}}
+          {{type}}
+        {{/power-select}}
+        </div>
+        <div>
+          {{!-- <img src='https://maps.googleapis.com/maps/api/staticmap?center=Atlanta,GA&size=600x300&key={{env.g-map.key}}' border=0 alt='Base Map Preview'> --}}
+          <img border="0" src="//maps.googleapis.com/maps/api/staticmap?center=Atlanta,GA&amp;zoom=13&amp;size=300x300&amp;maptype={{tourLoader.data.map_type}}&key=AIzaSyC0l_y6pP0DK4oig0ile1XLbRx9HUQeryE" alt="Points of Interest in Lower Manhattan">
+        </div>
+      </div>
+    {{/otb-crud/form-section}}
+    {{otb-crud/video model=tourLoader.data save=addVideo}}
+    {{otb-crud/medium-upload uploadTask=uploadFile model=tourLoader.data modelName='tour'}}
+    Media Count: {{tourLoader.data.tour_media.length}}
+    {{otb-crud/media model=tourLoader.data reorder=reorder save=saveRecord delete=deleteHasMany}}
+
+    {{#otb-crud/form-section classNames='crud-stop-list' label='Stops'}}
+      <div class='uk-form-controls'>
+      {{#otb-crud/new-button class='uk-margin' click=(perform newStop tourLoader.data)}}New Stop{{/otb-crud/new-button}}
+
+      {{#uk-accordion id='stopList' tagName='div' on-shown=(action 'scrollElementToTop') targets='> div > div > *' as |accordion|}}
+        {{#uk-sortable handle='.uk-accordion-title' on-stop=(perform reorder) on-remove=(perform reorder)}}
+          {{#each tourLoader.data.sortedTourStops as |stop index|}}
+            <div class='uk-background-muted uk-margin-small uk-padding-small' id={{concat stop.stop.slug '-' stop.stop.id}} data-id={{stop.id}} data-model='tour-stop'>
+              {{#accordion.item
+                title=(concat stop.position ': ' (if stop.stop.title stop.stop.title 'Loading...')) 
+                tagName='div'
+                class='otb-handle' as |item|}}
+                {{#item.content}}
+                  <div class='uk-card uk-card-default uk-card-body uk-card-small'>
+                    {{otb-crud/common-form model=stop.stop modelTitle='Stop'}}
+                    {{otb-crud/map model=stop.stop}}
+
+                    <h3 class='uk-heading'>Manage Media</h3>
+                    {{otb-crud/video model=stop.stop save=addVideo}}
+                    <h4>Upload Images</h4>
+                    {{otb-crud/medium-upload uploadTask=uploadFile model=stop.stop modelName='stop'}}
+                    {{otb-crud/media model=stop.stop reorder=reorder save=saveRecord delete=deleteHasMany}}
+                    {{#uk-button color='primary' on-click=(perform saveRecord stop.stop)}}save{{/uk-button}}
+                    {{#uk-button on-click=cancel}}Cancel{{/uk-button}}
+                    {{#uk-button color='link' on-click=(perform deleteHasMany (hash parentObj=tourLoader.data relationType='stop' childObj=stop.stop reorder=true))}}Delete from tour{{/uk-button}}
+                  </div>
+                {{/item.content}}
+              {{/accordion.item}}
+            </div>
+          {{/each}}
+        {{/uk-sortable}}
+      {{/uk-accordion}}
+      </div>
+    {{/otb-crud/form-section}}
+
+    {{#otb-crud/form-section classNames='crud-page-list' label='Pages'}}
+      <div class='uk-form-controls'>
+      {{#otb-crud/new-button class='uk-margin' click=(perform newPage tourLoader.data)}}New Page{{/otb-crud/new-button}} <span uk-tooltip="title: Hello World; pos: right">{{fa-icon 'question-circle'}}</span>
+
+      {{#uk-accordion id='pageList' tagName='div' on-shown=(action 'scrollElementToTop') targets='> div > div > *' as |accordion|}}
+        {{#uk-sortable handle='.uk-accordion-title' on-stop=(perform reorder)}}
+          {{#each tourLoader.data.sortedFlatPages as |page index|}}
+            <div class='uk-background-muted uk-margin-small uk-padding-small' id={{concat 'page-' page.flat_page.id}} data-id={{page.flat_page.id}} data-model='tour-flat-page'>
+              {{#accordion.item
+                title=(concat page.position ': ' page.flat_page.title) 
+                tagName='div'
+                class='otb-handle' as |item|}}
+                {{#item.content}}
+                  <div class='uk-card uk-card-default uk-card-body uk-card-small'>
+                    {{#otb-crud/form-section label='Page Title' as |inputId|}}
+                    {{input class='uk-input' id=inputId value=page.flat_page.title}}
+                    {{/otb-crud/form-section}}
+
+                    {{#otb-crud/form-section label='Page Content' as |inputId|}}
+                    {{ember-jodit value=(if page.flat_page.content.content page.flat_page.content.content '') onChange=(action (mut page.flat_page.content.content))}}
+                    {{/otb-crud/form-section}}
+
+                    {{#uk-button color='primary' on-click=(perform saveRecord page.flat_page)}}save{{/uk-button}}
+                    {{#uk-button on-click=cancel}}Cancel{{/uk-button}}
+                    {{#uk-button color='link' on-click=(perform deleteHasMany (hash parentObj=tourLoader.data relationType='flat_page' childObj=page.flat_page))}}Delete from tour{{/uk-button}}
+                  </div>
+                {{/item.content}}
+              {{/accordion.item}}
+            </div>
+          {{else}}
+            <div>{{#accordion.item title='No pages added to tour'}}{{item.content}}{{/accordion.item}}</div>
+          {{/each}}
+        {{/uk-sortable}}
+      {{/uk-accordion}}
+    <div class='uk-section'></div>
+      </div>
+    {{/otb-crud/form-section}}
+    </form>
+  </div>
+  {{otb-crud/submit-buttons class='uk-width-1-1' save=(perform saveRecord tourLoader.data)}}
+</div>
+
+<div id="task-running" class='uk-flex-top'>
+  <div class='uk-modal-dialog uk-margin-auto-vertical uk-modal-body'>
+    <p class='uk-text-{{taskMessage.type}} uk-text-large'>
+      {{taskMessage.message}}
+    </p>
+  </div>
+</div>
+{{/if}}
+{{/data-loader}}

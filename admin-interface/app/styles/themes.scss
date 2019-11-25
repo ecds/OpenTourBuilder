@@ -1,0 +1,77 @@
+// theme map
+$themes: (
+  default: (
+    blu: (
+      primary-dark: #014b9c,
+      primary: #1b76ce,
+      secondary: #eee,
+      accent: #fe5455
+    ),
+    dark: (
+      primary-dark: #000,
+      primary: #212121,
+      secondary: #949494,
+      accent: #fe5455
+    ),
+    second: (
+      primary: #287f6e,
+      secondary: #83e5d2
+    )
+  )
+);
+
+$global-primary-background: #212121;
+
+// if theme service exists as addon - allow 3rd parties to merge into themes.
+@if variable-exists(theme-additional) {
+  $themes: map-merge($themes, $theme-additional);
+}
+
+// @mixin apply-theme {
+//   @each $base, $attributes in $themes {
+//     @each $section, $values in $attributes {
+//       $name: '#{$base}-#{$section}';
+//       &[data-theme='#{$name}'] {
+//         // ..
+//       }
+//     }
+//   }
+// }
+
+// helper for SASS files to apply theme values to an element.
+// usage: @include theme('color', 'primary');
+@mixin theme($css-attribute, $theme-value) {
+  @each $base, $attributes in $themes {
+    @each $section, $values in $attributes {
+      $name: '#{$base}-#{$section}';
+      &[data-theme='#{$name}'] {
+        @if $css-attribute == 'background' and $theme-value == 'bg-image' {
+          $url: map-get($values, $theme-value);
+          #{$css-attribute}: url($url) repeat-x;
+        } @else if $css-attribute == 'background' and $theme-value == 'icon' {
+          $url: map-get($values, $theme-value);
+          #{$css-attribute}: url($url) no-repeat;
+        } @else {
+          #{$css-attribute}: map-get($values, $theme-value) !important;
+        }
+        // ...
+      }
+    }
+  }
+}
+
+// helper for more advanced theming.
+// usage: @include theme-advanced('border', '', 'accent', '1px solid');
+@mixin theme-advanced($css-attribute, $before, $theme-value, $after) {
+  @each $base, $attributes in $themes {
+    @each $section, $values in $attributes {
+      $name: '#{$base}-#{$section}';
+
+      &[data-theme='#{$name}'] {
+        #{$css-attribute}: #{$before} map-get($values, $theme-value) #{$after};
+      }
+    }
+  }
+}
+
+// @mixin theme-value($them-value);

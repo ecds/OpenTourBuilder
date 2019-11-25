@@ -1,0 +1,22 @@
+<div id='stop-list' class='uk-overflow-auto'>
+    <div class="uk-margin-bottom" id={{tourStops.firstObject.tour.slug}}>
+        {{otb-media stop=tourStops.firstObject.tour}}
+        <div class='uk-container'>
+            {{{tourStops.firstObject.tour.description}}}
+        </div>
+    </div>
+    <hr />
+    {{#each tourStops as |tourStop|}}
+    <div class="uk-margin-bottom uk-position-relative stop-list-stop {{if tourStop.active 'active-stop'}} tour-stop" id={{concat tourStop.stop.slug '-' tourStop.stop.id}} data={{tourStop}}>
+        {{#sticky-element top=80 bottom=0}}
+        <h3 class='uk-padding-small uk-margin-remove'>{{tourStop.position}}: {{tourStop.stop.title}}</h3>
+        {{/sticky-element}}
+        {{!-- {{#if (and tourStop.stop.media tourStop.active)}} --}}
+        {{otb-media stop=tourStop.stop}}
+        {{!-- {{/if}} --}}
+        <div class='uk-container'>
+            {{{tourStop.stop.description}}}
+        </div>
+    </div>
+    {{/each}}
+</div>

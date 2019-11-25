@@ -1,0 +1,64 @@
+<div class='uk-grid-match uk-grid-medium uk-child-width-expand@s' uk-grid>
+  <div class='uk-width-1-3@m uk-width-1-1@s uk-margin-bottom'>
+
+    <h3 class='uk-heading'>Stop</h3>
+    {{#otb-crud/form-section label='Stop Address' as |inputId|}}
+        {{input class='uk-input uk-margin-bottom' id=inputId value=model.address}}
+        {{#uk-button size='small' color='secondary' on-click=(action 'locateAddress' model=model)}}
+          {{fa-icon 'location-arrow'}} Locate Address
+        {{/uk-button}}
+    {{/otb-crud/form-section}}
+
+    {{#otb-crud/form-section label='Latitude' as |inputId|}}
+      {{input class='uk-input' type='number' step='0.0001000000000' id=inputId value=model.lat}}
+    {{/otb-crud/form-section}}
+
+    {{#otb-crud/form-section label='Longititude' as |inputId|}}
+      {{input class='uk-input' type='number' step='0.0001000000000' id=inputId value=model.lng}}
+    {{/otb-crud/form-section}}
+
+    <button class='uk-button uk-button-small' uk-toggle target='.parking-location'>Add parking location</button>
+    <div class='parking-location' hidden>
+      <h3 class='uk-heading' >Parking</h3>
+      {{#otb-crud/form-section label='Parking Address' as |inputId|}}
+          {{input class='uk-input uk-margin-bottom' id=inputId value=parkingAddress}}
+          {{#uk-button size='small' color='secondary' on-click=(action 'locateAddress' parkingAddress model.parking_lat model.parking_lng)}}
+            {{fa-icon 'location-arrow'}} Locate Address
+          {{/uk-button}}
+      {{/otb-crud/form-section}}
+
+      {{#otb-crud/form-section label='Latitude' as |inputId|}}
+        {{input type='number' class='uk-input' step='0.0001000000000' id=inputId value=model.parking_lat}}
+      {{/otb-crud/form-section}}
+
+      {{#otb-crud/form-section label='Longitude' as |inputId|}}
+        {{input type='number' class='uk-input' step='0.0001000000000' id=inputId value=model.parking_lng}}
+      {{/otb-crud/form-section}}
+    </div>
+  </div>
+
+  <div class='uk-width-2-3@m uk-width-1-1@s'>
+  {{#if (and model.lat model.lng)}}
+    {{#g-map options=(hash zoom=18 mapTypeId=model.map_type) lat=model.lat lng=model.lng as |feature|}}
+        {{#feature.marker
+            draggable=true onDrag=(action 'reLocate')
+            lat=model.lat
+            lng=model.lng as |marker|}}
+        {{/feature.marker}}
+        {{#if (and model.parking_lat model.parking_lng)}}
+          {{#feature.marker
+            icon=(parking-icon)
+            draggable=true onDrag=(action 'reLocateParking')
+            lat=model.parking_lat
+            lng=model.parking_lng as |marker|}}
+        {{/feature.marker}}
+        {{/if}}
+      {{/g-map}}
+  {{/if}}
+  </div>
+  <div class='uk-width-1-1'>
+    {{#otb-crud/form-section label='Direction Notes' as |inputId|}}
+      {{ember-jodit value=(if model.direction_notes model.direction_notes '') onChange=(action (mut model.direction_notes))}}
+    {{/otb-crud/form-section}}
+  </div>
+</div>
