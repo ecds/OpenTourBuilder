@@ -1,8 +1,0 @@
-{{#if loadEmbed}}
-  {{{video.medium.embed}}}
-{{else}}
-  <div role='link' tabindex='0' onclick={{toggle 'loadEmbed' this}}>
-    {{uk-img medium=medium target=(concat '#intro-media-modal-' video.medium.id) alt=(concat 'Image: ' video.medium.caption) data-src=(concat video.medium.baseUrl video.medium.desktop)}}
-    <p>{{video.medium.caption}}</p>
-  </div>
-{{/if}}
