@@ -91,7 +91,7 @@ class V3::ToursController < V3Controller
               params, only: [
                     :title, :description,
                     :is_geo, :modes, :published, :theme_id,
-                    :mode_id, :meta_description, :stops,
+                    :mode, :meta_description, :stops,
                     :media, :authors, :flat_pages, :map_type
                 ]
             )

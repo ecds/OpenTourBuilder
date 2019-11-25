@@ -42,6 +42,34 @@
   <div>
     <form class='uk-form-stacked otb-crud uk-padding uk-padding-bottom' {{action 'doNothing' on='submit'}}>
     {{otb-crud/common-form model=tourLoader.data modelTitle='Tour'}}
+
+    {{#otb-crud/form-section label="Travel Modes"}}
+      {{#data-loader queryType='all' modelName='mode' as |modeLoader|}}
+      <div class="uk-width-medium" uk-grid>
+        <div class="uk-width-1-2">
+          Mode
+        </div>
+        <div class="uk-width-1-4">
+          Enable
+        </div>
+        <div class="uk-width-1-4">
+          Default
+        </div>
+        {{#each modeLoader.data as |mode|}}
+        <div class="uk-width-1-2">
+          {{titleize mode.title}}
+        </div>
+        <div class="uk-width-1-4">
+          {{input type="checkbox" checked=(contains mode tourLoader.data.modes) change=(perform toggleHasMany (hash parentObj=tourLoader.data relationType='mode' childObj=mode))}}
+        </div>
+        <div class="uk-width-1-4">
+          <input type="radio" name="default" value=mode checked={{eq tourLoader.data.mode.id mode.id}} onchange={{perform setDefaultMode tourLoader.data mode}}>
+        </div>
+        {{/each}}
+      </div>
+      {{/data-loader}}
+    {{/otb-crud/form-section}}
+
     {{#otb-crud/form-section label='Map Type'}}
       <div class='uk-form-controls uk-child-width-1-2' uk-grid>
         <div>

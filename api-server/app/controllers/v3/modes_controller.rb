@@ -52,7 +52,12 @@ module V3
 
         # Only allow a trusted parameter "white list" through.
         def mode_params
-          params.require(:mode).permit(:title)
+          ActiveModelSerializers::Deserialization
+          .jsonapi_parse(
+            params, only: [
+                  :tour, :tours
+              ]
+          )
         end
   end
 end

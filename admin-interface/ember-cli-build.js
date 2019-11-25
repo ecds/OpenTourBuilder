@@ -11,7 +11,11 @@ module.exports = function(defaults) {
     },
 
     'ember-composable-helpers': {
-      only: ['toggle', 'next', 'pipe']
+      only: ['toggle', 'next', 'pipe', 'contains']
+    },
+
+    'ember-cli-string-helpers': {
+      only: ['titleize']
     },
 
     emberCliDropzonejs: {

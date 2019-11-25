@@ -24,6 +24,8 @@ class Ability
     can [:manage], StopMedium
     can [:manage], FlatPage
     can [:manage], TourFlatPage
+    can [:manage], Mode
+    can [:manage], TourMode
     can [:read], User
     return unless user.current_tenant_admin?
     can [:manage], Tour

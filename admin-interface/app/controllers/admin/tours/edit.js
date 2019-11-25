@@ -138,6 +138,14 @@ export default Controller.extend(CrudActionsMixin, {
       let path = event.path || (event.composedPath && event.composedPath());
       path[2].scrollIntoView();
       window.scrollBy(0, -100);
+    },
+
+    addRemoveMode(options, event) {
+      if (event.target.checked) {
+        this.get()
+      }
+    console.log("TCL: addRemoveMode -> event", event)
+    console.log("TCL: addRemoveMode -> options", options)
     }
   }
 });

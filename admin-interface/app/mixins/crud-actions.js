@@ -204,5 +204,10 @@ export default Mixin.create({
 
     modal.hide();
     modal.$destroy;
+  }),
+
+  setDefaultMode: task(function*(tour, mode) {
+    tour.setProperties({ mode: mode });
+    yield this.get('saveRecord').perform(tour);
   })
 });
