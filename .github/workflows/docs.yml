@@ -31,10 +31,13 @@ jobs:
       # The theme needs git, which the slim image leaves out. Installing it
       # first also makes checkout produce a real git repository.
       - run: apt-get update && apt-get install -y --no-install-recommends git
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
+      # The checkout belongs to a different user than the container, so git
+      # won't read it until it's marked safe.
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
       - run: pip install --no-cache-dir -r requirements.txt
       - run: mkdocs build --strict
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: site
 
@@ -46,4 +49,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
