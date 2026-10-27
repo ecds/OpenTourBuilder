@@ -1,10 +1,10 @@
 # Builds the docs site and publishes it to GitHub Pages whenever
-# anything under docs/ changes on the develop branch.
+# anything under docs/ changes on the main branch.
 name: Docs
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
     paths:
       - "docs/**"
       - "mkdocs.yml"
