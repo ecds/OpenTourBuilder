@@ -21,9 +21,11 @@ See each repository's README for setup and development instructions.
 
 ## Documentation
 
-The documentation lives in [`docs/`](docs/) as plain Markdown and is published to [docs.opentour.site](https://docs.opentour.site) whenever it changes on the `develop` branch.
+The documentation lives in [`docs/`](docs/) as plain Markdown and is published to [docs.opentour.site](https://docs.opentour.site) whenever it changes on the `main` branch.
 
 To change it, edit the Markdown files, directly on GitHub or locally, and commit. New pages need a line in the `nav:` list in [`mkdocs.yml`](mkdocs.yml) to appear in the menu. Stick to Markdown that GitHub itself displays correctly, so the files stay readable here too.
+
+Put images in `docs/images/` as PNG or JPEG, any size. When they reach `main`, the docs workflow shrinks them to at most 1600 pixels wide, converts them to WebP, updates the links, and commits the result. Pull before your next local edit to pick up that commit.
 
 To preview the site locally (optional):
 

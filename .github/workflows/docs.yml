@@ -1,5 +1,6 @@
 # Builds the docs site and publishes it to GitHub Pages whenever
-# anything under docs/ changes on the main branch.
+# anything under docs/ changes on the main branch. New PNG and JPEG images
+# are first turned into smaller WebP files and committed back.
 name: Docs
 
 on:
@@ -10,6 +11,7 @@ on:
       - "mkdocs.yml"
       - "requirements.txt"
       - ".github/workflows/docs.yml"
+      - ".github/scripts/**"
   workflow_dispatch:
 
 permissions:
@@ -22,7 +24,34 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  optimize-images:
+    runs-on: ubuntu-latest
+    container: python:3.13-slim
+    permissions:
+      contents: write
+    outputs:
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - run: apt-get update && apt-get install -y --no-install-recommends git
+      - uses: actions/checkout@v7
+      - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+      - run: pip install --no-cache-dir -r .github/scripts/requirements.txt
+      - run: python .github/scripts/optimize_images.py docs
+      # Commits made with the workflow's own token don't start another run,
+      # so the build below picks up this commit instead.
+      - id: commit
+        run: |
+          git add -A docs
+          if ! git diff --cached --quiet; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git commit -m "Convert docs images to WebP"
+            git push
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+
   build:
+    needs: optimize-images
     runs-on: ubuntu-latest
     # A fixed Python image, so the build doesn't depend on what GitHub
     # installs on its runners.
@@ -32,6 +61,8 @@ jobs:
       # first also makes checkout produce a real git repository.
       - run: apt-get update && apt-get install -y --no-install-recommends git
       - uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.optimize-images.outputs.sha }}
       # The checkout belongs to a different user than the container, so git
       # won't read it until it's marked safe.
       - run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
