@@ -28,6 +28,9 @@ jobs:
     # installs on its runners.
     container: python:3.13-slim
     steps:
+      # The theme needs git, which the slim image leaves out. Installing it
+      # first also makes checkout produce a real git repository.
+      - run: apt-get update && apt-get install -y --no-install-recommends git
       - uses: actions/checkout@v4
       - run: pip install --no-cache-dir -r requirements.txt
       - run: mkdocs build --strict
