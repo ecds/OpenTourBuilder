@@ -1,0 +1,24 @@
+site_name: OpenTour Builder
+site_url: https://docs.opentour.site/
+repo_url: https://github.com/ecds/OpenTourBuilder
+edit_uri: edit/develop/docs/
+
+theme:
+  name: shadcn
+
+nav:
+  - About OpenTour: index.md
+  - How to Use OpenTour: how-to-use.md
+  - Terms of Service: terms-of-service.md
+  - Version 2.0 (archived):
+      - How to Use v. 2.0: archive/how-to-use-v2.md
+      - v. 2.0 Installation: archive/install-v2.md
+
+markdown_extensions:
+  - toc:
+      # Heading links match GitHub's, so links copied from github.com work.
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+  - tables
+  - pymdownx.blocks.admonition

@@ -1,9 +1,0 @@
-[submodule "otb-public-interface"]
-	path = otb-public-interface
-	url = https://github.com/ecds/otb-public-interface
-[submodule "otb-api-server"]
-	path = otb-api-server
-	url = https://github.com/ecds/otb-api-server
-[submodule "otb-admin-interface"]
-	path = otb-admin-interface
-	url = https://github.com/ecds/otb-admin-interface

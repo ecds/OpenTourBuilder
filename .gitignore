@@ -1,34 +1,5 @@
-*.DS_Store
-.coverage
-api-server/config/database.yml
-api-server/log
-api-server/config/secrets.yml
-tmp
-api-server/config/initializers/auth.rb
-api-server/public/uploads/
+.DS_Store
 .vscode
-*.env*
-*server.js
 
-# compiled output
-*/dist/
-*/tmp/
-
-# dependencies
-*/bower_components/
-*/node_modules/
-
-# misc
-*/.sass-cache
-*/connect.lock
-*/coverage/
-*/libpeerconnection.log
-*/npm-debug.log*
-*/testem.log
-*/yarn-error.log
-
-# ember-try
-*/.node_modules.ember-try/
-*/bower.json.ember-try
-*/package.json.ember-try
-
+# docs build output
+site/
