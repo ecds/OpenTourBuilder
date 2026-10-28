@@ -5,6 +5,7 @@ edit_uri: edit/develop/docs/
 
 theme:
   name: shadcn
+  icon: https://opentour.site/images/otblogo.png
 
 nav:
   - About OpenTour: index.md
