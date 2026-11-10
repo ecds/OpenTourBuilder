@@ -1,23 +1,16 @@
-# OpenTour v. 3.0 Manual (including 3.1 updates for admin / 4.0 updates for public view)
+## OpenTour v. 3.0 Manual (including 3.1 updates for admin / 4.0 updates for public view)
 
-Updated October 5, 2026.
+*Updated November 10, 2026.*
 
 For installation instructions for v. 3.0+, see the [README.md](https://github.com/ecds/OpenTourBuilder/blob/develop/README.md). This is an overview using OpenTour v. 3.0+ for your projects. It assumes you already have OpenTour v. 3.0+ set up on your system or have access to an installation and have a url ready.
 
 If you want to use OpenTour, you can find out more [on the about page](index.md) and apply for a site [on the Emory webpage](https://digitalscholarship.emory.edu/opentour-builder-proposal-process/) or read about teaching with the OpenTour app [on the ECDS blog](https://scholarblogs.emory.edu/ecds/ecds-resources-feature-opentour/) and find out how to apply for help in getting your own site.
 
-****NOTE*** - The URLs for Emory University's official installation of OpenTour Builder have changed:
+### How to add a Login to a Tour site/Login common issues:
 
-- FROM: https://opentour.emory.edu/ with https://opentour.emory.edu/tour-site-name for each Tour Site
-- TO: https://opentour.site with a subdomain https://tour-site-name.opentour.site for each Tour Site.
+**To add a ***New*** account to your Tour Site, follow the instructions for "Log in" below and then contact the OpenTour administrator to add Tour Site permissions. <u>YOU must create the account</u> (by logging in once) *before* the administrator can give it Tour Site access.**
 
-***All old URLs will continue to work*** (there will be no interruption in function).
-
-## Add a Login to a Tour site:
-
-**To add a ***New*** account to your Tour Site, follow the instructions for "Log in" below and then contact the OpenTour administrator to add Tour Site permissions. <u>YOU must create the account</u> (by logging in once) before the administrator can give it Tour Site access.**
-
-**LOGIN NOTE:** The first time you log in you will see the admin message *You have not been added to any tour sites. Please contact an administrator.* You can click on 'administrator' for the ECDS admin email address. Once you are added to a tour site, you will see your tour site name in this location.<br/>
+**LOGIN NOTE:** The first time you log in you will see the admin message *You have not been added to any tour sites. Please contact an administrator.* You can click on 'administrator' for the ECDS admin email address. The OpenTour administrator (either the person you consulted with previously or the person at this ECDS admin email address) will add you to a tour site. Once you are added to a tour site, you will see your tour site name in this location.<br/>
 
 ![No tour sites](images/NoTourSites3_1.webp "Admin message stating no tour sites")
 
@@ -421,3 +414,12 @@ Example timeline using ‘background’ field and short text. You can see more o
 ### e. When I am working on a tour with other members of my group, not all the data I enter saves. Why isn't it saving?
 
 - OpenTour will save your work automatically as you work. It is also best practice to click 'save' on the Tour Stop and 'save' on the overall Tour at the end of every work session. While OpenTour is saving your work, is not automatically updating any edits entered by anyone else. Because of this, **only one person should enter data at a time**. If two people enter data (on separate browsers) at once, whichever edits are saved last will show, but the other edits will be overwritten, and not save. If you are working alongside others, you will need to *refresh your page before making changes* to prevent overwriting their work.
+
+### f. My URL seems to redirect now. This is the URL I used to use. Why did it change?
+
+***NOTE*** - The URLs for Emory University's official installation of OpenTour Builder changed with an older update of the app:
+
+- FROM: https://opentour.emory.edu/ with https://opentour.emory.edu/tour-site-name for each Tour Site
+- TO: https://opentour.site with a subdomain https://tour-site-name.opentour.site for each Tour Site.
+
+***All old URLs will continue to work*** (there will be no interruption in function). This allows users to have a more fitting URL for their projects.
