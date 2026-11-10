@@ -69,50 +69,63 @@ If you want to use OpenTour, you can find out more [on the about page](index.md)
 
 ### h. **LOGIN NOTE:** Getting access to a Tour Site.
 
-- **LOGIN NOTE:** The first time you log in you will see the admin message *You have not been added to any tour sites. Please contact an administrator.* You can click on 'administrator' for the Readux admin email address. Once you are added to a tour site, you will see your tour site name in this location.
+- **LOGIN NOTE:** The first time you log in you will see the admin message *You have not been added to any tour sites. Please contact an administrator.* You can click on 'administrator' for the Readux admin email address. Once you are added to a tour site, you will see your tour site name in this location. See the [Login notes](#how-to-add-a-login-to-a-tour-sitelogin-common-issues) at the top of the page for more information.
 
 ### i. **COMMON ISSUE:** Logged in, but no tour site
 
-If you log in and find the above message (also pictured in image below) instead of your tour site, when you have had access to a tour site in the past, *please first check that you logged in with the correct Gmail/Facebook/Github account*. Your OpenTour tour site permissions are tied to the specific email address you use to log in, and if you use a different social media account, you will not be able to access your tour site. OpenTour will register you as a different (new) user!
+If you log in and find the above message (also pictured in image below) instead of your tour site, when you have had access to a tour site in the past, *please first check that you logged in with the correct Gmail/Facebook/Github account*. Your OpenTour tour site permissions are tied to the specific email address you use to log in, and if you use a different social media account, you will not be able to access your tour site. OpenTour will register you as a different (new) user! See the [Login notes](#how-to-add-a-login-to-a-tour-sitelogin-common-issues) at the top of the page for more information.
 
 ![No tour sites](images/NoTourSites3_1.webp "Admin message stating no tour sites")
 
-### j. The Documentation link available in the header brings the user to this guide for help.
+### j. Documentation link - how to find this.
+
+The Documentation link available in the header of [opentour.site](https://opentour.site) brings the user to this guide for help.
 
 ## 2. How to Create a Tour.
 ### a. Once you are logged-in, go to your “Tour Site”.
 
+- The main admin will show a grey bar with you Tour Site name. Click on the name to go to the Tour Site admin.
 - All your work will stay within your named Tour Site. The name of your tour site will also be the URL to which visitors will go.
-- E.g. *http://tour-site-name.opentour.site/* will be the URL for tours created in the tour site called “Tour Site Name”.
+- E.g. *https://tour-site-name.opentour.site/* will be the URL for tours created in the tour site called “Tour Site Name”.
 - The name of your tour site should fit on one line on a mobile phone for best legibility. This will be under 25 characters on most mobile phones and we recommend around 22 characters or shorter.
 
 ![Click on Tour Site](images/ClickOnTourSite.webp "Click on your Tour Site")
 
-### b. **Sharing the site:** Take care and be kind to other users.
+### b. *Sharing the OpenTour site with other users* Take care and be kind to other users.
 
-- You should not be able to access other tour sites, but if you have access to multiple projects, *Do NOT* try to create a new tour outside of your current tour site. *Do NOT* try to create a tour from the main admin page before clicking on your tour site. **Do NOT edit, delete, or otherwise alter the tours of other users** who may share your tour site.
+- You should not be able to access other tour sites, but at times if you are a part of a larger institution's site or if you have access to multiple projects, you may see other tours or tour sites.
+- If you do have such access, *Do NOT* try to create a new tour outside of your current tour site. *Do NOT* try to create a tour from the main admin page before clicking on your tour site. **Do NOT edit, delete, or otherwise alter the tours of other users** who may share your tour site.
 
-### c. Once you are in your Tour Site, you have a few options.
+### c. Once in your Tour Site, what to do.
 
+- In the Tour Site admin, you have a few options.
 - You can choose the **“New Tour”** button to create a tour!
-- If you already created your tour, **click on its name** to edit it.
+- If you already created your tour, **click on its name** to edit it. This will take you to the tour specific admin page.
 - You can add a **unique logo** to your tour site, which will show in the top left corner of your tour site in the public view. Just click on 'Upload site logo' and choose an appropriately sized image file.
 
 ![New Tour Button](images/EditTour.webp "Click on the New Tour Button in your Tour Site")
 
-### d. Clicking on 'New Tour' brings up the edit a tour menu.
+### d. To create a new tour.
 
-- It has a number of basic fields to get your tour started.  First, we will look at the fields for creating the main tour landing page.
+- Clicking on 'New Tour' brings up the edit a tour menu for a new blank tour.
+- This admin page has a number of basic fields to get your tour started.  First, we will look at the fields for creating the main tour landing page.
 
 ![New Tour Menu](images/NewTourFields.webp "This Brings up the New Tour Menu")
 
-### e. To begin creating your tour, enter your Tour Title.
+### e. First, enter your Tour Title.
 
+- To begin creating your tour, enter your title in the "Tour Title" field. Remember, like the Tour Site title - the Tour Title will be a part of the tour's URL.
 - Keep in mind that it should be short and clear.  It needs to fit on the width of a mobile phone, which limits the number of descriptive words you can use. The maximum number of characters is 38, which in some cases may be too long. We recommend keeping your tour title to around 30 characters or less.
+- If you want a longer tour title, you can use a URL shorter (like bitly) to make a shorter URL for your users. We recommend, though, that you use a shorter title, and add the additional information from your longer title into the Tour Description, at the top of this field in bold.
 
-### f. Below “Tour Title” you will see the word “published” and a checkbox.
+### f. The "Publish" and Unpublish checkbox.
 
+- Below “Tour Title” you will see the word “Published” and a checkbox.
+- When you check this checkbox, the tour will become published (publicly visible and found by search engines).
+- When you uncheck the box, it will return to 'private' status, visible only when you are logged into the admin.
+- You can select, and deselect this box as many times as you want, and continue to edit the tour.
 - **Do not** select this checkbox until you are certain you want the tour to be publicly visible.  You can continue to work on the tour, edit it, and see what it looks like, at any point when you are logged into the site, even before it is published. You will also be able to edit the tour after it is published.
+- Make sure to click 'save' at the bottom of the page, before navigating away. While the tour auto-saves as you edit, it is also best with this step to make sure it saved.
 
 ### g. The next field is your “Tour Description.”
 
