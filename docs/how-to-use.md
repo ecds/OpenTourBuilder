@@ -18,7 +18,7 @@ If you want to use OpenTour, you can find out more [on the about page](index.md)
 
 **COMMON ISSUE:** If you log in and find the above message (*You have not been added to any tour sites. Please contact an administrator.*) instead of your tour site, <em>when you have had access to a tour site in the past</em>, please <strong>first check</strong> that you logged in with *the correct Gmail/Facebook/Github account*. Your OpenTour tour site permissions are tied to the specific email address you use to log in, and if you use a different social media account, you will not be able to access your tour site. OpenTour will add you as a different (new) user!
 
-## Contents:
+## Contents of this page
 
 1. [Log in](#1-how-to-log-in "log in")
 2. [Create a Tour](#2-how-to-create-a-tour "Create a Tour")
@@ -38,19 +38,20 @@ If you want to use OpenTour, you can find out more [on the about page](index.md)
 
 - for Emory that is [http://opentour.site/admin](http://opentour.site/admin). If you are logging into an Emory hosted tour site, log into https://your-tour-site-name.opentour.site/admin/, replacing *your-tour-site-name* with the url for your Tour Site.
 
-### b. Log in by using your chosen social media account
+### b. Log in with your chosen social media account
 
-- (***this must be the same one that was set up as a user for this tour site***). Click the Red 'G' Google bar for gmail, blue 'f' for Facebook, black Github bar for your Github account, or the light blue Twitter for your Twitter account.
-- **Note:** this will also log you into gmail/Facebook/Github/Twitter on this browser. If you go to your mail, google, youtube, etc., you will see that. So, you may want to go log out of gmail after you finish working on the tour (particularly on public computers).
-- **Note:** If you are already logged into Gmail/Facebook/Github/Twitter in the browser that you are using, OpenTour may automatically accept your login without requiring your password a second time, and redirect you automatically to the admin after you choose your account name.
+- (***this must be the same one that was set up as a user for this tour site***). Click the Red 'G' Google bar for Gmail, blue 'f' for Facebook, black Github bar for your Github account, or the light blue Twitter for your Twitter account. **Note - With recent updates, Gmail and GitHub are the currently preferred options. We will be offering a unique OpenTour login in the near future.**
+- **Note:** this will also log you into Gmail/Github on this browser. If you go to your mail, google, youtube, etc., you will see that. So, you may want to go log out of Gmail after you finish working on the tour (particularly on public computers). You can log out of Gmail, and stayed logged into OpenTour (until you choose to log out of OpenTour).
+- **Note:** If you are already logged into Gmail/Github in the browser that you are using, OpenTour may automatically accept your login without requiring your password a second time, and redirect you automatically to the admin after you choose your account name.
 
 ### c. **Login Error**
 
-- *Note:* If you get an error when you try to log in, check to see if you are already logged into Gmail/Facebook/Github/Twitter on another tab, and try logging out before logging back into OpenTour.
+- *Note:* If you get an error when you try to log in, check to see if you are already logged into Gmail/Github on another tab, and try logging out before logging back into OpenTour.
+- See the [Login notes](#how-to-add-a-login-to-a-tour-sitelogin-common-issues) at the top of the page for more information.
 
 ### d. **OpenTour Terms of Service agreement**
 
-- *Note:* The first time you log into the OpenTour app, you will be presented with the OpenTour *Terms of Service agreement*. Agree by clicking 'Agree' at the bottom to proceed.
+- *Note:* The first time you log into the OpenTour app, you will be presented with the OpenTour [*Terms of Service agreement*](/terms-of-service/). Agree by clicking 'Agree' at the bottom to proceed.
 
 ### e. The login page looks like this:
 
