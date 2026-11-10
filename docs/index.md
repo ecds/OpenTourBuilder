@@ -1,6 +1,11 @@
 # OpenTour Wiki
 
-For installation instructions for version 2.0, see the [README.md](https://github.com/ecds/OpenTourBuilder/blob/master/README.md), or OTB v. 2.0 Installation Instructions page to the right. For an overview of how to use OpenTour v. 2.0 or v. 3.0 for your projects, see the OpenTour Manuals in the How to Use pages to the right. [OpenTour v. 3.0](how-to-use.md) is the current active version of the OpenTour app.
+## Verson 2.0 (Archived)
+
+For installation instructions for version 2.0, see the [README.md](https://github.com/ecds/OpenTourBuilder/blob/master/README.md), or OTB v. 2.0 Installation Instructions page (v. 2.0 Installation) on the bottom left. For the How to Use OpenTour v. 2.0 instructions, see the How to Use page on the left. 
+
+## Version 3+ (Current)
+For an overview of how to use OpenTour v. 3.0+ for your projects, see the OpenTour Manual in the **How to Use OpenTour** pages on the top left. [OpenTour v. 3.0](how-to-use.md) is the current active version of the OpenTour app.
 
 # About OpenTour Builder
 
