@@ -82,8 +82,9 @@ If you log in and find the above message (also pictured in image below) instead 
 The Documentation link available in the header of [opentour.site](https://opentour.site) brings the user to this guide for help.
 
 ## 2. How to Create a Tour.
-### a. Once you are logged-in, go to your “Tour Site”.
+### a. Navigating to your Tour.
 
+- Once you are logged-in, go to your “Tour Site”.
 - The main admin will show a grey bar with you Tour Site name. Click on the name to go to the Tour Site admin.
 - All your work will stay within your named Tour Site. The name of your tour site will also be the URL to which visitors will go.
 - E.g. *https://tour-site-name.opentour.site/* will be the URL for tours created in the tour site called “Tour Site Name”.
@@ -116,7 +117,7 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 - To begin creating your tour, enter your title in the "Tour Title" field. Remember, like the Tour Site title - the Tour Title will be a part of the tour's URL.
 - Keep in mind that it should be short and clear.  It needs to fit on the width of a mobile phone, which limits the number of descriptive words you can use. The maximum number of characters is 38, which in some cases may be too long. We recommend keeping your tour title to around 30 characters or less.
-- If you want a longer tour title, you can use a URL shorter (like bitly) to make a shorter URL for your users. We recommend, though, that you use a shorter title, and add the additional information from your longer title into the Tour Description, at the top of this field in bold.
+- If you want a longer tour title, you can use a URL shorter (like bitly) to make a shorter URL for your users. We recommend, though, that you use a shorter title, and add the additional information from your longer title into the Tour Description field, at the top of this field in bold. This will show directly below the Tour Title on the Tour page.
 
 ### f. The "Publish" and Unpublish checkbox.
 
@@ -127,39 +128,46 @@ The Documentation link available in the header of [opentour.site](https://opento
 - **Do not** select this checkbox until you are certain you want the tour to be publicly visible.  You can continue to work on the tour, edit it, and see what it looks like, at any point when you are logged into the site, even before it is published. You will also be able to edit the tour after it is published.
 - Make sure to click 'save' at the bottom of the page, before navigating away. While the tour auto-saves as you edit, it is also best with this step to make sure it saved.
 
-### g. The next field is your “Tour Description.”
+### g. Next is “Tour Description.”
 
-- Your “Tour Description” can be much longer than your Title.  This field can include a text description. It should not be too long, as again it needs to be read on a mobile phone screen, however, scrolling allows for a few paragraphs.  This section introduces your tour and its purpose.  The text is entered in a basic wysiwyg editor (like working in a basic text editor).
-- The “html” tab `[</> SOURCE]`, located next to the `PREVIEW` tab, allows you to edit the html of your text directly. You do not have to use this, but if you want additional styling of your text, you can use this tab. It allows you to iframe content if needed or minimally change styles. Go to [How-To Information](#5-additional-how-to-information "Additional How-To") for how to use iframes.
-- There are also other helpers for **bold text**, *italics*, underline, strike-through, lists, and adding external or internal links with the chain/link icon.
+- Your text in the field “Tour Description” can be much longer than your Title.  This field includes a text description. For length consider that again it needs to be read on a mobile phone screen, however, scrolling allows for a few paragraphs.  You are only limited by how much you would expect a user to read on a mobile phone screen (not by the field itself).  This section introduces your tour and its purpose.  The text is entered in a basic wysiwyg editor (like working in a basic text editor).
+- The “html” tab `[</> SOURCE]`, located next to the `PREVIEW` tab, allows you to edit the html of your text directly. You do not have to use this, but if you want additional styling of your text, you can use this tab. It allows you to iframe content if needed or minimally change styles (such as the color of your text). Go to [How-To Information](#5-additional-how-to-information "Additional How-To") for how to use iframes.
+- In the wysiwyg editor, there are also other helpers for **bold text**, *italics*, underline, strike-through, lists, and adding external or internal links with the chain/link icon.
 - **Note:** After entering your tour description, add a couple of carriage returns (hit enter a couple of times) to leave some white space after your paragraph-text. This will make reading your tour text easier on a mobile device.
 
-### h. Next is the “Tour Meta Description”.
+### h. Then “Tour Meta Description”.
 
-- The Tour Meta Description is the text that would show up if someone found your tour by means of a search engine, like Google, or if the tour is shared on social media, like Twitter.  It can be the same as the tour description or shorter and simpler, but cannot have styles (bold, italics, etc.).
+- The Tour Meta Description field contains the text that would show up if someone found your tour by means of a search engine, like Google, or if the tour is shared on social media, like Facebook, Threads, etc.  The text here can be the same as the tour description or summarized to be shorter and simpler, but it *cannot* have styles (bold, italics, etc.) or any formatting.  Only a sentence or two is necessary.
 
-### i. *New in 3.1* On mobile devices you can click the audio (headset) icon and a computer voice reads out the text.
+### i. Select the Tour audio language.
 
-- Find out more about [audio accessibility](#6-using-an-opentour-tour "Audio"). New in OpenTour 3.1, you can select in which language the voice reads the text. The default is English, but many other options are available, so that a tour in (for example) Spanish will be read correctly.
+***New in 3.1* On mobile devices you can click the audio (headset) icon and a computer voice reads out the text.**
+- Find out more about [audio accessibility](#6-using-an-opentour-tour "Audio"). On mobile, a computer voice is provided to read the text out to users. The voice is set by the language of the text. In order to have the voice read clearly, select the language of the text of your tour. This setting is per tour. You can create two identical tours in two languages, and change this setting.
+- New in OpenTour 3.1, you can select in which language the voice reads the text. The default is English, but many other options are available, so that a tour in (for example) Spanish will be read correctly.
 
-### j. *Updated in 4.0* Desktop and Mobile header and Links:
+### j. *Updated in 4.0* Desktop and Mobile Header and Links:
 
-- In the header on a desktop tour and in the side menu on a mobile tour, the user can find links to the Tour Site home, the main page of the tour, and any 'Pages' on the tour. New in OpenTour 3.1, you can also *add an external link* to this menu. This allows you to link directly to your organization's homepage from a tour. New in OpenTour 4.0, in the mobile menu you will have a link to the Stops page of your tour, so you can return to the stops list at any time.
-- To enter the link, fill out both the "Link Text" - the word or phrase that shows up on the menu - and the "Link Address" - the URL to your website.
+- In the header on a desktop tour and in the side menu on a mobile tour, the user can find links to the Tour Site home, the main page of the tour, and any 'Pages' on the tour.
+- New in OpenTour 3.1, you can also *add an external link* to this menu. This allows you to link directly to your organization's homepage from a tour.
+- New in OpenTour 4.0, in the mobile menu you will have a link to the Stops page of your tour, so you can return to the stops list at any time more quickly.
+- **External Link Field** - To enter a link to an external site (like your personal homepage), fill out both the "Link Text" and the "Link Address" fields, both are necessay.
+  - "Link Text" - the word or phrase that shows up on the menu (e.g. Project Homepage).
+  - "Link Address" - the URL to your website.
 
 ![Mobile Themes](images/themes.webp "Mobile Themes")
 
 ### k. Color theme selection for your tour.
 
-- Then an array of buttons allows you to select which of OpenTour’s color themes you want your users to see during mobile view. There are a variety of options to coordinate with different tours. Choose one theme for the entire tour by clicking on the icon of that color set (menu and highlighted button colors). This sets the tour color theme for all the tour screens in mobile view.
+- Below "External Link" an array of buttons allows you to select which of OpenTour’s color themes you want your users to see during mobile view. There are a variety of options to coordinate with different tours. Choose one theme for the entire tour by clicking on the icon of that color set (menu and highlighted button colors). This sets the tour color theme for all the tour screens in mobile view. This can be changed later.
 
 ![Tour Modes and Maps](images/MapSelections.webp "Tour Modes and Maps")
 
 ### l. Map options for your tour
 
-- OpenTour provides a few map options, some of which are new in OpenTour 3.1. The first two options are checkboxes, which let you choose what type of tour you want to create.
-- First you can choose whether or not you want to enable the map. If not checked, you would create a tour just of scrolling text without geographical references.
-- Second, you can separately choose whether to provide Google directions. This is only an option when the map is enabled. If the map is enabled, you still might not want Google directions. Google directions help get your users from stop to stop on your tour. However, if you are creating a tour with stops in broadly distant locations, you may not be expecting users to travel them. Additionally, if you create a tour which is inside of a building, Google directions will not be able to provide useful information. Finally, if you use the new feature to overlay an image or map on top of the Google map (see below), you will likely not need directions.
+- OpenTour provides a few map options. *Some added in OpenTour 3.1.* The first two options are checkboxes, which let you choose what type of tour you want to create.
+  - First you can choose whether or not you want to enable the map. If not checked, you would create a tour just of scrolling text without geographical references.
+  - Second, you can separately choose whether to provide Google directions. This is only an option when the map is enabled. If the map is enabled, you still might not want Google directions. Google directions help get your users from stop to stop on your tour. However, if you are creating a tour with stops in broadly distant locations (like different countries), you may not be expecting users to actually travel between them. Additionally, if you create a tour which is inside of a building, Google directions will not be able to provide useful information. Finally, if you use the new feature to overlay an image or map on top of the Google map (see below), you will likely not need directions.
+- Then, a third checkbox, allows the option to "Restrict Map Bounds". This will prevent users from randomly scrolling away from the stops on your tour, and ending up lost on the map. This is separate from the tour directions provided by Google, and restricts the user to browsing the map in the area of the stops only (but does not prevent the user from getting directions from somewhere distant).
 
 ### m. Basemap options for your tour.
 
