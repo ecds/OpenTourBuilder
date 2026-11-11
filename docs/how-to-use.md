@@ -171,7 +171,9 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 ### m. Basemap options for your tour.
 
-- Then a small dropdown menu allows you to select which of Google’s basemaps you want your users to see.  The options are roadmap, satellite, hybrid, and terrain. This sets the basemap for all the tour screens.
+- Then a small dropdown menu allows you to select which of Google’s basemaps you want your users to see.
+  - The options are roadmap, satellite, hybrid, and terrain. This sets the basemap for all the tour screens for the individual tour.
+- ***New in 4.0*** While the basemap types have not changed, the maps on laptop/desktop now draw from MapLibre, for a more efficient user experience. The maps on mobile (and directions) are still drawn from Google.
 
 ### n. *New in 3.1* Overlay a historical map or image on the basemap.
 
