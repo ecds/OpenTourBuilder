@@ -178,8 +178,8 @@ The Documentation link available in the header of [opentour.site](https://opento
 ### n. *New in 3.1* Overlay a historical map or image on the basemap.
 
 - *New in 3.1* You can now choose to overlay an image or map over the Google map in OpenTour. This allows you to use historical maps on your tour, to create tours of fictional places, or to even create a "tour" of an artwork.
-- Just click on *Select A File* in the gray box, and choose your image.<br>
-- Once you have uploaded your image, you will see it over the map on the right. There are four large circles, one at each corner.  You can click and drag any of the circles to resize the map or image.
+- Just click on *Select A File* in the <span style="color: #A4A4A4;">GRAY</span> box, and choose your image. You can also drag your image file into the box.<br/>
+- Once you have uploaded your image, you will see it over the map on the right. There are four large circles, one at each corner.  You can click and drag any of the circles to resize the map or image, and to move it to line up with the base map.
 
 ![Adding an Overlay Map](images/AddingOverlayMap.webp "Adding an Overlay Map")
 
@@ -187,24 +187,30 @@ The Documentation link available in the header of [opentour.site](https://opento
 - The map will now also show in any stops that you create in the admin, so that you can position your points over the overlay map.
 - ***Tip*** Keep in mind where the points go on your map, so that you have a border of map around them.
 
-![Example Overlay Map with Dummy Text](images/ExampleOverlayMapDummyText.webp "Example Overlay Map with Dummy Text")
+![Example Overlay Historical Map with Dummy Text](images/ExampleOverlayMapDummyText.webp "Example Overlay Historical Map with Dummy Text")
 
-### o. Next the Travel Modes section
+### o. The Travel Modes section
 
-- Travel modes allows you to select which of Google’s travel modes you want your users to see when they are getting directions.
-- The options are Walking, Bicycling, Driving, and Transit. In many cases you may want to only show users a couple of relevant options, instead of all four. On the front end they will be able to choose between whichever of these four modes you enable.  Enable a mode by checking the check-box (square) to its right, under the Enable column.
-- In this section you also set the default mode, which shows up without user interaction for all your tour stops. To choose a default mode, check the radio button (circle) to the right of the mode, in the Default column.
+- "Travel Modes" section, below the other [Map Options](#l-map-options-for-your-tour), allows you to select which of Google’s travel modes you want your users to see when they are getting directions.
+    - The options are Walking, Bicycling, Driving, and Transit.
+    - In many cases you may want to only show users a couple of relevant options, instead of all four. On the front end they will be able to choose between whichever of these four modes you enable.
+    - Enable a mode by checking the check-box (square) to its right, under the Enable column. They are all enabled to start.
+- In this section you also set the default mode, which shows up without user interaction for all your tour stops. The user can then select a different mode if enabled.
+    - To choose a default mode, check the radio button (circle) to the right of the mode, in the Default column. For example, "Walking" for a walking tour.
 
 ![Add Media](images/MediaOptions.webp "Add Media")
 
 ### p. Media slider - inputting images and media.
 
-- Below this, the final section of your main tour page is the media section.  Your options are “Embed Media” and “Images”.  All images and videos that you upload and attach will appear in a slider at the top of your main tour page.  You can upload as many as you want with the understanding that it needs to be a reasonable number for a visitor to scroll through.
-- **Embed media** – To add a video or audio clip, you need to link the video from Vimeo or YouTube, or get the embed code from SoundCloud.  Add the video’s share link, or SoundCloud clip's audio embed link to the “Add YouTube, Vimeo, on SoundCloud...” line.  Once you have pasted or typed in the link, you should see the image of the media below and the button "Yes! Add this Media" below it.  Click that button to add the media as a media item to your Tour’s home page.  Replace the link if the wrong video or clip appears.  If a video or clip does not appear, and the button does not show up, the link is not correct, or the video or audio is hosted on an unsupported platform. See notes and tips below (iv-vii.). **NOTE** - While you can use the URL for YouTube and Vimeo, you must use the embed code `<iframe ...>` for SoundCloud.
+- Below all of the map options, the final section of your main tour page is the media section.  This is the section where you input media just for your tour's homepage/starting section.
+- Your options are “Embed Media” and “Images”.  All images and videos that you upload and attach will appear in a single slider at the top of your main tour page.  You can upload as many as you want with the understanding that it needs to be a reasonable number for a visitor to scroll through.
+- **Embed media** – To add a video or audio clip, you need to link the video from Vimeo or YouTube, or get the embed code from SoundCloud.  Add the video’s share link, or SoundCloud clip's audio embed link to the “Add YouTube, Vimeo, on SoundCloud...” line.  Once you have pasted or typed in the link, you should see the image of the media below and the button "Yes! Add this Media" below it.  Click that button to add the media as a media item to your Tour’s home page.  Replace the link if the wrong video or clip appears.  If a video or clip does not appear, and the button does not show up, the link is not correct, or the video or audio is hosted on an unsupported platform. See notes and tips below (iv-vii.).
+- **NOTE** - While you can use the URL for YouTube and Vimeo, you must use the embed code `<iframe ...>` for SoundCloud.
 
 ![Youtube Video](images/AddMedium.webp "Videos")
 
-- **Add Images** – To add images, go to the section “Drag and drop images onto this area to upload them or Upload an Image” and click “Upload an Image”.  Select the image that you want from your computer and click “Save”. **Note** The images will show full width in a 16:9 image ratio. A 4:3 image will have a white border on two sides. Any sized image can fit, however.
+- **Add Images** – To add images, go to the section “Drag and drop images onto this area to upload them or Upload an Image” and click “Upload an Image”.  Select the image that you want from your computer and click “Save”.
+- **Note** The images will show full width in a 16:9 image ratio. A 4:3 image will have a white border on two sides. Any sized image can fit, however.
 
 ![Media reordering](images/MediaOrderMore.webp "Click and drag to reorder media")
 
