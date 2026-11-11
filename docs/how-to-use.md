@@ -141,7 +141,7 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 ### i. Select the Tour audio language.
 
-***New in 3.1* On mobile devices you can click the audio (headset) icon and a computer voice reads out the text.**
+- ***New in 3.1* On mobile devices you can click the audio (headset) icon and a computer voice reads out the text.**
 - Find out more about [audio accessibility](#6-using-an-opentour-tour "Audio"). On mobile, a computer voice is provided to read the text out to users. The voice is set by the language of the text. In order to have the voice read clearly, select the language of the text of your tour. This setting is per tour. You can create two identical tours in two languages, and change this setting.
 - New in OpenTour 3.1, you can select in which language the voice reads the text. The default is English, but many other options are available, so that a tour in (for example) Spanish will be read correctly.
 
@@ -151,8 +151,8 @@ The Documentation link available in the header of [opentour.site](https://opento
 - New in OpenTour 3.1, you can also *add an external link* to this menu. This allows you to link directly to your organization's homepage from a tour.
 - New in OpenTour 4.0, in the mobile menu you will have a link to the Stops page of your tour, so you can return to the stops list at any time more quickly.
 - **External Link Field** - To enter a link to an external site (like your personal homepage), fill out both the "Link Text" and the "Link Address" fields, both are necessay.
-  - "Link Text" - the word or phrase that shows up on the menu (e.g. Project Homepage).
-  - "Link Address" - the URL to your website.
+    - "Link Text" - the word or phrase that shows up on the menu (e.g. Project Homepage).
+    - "Link Address" - the URL to your website.
 
 ![Mobile Themes](images/themes.webp "Mobile Themes")
 
@@ -165,20 +165,20 @@ The Documentation link available in the header of [opentour.site](https://opento
 ### l. Map options for your tour
 
 - OpenTour provides a few map options. *Some added in OpenTour 3.1.* The first two options are checkboxes, which let you choose what type of tour you want to create.
-  - First you can choose whether or not you want to enable the map. If not checked, you would create a tour just of scrolling text without geographical references.
-  - Second, you can separately choose whether to provide Google directions. This is only an option when the map is enabled. If the map is enabled, you still might not want Google directions. Google directions help get your users from stop to stop on your tour. However, if you are creating a tour with stops in broadly distant locations (like different countries), you may not be expecting users to actually travel between them. Additionally, if you create a tour which is inside of a building, Google directions will not be able to provide useful information. Finally, if you use the new feature to overlay an image or map on top of the Google map (see below), you will likely not need directions.
+    - First you can choose whether or not you want to enable the map. If not checked, you would create a tour just of scrolling text without geographical references.
+    - Second, you can separately choose whether to provide Google directions. This is only an option when the map is enabled. If the map is enabled, you still might not want Google directions. Google directions help get your users from stop to stop on your tour. However, if you are creating a tour with stops in broadly distant locations (like different countries), you may not be expecting users to actually travel between them. Additionally, if you create a tour which is inside of a building, Google directions will not be able to provide useful information. Finally, if you use the new feature to overlay an image or map on top of the Google map (see below), you will likely not need directions.
 - Then, a third checkbox, allows the option to "Restrict Map Bounds". This will prevent users from randomly scrolling away from the stops on your tour, and ending up lost on the map. This is separate from the tour directions provided by Google, and restricts the user to browsing the map in the area of the stops only (but does not prevent the user from getting directions from somewhere distant).
 
 ### m. Basemap options for your tour.
 
 - Then a small dropdown menu allows you to select which of Google’s basemaps you want your users to see.
-  - The options are roadmap, satellite, hybrid, and terrain. This sets the basemap for all the tour screens for the individual tour.
+    - The options are roadmap, satellite, hybrid, and terrain. This sets the basemap for all the tour screens for the individual tour.
 - ***New in 4.0*** While the basemap types have not changed, the maps on laptop/desktop now draw from MapLibre, for a more efficient user experience. The maps on mobile (and directions) are still drawn from Google.
 
 ### n. *New in 3.1* Overlay a historical map or image on the basemap.
 
 - *New in 3.1* You can now choose to overlay an image or map over the Google map in OpenTour. This allows you to use historical maps on your tour, to create tours of fictional places, or to even create a "tour" of an artwork.
-- Just *click on Select A File* in the gray box, and choose your image.<br>
+- Just click on *Select A File* in the gray box, and choose your image.<br>
 - Once you have uploaded your image, you will see it over the map on the right. There are four large circles, one at each corner.  You can click and drag any of the circles to resize the map or image.
 
 ![Adding an Overlay Map](images/AddingOverlayMap.webp "Adding an Overlay Map")
