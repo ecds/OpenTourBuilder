@@ -252,7 +252,7 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 - Click “New Stop”.  You will be presented with a blank stop form.
 - If you have created a stop already in another tour within your Tour Site, you can click **ADD OTHER STOPS** to bring a copy or duplicate of the stop to this tour. This may be useful if you are doing multiple tours of a single area, and want to have a few stops overlap. Once you click **ADD OTHER STOPS**, you will get a list of all the stop in your Tour Site. For each stop, you can choose either to **"Add+"** the stop to your tour, so that any edits to the stop would show up in all tours, or to **"Copy"** to the stop to your tour, so that you can make minor adjustments that show up only in this tour.
-- ***NOTE*** Many of the fields for stops are similar to those we saw on the main tour landing page.
+- ***NOTE*** **Many of the fields for stops are similar to those we saw on the main tour landing page.**
 
 ![New Stop Menu](images/NewAddStop.webp "Click New Stop for the Menu")
 
@@ -272,45 +272,61 @@ The Documentation link available in the header of [opentour.site](https://opento
 ### d. Stop location/address/position input.
 
 - The place where stops differ from the landing page is in the location and mapping information.  You will see the field “Stop Address” where you can enter the data for the physical location of your tour stop.
-- **LOCATION NOTE:** You **MUST** enter a location for each tour stop. If you do not enter your own location, the map will default the first stop on a tour to the Latitude/Longitude of the center of Atlanta, subsequent stops will default to the location of the previous stop. This is new in OpenTour 3.1, OpenTour 3.0 centered blank stops at a Lat/Long of 0,0. Keep your stop locations in mind.
-- **LOCATION NOTE:** You **MUST** have a number on both the latitude and longitude lines for each tour stop (the default with no changes is Latitude/Longitude of 33.75432,-84.38979 – located in the middle of Atlanta). If you delete these numbers, and do not have another latitude and longitude the map will not display. These lines cannot be blank. If you enter an address and click “Locate Address” the lat/long will populate for you. If you adjust the position on the map of your point, the lat/long will adjust automatically.
-- **Suggestion:** If you want to have a stop without a position, enter the same position as you did for the previous stop, and this will allow the user to understand his or her position on the map.
+    - **LOCATION NOTE:** You **MUST** enter a location for each tour stop. If you do not enter your own location, the map will default the first stop on a tour to the Latitude/Longitude of the center of Atlanta, subsequent stops will default to the location of the previous stop. This is new in OpenTour 3.1, OpenTour 3.0 centered blank stops at a Lat/Long of 0,0. Keep your stop locations in mind.
+    - **LOCATION NOTE:** You **MUST** have a number on both the latitude and longitude lines for each tour stop (the default with no changes is Latitude/Longitude of 33.75432,-84.38979 – located in the middle of Atlanta). If you delete these numbers, and do not have another latitude and longitude the map will not display. These lines cannot be blank. If you enter an address and click “Locate Address” the lat/long will populate for you. If you adjust the position on the map of your point, the lat/long will adjust automatically.
+    - **Suggestion:** If you want to have a stop without a position, enter the same position as you did for the previous stop, and this will allow the user to understand his or her position on the map.
 
 ![Location Information](images/LocationStop.webp "Location Information")
 
-### e. Location information:
-
-- Type in the Stop Address and click “Locate Address.”  A point at that address will appear on the preview map, a google map to the right, and the Latitude and Longitude fields below will populate based on the address.
-- If you instead know the Latitude and Longitude, you can type the latitude and longitude into these fields directly and then click "Locate Address." A point will appear on the preview map, once both numbers are entered.
+- **Enter your Stop location:** Type in the Stop Address and click “Locate Address.”  A point at that address will appear on the preview map, a google map to the right, and the Latitude and Longitude fields below will populate based on the address.
+- If you instead know the Latitude and Longitude, you can type the latitude and longitude into these fields directly and then click "Locate Address." A point will appear on the preview map, once both numbers are entered. You still *must* click "Locate Address".
 - In either case, once the point has appeared on the preview map, you can click the point and drag to adjust its location on the map. This will update **BOTH** the address **AND** the Lat/Long.
 - **Make sure** to click "Locate Address" and "Save" on the stop after entering or updating an address or Latitude and Longitude. While it will show the updated address on the preview map, you must click both "Locate Address" and "Save" for the public view to update.
-- ***New in 3.1*** You can change the color of the map point marker. Click "Icon Color" to choose a different color for the icon of just that stop. If you want to distinguish certain stops from others (for example, still existing historical sites vs. lost sites), you can color all of one type its own color and put an explanation of the color in the tour description.
-- ***New in 3.1*** You can also upload a stop pointer icon. If you want to use a custom icon, rather than the standarded stop flag, to mark specific stops, you can click "Upload New Icon". The stop icons need to be smaller than 80 x 80 pixels. If you want to use the same custom stop icon on more than one stop, you can upload it on your first use, and use "Use Existing Map icon" for future stops, where you will be able to choose your icon from a list.
+- ***New in 3.1*** You can change the color of the map point marker. Click "Icon Color" to choose a different color for the icon of just that stop.
+    - If you want to distinguish certain stops from others (for example, still existing historical sites vs. lost sites), you can color all of one type its own color and put an explanation of the color in the tour description.
+- ***New in 3.1*** You can also upload a stop pointer icon. The default standard position icon is used if you do not upload one.
+    - If you want to use a custom icon, rather than the standard stop flag, to mark specific stops, you can click "Upload New Icon".
+    - The stop icons need to be smaller than 80 x 80 pixels. This will still look very large, so err on the side of small (like an emoji-sized image).
+    - If you want to use the same custom stop icon on more than one stop, you can upload it on your first use, and use "Use Existing Map icon" for future stops, where you will be able to choose your icon from a list.
 
-### f. Parking:
+### e. Parking:
 
 - If your stop has a specific location for parking, separate from the stop location itself (that the directions will need to take into account), click on “Add Parking Location”.
-- This will open a section with three new fields.  Add the address or Latitude and Longitude of the parking location as you did for the stop above.
-- After refreshing the page, the parking location can also be edited on the map by clicking and dragging it. It shows as a blue “P” icon on the map.
+- This will open a section with three new fields.  Add the address *or* Latitude and Longitude of the parking location as you did for the stop above.
+- The parking location can also be edited on the map by clicking and dragging it. It shows as a blue “P” icon on the map.
+- Google directions will take a user first to the location of the parking, and then to the stop location.
 
-### g. Direction Notes field:
+### f. Direction Notes field:
 
-- If your stop has additional verbose directions that you would like to add, this field (with a basic text editor) will allow you to add them.  This can include any additional information, such as “walk past the large oak tree” or “turn left at the Big Chicken”.  It will show up in a tab under “Directions” next to the tab for turn by turn directions added by google. The tab will not appear if the field is left blank.
+- If your stop has additional verbose directions that you would like to add, this field (with a basic text editor) will allow you to add them.
+- This can include any additional information, such as “walk past the large oak tree” or “turn left at the Big Chicken”.  It will show up in a tab under “Directions” next to the tab for turn by turn directions added by google.
+- The Direction Notes field has the `</>Source` option, so that you can add italics, bold, etc.
+- The tab will not appear if the field is left blank.
 
 ![Direction Notes and Add Media Stop](images/AddMediaStop.webp "Direction Notes and Add Media Stop")
 
-### h. Manage Media:
+### g. Manage Media:
 
-- The manage media functions the same for stops as it does for the main tour page.  You can add videos by YouTube or Vimeo link, audio by SoundCloud embed, or upload image files.  You can reorder any image or video by clicking and dragging. You can add media items from other tours in your Tour Site with the "ADD OTHER MEDIA" button.
+- The manage media functions the same for stops as it does for the main tour page.
+- You can add videos by YouTube or Vimeo link, audio by SoundCloud embed, or upload image files.
+- You can reorder any image or video by clicking and dragging.
+- You can add media items from other tours in your Tour Site with the "ADD OTHER MEDIA" button.
+- You can click on 'edit' for any media item to add a title and caption, with information such as a CC license.
 
-### i. Click the “SAVE” button at the bottom of the STOP to save the stop data.
+### h. Click the “SAVE” button at the bottom of the STOP to save the stop data.
 
 - **NOTE:** It is always best practice to click the stop and tour "SAVE" buttons. While the tour auto-saves, and the overall tour "SAVE" button should save everything, best practice is to click the stop "SAVE" as well to be sure.
 
-### j. Add more stops and then click “Save” at the bottom of the overall tour page.
-### k. Ordering and reordering your stops (it's easy!)
+### i. Add more stops.
 
-- You can reorder your stops, and they will renumber automatically. Click on the stop whose position you want to change, and holding down the mouse button, drag it above or below the stop that you want it to go before or after. For example in the sample image below, you can click on stop 6 and drag it above stop 5. This will automatically renumber stop 6 to stop 5.
+- Follow the above steps again to add another stop. You can add as many stops as you want.
+- Then click “Save” at the bottom of the overall tour page.
+
+### j. Ordering/reordering your stops (it's easy!)
+
+- You can reorder your stops, and they will renumber automatically.
+- Click on the stop whose position you want to change, and holding down the mouse button, drag it above or below the stop that you want it to go before or after. For example in the sample image below, you can click on stop 6 and drag it above stop 5. This will automatically renumber stop 6 to stop 5.
+- With this feature, you can enter all your stops, and choose the order at any time later.
 
 ![Reordering a stop](images/Reordering_stops_otb.webp "Reordering a stop")
 
@@ -326,9 +342,11 @@ The Documentation link available in the header of [opentour.site](https://opento
 ### b. Click “New Page”
 
 - to add an informational page with no associated map point.
+- Get a blank page template, with a title field and a text body, with the familiar wysiwyg editor and `</>Source` options.
 
-### c. Click on "ADD OTHER PAGES" to copy or duplicate a page from another tour in your Tour Site.
+### c. Copy a Page from another tour.
 
+- Click on "ADD OTHER PAGES" to copy or duplicate a page from another tour in your Tour Site.
 - You may want to have the same "About the Team" page on every tour, for instance.
 
 ### d. Add a “Page Title”
@@ -346,10 +364,11 @@ The Documentation link available in the header of [opentour.site](https://opento
 ### f. Click SAVE
 
 - Click Save at the bottom of the Page menu, and then the bottom of the overall tour page.
+- **NOTE:** It is always best practice to click the page and tour "SAVE" buttons. While the tour auto-saves, and the overall tour "SAVE" button should save everything, best practice is to click the stop "SAVE" as well to be sure.
 
 ### g. **NOTE** Text color / style.
 
-- Text on OpenTour Pages defaults to light text on a dark background for Desktop view and Mobile view. If you plan to alter your html/css for Page text, keep in mind that this may make it harder to read. See the default text color for Desktop view and Mobile view below.
+- Text on OpenTour Pages defaults to light text on a dark background for Desktop view and Mobile view. This is different from the stops, which default to standard black text on white background. If you plan to alter your html/css for Page text, keep in mind that this may make it harder to read. See the default text color for Desktop view and Mobile view below.
 
 ![Tour Page Desktop](images/desktop-page.webp "Page Text on Desktop")
 
@@ -388,9 +407,10 @@ Example timeline using ‘background’ field and short text. You can see more o
 
 ### e. For Soundcloud audio in OpenTour (3.0):
 
-- ** This information was for OpenTOUR 3.0 - SoundCloud audio can now be added to the standard Media slider. **Copy the embed code and paste in the Media bar.
-- If you want to include an audio clip related to your tour stop or tour, you can do so in a page, the main tour page, or in an individual stop by using the html button `[</> SOURCE]` and iframing in the particular clip from Soundcloud.
-- The iframe settings must be `<iframe src="<soundcloud Url>"></iframe>` where the `<soundcloud Url>` is the url to your particular audio clip.
+- ***This information was for OpenTOUR 3.0*** - SoundCloud audio can now (3.1+) be added to the standard Media slider.
+    - For OpenTour 3.1+: Go to the SoundCloud audio page. Click share. Copy the embed code, and paste it in the OpenTour Media bar.
+- For OpenTour 3.0: If you want to include an audio clip related to your tour stop or tour, you can do so in a page, the main tour page, or in an individual stop by using the html button `[</> SOURCE]` and iframing in the particular clip from Soundcloud.
+    - The iframe settings must be `<iframe src="<soundcloud Url>"></iframe>` where the `<soundcloud Url>` is the url to your particular audio clip.
 
 ## 6. Using an OpenTour Tour:
 ### a. Using Turn-by-turn directions.
@@ -422,12 +442,16 @@ Example timeline using ‘background’ field and short text. You can see more o
 ## 7. Troubleshooting:
 ### a. I cannot get logged in! What is going on?
 
-- If you see the admin, admin header, but no tour sites, as below, you DO have an OpenTour account, but do NOT have access to any Tour Sites. If this is your **first** login, contact an admin to get access to a Tour Site. If this is not your first time, you have most likely logged in with a different email address than you used to set up your account. You will see the message "*If you have had access to tour sites in the past, and should still have access, please check to make sure that you used the same GMail, Facebook, Twitter or GitHub account that you have previously used. If you use another account, your tour sites will not show!*" Logging in with a new or different email address will create a new (empty) OpenTour account, and you will not see your tours. Try logging out and back in with any other email addresses you might have used.
+- If you see the admin, admin header, but no tour sites, as below, you DO have an OpenTour account, but do NOT have access to any Tour Sites.
+    - If this is your **first** login, contact an admin to get access to a Tour Site.
+    - If this is not your first time, you have most likely logged in with a different email address than you used to set up your account. You will see the message "*If you have had access to tour sites in the past, and should still have access, please check to make sure that you used the same GMail, Facebook, Twitter or GitHub account that you have previously used. If you use another account, your tour sites will not show!*" Logging in with a new or different email address will create a new (empty) OpenTour account, and you will not see your tours. Try logging out and back in with any other email addresses you might have used.
 
 ![No tour sites](images/NoTourSites3_1.webp "Admin message stating no tour sites")
 
-- If you log in, but you only see the admin header, no message ("*If you have....*" as above), one of two things has probably happened. 1) Make sure that you actually fully logged into the site. Refresh the page, and the login options should reappear. Try your preferred login again. If you close out the gmail pop-up, you will see a blank admin with the admin header and no message, but you will not be logged into the site. If you are logged into the site, when you refresh the login options will *Not* reappear. 2) Make sure you are logging into the correct URL. Admin URLs are NOT the same as your Tour Site URL + /admin. You need to log into https://opentour.site/admin/my-tour-site-name/. If you try to log into the public-facing Tour Site URL + /admin, it will not log you into the site.
-- If you have any other error, please contact us!
+- If you log in, but you only see the admin header, no message ("*If you have....*" as above), one of two things has probably happened.
+    1) Make sure that you actually fully logged into the site. Refresh the page, and the login options should reappear. Try your preferred login again. If you close out the gmail pop-up, you may see a blank admin with the admin header and no message, but you will not be logged into the site. If you are logged into the site, when you refresh the login options will *Not* reappear.
+    2) Make sure you are logging into the correct URL. Admin URLs are NOT the same as your Tour Site URL + /admin. You need to log into https://opentour.site/admin/my-tour-site-name/. If you try to log into the public-facing Tour Site URL + /admin, it will not log you into the site.
+- If you have any other login error, please contact us!
 
 ### b. My iframed content is displaying oddly. What do I do?
 
@@ -436,7 +460,7 @@ Example timeline using ‘background’ field and short text. You can see more o
 
 ### c. Why are the filenames showing up under my images and titles I didn't create on videos in the media slider?
 
-- The "Image Title" field imports the image filename or the title of a video from Vimeo or Youtube. OpenTour Builder is designed to ignore image filenames, but it will display the imported title of a video.  In some cases you may see an image filename display due to the editing process. In order to fix this, you need to edit the "Image Title" field for that media item.
+- The "Image Title" field imports the image filename or the title of a video from Vimeo or Youtube. OpenTour Builder is designed to ignore image filenames, but it will display the imported title of a video.  In some cases you may see an image filename display due to the editing process. In order to fix this, you need to edit [the "Image Title" field for that media item](#p-media-slider---inputting-images-and-media).
 
 ![Image With Filename](images/ImageTitleWithFIlename.webp "Image With Title Filename")
 
@@ -451,11 +475,15 @@ Example timeline using ‘background’ field and short text. You can see more o
 
 ### d. When I click on my tour from a tour site it goes to the wrong tour. OR When I click on a stop, my tour goes to the wrong stop. What is going on?
 
-- Remember, you cannot have two tours with the same name in your Tour Site, and you cannot have two stops with the same name in one Tour.  This will cause errors in the URLs, and you will also go to the first of the two (tours or stops). If you are running into this problem, just change the name of one, and it should solve the problem.
+- Remember, you cannot have two tours with the same name in your Tour Site, and you cannot have two stops with the same name in one Tour.
+- Having duplicate titles for two tours, or duplicate titles for stops will cause errors in the URLs, and it will send users to the first of the two (tours or stops).
+- If you are running into this problem, just change the name of one (stop or tour), and it should solve the problem.
 
 ### e. When I am working on a tour with other members of my group, not all the data I enter saves. Why isn't it saving?
 
-- OpenTour will save your work automatically as you work. It is also best practice to click 'save' on the Tour Stop and 'save' on the overall Tour at the end of every work session. While OpenTour is saving your work, is not automatically updating any edits entered by anyone else. Because of this, **only one person should enter data at a time**. If two people enter data (on separate browsers) at once, whichever edits are saved last will show, but the other edits will be overwritten, and not save. If you are working alongside others, you will need to *refresh your page before making changes* to prevent overwriting their work.
+- OpenTour will save your work automatically as you work. It is also best practice to click 'save' on the Tour Stop and 'save' on the overall Tour at the end of every work session.
+- While OpenTour is saving your work, is not automatically updating nor merging any edits entered by anyone else. Because of this, **only one person should enter data at a time**. If two people enter data (on separate browsers) at once, whichever edits are saved last will show, but the other edits will be overwritten, and not save.
+- If you are working alongside others, you will need to *refresh your page before making changes* to prevent overwriting their work.
 
 ### f. My URL seems to redirect now. This is the URL I used to use. Why did it change?
 
