@@ -231,43 +231,45 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 ![Media Caption](images/MediaMeta.webp "Add media captions to images and videos")
 
-- **TIP** - If you import a video from Vimeo that is shared by Private link, it may not correctly import the thumbnail. Use the above (vi.) 'Replace Image' button to add a thumbnail.
+- **TIP** - If you import a video from Vimeo that is shared by Private link, it may not correctly import the thumbnail. Use the above instructions for the 'Replace Image' button to add a thumbnail.
 - Click the **ADD OTHER MEDIA** button to add images, video, or audio, to your tour that you have already uploaded or embedded on another tour in your tour site. You will get to choose from a list of all media that has already been uploaded.  These will only be media from YOUR tour site, not others on opentour.site.
 
-### q. Saving Your Work - and Previewing the Tour.
-
-- Now that you have entered all the data and media for the tour’s landing page, you can save your work and preview.  You can also move on to adding stops.  In either case, save your work by clicking “Save” at the bottom of the page to save the tour.
-- **Note:** Some actions, like adding media or reordering media, automatically save the tour. The tour also periodically auto-saves (new in version 3.1).  It is always best to click “Save” after any work! Also keep in mind that not clicking “Save” does not mean that your changes have been undone.  Always check the public tour page after working.
-
-### r. **New in 4.0** Linking to a media slider image or media item.
+### q. **New in 4.0** Linking to a media slider image or media item.
 
 - Once you have uploaded and saved your media item, you can get a link to that item. You can use that link within your stop text (or elsewhere in your tour), to link back to you image or media as an illustration.
-- To link to an image, preview the tour, or go to its public facing side. Click on the image or media item in your media slider, so that its pop-up appears. Two links appear in the bottom left of the image. Click "Copy Link", and the link to the media item will be saved to your clipboard. You can then go back to editing your text, and use the link to link to that media item.
+- To link to an image, preview the tour [see step r. if you need instructions](#r-saving-your-work---and-previewing-the-tour), or go to its public facing side. Click on the image or media item in your media slider, so that its pop-up appears. Two links appear in the bottom left of the image. Click "Copy Link", and the link to the media item will be saved to your clipboard. You can then go back to editing your text, and use the link to link to that media item.
 
 ![Copy Image Link](images/copy-image-link.webp "Click Copy Link to get your image link")
 
-## 3. How to Add Tour Stops:
-### a. Click “New Stop”.  You will be presented with a blank stop form.
+### r. Saving Your Work - and Previewing the Tour.
 
+- Now that you have entered all the data and media for the tour’s landing page, you can save your work and preview.  You can also move on to adding stops.  In either case, save your work by clicking “Save” at the bottom of the page to save the tour.
+- To preview the tour, click either "PREVIEW MOBILE" or "PREVIEW DESKTOP". A pop-up window will show you what the front side of the tour looks like in either of these two sizes.
+- **Note:** Some actions, like adding media or reordering media, automatically save the tour. The tour also periodically auto-saves (new in version 3.1).  It is always best to click “Save” after any work! Also keep in mind that not clicking “Save” does not mean that your changes have been undone.  Always check the public tour page after working.
+
+## 3. How to Add Tour Stops:
+### a. Create a New Stop.
+
+- Click “New Stop”.  You will be presented with a blank stop form.
 - If you have created a stop already in another tour within your Tour Site, you can click **ADD OTHER STOPS** to bring a copy or duplicate of the stop to this tour. This may be useful if you are doing multiple tours of a single area, and want to have a few stops overlap. Once you click **ADD OTHER STOPS**, you will get a list of all the stop in your Tour Site. For each stop, you can choose either to **"Add+"** the stop to your tour, so that any edits to the stop would show up in all tours, or to **"Copy"** to the stop to your tour, so that you can make minor adjustments that show up only in this tour.
+- ***NOTE*** Many of the fields for stops are similar to those we saw on the main tour landing page.
 
 ![New Stop Menu](images/NewAddStop.webp "Click New Stop for the Menu")
 
-### b. Many of the fields for stops are similar to those we saw on the main tour landing page.
-### c. First, you can add the “Stop Title” and “Stop Description.”
+### b. First, the “Stop Title” and “Stop Description.”
 
 - These function the same as they do on the landing page.  The title should be short enough to fit on a mobile phone.
-- **Note:** Make sure the stop name is unique.  It also serves as the slug for the URL for the stop, so do not choose “Stop 1” or “Start” if you might use that in another tour.
+- **Note:** Make sure the stop name is *unique* for this tour.  It also serves as the slug for the URL for the stop, so do not choose a name that you may want to use twice like “Stop Here”.
 - The Description field has the same basic text editor.  You can use the “html” tab `[</> SOURCE]` for any iframe or basic style changes that you want to show up on the stop page. Go to [How-To Information](#5-additional-how-to-information "Additional How-To") for how to use iframes.
 - **Note:** It is recommended that you not copy-paste in text directly from Microsoft Word. Word saves its text with complicated style code, which will also be pasted unnecessarily into the page. Try pasting the text that you have written up in Word or Google Docs into a plain text editor and then copy-paste into the tour from there.
-- While you can include images in the Description field (text editor) through the “html” tab `[</> SOURCE]` or through pasting from Word, it is recommended that you put images into your stop through the Manage Media portion of the tour stop (see [i. below](#i-manage-media "Manage Media")). This section will add the images to the slider at the top of each stop and will size them correctly by default for different viewers.
+- While you can include images in the Description field (text editor) through the “html” tab `[</> SOURCE]` or through pasting from Word, it is recommended that you put images into your stop through the Manage Media portion of the tour stop (see [below](#i-manage-media "Manage Media")). This section will add the images to the slider at the top of each stop and will size them correctly by default for different viewers. You can also [link to the images directly from your text](#q-new-in-40-linking-to-a-media-slider-image-or-media-item).
 
-### d. Add the Stop Meta Description.
+### c. The Stop Meta Description.
 
 - This is the description that will be visible if you share a stop on social media.
 - **NOTE:** The stop meta description *must* be less than 500 characters. As this is used for social media posts and search engines, more characters would never show. This also cannot include any styling, just text.
 
-### e. Stop location/address/position input.
+### d. Stop location/address/position input.
 
 - The place where stops differ from the landing page is in the location and mapping information.  You will see the field “Stop Address” where you can enter the data for the physical location of your tour stop.
 - **LOCATION NOTE:** You **MUST** enter a location for each tour stop. If you do not enter your own location, the map will default the first stop on a tour to the Latitude/Longitude of the center of Atlanta, subsequent stops will default to the location of the previous stop. This is new in OpenTour 3.1, OpenTour 3.0 centered blank stops at a Lat/Long of 0,0. Keep your stop locations in mind.
@@ -276,7 +278,7 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 ![Location Information](images/LocationStop.webp "Location Information")
 
-### f. Location information:
+### e. Location information:
 
 - Type in the Stop Address and click “Locate Address.”  A point at that address will appear on the preview map, a google map to the right, and the Latitude and Longitude fields below will populate based on the address.
 - If you instead know the Latitude and Longitude, you can type the latitude and longitude into these fields directly and then click "Locate Address." A point will appear on the preview map, once both numbers are entered.
@@ -285,28 +287,28 @@ The Documentation link available in the header of [opentour.site](https://opento
 - ***New in 3.1*** You can change the color of the map point marker. Click "Icon Color" to choose a different color for the icon of just that stop. If you want to distinguish certain stops from others (for example, still existing historical sites vs. lost sites), you can color all of one type its own color and put an explanation of the color in the tour description.
 - ***New in 3.1*** You can also upload a stop pointer icon. If you want to use a custom icon, rather than the standarded stop flag, to mark specific stops, you can click "Upload New Icon". The stop icons need to be smaller than 80 x 80 pixels. If you want to use the same custom stop icon on more than one stop, you can upload it on your first use, and use "Use Existing Map icon" for future stops, where you will be able to choose your icon from a list.
 
-### g. Parking:
+### f. Parking:
 
 - If your stop has a specific location for parking, separate from the stop location itself (that the directions will need to take into account), click on “Add Parking Location”.
 - This will open a section with three new fields.  Add the address or Latitude and Longitude of the parking location as you did for the stop above.
 - After refreshing the page, the parking location can also be edited on the map by clicking and dragging it. It shows as a blue “P” icon on the map.
 
-### h. Direction Notes field:
+### g. Direction Notes field:
 
 - If your stop has additional verbose directions that you would like to add, this field (with a basic text editor) will allow you to add them.  This can include any additional information, such as “walk past the large oak tree” or “turn left at the Big Chicken”.  It will show up in a tab under “Directions” next to the tab for turn by turn directions added by google. The tab will not appear if the field is left blank.
 
 ![Direction Notes and Add Media Stop](images/AddMediaStop.webp "Direction Notes and Add Media Stop")
 
-### i. Manage Media:
+### h. Manage Media:
 
 - The manage media functions the same for stops as it does for the main tour page.  You can add videos by YouTube or Vimeo link, audio by SoundCloud embed, or upload image files.  You can reorder any image or video by clicking and dragging. You can add media items from other tours in your Tour Site with the "ADD OTHER MEDIA" button.
 
-### j. Click the “SAVE” button at the bottom of the STOP to save the stop data.
+### i. Click the “SAVE” button at the bottom of the STOP to save the stop data.
 
 - **NOTE:** It is always best practice to click the stop and tour "SAVE" buttons. While the tour auto-saves, and the overall tour "SAVE" button should save everything, best practice is to click the stop "SAVE" as well to be sure.
 
-### k. Add more stops and then click “Save” at the bottom of the overall tour page.
-### l. Ordering and reordering your stops (it's easy!)
+### j. Add more stops and then click “Save” at the bottom of the overall tour page.
+### k. Ordering and reordering your stops (it's easy!)
 
 - You can reorder your stops, and they will renumber automatically. Click on the stop whose position you want to change, and holding down the mouse button, drag it above or below the stop that you want it to go before or after. For example in the sample image below, you can click on stop 6 and drag it above stop 5. This will automatically renumber stop 6 to stop 5.
 
