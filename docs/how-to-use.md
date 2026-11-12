@@ -196,7 +196,7 @@ The Documentation link available in the header of [opentour.site](https://opento
     - In many cases you may want to only show users a couple of relevant options, instead of all four. On the front end they will be able to choose between whichever of these four modes you enable.
     - Enable a mode by checking the check-box (square) to its right, under the Enable column. They are all enabled to start.
 - In this section you also set the default mode, which shows up without user interaction for all your tour stops. The user can then select a different mode if enabled.
-    - To choose a default mode, check the radio button (circle) to the right of the mode, in the Default column. For example, "Walking" for a walking tour.
+    - To choose a default mode, check the radio button (circle) to the right of the mode, in the "default" column. For example, "Walking" for a walking tour.
 
 ![Add Media](images/MediaOptions.webp "Add Media")
 
@@ -204,25 +204,35 @@ The Documentation link available in the header of [opentour.site](https://opento
 
 - Below all of the map options, the final section of your main tour page is the media section.  This is the section where you input media just for your tour's homepage/starting section.
 - Your options are “Embed Media” and “Images”.  All images and videos that you upload and attach will appear in a single slider at the top of your main tour page.  You can upload as many as you want with the understanding that it needs to be a reasonable number for a visitor to scroll through.
-- **Embed media** – To add a video or audio clip, you need to link the video from Vimeo or YouTube, or get the embed code from SoundCloud.  Add the video’s share link, or SoundCloud clip's audio embed link to the “Add YouTube, Vimeo, on SoundCloud...” line.  Once you have pasted or typed in the link, you should see the image of the media below and the button "Yes! Add this Media" below it.  Click that button to add the media as a media item to your Tour’s home page.  Replace the link if the wrong video or clip appears.  If a video or clip does not appear, and the button does not show up, the link is not correct, or the video or audio is hosted on an unsupported platform. See notes and tips below (iv-vii.).
-- **NOTE** - While you can use the URL for YouTube and Vimeo, you must use the embed code `<iframe ...>` for SoundCloud.
+    - Images need to be uploaded from your computer. OpenTour accepts any standard image format (event animated gifs)!
+    - Videos and audio clips will be embedded from an external source, so you will need to link to YouTube, Vimeo, or SoundCloud.
+- **Embed media** – To add a video or audio clip, you need to link the video from Vimeo or YouTube, or the embed code (not link) from SoundCloud.
+    - Add the video’s share link, or SoundCloud clip's audio share embed to the “Add YouTube, Vimeo, on SoundCloud...” line.
+    - Once you have pasted or typed in the link, you should see the image of the media below and the button "Yes! Add this Media" below it.  Click that button to add the media as a media item to your Tour’s home page.
+    - Replace the link if the wrong video or clip appears.  If a video or clip does not appear, and the button does not show up, the link is not correct, or the video or audio is hosted on an unsupported platform. See notes and tips below.
+- **NOTE** - While you can use the URL for YouTube and Vimeo, you must use the embed code `<iframe ...>` for SoundCloud.  You get the embed code through the 'share' button the SoundCloud page. See [this help article](https://help.soundcloud.com/hc/en-us/articles/115003453587-Embedding-a-track-or-playlist), if you have trouble finding the embed code. You will not actually need to embed the file yourself.  You just need to put the embed code in the "Embed Media" text box.
 
 ![Youtube Video](images/AddMedium.webp "Videos")
 
-- **Add Images** – To add images, go to the section “Drag and drop images onto this area to upload them or Upload an Image” and click “Upload an Image”.  Select the image that you want from your computer and click “Save”.
+- **Add Images** – To add images, go to the section “Drag and drop images onto this area to upload them or Upload an Image.” Click “Upload an Image”. You can also drag and drop the file.  Select the image that you want from your computer and click “Save”.
 - **Note** The images will show full width in a 16:9 image ratio. A 4:3 image will have a white border on two sides. Any sized image can fit, however.
 
 ![Media reordering](images/MediaOrderMore.webp "Click and drag to reorder media")
 
-- Reordering media items: Your media will all show up as tiles under “Media Count”.  You can click and drag to reorder them.  You can include as many images or videos in any order as you want. The will auto-save and renumber their order.
-- If you click on the “Edit” button on an image, video, or media item you can enter the “title” that you want to show up under the media item on the public tour page, and the “caption” that you want to show when a user clicks on the image. The caption is a good place to include licensing and copyright information about images.
+- Reordering media items:
+    - Your media will all show up as tiles under “Media Count”.  You can include as many images or videos in any order that you want. 
+    - You can click and drag to reorder them.  OpenTour will auto-save and renumber their order when you release.
+    - You can reorder the images at any point, and as often you want.
+- Image metadata: If you click on the “Edit” button on an image, video, or media item you can enter the “title” that you want to show up under the media item on the public tour page, and the “caption” that you want to show when a user clicks on the image.
+    - The caption is a good place to include licensing and copyright information about images.
+    - **NOTE** - For videos and audio clips from YouTube, Vimeo, and SoundCloud, the title will be imported from the host site. You can edit the text once it has imported to your video or audio clip.
+    - Vimeo and YouTube videos will import the description of the video to the 'caption' field. You can delete this text or edit as much as desired, and it will not affect the original video page in any way.
+    - **NOTE** - SoundCloud audio will import with the default SoundCloud image. If you want to replace the image with a relevant image file, you can click on 'Edit' under the media item, and 'Replace Image' on the Media metadata page. You can also replace the thumbnails imported from Vimeo or YouTube.
 
 ![Media Caption](images/MediaMeta.webp "Add media captions to images and videos")
 
-- **NOTE** - For videos and audio clips from YouTube, Vimeo, and SoundCloud, the title and caption will be imported from the host site. You can edit the text once it has imported to your video or audio clip.
-- **NOTE** - SoundCloud audio will import with the default SoundCloud image. If you want to replace the image with a relevant image file, you can click on 'Edit' under the media item, and 'Replace Image' on the Media metadata page. You can also replace the thumbnails imported from Vimeo or YouTube.
 - **TIP** - If you import a video from Vimeo that is shared by Private link, it may not correctly import the thumbnail. Use the above (vi.) 'Replace Image' button to add a thumbnail.
-- Click the **ADD OTHER MEDIA** button to add images, video, or audio, to your tour that you have already uploaded or embedded on another tour in your tour site. You will get to choose from a list of all media that has already been uploaded.
+- Click the **ADD OTHER MEDIA** button to add images, video, or audio, to your tour that you have already uploaded or embedded on another tour in your tour site. You will get to choose from a list of all media that has already been uploaded.  These will only be media from YOUR tour site, not others on opentour.site.
 
 ### q. Saving Your Work - and Previewing the Tour.
 
